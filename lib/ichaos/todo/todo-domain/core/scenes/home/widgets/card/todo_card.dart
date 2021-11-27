@@ -6,7 +6,6 @@ import 'package:getwidget/colors/gf_color.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/widgets/icon_text.dart';
 import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
-import 'package:i_chaos/ichaos/public/widgets/mini_chip.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';

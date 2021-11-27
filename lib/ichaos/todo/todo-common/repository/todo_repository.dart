@@ -13,7 +13,7 @@ class TodoRepository extends RootRepository{
     if (start == null && end == null) {
       todoEntities = await todoDao.list();
     } else if (start != null && end != null) {
-      todoEntities = await todoDao.listByTime(start.yyyyMMddHHmmss, end.yyyyMMddHHmmss);
+      todoEntities = await todoDao.listByTime(start.beginPoint.yyyyMMddHHmmss, end.endPoint.yyyyMMddHHmmss);
     }
     return todoEntities.map((entity) => entity.fromEntity()).toList();
   }

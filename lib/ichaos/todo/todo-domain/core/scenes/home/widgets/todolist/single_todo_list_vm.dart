@@ -37,23 +37,29 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   @override
   Future<List<TodoVO>>? loadData() {
-//    DateTime now = DateTime.now();
-//    List<SubTaskVO> vos = [
-//      SubTaskVO.newSubTask(content: 'subtask context1'),
-//      SubTaskVO.newSubTask(content: 'subtask context2'),
-//      SubTaskVO.newSubTask(content: 'subtask context3'),
-//      SubTaskVO.newSubTask(content: 'subtask context4'),
-//    ];
-//
-//    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
-//    _todoRepo.insertTodo(vo);
-    return _todoRepo.listTodo();
+    DateTime now = DateTime.now();
+    List<SubTaskVO> vos = [
+      SubTaskVO.newSubTask(content: 'subtask context1'),
+      SubTaskVO.newSubTask(content: 'subtask context2'),
+      SubTaskVO.newSubTask(content: 'subtask context3'),
+      SubTaskVO.newSubTask(content: 'subtask context4'),
+    ];
+
+    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
+    _todoRepo.insertTodo(vo);
+    return _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
 
   @override
   onCompleted(List<TodoVO> data) {
     _activeTodoList = data.where((todo) => !todo.completed).toList();
     _completedTodoList = data.where((todo) => todo.completed).toList();
+  }
+
+  // 从数据源获取指定日期的事件列表切换内存中的事件列表
+  Future<void> switchTodoListByDate(DateTime selectDate) async {
+    _currentDate = selectDate;
+    await _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
 
   // 根据id获取内存中事件的位置

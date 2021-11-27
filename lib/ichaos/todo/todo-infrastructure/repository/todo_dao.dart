@@ -21,10 +21,10 @@ abstract class TodoDao {
   @Query('DELETE FROM $_todoEntityTableName')
   Future<void> deleteAll();
 
-  @Query("DELETE FROM $_todoEntityTableName WHERE createTime >= strftime('%Y-%m-%d %H:%M:%S', :start) and createTime <= strftime('%Y-%m-%d %H:%M:%S', :end)")
+  @Query('DELETE FROM $_todoEntityTableName WHERE create_time >= :start and create_time <= :end')
   Future<void> deleteAllOfDay(String start, String end);
 
-  @Query("SELECT * FROM $_todoEntityTableName WHERE createTime >= strftime('%Y-%m-%d %H:%M:%S', :start) and createTime <= strftime('%Y-%m-%d %H:%M:%S', :end)")
+  @Query('SELECT * FROM $_todoEntityTableName WHERE create_time >= :start and create_time <= :end')
   Future<List<TodoEntity>> listByTime(String start, String end);
 
   @update

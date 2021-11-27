@@ -234,6 +234,8 @@ dependencies:
   badges: ^2.0.1
   # 去除ListView的边界水波纹效果
   noripple_overscroll: ^0.0.2
+  # tabbar样式
+  tab_indicator_styler: ^2.0.0
 
 dev_dependencies:
   flutter_test:
