@@ -11,7 +11,7 @@ class SingleTodoList extends StatelessWidget {
   late SingleTodoListVM _singleTodoListVM;
   late List<TodoVO> _currTodoList;
 
-  SingleTodoList({required bool isActive, required SingleTodoListVM singleTodoListVM}) {
+  SingleTodoList({Key? key, required bool isActive, required SingleTodoListVM singleTodoListVM}) : super(key: key) {
     _isActive = isActive;
     _singleTodoListVM = singleTodoListVM;
     TodoState state = _isActive ? TodoState.active : TodoState.completed;
