@@ -1,4 +1,5 @@
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
+import 'package:i_chaos/ichaos/public/units/uuid.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_sort_rule.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
@@ -31,11 +32,21 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   late TodoRepository _todoRepo;
 
+  int get activeTodoCnt => _activeTodoList.length;
+  int get completedTodoCnt => _completedTodoList.length;
+
   @override
   Future<List<TodoVO>>? loadData() {
 //    DateTime now = DateTime.now();
-//    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now');
-//    TodoRepository().insert(vo);
+//    List<SubTaskVO> vos = [
+//      SubTaskVO.newSubTask(content: 'subtask context1'),
+//      SubTaskVO.newSubTask(content: 'subtask context2'),
+//      SubTaskVO.newSubTask(content: 'subtask context3'),
+//      SubTaskVO.newSubTask(content: 'subtask context4'),
+//    ];
+//
+//    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
+//    _todoRepo.insertTodo(vo);
     return _todoRepo.listTodo();
   }
 
@@ -94,7 +105,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
         _completedTodoList.add(copy);
         _activeTodoList.removeWhere((element) => element.id == id);
       }
-      notifyListeners();
+      notifyListeners(refreshSelector: true);
     }
   }
 
@@ -133,7 +144,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
       } else {
         _activeTodoList[todoIndex] = newVo;
       }
-      notifyListeners();
+      notifyListeners(refreshSelector: true);
     }
   }
 

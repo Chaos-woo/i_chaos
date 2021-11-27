@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list.dart';
 import 'widgets/todolist/single_todo_list_vm.dart';
 
 class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin{
@@ -28,35 +27,11 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin{
             model.initData();
           },
           builder: (ctx, vm, child) {
-            List<TodoVO> activeTodoList = vm.getTodoListByState(TodoState.active);
-            return ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return _todoItem(activeTodoList[index]);
-                },
-                itemCount: activeTodoList.length,
-            );
+            return SingleTodoList(singleTodoListVM: vm, isActive: true);
           },
         )
     );
   }
-
-  Widget _todoItem(TodoVO vo){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(vo.content,style: TextStyle(
-            fontSize: 30.sp,fontWeight: FontWeight.w400),//maxLines: 1,
-        ),
-        RaisedButton(onPressed: () {
-          _singleTodoListVM.deleteMainTodo(vo.id!);
-        },
-
-        )
-      ],
-    );
-  }
-
-
 
 
 }

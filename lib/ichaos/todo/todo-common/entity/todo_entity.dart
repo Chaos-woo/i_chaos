@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:common_utils/common_utils.dart';
 import 'package:floor/floor.dart';
 import 'package:i_chaos/ichaos/public/base/database/root_entity.dart';
@@ -47,6 +49,18 @@ class TodoEntity extends RootEntity<TodoVO>{
   }
   
   List<SubTaskVO> deserializeSubTaskVO(String? subTaskString) {
-    return JsonUtil.getList(subTaskString) ?? [];
+    if (subTaskString == null) {
+      return [];
+    }
+    var list = jsonDecode(subTaskString);
+
+    List<dynamic> subTasks = list;
+    List<SubTaskVO> taskList = [];
+    for (var item in subTasks) {
+      Map<String, dynamic> task = item as Map<String, dynamic>;
+      taskList.add(SubTaskVO.fromJson(task));
+    }
+    taskList.sort((SubTaskVO a, SubTaskVO b) => a.createTime.isAfter(b.createTime) ? 1 : -1);
+    return taskList;
   }
 }

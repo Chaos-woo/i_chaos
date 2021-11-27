@@ -224,9 +224,16 @@ dependencies:
   json_annotation: ^4.3.0
   # bottom bar
   salomon_bottom_bar: ^3.1.0
+  # 组件链式调用
   widget_chain: ^0.1.0
-  # 日历
-  zsh_calendar: ^0.0.1
+  # 组件滑动操作
+  flutter_slidable: ^1.0.0-dev.8
+  # 日历组件
+  table_calendar: ^3.0.3
+  # badges / mini chip
+  badges: ^2.0.1
+  # 去除ListView的边界水波纹效果
+  noripple_overscroll: ^0.0.2
 
 dev_dependencies:
   flutter_test:

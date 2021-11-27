@@ -1,4 +1,5 @@
 
+import 'package:i_chaos/ichaos/public/units/uuid.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'subtask.g.dart';
@@ -16,4 +17,9 @@ class SubTaskVO {
   factory SubTaskVO.fromJson(Map<String, dynamic> json) => _$SubTaskVOFromJson(json);
 
   Map<String, dynamic> toJson() => _$SubTaskVOToJson(this);
+
+  static SubTaskVO newSubTask({required String content, DateTime? createTime}) {
+    DateTime time = createTime ?? DateTime.now();
+    return SubTaskVO(UuidUnit.id(), content, false, time, time);
+  }
 }
