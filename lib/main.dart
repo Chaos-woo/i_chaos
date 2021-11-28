@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:i_chaos/base_framework/config/app_config.dart';
 import 'package:i_chaos/ichaos/public/config/design_config.dart';
 import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
+import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:reflectable/reflectable.dart';
@@ -138,9 +139,17 @@ class _MainSceneState extends State<MainScene> {
           });
         },
       ),
-      body: PageView(
-        controller: _pageController,
-        children: _tabPages,
+      body: NoRippleOverScroll(
+        child: PageView(
+          controller: _pageController,
+          children: _tabPages,
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+              _pageController.jumpToPage(_currentIndex);
+            });
+          },
+        ),
       ),
     );
   }

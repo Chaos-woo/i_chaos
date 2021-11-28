@@ -50,7 +50,7 @@ class FilteredTabBar extends StatelessWidget {
                               builder: (ctx, activeTodoCnt, child) {
                                 return Badge(
                                   toAnimate: false,
-                                  badgeContent: Text('$activeTodoCnt'),
+                                  badgeContent: activeTodoCnt > 0 ? Text('$activeTodoCnt') : null,
                                   position: BadgePosition(top: activeTodoCnt > 10 ? -1 : -4, end: -30),
                                   padding: EdgeInsets.all(activeTodoCnt > 10 ? 3 : 6),
                                   badgeColor: Colors.red,
