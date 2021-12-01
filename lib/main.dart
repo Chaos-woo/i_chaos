@@ -8,7 +8,6 @@ import 'package:i_chaos/ichaos/public/config/design_config.dart';
 import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:provider/provider.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -63,7 +62,7 @@ class IChaosApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const OKToast(
-        child: MainScene(),
+        child: SafeArea(child: MainScene()),
       ),
     );
   }
@@ -126,7 +125,7 @@ class _MainSceneState extends State<MainScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(244, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(244, 245, 245, 1),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         items: _bottomBarItems,
