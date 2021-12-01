@@ -35,12 +35,15 @@ class FilteredTabBarVM extends SingleViewStateModel {
   }
 
   // 选择的日期切换
-  void selectedDateSwitch(DateTime selectDate) {
+  void selectedDateChange(DateTime selectDate) {
     setBusy(true);
-    _singleTodoListVM.switchTodoListByDate(selectDate).then((_) {
-      _selectDate = selectDate;
-      setBusy(false);
-      notifyListeners();
+    notifyListeners();
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _singleTodoListVM.switchTodoListByDate(selectDate).then((_) {
+        _selectDate = selectDate;
+        setBusy(false);
+        notifyListeners();
+      });
     });
   }
 

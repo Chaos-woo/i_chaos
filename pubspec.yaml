@@ -236,6 +236,8 @@ dependencies:
   noripple_overscroll: ^0.0.2
   # tabbar样式
   tab_indicator_styler: ^2.0.0
+  # 简单手势处理
+  simple_gesture_detector: ^0.2.0
 
 dev_dependencies:
   flutter_test:
