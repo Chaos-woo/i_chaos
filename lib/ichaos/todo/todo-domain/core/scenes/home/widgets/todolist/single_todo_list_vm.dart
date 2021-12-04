@@ -52,6 +52,11 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   @override
   onCompleted(List<TodoVO> data) {
+    _handleTodoListByStatus(data);
+  }
+
+  // 根据事件状态分发到不同的列表事件列表中
+  void _handleTodoListByStatus(List<TodoVO> data) {
     _activeTodoList = data.where((todo) => !todo.completed).toList();
     _completedTodoList = data.where((todo) => todo.completed).toList();
   }
@@ -59,7 +64,8 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
   // 从数据源获取指定日期的事件列表切换内存中的事件列表
   Future<void> switchTodoListByDate(DateTime selectDate) async {
     _currentDate = selectDate;
-    await _todoRepo.listTodo(start: _currentDate, end: _currentDate);
+    List<TodoVO> todoList = await _todoRepo.listTodo(start: _currentDate, end: _currentDate);
+    _handleTodoListByStatus(todoList);
   }
 
   // 根据id获取内存中事件的位置

@@ -6,7 +6,7 @@ import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 
 /// 事件数据仓库
-class TodoRepository extends RootRepository{
+class TodoRepository extends RootRepository {
   Future<List<TodoVO>> listTodo({DateTime? start, DateTime? end}) async {
     final todoDao = await getTodoDao();
     List<TodoEntity> todoEntities = [];

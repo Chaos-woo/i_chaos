@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:getwidget/size/gf_size.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 
@@ -33,17 +35,28 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
         model.initData();
       },
       builder: (ctx, singleTodoListVM, child) {
-        return ProviderWidget<FilteredTabBarVM>(
+        return ProviderWidget<FilteredTabBarVM> (
             model: FilteredTabBarVM(singleTodoListVM: singleTodoListVM),
             builder: (ctx, filteredTabBarVM, child) {
-              return Scaffold(
-                appBar: _getTodoAppBar(filteredTabBarVM),
-                body: Column(children: <Widget>[
-                  CalendarBar(filteredTabBarVM: filteredTabBarVM).transformToPageWidget(),
-                  FilteredTabBar(
-                    filteredTabBarVM: filteredTabBarVM,
-                  )
-                ]),
+              return ProviderWidget<CalendarBarVM>(
+                model: CalendarBarVM(filteredTabBarVM: filteredTabBarVM),
+                builder: (ctx, calendarBarVM, _) {
+                  return Scaffold(
+                    appBar: _getTodoAppBar(filteredTabBarVM),
+                    body: Column(children: <Widget>[
+                      CalendarBar().transformToPageWidget(),
+                      FilteredTabBar(
+                        filteredTabBarVM: filteredTabBarVM,
+                      )
+                    ]),
+                    floatingActionButton: ProviderWidget<TodoHomeFloatingActionBtnVM>(
+                      model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
+                      builder: (ctx, actionBtnVM, _) {
+                        return TodoHomeFloatingActionBtn(actionBtnVM: actionBtnVM).transformToPageWidget();
+                      },
+                    ),
+                  );
+                },
               );
             });
       },
@@ -64,7 +77,9 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
             ),
           ),
           10.hGap,
-          if ((now.month != currDate.month && now.year == currDate.year) || (now.month == currDate.month && now.year != currDate.year) || (now.month != currDate.month && now.year != currDate.year))
+          if ((now.month != currDate.month && now.year == currDate.year) ||
+              (now.month == currDate.month && now.year != currDate.year) ||
+              (now.month != currDate.month && now.year != currDate.year))
             GFButton(
               onPressed: () {},
               textColor: Colors.white,

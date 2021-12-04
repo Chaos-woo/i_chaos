@@ -41,18 +41,18 @@ class FilteredTabBar extends StatelessWidget {
                       isScrollable: false,
                       tabs: [
                         Tab(
-                          child: Selector<FilteredTabBarVM, int>(
-                            selector: (ctx, vm) => vm.activeTodoCnt,
-                            shouldRebuild: (pre, next) => pre != next,
-                            builder: (ctx, activeTodoCnt, child) {
-                              return Badge(
+                          child: Selector<FilteredTabBarVM, DateTime>(
+                            selector: (ctx, vm) => vm.currentDate,
+                            shouldRebuild: (pre, next) => pre.isSameDay(next),
+                            builder: (ctx, _, child) {
+                              return vm.activeTodoCnt > 0 ? Badge(
                                 toAnimate: false,
-                                badgeContent: activeTodoCnt > 0 ? Text('$activeTodoCnt') : null,
-                                position: BadgePosition(top: activeTodoCnt > 10 ? -1 : -4, end: -30),
-                                padding: EdgeInsets.all(activeTodoCnt > 10 ? 3 : 6),
+                                badgeContent: Text('${vm.activeTodoCnt}'),
+                                position: BadgePosition(top: vm.activeTodoCnt >= 10 ? -1 : -4, end: -30),
+                                padding: EdgeInsets.all(vm.activeTodoCnt >= 10 ? 3 : 6),
                                 badgeColor: Colors.red,
                                 child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
-                              );
+                              ) : Text(_filteredTabBarVM.tabWord(TodoState.active));
                             },
                           ),
                         ),

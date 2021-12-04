@@ -5,6 +5,7 @@ import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/card/todo_card.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +23,9 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    SingleTodoListVM vm = Provider.of<SingleTodoListVM>(context, listen: false);
-    List<TodoVO> currTodoList = vm.getTodoListByState(_todoState);
+    SingleTodoListVM singleTodoListVM = Provider.of<SingleTodoListVM>(context, listen: false);
+//    TodoHomeFloatingActionBtnVM todoFABtnVM = Provider.of<TodoHomeFloatingActionBtnVM>(context, listen: false);
+    List<TodoVO> currTodoList = singleTodoListVM.getTodoListByState(_todoState);
 
     return Container(
       color: Colors.white70,

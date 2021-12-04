@@ -28,6 +28,15 @@ extension DateTimeExtension on DateTime {
 
   // 获取所选日期的周一的日期
   DateTime get monday => subtract(Duration(days: weekday - 1));
+
+  bool isToday() {
+    DateTime now = DateTime.now();
+    return now.year == year && now.month == month && now.day == day;
+  }
+
+  bool isSameDay(DateTime date) {
+    return date.year == year && date.month == month && date.day == day;
+  }
 }
 
 /// 时间字符串扩展
