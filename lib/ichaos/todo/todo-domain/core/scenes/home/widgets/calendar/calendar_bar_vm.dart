@@ -6,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 class CalendarBarVM extends SingleViewStateModel {
   final DateTime firstDay = DateTime(2020, 1, 1);
   final DateTime lastDay = DateTime(2099, 12, 30);
+  final int _defaultSinglePageAnimationDuration = 100;
 
   final Map<int, String> weekLabels = {
     7 : "周日",
@@ -20,8 +21,9 @@ class CalendarBarVM extends SingleViewStateModel {
   late DateTime _selectDate;
   late FilteredTabBarVM _filteredTabBarVM;
 
-  // 默认日历条翻页时间为50
-  int _pageAnimationDuration = 50;
+  // 默认日历条翻页时间为100
+  int _pageAnimationDuration = 100;
+  // 日历条当前页
   late int _currentPage = 0;
 
   CalendarBarVM({required FilteredTabBarVM filteredTabBarVM}) {
@@ -46,13 +48,14 @@ class CalendarBarVM extends SingleViewStateModel {
   void swipeDateChange(DateTime selectDate) {
     _filteredTabBarVM.selectedDateChange(selectDate,
         calendarPageAnimationDuration: _pageAnimationDuration);
-    // 恢复为默认单页滑动时间50
-    _pageAnimationDuration = 50;
+    // 恢复为默认单页滑动时间100
+    _pageAnimationDuration = _defaultSinglePageAnimationDuration;
   }
 
   // 日期切换 - 点选
   void selectDateChange(DateTime selectDate) {
-    _filteredTabBarVM.selectedDateChange(selectDate, calendarPageAnimationDuration: _pageAnimationDuration);
+    // 定义为400延迟是因为日历组件内部UI刷新时间为300
+    _filteredTabBarVM.selectedDateChange(selectDate, calendarPageAnimationDuration: 400);
     _selectDate = selectDate;
   }
 
@@ -64,7 +67,13 @@ class CalendarBarVM extends SingleViewStateModel {
   // 回到今日
   void backToToday() {
     _selectDate = DateTime.now();
-    _pageAnimationDuration = _calculatePageAnimationDuration();
+    int targetPage = _calculateFinalFocusedPage(_selectDate);
+    // 简单实验下5页以下使用恒定滑动时间体验较好
+    if (targetPage - _currentPage < 5) {
+      _pageAnimationDuration = 500;
+    } else {
+      _pageAnimationDuration = _calculateTargetPageAnimationDuration(targetPage);
+    }
     notifyListeners(refreshSelector: true);
   }
 
@@ -94,7 +103,12 @@ class CalendarBarVM extends SingleViewStateModel {
 
   // 根据当前页和选择时间计算日历滑动时间
   int _calculatePageAnimationDuration() {
-    return (_calculateFinalFocusedPage(_selectDate) - currentPage).abs() * 50;
+    return (_calculateFinalFocusedPage(_selectDate) - currentPage).abs() * _defaultSinglePageAnimationDuration;
+  }
+
+  // 根据当前页和和目标页计算日历滑动时间
+  int _calculateTargetPageAnimationDuration(int targetPage) {
+    return (targetPage - currentPage).abs() * _defaultSinglePageAnimationDuration;
   }
 
   // 计算指定日期在滑动页面中的页数，参照table_calendar_base.dart _calculateFocusedPage

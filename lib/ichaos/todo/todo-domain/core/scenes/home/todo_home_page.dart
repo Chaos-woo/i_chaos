@@ -41,20 +41,18 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
               return ProviderWidget<CalendarBarVM>(
                 model: CalendarBarVM(filteredTabBarVM: filteredTabBarVM),
                 builder: (ctx, calendarBarVM, _) {
-                  return Scaffold(
-                    appBar: _getTodoAppBar(filteredTabBarVM),
-                    body: Column(children: <Widget>[
-                      CalendarBar().transformToPageWidget(),
-                      FilteredTabBar(
-                        filteredTabBarVM: filteredTabBarVM,
-                      )
-                    ]),
-                    floatingActionButton: ProviderWidget<TodoHomeFloatingActionBtnVM>(
-                      model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
-                      builder: (ctx, actionBtnVM, _) {
-                        return TodoHomeFloatingActionBtn(actionBtnVM: actionBtnVM).transformToPageWidget();
-                      },
-                    ),
+                  return ProviderWidget<TodoHomeFloatingActionBtnVM>(
+                    model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
+                    builder: (ctx, actionBtnVM, _) {
+                      return Scaffold(
+                        appBar: _getTodoAppBar(filteredTabBarVM),
+                        body: Column(children: <Widget>[
+                          CalendarBar().transformToPageWidget(),
+                          FilteredTabBar(),
+                        ]),
+                        floatingActionButton: TodoHomeFloatingActionBtn(actionBtnVM: actionBtnVM).transformToPageWidget(),
+                      );
+                    },
                   );
                 },
               );

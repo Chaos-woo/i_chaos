@@ -5,7 +5,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calenda
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 
-enum FloatingBtnDisplayStatus {
+enum FloatBtnDisplayStatus {
   show, hide
 }
 
@@ -28,10 +28,16 @@ class TodoHomeFloatingActionBtnVM extends SingleViewStateModel {
     this.btnDisplayCallback = btnDisplayCallback;
   }
 
-  Future<void> floatingBtnDisplayChange(FloatingBtnDisplayStatus action) async {
-    bool isDisplay = action == FloatingBtnDisplayStatus.show;
+  // 根据传入参数改变按钮展示状态
+  void floatingBtnDisplayChange(FloatBtnDisplayStatus action) {
+    bool isDisplay = _isShow(action);
     this.isDisplay = isDisplay;
     btnDisplayCallback?.call(isDisplay);
+  }
+
+  // 按钮是否需要为展示状态
+  bool _isShow(FloatBtnDisplayStatus action) {
+    return action == FloatBtnDisplayStatus.show;
   }
 
   // 回到今日
@@ -39,6 +45,7 @@ class TodoHomeFloatingActionBtnVM extends SingleViewStateModel {
     _calendarBarVM.backToToday();
   }
 
+  // 当前选择时间是否为今日
   bool isToday() {
     return _filteredTabBarVM.currentDate.isToday();
   }

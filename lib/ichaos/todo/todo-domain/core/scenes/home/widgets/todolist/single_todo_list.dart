@@ -24,7 +24,6 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     SingleTodoListVM singleTodoListVM = Provider.of<SingleTodoListVM>(context, listen: false);
-//    TodoHomeFloatingActionBtnVM todoFABtnVM = Provider.of<TodoHomeFloatingActionBtnVM>(context, listen: false);
     List<TodoVO> currTodoList = singleTodoListVM.getTodoListByState(_todoState);
 
     return Container(
