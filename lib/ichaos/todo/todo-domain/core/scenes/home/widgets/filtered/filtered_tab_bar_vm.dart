@@ -46,6 +46,8 @@ class FilteredTabBarVM extends SingleViewStateModel {
 
   // 获取未完成事件数量
   int get activeTodoCnt => _singleTodoListVM.activeTodoCnt;
+  // 获取已完成事件数量
+  int get completedTodoCnt => _singleTodoListVM.completedTodoCnt;
   // 获取当前选择日期
   DateTime get currentDate => _selectDate;
   // 获取当前tabBar下标

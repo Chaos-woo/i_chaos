@@ -1,12 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list.dart';
 import 'package:provider/provider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
-import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 
 import 'filtered_tab_bar_vm.dart';
 
@@ -40,14 +40,16 @@ class FilteredTabBar extends StatelessWidget {
                         selector: (ctx, vm) => vm.currentDate,
                         shouldRebuild: (pre, next) => pre.isSameDay(next),
                         builder: (ctx, vm, child) {
-                          return _filteredTabBarVM.activeTodoCnt > 0 ? Badge(
-                            toAnimate: false,
-                            badgeContent: Text('${_filteredTabBarVM.activeTodoCnt}'),
-                            position: BadgePosition(top: _filteredTabBarVM.activeTodoCnt >= 10 ? -1 : -4, end: -30),
-                            padding: EdgeInsets.all(_filteredTabBarVM.activeTodoCnt >= 10 ? 3 : 6),
-                            badgeColor: Colors.red,
-                            child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
-                          ) : Text(_filteredTabBarVM.tabWord(TodoState.active));
+                          return _filteredTabBarVM.activeTodoCnt > 0
+                              ? Badge(
+                                  toAnimate: false,
+                                  badgeContent: Text('${_filteredTabBarVM.activeTodoCnt}'),
+                                  position: BadgePosition(top: _filteredTabBarVM.activeTodoCnt >= 10 ? -1 : -4, end: -30),
+                                  padding: EdgeInsets.all(_filteredTabBarVM.activeTodoCnt >= 10 ? 3 : 6),
+                                  badgeColor: Colors.red,
+                                  child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
+                                )
+                              : Text(_filteredTabBarVM.tabWord(TodoState.active));
                         },
                       ),
                     ),
@@ -88,14 +90,43 @@ class FilteredTabBar extends StatelessWidget {
 
   List<Widget> getTodoListOrPlaceholder(BuildContext ctx, bool isBusy) {
     if (isBusy) {
-      return [const Text('no records'),const Text('no records'),];
+      return [
+        const Text('no records'),
+        const Text('no records'),
+      ];
     } else {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);
 
       return [
-        SingleTodoList(isActive: true).transformToPageWidget(key: UniqueKey()),
-        SingleTodoList(isActive: false).transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: true,
+            todoListScrollCallback: _getTodoListNotifyCallback(btnVM, true)).transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: false,
+            todoListScrollCallback: _getTodoListNotifyCallback(btnVM, false)).transformToPageWidget(key: UniqueKey()),
       ];
     }
+  }
+
+  TodoListScrollCallback _getTodoListNotifyCallback(TodoHomeFloatingActionBtnVM btnVM, bool isActive) {
+    int todoListCnt = isActive ? _filteredTabBarVM.activeTodoCnt : _filteredTabBarVM.completedTodoCnt;
+    return TodoListScrollCallback(
+      onTodoListScrollUpdate: () {
+        print('update');
+        if(todoListCnt > 0) {
+          btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.hide);
+        }
+      },
+      onTodoListScrollEnd: () {
+        print('End');
+        if(todoListCnt > 0) {
+          btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
+        }
+      },
+      onTodoListOverScroll: () {
+        print('Scroll');
+        if(todoListCnt > 0 && !btnVM.show) {
+          btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
+        }
+      }
+    );
   }
 }

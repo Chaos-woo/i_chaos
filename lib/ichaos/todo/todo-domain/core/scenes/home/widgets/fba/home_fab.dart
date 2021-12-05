@@ -21,7 +21,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
   void initState() {
     super.initState();
     // 实例化动画
-    _btnAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 800));
+    _btnAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
     _offsetAnimation = Tween(begin: const Offset(0, 0), end: const Offset(1, 0)).animate(_btnAnimationController);
   }
 
