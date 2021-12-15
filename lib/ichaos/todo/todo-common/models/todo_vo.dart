@@ -82,12 +82,12 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   }
 
   /// 卡片区域信息分布
-  bool get isColorArea => level > TodoLevel.normal.code || level == TodoLevel.deferrable.code;
-  bool get isPromptArea => (location != null && location != '') || (needPromptTime != null);
-  bool get isMainArea => true;
-  bool get isRemarkArea => remark != null && remark != '';
-  bool get isSubTaskArea => subTaskList.isNotEmpty;
-  bool get isTagsArea => level > TodoLevel.normal.code || period > 0 || (tag != null && tag! > 0);
+  bool get isColorPrompt => level > TodoLevel.normal.code || level == TodoLevel.deferrable.code;
+  bool get isPromptContent => (location != null && location != '') || (needPromptTime != null);
+  bool get isMainContent => true;
+  bool get isRemarkInfo => remark != null && remark != '';
+  bool get isSubTaskInfo => subTaskList.isNotEmpty;
+  bool get isTagsPrompt => level > TodoLevel.normal.code || period > 0 || (tag != null && tag! > 0);
 
   static TodoVO emptyReplace() {
     return TodoVO.newTodo(content: 'empty');

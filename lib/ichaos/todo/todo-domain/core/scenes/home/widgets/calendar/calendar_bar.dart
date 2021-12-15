@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
@@ -16,6 +17,7 @@ class CalendarBar extends WidgetState {
 
     return Container(
       margin: const EdgeInsets.only(top: 0),
+      width: ScreenUtil.getInstance().screenWidth / 10 * 8.5,
       color: Colors.teal,
       child: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {

@@ -29,7 +29,7 @@ class FilteredTabBar extends StatelessWidget {
               height: 45,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.white54,
               ),
               child: TabBar(
                   indicatorColor: Colors.teal,
@@ -73,7 +73,7 @@ class FilteredTabBar extends StatelessWidget {
                 width: ScreenUtil.getScreenW(context),
                 height: MediaQuery.of(context).size.height - 242,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.white54,
                 ),
                 child: Selector<FilteredTabBarVM, DateTime>(
                   selector: (ctx, vm) => vm.currentDate,
@@ -110,19 +110,16 @@ class FilteredTabBar extends StatelessWidget {
     int todoListCnt = isActive ? _filteredTabBarVM.activeTodoCnt : _filteredTabBarVM.completedTodoCnt;
     return TodoListScrollCallback(
       onTodoListScrollUpdate: () {
-        print('update');
         if(todoListCnt > 0) {
           btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.hide);
         }
       },
       onTodoListScrollEnd: () {
-        print('End');
         if(todoListCnt > 0) {
           btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
         }
       },
       onTodoListOverScroll: () {
-        print('Scroll');
         if(todoListCnt > 0 && !btnVM.show) {
           btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
         }
