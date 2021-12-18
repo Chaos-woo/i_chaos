@@ -476,6 +476,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
+  iconfont:
+    dependency: "direct main"
+    description:
+      name: iconfont
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   image:
     dependency: transitive
     description:

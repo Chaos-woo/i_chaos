@@ -238,6 +238,8 @@ dependencies:
   tab_indicator_styler: ^2.0.0
   # 简单手势处理
   simple_gesture_detector: ^0.2.0
+  # icon font 字体图标
+  iconfont: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -259,6 +261,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/ali_icons/iconfont.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

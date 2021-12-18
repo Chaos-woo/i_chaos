@@ -4,6 +4,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:i_chaos/base_framework/config/app_config.dart';
+import 'package:i_chaos/ichaos/public/ali_icons.dart';
 import 'package:i_chaos/ichaos/public/config/design_config.dart';
 import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
@@ -103,7 +104,7 @@ class _MainSceneState extends State<MainScene> {
 
     /// Todo list
     SalomonBottomBarItem(
-      icon: const Icon(Icons.format_list_numbered),
+      icon: const Icon(AliIcons.ALI_ICON_ACTIVITY),
       title: const Text("ToDO"),
       selectedColor: Colors.teal,
     ),

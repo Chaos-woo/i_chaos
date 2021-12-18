@@ -20,34 +20,32 @@ class TodoCard extends WidgetState {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
-        child: InkWell(
-          child: Container(
-            margin: EdgeInsets.only(top: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                width: 1,
-                color: TodoLevel.coded(_todo.level).color,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              boxShadow: [
-                if(_todo.isColorPrompt)
-                  BoxShadow(
-                      color: TodoLevel.coded(_todo.level).color,
-                      offset: const Offset(0.0, -5.0), // 阴影y轴偏移量
-                      blurRadius: 0, // 阴影模糊程度
-                      spreadRadius: 0 // 阴影扩散程度
-                  )
-              ],
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
+      child: InkWell(
+        child: Container(
+          margin: const EdgeInsets.only(top: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(
+              width: 1,
+              color: TodoLevel.coded(_todo.level).color,
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              // 卡片列信息
-              children: _cardColumn(),
-            ),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            boxShadow: [
+              if(_todo.isColorPrompt)
+                BoxShadow(
+                    color: TodoLevel.coded(_todo.level).color,
+                    offset: const Offset(0.0, -2.0), // 阴影y轴偏移量
+                    blurRadius: 0, // 阴影模糊程度
+                    spreadRadius: 0 // 阴影扩散程度
+                )
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            // 卡片列信息
+            children: _cardColumn(),
           ),
         ),
       ),

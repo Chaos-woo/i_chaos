@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
@@ -17,8 +16,8 @@ class TodoListScrollCallback {
   OnTodoListScrollEnd? onTodoListScrollEnd;
   OnTodoListOverScroll? onTodoListOverScroll;
 
-  TodoListScrollCallback({OnTodoListScrollUpdate? onTodoListScrollUpdate, OnTodoListScrollEnd? onTodoListScrollEnd,
-    OnTodoListOverScroll? onTodoListOverScroll}) {
+  TodoListScrollCallback(
+      {OnTodoListScrollUpdate? onTodoListScrollUpdate, OnTodoListScrollEnd? onTodoListScrollEnd, OnTodoListOverScroll? onTodoListOverScroll}) {
     // ignore: prefer_initializing_formals
     this.onTodoListScrollUpdate = onTodoListScrollUpdate;
     // ignore: prefer_initializing_formals
@@ -34,6 +33,7 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
 
   late bool _isActive;
   late TodoState _todoState;
+
   // 监听事件列表回调
   TodoListScrollCallback? _todoListScrollCallback;
 
@@ -63,7 +63,8 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
               case OverscrollNotification:
                 _todoListScrollCallback?.onTodoListOverScroll?.call();
                 break;
-              default: break;
+              default:
+                break;
             }
           }
           return false;
@@ -71,8 +72,14 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             if (index == currTodoList.length) {
-              return Center(
-                child: Text('no record'),
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Center(
+                  child: Text(
+                    '-- 没有更多记录啦 --',
+                    style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
+                  ),
+                ),
               );
             }
             return TodoCard(currTodoList[index]).transformToPageWidget();
@@ -85,4 +92,3 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
     );
   }
 }
-

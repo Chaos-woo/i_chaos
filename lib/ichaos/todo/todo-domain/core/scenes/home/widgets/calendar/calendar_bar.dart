@@ -47,7 +47,7 @@ class CalendarBar extends WidgetState {
               return Center(
                 child: Text(
                   weekLabel,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 10, color: Colors.black54, fontFamily: 'Lexend Deca', fontWeight: FontWeight.w600),
                 ),
               );
             },
