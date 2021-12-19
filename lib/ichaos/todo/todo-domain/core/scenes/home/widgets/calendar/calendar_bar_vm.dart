@@ -4,7 +4,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtere
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarBarVM extends SingleViewStateModel {
-  final DateTime firstDay = DateTime(2020, 1, 1);
+  final DateTime firstDay = DateTime(2016, 1, 1);
   final DateTime lastDay = DateTime(2099, 12, 30);
   final int _defaultSinglePageAnimationDuration = 100;
 
