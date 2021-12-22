@@ -75,6 +75,7 @@ class CalendarBarVM extends SingleViewStateModel {
       _pageAnimationDuration = _calculateTargetPageAnimationDuration(targetPage);
     }
     notifyListeners(refreshSelector: true);
+    _filteredTabBarVM.selectedDateChange(_selectDate, calendarPageAnimationDuration: 400);
   }
 
   // 回到今日
@@ -88,6 +89,7 @@ class CalendarBarVM extends SingleViewStateModel {
       _pageAnimationDuration = _calculateTargetPageAnimationDuration(targetPage);
     }
     notifyListeners(refreshSelector: true);
+    _filteredTabBarVM.selectedDateChange(_selectDate, calendarPageAnimationDuration: 400);
   }
 
   // 设置日历组件的装饰
