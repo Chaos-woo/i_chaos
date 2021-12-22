@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 
 // 抽象透明页面
-abstract class AbstractTransparentPageX extends PageState with SingleTickerProviderStateMixin {
+abstract class AbstractTransparentPageX<R extends Object> extends PageState with SingleTickerProviderStateMixin {
   /// 可自定义参数
   // 组件最大宽度
   late double? widgetMaxWidth;
@@ -11,6 +11,8 @@ abstract class AbstractTransparentPageX extends PageState with SingleTickerProvi
   late int? animationDuration;
   // 进入方向
   late bool? leftStartDirection;
+  // 组件左方padding或组件右方padding
+  late double? leftPadding;
   // 关闭或重新打开距离标识比例
   late int? reOpenRadio;
   // 背景透明度
@@ -55,10 +57,11 @@ abstract class AbstractTransparentPageX extends PageState with SingleTickerProvi
 
     _realStartPos = EdgeInsets.only(left: _startPos);
     // 结束位置根据进入方向来判断距离left的位置
-    EdgeInsets realEndPos = leftStartDirection! ? const EdgeInsets.only(left: 0) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth!);
+    EdgeInsets realEndPos = leftStartDirection! ? EdgeInsets.only(left: 0 + leftPadding!) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth! - leftPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
+
     super.initState();
 
     animation.addListener(() {
@@ -140,9 +143,17 @@ abstract class AbstractTransparentPageX extends PageState with SingleTickerProvi
   }
 
   close(double start) {
+    closeAndReturn(start, null);
+  }
+
+  closeAndReturn(double start, R? result) {
     controller.reverse(from: double.parse(animationDuration!.toString())).whenComplete(() {
-      pop();
+      pop(result: Future.value(result));
     });
+  }
+
+  popAndReturn(R? result) {
+    closeAndReturn(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth!, result);
   }
 
   reOpen(double start) {
@@ -158,7 +169,7 @@ abstract class AbstractTransparentPageX extends PageState with SingleTickerProvi
   dragEndV(DragEndDetails details) {}
 }
 
-abstract class AbstractTransparentPageY extends PageState with SingleTickerProviderStateMixin {
+abstract class AbstractTransparentPageY<R extends Object> extends PageState with SingleTickerProviderStateMixin {
   /// 可自定义参数
   // 组件最大高度
   late double? widgetMaxHeight;
@@ -166,6 +177,8 @@ abstract class AbstractTransparentPageY extends PageState with SingleTickerProvi
   late int? animationDuration;
   // 进入方向
   late bool? topStartDirection;
+  // 组件上方padding或组件下方padding
+  late double? topPadding;
   // 关闭或重新打开距离标识比例
   late int? reOpenRadio;
   // 背景透明度
@@ -194,6 +207,7 @@ abstract class AbstractTransparentPageY extends PageState with SingleTickerProvi
     animationDuration = 200;
     reOpenRadio = 3;
     opacity = 0.3;
+    topPadding = 0;
 
     initPageParams();
 
@@ -210,10 +224,11 @@ abstract class AbstractTransparentPageY extends PageState with SingleTickerProvi
 
     _realStartPos = EdgeInsets.only(top: _startPos);
     // 结束位置根据进入方向来判断距离top的位置
-    EdgeInsets realEndPos = topStartDirection! ? const EdgeInsets.only(top: 0) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight!);
+    EdgeInsets realEndPos = topStartDirection! ? EdgeInsets.only(top: 0 + topPadding!) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight! - topPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
+
     super.initState();
 
     animation.addListener(() {
@@ -280,9 +295,17 @@ abstract class AbstractTransparentPageY extends PageState with SingleTickerProvi
   dragEnd(DragEndDetails details) {}
 
   close(double start) {
+    closeAndReturn(start, null);
+  }
+
+  closeAndReturn(double start, R? result) {
     controller.reverse(from: double.parse(animationDuration!.toString())).whenComplete(() {
-      pop();
+      pop(result: Future.value(result));
     });
+  }
+
+  popAndReturn(R? result) {
+    closeAndReturn(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight!, result);
   }
 
   reOpen(double start) {
@@ -312,3 +335,4 @@ abstract class AbstractTransparentPageY extends PageState with SingleTickerProvi
     }
   }
 }
+

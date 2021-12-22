@@ -24,6 +24,7 @@ class TodoDrawerPage extends AbstractTransparentPageY {
     widgetMaxHeight = 300.w;
     animationDuration = 500;
     topStartDirection = false;
+    topPadding = 100;
   }
 
   @override

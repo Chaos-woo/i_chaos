@@ -22,7 +22,7 @@ class CalendarBarVM extends SingleViewStateModel {
   late FilteredTabBarVM _filteredTabBarVM;
 
   // 默认日历条翻页时间为100
-  int _pageAnimationDuration = 100;
+  int _pageAnimationDuration = 20;
   // 日历条当前页
   late int _currentPage = 0;
 
@@ -62,6 +62,19 @@ class CalendarBarVM extends SingleViewStateModel {
   // 获取周标签值
   String getWeekLabel(int weekday) {
     return weekLabels[weekday]!;
+  }
+
+  // 跳转至指定日期
+  void jumpToToday(DateTime targetDate) {
+    _selectDate = targetDate;
+    int targetPage = _calculateFinalFocusedPage(_selectDate);
+    // 简单实验下5页以下使用恒定滑动时间体验较好
+    if (targetPage - _currentPage < 5) {
+      _pageAnimationDuration = 500;
+    } else {
+      _pageAnimationDuration = _calculateTargetPageAnimationDuration(targetPage);
+    }
+    notifyListeners(refreshSelector: true);
   }
 
   // 回到今日

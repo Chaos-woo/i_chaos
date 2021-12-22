@@ -59,8 +59,9 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
   Widget _getMainScaffold(BuildContext ctx) {
     final filteredTabBarVM = Provider.of<FilteredTabBarVM>(ctx);
     final actionBtnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx);
+    final calendarBarVM = Provider.of<CalendarBarVM>(ctx);
 
-    List<Widget> calendarBarWidgets = _getCalendarImage();
+    List<Widget> calendarBarWidgets = _getCalendarImage(calendarBarVM);
     calendarBarWidgets.add(CalendarBar().transformToPageWidget());
 
     return Scaffold(
@@ -128,9 +129,9 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
   }
 
   // 获取年月图
-  List<Widget> _getCalendarImage() {
+  List<Widget> _getCalendarImage(CalendarBarVM calendarBarVM) {
     return <Widget>[
-      const CalendarImage(),
+      CalendarImage(calendarBarVM).transformToPageWidget(),
       Container(
         width: 1,
         height: 68,
