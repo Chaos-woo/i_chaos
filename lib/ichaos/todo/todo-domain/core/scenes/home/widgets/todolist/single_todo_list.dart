@@ -82,7 +82,17 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
                 ),
               );
             }
-            return TodoCard(currTodoList[index]).transformToPageWidget();
+            return TodoCard(currTodoList[index], operateCallback: TodoOperateCallback(
+              onDelete: (ctx, vo) {
+                singleTodoListVM.deleteMainTodo(vo.id!);
+              },
+              onModify: (ctx, vo) {
+//                push();
+              },
+              onDetailQuery: (ctx, vo) {
+//                push();
+              }
+            )).transformToPageWidget();
           },
           itemCount: currTodoList.length + 1,
           addAutomaticKeepAlives: false,

@@ -12,7 +12,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'ichaos/todo/todo-domain/core/scenes/home/todo_home_page.dart';
+import 'ichaos/todo/todo-domain/core/scenes/home/pages/todo_home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -4,15 +4,15 @@ import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
-import 'pages/drawer_page.dart';
+import 'drawer_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/calendar_image.dart';
-import 'widgets/todolist/single_todo_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar_image.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 
 class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
   @override

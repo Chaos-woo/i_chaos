@@ -6,23 +6,59 @@ import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/public/widgets/icon_text.dart';
 import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
+import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 
+typedef OnTodoDeleteCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
+
+class TodoOperateCallback {
+  OnTodoDeleteCallback? onDelete;
+  OnTodoDetailQueryCallback? onDetailQuery;
+  OnTodoModifyCallback? onModify;
+
+  TodoOperateCallback({OnTodoDeleteCallback? onDelete, OnTodoDetailQueryCallback? onDetailQuery, OnTodoModifyCallback? onModify}) {
+    this.onDelete = onDelete;
+    this.onDetailQuery = onDetailQuery;
+    this.onModify = onModify;
+  }
+}
+
 class TodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
 
   final TodoVO _todo;
+  TodoOperateCallback? operateCallback;
 
-  TodoCard(this._todo);
+  TodoCard(this._todo, {TodoOperateCallback? operateCallback}) {
+    this.operateCallback = operateCallback;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
       child: InkWell(
+        onLongPress: () {
+          WWDialog.showMiddleDialog(context,
+              title: '更多操作：${_todo.content}',
+              customWidgetButtons: [
+                defaultCustomButton(context, text: '查看', onTap: () {
+                  operateCallback?.onDetailQuery?.call(context, _todo);
+              }),
+                defaultCustomButton(context, text: '修改', onTap: () {
+                  operateCallback?.onModify?.call(context, _todo);
+                }),
+                defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
+                  operateCallback?.onDelete?.call(context, _todo);
+                }),
+              ],
+              arrangeType: buttonArrangeType.column,);
+        },
         child: Container(
           margin: const EdgeInsets.only(top: 8),
           decoration: BoxDecoration(
@@ -33,13 +69,13 @@ class TodoCard extends WidgetState {
             ),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             boxShadow: [
-              if(_todo.isColorPrompt)
+              if (_todo.isColorPrompt)
                 BoxShadow(
                     color: TodoLevel.coded(_todo.level).color,
                     offset: const Offset(0.0, -2.0), // 阴影y轴偏移量
                     blurRadius: 0, // 阴影模糊程度
                     spreadRadius: 0 // 阴影扩散程度
-                )
+                    )
             ],
           ),
           child: Column(
@@ -55,10 +91,7 @@ class TodoCard extends WidgetState {
   // 卡片列信息
   List<Widget> _cardColumn() {
     List<Widget> baseNode = _todo.isPromptContent ? _promptInfoRow() : [];
-    baseNode.addAll([
-      _mainContentRow(),
-      if(_todo.isRemarkInfo) _remarkInfoRow()
-    ]);
+    baseNode.addAll([_mainContentRow(), if (_todo.isRemarkInfo) _remarkInfoRow()]);
     return baseNode;
   }
 
@@ -103,8 +136,7 @@ class TodoCard extends WidgetState {
             softWrap: true,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-          )
-      ),
+          )),
     );
   }
 

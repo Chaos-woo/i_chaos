@@ -1,5 +1,4 @@
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
-import 'package:i_chaos/ichaos/public/units/uuid.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_sort_rule.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';

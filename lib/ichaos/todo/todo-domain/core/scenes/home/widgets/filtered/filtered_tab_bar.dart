@@ -27,10 +27,7 @@ class FilteredTabBar extends StatelessWidget {
           children: <Widget>[
             Container(
               height: 45,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: ScreenUtil.getInstance().screenWidth,
               decoration: const BoxDecoration(
                 color: Colors.white54,
               ),
