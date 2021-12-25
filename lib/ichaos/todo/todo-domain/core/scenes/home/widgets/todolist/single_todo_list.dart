@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:getwidget/components/toast/gf_toast.dart';
+import 'package:getwidget/position/gf_toast_position.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/card/todo_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 typedef OnTodoListScrollUpdate = void Function();
@@ -85,6 +89,7 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
             return TodoCard(currTodoList[index], operateCallback: TodoOperateCallback(
               onDelete: (ctx, vo) {
                 singleTodoListVM.deleteMainTodo(vo.id!);
+                SnackBarUtil.topBar('删除完成: ${vo.content}');
               },
               onModify: (ctx, vo) {
 //                push();

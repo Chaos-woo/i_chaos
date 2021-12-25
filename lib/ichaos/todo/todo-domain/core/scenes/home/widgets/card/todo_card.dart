@@ -43,21 +43,33 @@ class TodoCard extends WidgetState {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
       child: InkWell(
-        onLongPress: () {
-          WWDialog.showMiddleDialog(context,
-              title: '更多操作：${_todo.content}',
-              customWidgetButtons: [
-                defaultCustomButton(context, text: '查看', onTap: () {
-                  operateCallback?.onDetailQuery?.call(context, _todo);
+        onTap: () {
+          WWDialog.showBottomDialog(
+            context,
+            isSystemBottomDialog: false,
+            customTitleWidget: Container(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: const Text(
+                '更多操作',
+                style: TextStyle(
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            customWidgetButtons: [
+              defaultCustomButton(context, text: '查看', onTap: () {
+                operateCallback?.onDetailQuery?.call(context, _todo);
               }),
-                defaultCustomButton(context, text: '修改', onTap: () {
-                  operateCallback?.onModify?.call(context, _todo);
-                }),
-                defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
-                  operateCallback?.onDelete?.call(context, _todo);
-                }),
-              ],
-              arrangeType: buttonArrangeType.column,);
+              defaultCustomButton(context, text: '修改', onTap: () {
+                operateCallback?.onModify?.call(context, _todo);
+              }),
+              defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
+                operateCallback?.onDelete?.call(context, _todo);
+              }),
+            ],
+            arrangeType: buttonArrangeType.column,
+          );
         },
         child: Container(
           margin: const EdgeInsets.only(top: 8),

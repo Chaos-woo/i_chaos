@@ -167,7 +167,11 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     }
 
     await _todoRepo.deleteTodoById(vo);
-    _activeTodoList.removeWhere((element) => element.id == id);
+    if (vo.completed) {
+      _completedTodoList.removeWhere((element) => element.id == id);
+    } else {
+      _activeTodoList.removeWhere((element) => element.id == id);
+    }
     notifyListeners();
   }
 
