@@ -3,6 +3,8 @@
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 
 /// 事件状态切换tabBar视图模型
@@ -60,6 +62,23 @@ class FilteredTabBarVM extends SingleViewStateModel {
   // 获取对应状态的事件列表
   List<TodoVO> get activeTodoList => _singleTodoListVM.getTodoListByState(TodoState.active);
   List<TodoVO> get completedTodoList => _singleTodoListVM.getTodoListByState(TodoState.completed);
+
+  TodoListScrollCallback getTodoListNotifyCallback(TodoHomeFloatingActionBtnVM btnVM, bool isActive) {
+    int todoListCnt = isActive ? activeTodoCnt : completedTodoCnt;
+    return TodoListScrollCallback(onTodoListScrollUpdate: () {
+      if (todoListCnt > 0) {
+        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.hide);
+      }
+    }, onTodoListScrollEnd: () {
+      if (todoListCnt > 0) {
+        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
+      }
+    }, onTodoListOverScroll: () {
+      if (todoListCnt > 0 && !btnVM.show) {
+        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
+      }
+    });
+  }
 
   @override
   Future? loadData() {

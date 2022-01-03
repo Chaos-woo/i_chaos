@@ -71,10 +71,7 @@ class FilteredTabBar extends StatelessWidget {
             ),
             Container(
                 width: ScreenUtil.getScreenW(context),
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height - 242,
+                height: ScreenUtil.getInstance().screenHeight - 242,
                 decoration: const BoxDecoration(
                   color: Colors.white54,
                 ),
@@ -101,26 +98,9 @@ class FilteredTabBar extends StatelessWidget {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);
 
       return [
-        SingleTodoList(isActive: true, todoListScrollCallback: _getTodoListNotifyCallback(btnVM, true)).transformToPageWidget(key: UniqueKey()),
-        SingleTodoList(isActive: false, todoListScrollCallback: _getTodoListNotifyCallback(btnVM, false)).transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true)).transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false)).transformToPageWidget(key: UniqueKey()),
       ];
     }
-  }
-
-  TodoListScrollCallback _getTodoListNotifyCallback(TodoHomeFloatingActionBtnVM btnVM, bool isActive) {
-    int todoListCnt = isActive ? _filteredTabBarVM.activeTodoCnt : _filteredTabBarVM.completedTodoCnt;
-    return TodoListScrollCallback(onTodoListScrollUpdate: () {
-      if (todoListCnt > 0) {
-        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.hide);
-      }
-    }, onTodoListScrollEnd: () {
-      if (todoListCnt > 0) {
-        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
-      }
-    }, onTodoListOverScroll: () {
-      if (todoListCnt > 0 && !btnVM.show) {
-        btnVM.floatingBtnDisplayChange(FloatBtnDisplayStatus.show);
-      }
-    });
   }
 }

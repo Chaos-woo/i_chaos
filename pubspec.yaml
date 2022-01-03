@@ -240,6 +240,8 @@ dependencies:
   simple_gesture_detector: ^0.2.0
   # icon font 字体图标
   iconfont: ^1.0.0
+  # 避免组件被键盘遮挡
+  keyboard_avoider: ^0.1.2
 
 dev_dependencies:
   flutter_test:

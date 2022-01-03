@@ -6,6 +6,7 @@ import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/card/todo_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 import 'package:oktoast/oktoast.dart';
@@ -77,7 +78,7 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
           itemBuilder: (ctx, index) {
             if (index == currTodoList.length) {
               return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Center(
                   child: Text(
                     '-- 没有更多记录啦 --',
@@ -92,7 +93,7 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
                 SnackBarUtil.topBar('删除完成: ${vo.content}');
               },
               onModify: (ctx, vo) {
-//                push();
+                push(SingleTodoPage(vo));
               },
               onDetailQuery: (ctx, vo) {
 //                push();

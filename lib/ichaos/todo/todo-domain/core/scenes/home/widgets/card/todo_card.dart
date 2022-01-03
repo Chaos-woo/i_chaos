@@ -41,7 +41,7 @@ class TodoCard extends WidgetState {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
       child: InkWell(
         onTap: () {
           WWDialog.showBottomDialog(

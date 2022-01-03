@@ -13,6 +13,7 @@ class DayDateUtil {
   static String endOfDay() => DateUtil.formatDate(DateTime.now(), format: _endPointOfDay);
   static String beginOfAssignDay(DateTime dateTime) => DateUtil.formatDate(dateTime, format: _beginPointOfDay);
   static String endOfAssignDay(DateTime dateTime) => DateUtil.formatDate(dateTime, format: _endPointOfDay);
+  static DateTime tomorrow() => DateTime.now().add(const Duration(days: 1));
 }
 
 /// 日期时间扩展

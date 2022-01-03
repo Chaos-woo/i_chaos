@@ -17,6 +17,8 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   late int? reOpenRadio;
   // 背景透明度
   late double? opacity;
+  // 触摸透明区域是否可退出当前页
+  late bool? canBeCloseByTouchTransparentArea;
 
   late AnimationController controller;
   late Animation animation;
@@ -41,6 +43,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
     animationDuration = 200;
     reOpenRadio = 3;
     opacity = 0.3;
+    canBeCloseByTouchTransparentArea = true;
 
     initPageParams();
 
@@ -103,7 +106,9 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
           onVerticalDragUpdate: dragUpdateV,
           onVerticalDragEnd: dragEndV,
           onTap: () {
-            close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth!);
+            if (canBeCloseByTouchTransparentArea!) {
+              close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth!);
+            }
           },
           child: Container(
             color: Color.fromRGBO(34, 34, 34, opacity!),
@@ -136,7 +141,11 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   dragEnd(DragEndDetails details) {
     if ((leftStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
         (!leftStartDirection! && _startPos > widgetMaxWidth! + _reOpenOrCloseFlagDistance!)) {
-      close(_startPos);
+      if (canBeCloseByTouchTransparentArea!) {
+        close(_startPos);
+      } else {
+        reOpen(_startPos);
+      }
     } else {
       reOpen(_startPos);
     }
@@ -183,6 +192,8 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
   late int? reOpenRadio;
   // 背景透明度
   late double? opacity;
+  // 触摸透明区域是否可退出当前页
+  late bool? canBeCloseByTouchTransparentArea;
 
   late AnimationController controller;
   late Animation animation;
@@ -208,6 +219,7 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
     reOpenRadio = 3;
     opacity = 0.3;
     topPadding = 0;
+    canBeCloseByTouchTransparentArea = true;
 
     initPageParams();
 
@@ -270,7 +282,9 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
           onVerticalDragUpdate: dragUpdateV,
           onVerticalDragEnd: dragEndV,
           onTap: () {
-            close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight!);
+            if (canBeCloseByTouchTransparentArea!) {
+              close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight!);
+            }
           },
           child: Container(
             color: Color.fromRGBO(34, 34, 34, opacity!),
@@ -329,7 +343,11 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
   dragEndV(DragEndDetails details) {
     if ((topStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
         (!topStartDirection! && _startPos > widgetMaxHeight! + _reOpenOrCloseFlagDistance!)) {
-      close(_startPos);
+      if (canBeCloseByTouchTransparentArea!) {
+        close(_startPos);
+      } else {
+        reOpen(_startPos);
+      }
     } else {
       reOpen(_startPos);
     }

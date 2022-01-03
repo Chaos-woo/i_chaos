@@ -6,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 class CalendarBarVM extends SingleViewStateModel {
   final DateTime firstDay = DateTime(2016, 1, 1);
   final DateTime lastDay = DateTime(2099, 12, 30);
+  static DateTime publicLastDay = DateTime(2099, 12, 30);
   final int _defaultSinglePageAnimationDuration = 100;
 
   final Map<int, String> weekLabels = {

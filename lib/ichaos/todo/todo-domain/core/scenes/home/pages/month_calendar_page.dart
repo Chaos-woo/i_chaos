@@ -5,7 +5,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calenda
 import 'package:table_calendar/table_calendar.dart';
 
 class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
-  late CalendarBarVM _calendarBarVM;
+  late CalendarBarVM? _calendarBarVM;
   late DateTime _selectDate;
   late double _screenWidth;
   late double _screenHeight;
@@ -14,8 +14,11 @@ class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
   late double _calendarWidth;
   late double _calendarHeight;
 
-  MonthCalendarPage(CalendarBarVM calendarBarVM) {
+  late final bool _canBeCloseByTouchTransparentArea;
+
+  MonthCalendarPage({CalendarBarVM? calendarBarVM, bool canBeCloseByTouchTransparentArea = true}) {
     _calendarBarVM = calendarBarVM;
+    _canBeCloseByTouchTransparentArea = canBeCloseByTouchTransparentArea;
   }
 
   @override
@@ -32,8 +35,8 @@ class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
         child: Align(
           alignment: Alignment.center,
           child: TableCalendar(
-            firstDay: _calendarBarVM.firstDay,
-            lastDay: _calendarBarVM.lastDay,
+            firstDay: _calendarBarVM != null ? _calendarBarVM!.firstDay : DateTime.now(),
+            lastDay: _calendarBarVM != null ? _calendarBarVM!.lastDay : CalendarBarVM.publicLastDay,
             headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
             focusedDay: _selectDate,
             calendarFormat: CalendarFormat.month,
@@ -59,7 +62,7 @@ class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
     // 设置动画时长
     animationDuration = 300;
     // 设置当前选择日期
-    _selectDate = _calendarBarVM.selectDate;
+    _selectDate = _calendarBarVM != null ? _calendarBarVM!.selectDate : DateTime.now();
     // 获取屏幕宽度高度
     _screenWidth = ScreenUtil.getInstance().screenWidth;
     _screenHeight = ScreenUtil.getInstance().screenHeight;
@@ -73,6 +76,8 @@ class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
     widgetMaxHeight = _calendarHeight;
     // 设置组件上方边距
     topPadding = _paddingHeight;
+    // 设置拖拉和触摸透明区域不可关闭页面
+    canBeCloseByTouchTransparentArea = _canBeCloseByTouchTransparentArea;
   }
 
   @override

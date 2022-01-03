@@ -21,7 +21,7 @@ class TodoHomeFloatingActionBtnVM extends SingleViewStateModel {
     _calendarBarVM = calendarBarVM;
   }
 
-  bool get show => isDisplay!;
+  bool get show => isDisplay ?? true;
 
   // 注册属性更改回调
   void addListenerOfBtnState(ValueChanged<bool> btnDisplayCallback) {
