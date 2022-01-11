@@ -32,7 +32,11 @@ class CalendarImage extends WidgetState {
         width: calendarImageChunkWidth,
         padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
         height: 68,
-        color: Colors.teal,
+
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15)),
+          color: Colors.teal,
+        ),
         child: Container(
           width: calendarImageWidth,
           height: calendarImageWidth,

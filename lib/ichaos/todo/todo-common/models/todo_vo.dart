@@ -18,8 +18,6 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   DateTime updateTime;
   // 内容
   String content;
-  // 提醒时间
-  DateTime? needPromptTime;
   // 地点信息
   String? location;
   // 事件等级
@@ -35,6 +33,10 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   String? remark;
   // 子任务json
   List<SubTaskVO> subTaskList;
+
+  /// 系统日历功能
+  // 提醒时间
+  DateTime? needPromptTime;
   // 调用日历提醒功能返回事件id
   String? promptEventId;
 

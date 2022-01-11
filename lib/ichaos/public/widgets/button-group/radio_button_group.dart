@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/variable_button_label.dart';
 
-typedef DateChanged = Future<dynamic> Function (int preIndex, int index);
+typedef DateChanged = Future<dynamic> Function(int preIndex, int index);
 
 class RadioButtonGroup extends StatefulWidget {
   // 按钮组文字
@@ -81,10 +81,10 @@ class RadioButtonGroup extends StatefulWidget {
         super(key: key);
 
   @override
-  _RadioButtonGroupState createState() => _RadioButtonGroupState();
+  RadioButtonGroupState createState() => RadioButtonGroupState();
 }
 
-class _RadioButtonGroupState extends State<RadioButtonGroup> {
+class RadioButtonGroupState extends State<RadioButtonGroup> {
   // 当前被选择的按钮下标
   late int selectedIndex;
 
@@ -118,6 +118,11 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  // 重置当前选择按钮
+  void reloadIndex(int index) {
+    selectedBtnChanged(index, needReloadBtnChangedFunc: false);
   }
 
   // 当前按钮是否被选择
@@ -199,21 +204,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
                         width: baseWidgetWidth,
                         child: GFButton(
                           onPressed: () async {
-                            if (widget.onButtonChanged != null) {
-                              await widget.onButtonChanged!(selectedIndex, index);
-                            }
-
-                            for (int i=0;i<widget.buttonGroupLabels.length;i++) {
-                              VariableButtonLabel? varBtn = varBtnLabelMap[i];
-                              if (varBtn != null) {
-                                String? label = varBtn.varBtnPredictor(index, _isCurrentSelected(i) ? VarBtnStatus.selected : VarBtnStatus.unSelected);
-                                buttonGroupLabelsCopy[i] = label ?? widget.buttonGroupLabels[i];
-                              }
-                            }
-
-                            selectedIndex = index;
-
-                            setState(() {});
+                            selectedBtnChanged(index);
                           },
                           text: buttonGroupLabelsCopy[index],
                           textStyle: TextStyle(
@@ -236,20 +227,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
                         width: baseWidgetWidth,
                         child: GFButton(
                           onPressed: () async {
-                            if (widget.onButtonChanged != null) {
-                              await widget.onButtonChanged!(selectedIndex, index);
-                            }
-
-                            for (int i=0;i<widget.buttonGroupLabels.length;i++) {
-                              VariableButtonLabel? varBtn = varBtnLabelMap[i];
-                              if (varBtn != null) {
-                                String? label = varBtn.varBtnPredictor(index, _isCurrentSelected(i) ? VarBtnStatus.selected : VarBtnStatus.unSelected);
-                                buttonGroupLabelsCopy[i] = label ?? widget.buttonGroupLabels[i];
-                              }
-                            }
-
-                            selectedIndex = index;
-                            setState(() {});
+                            selectedBtnChanged(index);
                           },
                           text: buttonGroupLabelsCopy[index],
                           textStyle: TextStyle(
@@ -270,5 +248,24 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
         ),
       ],
     );
+  }
+
+  // 被选择按钮更新时所作的操作
+  void selectedBtnChanged(int index, {bool needReloadBtnChangedFunc = true}) async {
+    if (widget.onButtonChanged != null && needReloadBtnChangedFunc) {
+      await widget.onButtonChanged!(selectedIndex, index);
+    }
+
+    for (int i = 0; i < widget.buttonGroupLabels.length; i++) {
+      VariableButtonLabel? varBtn = varBtnLabelMap[i];
+      if (varBtn != null) {
+        String? label = varBtn.varBtnPredictor(index, _isCurrentSelected(i) ? VarBtnStatus.selected : VarBtnStatus.unSelected);
+        buttonGroupLabelsCopy[i] = label ?? widget.buttonGroupLabels[i];
+      }
+    }
+
+    setState(() {
+      selectedIndex = index;
+    });
   }
 }

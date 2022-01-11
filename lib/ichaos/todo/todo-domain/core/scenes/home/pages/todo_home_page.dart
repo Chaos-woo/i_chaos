@@ -66,15 +66,41 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
 
     return Scaffold(
       appBar: _getTodoAppBar(filteredTabBarVM),
-      body: Column(children: <Widget>[
-        SizedBox(
-          width: ScreenUtil.getInstance().screenWidth,
-          child: Row(
-            children: calendarBarWidgets,
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            child: Container(
+              color: const Color(0xFFF5F5F5)
+            ),
           ),
-        ),
-        FilteredTabBar(),
-      ]),
+          Positioned(
+            child: Column(children: <Widget>[
+              Container(
+                width: ScreenUtil.getInstance().screenWidth,
+                child: Row(
+                  children: calendarBarWidgets,
+                ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 2.0), //阴影y轴偏移量
+                        blurRadius: 1, //阴影模糊程度
+                        spreadRadius: 0 //阴影扩散程度
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: ScreenUtil.getInstance().screenWidth,
+                child: FilteredTabBar(),
+              ),
+            ]),
+          ),
+        ],
+      ),
       floatingActionButton: TodoHomeFloatingActionBtn(actionBtnVM: actionBtnVM).transformToPageWidget(),
     );
   }
@@ -102,6 +128,7 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
       ),
       titleSpacing: -5,
       toolbarHeight: 40,
+      elevation: 0,
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.shopping_cart),

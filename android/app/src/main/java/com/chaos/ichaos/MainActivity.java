@@ -1,4 +1,4 @@
-package com.example.i_chaos;
+package com.chaos.ichaos;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -54,7 +54,6 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
     List<TodoVO> currTodoList = singleTodoListVM.getTodoListByState(_todoState);
 
     return Container(
-      color: Colors.white54,
       child: NotificationListener<ScrollNotification>(
         onNotification: (notification) {
           if (notification.depth == 0) {

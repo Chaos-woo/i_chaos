@@ -13,12 +13,11 @@ class TodoDetailFormVO {
   static const String chooseDateBtnText = "选择日期";
   static const String noDateBtnText = "放到草稿箱";
 
-
   TodoDetailFormVO.fromTodo(TodoVO vo) {
     _content = vo.content;
     _remark = vo.remark;
     _subTaskVOs = vo.subTaskList;
-    _selectDate = vo.needPromptTime;
+    _selectDate = vo.createTime; // todo：不对
     _level = vo.level;
     _location = vo.location;
   }
@@ -70,5 +69,10 @@ class TodoDetailFormVO {
 
   set selectDate(DateTime? value) {
     _selectDate = value;
+  }
+
+  @override
+  String toString() {
+    return 'TodoDetailFormVO{_content: $_content, _remark: $_remark, _subTaskVOs: $_subTaskVOs, _selectDate: $_selectDate, _level: $_level, _location: $_location}';
   }
 }

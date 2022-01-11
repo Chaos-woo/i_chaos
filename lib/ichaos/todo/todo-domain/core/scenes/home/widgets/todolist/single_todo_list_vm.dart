@@ -46,6 +46,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
     TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
     _todoRepo.insertTodo(vo);
+    // 拉取当前日期的事件
     return _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
 

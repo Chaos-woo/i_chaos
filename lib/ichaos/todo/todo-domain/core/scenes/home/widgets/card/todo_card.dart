@@ -58,9 +58,9 @@ class TodoCard extends WidgetState {
               ),
             ),
             customWidgetButtons: [
-              defaultCustomButton(context, text: '查看', onTap: () {
-                operateCallback?.onDetailQuery?.call(context, _todo);
-              }),
+//              defaultCustomButton(context, text: '查看', onTap: () {
+//                operateCallback?.onDetailQuery?.call(context, _todo);
+//              }),
               defaultCustomButton(context, text: '修改', onTap: () {
                 operateCallback?.onModify?.call(context, _todo);
               }),

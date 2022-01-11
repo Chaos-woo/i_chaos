@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
   late TodoHomeFloatingActionBtnVM _actionBtnVM;
 
   TodoHomeFloatingActionBtn({required TodoHomeFloatingActionBtnVM actionBtnVM}) {
-      _actionBtnVM = actionBtnVM;
+    _actionBtnVM = actionBtnVM;
   }
 
   @override
@@ -77,9 +79,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                     child: const Icon(Icons.add),
                     heroTag: 'add',
                     onPressed: () {
-//              Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                return TodoEditScene(null);
-//              }));
+                      push(SingleTodoPage(TodoVO.emptyReplace()));
                     },
                   ),
                 ],

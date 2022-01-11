@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/components/button/gf_button.dart';
@@ -5,21 +6,23 @@ import 'package:getwidget/getwidget.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/public/ali_icons.dart';
+import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
+import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/variable_button_label.dart';
+import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
+import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_top_dialog_item_data.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/todo_detail_form.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/pages/month_calendar_page.dart';
-import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:provider/provider.dart';
 
-class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class SingleTodoPage extends PageState {
   final TodoVO _originalTodo;
   late SingleTodoVM _singleTodoVM;
 
@@ -33,11 +36,10 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return switchStatusBar2Dark(
         child: ProviderWidget<SingleTodoVM>(
             model: _singleTodoVM,
-            builder: (ctx, singleTodoListVM, child) {
+            builder: (ctx, vm, child) {
               return Scaffold(
                 appBar: AppBar(
                   title: Text(
@@ -51,13 +53,33 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                     IconButton(
                         onPressed: () {
                           // 展示重置按钮
+                          WWDialog.showTopDialog(context,
+                              dialogWidth: 100,
+                              triangleType: DiaLogTriangleType.right,
+                              bgColor: Colors.white,
+                              contentColor: Colors.black,
+                              contentFontSize: 14,
+                              listDatasource: [
+                                TopDialogItemData('重置', '0'),
+                              ], onTap: (TopDialogItemData item) {
+                            _singleTodoVM.reset(_originalTodo);
+                          });
                         },
-                        icon: const Icon(AliIcons.ALI_ICON_SWITCH))
+                        icon: const Icon(AliIcons.ALI_ICON_MORE)),
+                    SizedBox(
+                      width: 14,
+                    )
                   ],
                 ),
                 body: KeyboardAvoider(
                   autoScroll: true,
-                  child: _buildForm(_singleTodoVM),
+                  child: Selector<SingleTodoVM, SingleTodoVM>(
+                    selector: (ctx, vm) => vm,
+                    shouldRebuild: (pre, next) => true,
+                    builder: (ctx, vm, _) {
+                      return _buildForm(vm);
+                    },
+                  ),
                 ),
               );
             }));
@@ -95,6 +117,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                 maxLines: 3,
                 maxLength: 50,
                 decoration: InputDecoration(
+                  counterText: '',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x00000000),
@@ -138,6 +161,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                 maxLength: 100,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
+                  counterText: '',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x00000000),
@@ -161,6 +185,51 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const Padding(
+                  padding: wholePadding,
+                  child: Text(
+                    '需要把任务分阶段完成吗?',
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                ),
+                Padding(
+                  padding: wholePadding,
+                  child: InkWell(
+                    child: const Icon(
+                      AliIcons.ALI_ICON_PROMPT_FILL,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    onTap: () {
+                      WWDialog.showMiddleDialog(context,
+                          title: '子任务是什么?',
+                          content: '1. 任务分阶段: 将任务X分为多个子任务，当勾选某一个子任务时表示完成了该子任务。\n'
+                              '2. 当所有子任务完成时，任务X将被标识为完成。\n'
+                              '3. 若任务X被标识为完成时，其下所有的子任务将被展示为完成状态。',
+                          contentAlign: TextAlign.left,
+                          isNeedCloseDiaLog: true,
+                          buttons: ['了解啦~'],
+                          onTap: (index, ctx) {});
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: wholePadding,
+              child: SizedBox(
+                width: ScreenUtil.getInstance().screenWidth - 2 * wholePadding.start,
+                child: ProviderWidget<SubTaskListVM>(
+                    model: _singleTodoVM.subTaskListVM,
+                    onModelReady: (vm) => vm.init(),
+                    builder: (ctx, vm, child) {
+                      return SubTaskList(vm).transformToPageWidget();
+                    }),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: const <Widget>[
                 Padding(
                   padding: wholePadding,
@@ -174,6 +243,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
             Padding(
               padding: wholePadding,
               child: RadioButtonGroup(
+                key: _singleTodoVM.todoDateBtnGroupKey,
                 buttonGroupLabels: const [
                   TodoDetailFormVO.todayBtnText,
                   TodoDetailFormVO.tomorrowBtnText,
@@ -183,30 +253,34 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                 buttonGroupIcons: const [AliIcons.ALI_ICON_FLAG, AliIcons.ALI_ICON_DOCUMENT, AliIcons.ALI_ICON_TIME, AliIcons.ALI_ICON_SERVICE],
                 onButtonChanged: (preIndex, index) async {
                   switch (index) {
-                    case 0: {
-                      _singleTodoVM.detailForm.selectDate = DateTime.now();
-                    }
-                    break;
-                    case 1: {
-                      _singleTodoVM.detailForm.selectDate = DayDateUtil.tomorrow();
-                    }
-                    break;
-                    case 2: {
-                      DateTime? selectDate = await push(MonthCalendarPage(canBeCloseByTouchTransparentArea: false));
-                      _singleTodoVM.detailForm.selectDate = selectDate ?? DateTime.now();
-                    }
-                    break;
-                    default : {
-                      _singleTodoVM.detailForm.selectDate = null;
-                    }
-                    break;
+                    case 0:
+                      {
+                        _singleTodoVM.todoFormForm.selectDate = DateTime.now();
+                      }
+                      break;
+                    case 1:
+                      {
+                        _singleTodoVM.todoFormForm.selectDate = DayDateUtil.tomorrow();
+                      }
+                      break;
+                    case 2:
+                      {
+                        DateTime? selectDate = await push(MonthCalendarPage(canBeCloseByTouchTransparentArea: false));
+                        _singleTodoVM.todoFormForm.selectDate = selectDate ?? DateTime.now();
+                      }
+                      break;
+                    default:
+                      {
+                        _singleTodoVM.todoFormForm.selectDate = null;
+                      }
+                      break;
                   }
-                  return _singleTodoVM.detailForm.selectedDate;
+                  return _singleTodoVM.todoFormForm.selectedDate;
                 },
                 variableButtonLabels: [
                   VariableButtonLabel(2, (nextIndex, currStatus) {
                     if (nextIndex == 2) {
-                      return _singleTodoVM.detailForm.selectedDate?.yyyyMMdd;
+                      return _singleTodoVM.todoFormForm.selectedDate?.yyyyMMdd;
                     }
                     return null;
                   }),
@@ -233,6 +307,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
             Padding(
               padding: wholePadding,
               child: RadioButtonGroup(
+                key: _singleTodoVM.todoLevelBtnGroupKey,
                 buttonGroupLabels: [
                   TodoLevel.deferrable.title,
                   TodoLevel.unimportant.title,
@@ -252,7 +327,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                 selectedLabelColor: Colors.white,
                 unSelectedLabelColor: Colors.white,
                 horizontal: true,
-                defaultSelectedIndex: _singleTodoVM.isNew ? 2 : _singleTodoVM.detailForm.level,
+                defaultSelectedIndex: _singleTodoVM.isNew ? 2 : _singleTodoVM.todoFormForm.level,
               ),
             ),
             Row(
@@ -277,6 +352,7 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
                 maxLength: 25,
                 keyboardType: TextInputType.multiline,
                 decoration: InputDecoration(
+                  counterText: '',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x00000000),
@@ -308,14 +384,22 @@ class SingleTodoPage extends PageState with AutomaticKeepAliveClientMixin {
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(40, 24, 40, 0),
               child: Selector<SingleTodoVM, bool>(
-                selector: (ctx, vm) => vm.btnDisable,
+                selector: (ctx, vm) => vm.saveBtnAvailable,
                 shouldRebuild: (pre, next) => pre != next,
-                builder: (ctx, btnDisable, _) {
-                  return !btnDisable
+                builder: (ctx, saveBtnAvailable, _) {
+                  return saveBtnAvailable
                       ? GFButton(
                           text: '保存',
                           textStyle: const TextStyle(fontFamily: 'Lexend Deca', fontSize: 15),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            bool saveSuccess = await _singleTodoVM.save();
+                            if (!saveSuccess) {
+                              SnackBarUtil.topBar('创建失败');
+                            } else {
+                              SnackBarUtil.topBar('创建成功');
+                              pop();
+                            }
+                          },
                           icon: const Icon(
                             AliIcons.ALI_ICON_TASK,
                             color: Colors.white,

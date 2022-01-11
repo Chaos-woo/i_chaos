@@ -29,7 +29,8 @@ class FilteredTabBar extends StatelessWidget {
               height: 45,
               width: ScreenUtil.getInstance().screenWidth,
               decoration: const BoxDecoration(
-                color: Colors.white54,
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(15)),
               ),
               child: TabBar(
                   indicatorColor: Colors.teal,
@@ -42,13 +43,13 @@ class FilteredTabBar extends StatelessWidget {
                         builder: (ctx, vm, child) {
                           return _filteredTabBarVM.activeTodoCnt > 0
                               ? Badge(
-                            toAnimate: false,
-                            badgeContent: Text('${_filteredTabBarVM.activeTodoCnt}'),
-                            position: BadgePosition(top: _filteredTabBarVM.activeTodoCnt >= 10 ? -1 : -4, end: -30),
-                            padding: EdgeInsets.all(_filteredTabBarVM.activeTodoCnt >= 10 ? 3 : 6),
-                            badgeColor: Colors.red,
-                            child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
-                          )
+                                  toAnimate: false,
+                                  badgeContent: Text('${_filteredTabBarVM.activeTodoCnt}'),
+                                  position: BadgePosition(top: _filteredTabBarVM.activeTodoCnt >= 10 ? -1 : -4, end: -30),
+                                  padding: EdgeInsets.all(_filteredTabBarVM.activeTodoCnt >= 10 ? 3 : 6),
+                                  badgeColor: Colors.red,
+                                  child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
+                                )
                               : Text(_filteredTabBarVM.tabWord(TodoState.active));
                         },
                       ),
@@ -71,10 +72,9 @@ class FilteredTabBar extends StatelessWidget {
             ),
             Container(
                 width: ScreenUtil.getScreenW(context),
-                height: ScreenUtil.getInstance().screenHeight - 242,
-                decoration: const BoxDecoration(
-                  color: Colors.white54,
-                ),
+                // 减去appBar+日历条+过滤栏(含margin)+bottomBar(含margin)
+                height: ScreenUtil.getInstance().screenHeight - (40 + 68 + 10 + 130),
+                color: Colors.white,
                 child: Selector<FilteredTabBarVM, DateTime>(
                   selector: (ctx, vm) => vm.currentDate,
                   shouldRebuild: (pre, next) => pre.yyyyMMdd != next.yyyyMMdd,
@@ -98,8 +98,10 @@ class FilteredTabBar extends StatelessWidget {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);
 
       return [
-        SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true)).transformToPageWidget(key: UniqueKey()),
-        SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false)).transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true))
+            .transformToPageWidget(key: UniqueKey()),
+        SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false))
+            .transformToPageWidget(key: UniqueKey()),
       ];
     }
   }
