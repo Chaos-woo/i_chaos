@@ -95,7 +95,7 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 width: ScreenUtil.getInstance().screenWidth,
-                child: FilteredTabBar(),
+                child: generateWidget(() => FilteredTabBar()),
               ),
             ]),
           ),

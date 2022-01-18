@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/components/toast/gf_toast.dart';
@@ -8,6 +10,7 @@ import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/card/todo_card.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
@@ -23,19 +26,13 @@ class TodoListScrollCallback {
 
   TodoListScrollCallback(
       {OnTodoListScrollUpdate? onTodoListScrollUpdate, OnTodoListScrollEnd? onTodoListScrollEnd, OnTodoListOverScroll? onTodoListOverScroll}) {
-    // ignore: prefer_initializing_formals
     this.onTodoListScrollUpdate = onTodoListScrollUpdate;
-    // ignore: prefer_initializing_formals
     this.onTodoListScrollEnd = onTodoListScrollEnd;
-    // ignore: prefer_initializing_formals
     this.onTodoListOverScroll = onTodoListOverScroll;
   }
 }
 
-class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class SingleTodoList extends WidgetState {
   late bool _isActive;
   late TodoState _todoState;
 
@@ -51,58 +48,61 @@ class SingleTodoList extends WidgetState with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     SingleTodoListVM singleTodoListVM = Provider.of<SingleTodoListVM>(context, listen: false);
+    FilteredTabBarVM filteredTabBarVM = Provider.of<FilteredTabBarVM>(context, listen: false);
     List<TodoVO> currTodoList = singleTodoListVM.getTodoListByState(_todoState);
 
-    return Container(
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (notification) {
-          if (notification.depth == 0) {
-            switch (notification.runtimeType) {
-              case ScrollUpdateNotification:
-                _todoListScrollCallback?.onTodoListScrollUpdate?.call();
-                break;
-              case ScrollEndNotification:
-                _todoListScrollCallback?.onTodoListScrollEnd?.call();
-                break;
-              case OverscrollNotification:
-                _todoListScrollCallback?.onTodoListOverScroll?.call();
-                break;
-              default:
-                break;
-            }
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        if (notification.depth == 0) {
+          switch (notification.runtimeType) {
+            case ScrollUpdateNotification:
+              _todoListScrollCallback?.onTodoListScrollUpdate?.call();
+              break;
+            case ScrollEndNotification:
+              _todoListScrollCallback?.onTodoListScrollEnd?.call();
+              break;
+            case OverscrollNotification:
+              _todoListScrollCallback?.onTodoListOverScroll?.call();
+              break;
+            default:
+              break;
           }
-          return false;
-        },
-        child: ListView.builder(
-          itemBuilder: (ctx, index) {
-            if (index == currTodoList.length) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Center(
-                  child: Text(
-                    '-- 没有更多记录啦 --',
-                    style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
-                  ),
+        }
+        return false;
+      },
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          if (index == currTodoList.length) {
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Center(
+                child: Text(
+                  '-- 没有更多记录啦 --',
+                  style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
                 ),
-              );
-            }
-            return TodoCard(currTodoList[index], operateCallback: TodoOperateCallback(
-              onDelete: (ctx, vo) {
+              ),
+            );
+          }
+          return generateWidget(() => TodoCard(currTodoList[index],
+              operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
+                SnackBarUtil.topBar('已删除 ε==3 \n${vo.content}');
                 singleTodoListVM.deleteMainTodo(vo.id!);
-                SnackBarUtil.topBar('删除完成: ${vo.content}');
-              },
-              onModify: (ctx, vo) {
-                push(SingleTodoPage(vo));
-              },
-              onDetailQuery: (ctx, vo) {
-//                push();
-              }
-            )).transformToPageWidget();
-          },
-          itemCount: currTodoList.length + 1,
-          addAutomaticKeepAlives: false,
-          addRepaintBoundaries: false,
-        ),
+                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+              }, onModify: (ctx, vo) {
+                push(SingleTodoPage(vo, onSave: () {
+                  filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+                }));
+              }, onCompleted: (ctx, vo) {
+                SnackBarUtil.topBar('完成啦~(o≖◡≖) \n${vo.content}');
+                singleTodoListVM.toggleMainTodoState(vo.id!);
+                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+              }, onCancelCompleted: (ctx, vo) {
+                SnackBarUtil.topBar('点错了吧? 明明完成了(O_O)? \n${vo.content}');
+                singleTodoListVM.toggleMainTodoState(vo.id!);
+                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+              })));
+        },
+        itemCount: currTodoList.length + 1,
       ),
     );
   }

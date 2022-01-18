@@ -36,16 +36,16 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   @override
   Future<List<TodoVO>>? loadData() {
-    DateTime now = DateTime.now();
-    List<SubTaskVO> vos = [
-      SubTaskVO.newSubTask(content: 'subtask context1'),
-      SubTaskVO.newSubTask(content: 'subtask context2'),
-      SubTaskVO.newSubTask(content: 'subtask context3'),
-      SubTaskVO.newSubTask(content: 'subtask context4'),
-    ];
-
-    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
-    _todoRepo.insertTodo(vo);
+//    DateTime now = DateTime.now();
+//    List<SubTaskVO> vos = [
+//      SubTaskVO.newSubTask(content: 'subtask context1'),
+//      SubTaskVO.newSubTask(content: 'subtask context2'),
+//      SubTaskVO.newSubTask(content: 'subtask context3'),
+//      SubTaskVO.newSubTask(content: 'subtask context4'),
+//    ];
+//
+//    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
+//    _todoRepo.insertTodo(vo);
     // 拉取当前日期的事件
     return _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
@@ -57,8 +57,13 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   // 根据事件状态分发到不同的列表事件列表中
   void _handleTodoListByStatus(List<TodoVO> data) {
-    _activeTodoList = data.where((todo) => !todo.completed).toList();
-    _completedTodoList = data.where((todo) => todo.completed).toList();
+    _activeTodoList = data.where((todo) => !todo.completed && isValidTodo(todo)).toList();
+    _completedTodoList = data.where((todo) => todo.completed && isValidTodo(todo)).toList();
+  }
+
+  // 是否是有效的事件，事件无有效时间时标识为草稿
+  bool isValidTodo(TodoVO vo) {
+    return vo.validTime != null;
   }
 
   // 从数据源获取指定日期的事件列表切换内存中的事件列表
@@ -70,8 +75,8 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   // 根据id获取内存中事件的位置
   TodoVO? _findTodoBelongTo(int id) {
-    TodoVO activeTodo = _activeTodoList.lastWhere((element) => element.id == id, orElse: () => TodoVO.emptyReplace());
-    TodoVO completedTodo = _completedTodoList.lastWhere((element) => element.id == id, orElse: () => TodoVO.emptyReplace());
+    TodoVO activeTodo = _activeTodoList.firstWhere((element) => element.id == id, orElse: () => TodoVO.empty());
+    TodoVO completedTodo = _completedTodoList.firstWhere((element) => element.id == id, orElse: () => TodoVO.empty());
     return (activeTodo.id == null && completedTodo.id == null) ? null : activeTodo.id == null ? completedTodo : activeTodo;
   }
 
@@ -108,17 +113,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     copy.completed = !copy.completed;
     copy.updateTime = now;
     copy.completedTime = copy.completed ? now : null;
-    int affectRow = await _todoRepo.updateTodo(copy);
-    if (affectRow > 0) {
-      if (vo.completed) {
-        _activeTodoList.add(copy);
-        _completedTodoList.removeWhere((element) => element.id == id);
-      } else {
-        _completedTodoList.add(copy);
-        _activeTodoList.removeWhere((element) => element.id == id);
-      }
-      notifyListeners(refreshSelector: true);
-    }
+    await _todoRepo.updateTodo(copy);
   }
 
   // 更新子事件状态
@@ -148,16 +143,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
       newVo.completedTime = now;
     }
 
-    int affect = await _todoRepo.updateTodo(newVo);
-    if (affect > 0) {
-      if (completedFlagOfTodo) {
-        _completedTodoList.add(newVo);
-        _activeTodoList.removeAt(todoIndex);
-      } else {
-        _activeTodoList[todoIndex] = newVo;
-      }
-      notifyListeners(refreshSelector: true);
-    }
+    await _todoRepo.updateTodo(newVo);
   }
 
   // 删除事件
@@ -168,12 +154,6 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     }
 
     await _todoRepo.deleteTodoById(vo);
-    if (vo.completed) {
-      _completedTodoList.removeWhere((element) => element.id == id);
-    } else {
-      _activeTodoList.removeWhere((element) => element.id == id);
-    }
-    notifyListeners();
   }
 
 

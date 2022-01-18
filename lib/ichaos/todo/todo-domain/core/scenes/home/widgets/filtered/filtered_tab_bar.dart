@@ -1,19 +1,22 @@
 import 'package:badges/badges.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/widget_state/page_state.dart';
+import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import 'filtered_tab_bar_vm.dart';
 
-class FilteredTabBar extends StatelessWidget {
+class FilteredTabBar extends WidgetState {
   late FilteredTabBarVM _filteredTabBarVM;
 
-  FilteredTabBar({Key? key}) : super(key: key);
+  FilteredTabBar();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class FilteredTabBar extends StatelessWidget {
                     Tab(
                       child: Selector<FilteredTabBarVM, DateTime>(
                         selector: (ctx, vm) => vm.currentDate,
-                        shouldRebuild: (pre, next) => pre.isSameDay(next),
+                        shouldRebuild: (pre, next) => true,
                         builder: (ctx, vm, child) {
                           return _filteredTabBarVM.activeTodoCnt > 0
                               ? Badge(
@@ -77,7 +80,7 @@ class FilteredTabBar extends StatelessWidget {
                 color: Colors.white,
                 child: Selector<FilteredTabBarVM, DateTime>(
                   selector: (ctx, vm) => vm.currentDate,
-                  shouldRebuild: (pre, next) => pre.yyyyMMdd != next.yyyyMMdd,
+                  shouldRebuild: (pre, next) => true,
                   builder: (ctx, currentDate, child) {
                     return TabBarView(
                       children: getTodoListOrPlaceholder(context, _filteredTabBarVM.busy),
@@ -98,10 +101,8 @@ class FilteredTabBar extends StatelessWidget {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);
 
       return [
-        SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true))
-            .transformToPageWidget(key: UniqueKey()),
-        SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false))
-            .transformToPageWidget(key: UniqueKey()),
+        generateWidget(() => SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true))),
+        generateWidget(() => SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false)))
       ];
     }
   }

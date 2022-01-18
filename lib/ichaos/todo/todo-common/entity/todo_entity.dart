@@ -1,12 +1,11 @@
 
 import 'dart:convert';
 
-import 'package:common_utils/common_utils.dart';
 import 'package:floor/floor.dart';
 import 'package:i_chaos/ichaos/public/base/database/root_entity.dart';
+import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
-import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 
 @Entity(tableName: 'tb_todo')
 class TodoEntity extends RootEntity<TodoVO>{

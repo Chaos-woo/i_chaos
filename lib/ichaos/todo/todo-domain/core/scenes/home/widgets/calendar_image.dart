@@ -1,6 +1,7 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/pages/month_calendar_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
@@ -24,6 +25,7 @@ class CalendarImage extends WidgetState {
         if (selectDate != null) {
           final calendarBarVM = Provider.of<CalendarBarVM>(context, listen: false);
           if (!calendarBarVM.selectDate.isSameDay(selectDate)) {
+            SnackBarUtil.topBar('跳转至 ${selectDate.yyyyMMdd} ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*');
             calendarBarVM.jumpToToday(selectDate);
           }
         }

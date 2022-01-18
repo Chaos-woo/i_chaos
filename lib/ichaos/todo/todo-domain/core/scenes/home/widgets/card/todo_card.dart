@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,16 +17,22 @@ import 'package:noripple_overscroll/noripple_overscroll.dart';
 typedef OnTodoDeleteCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoCancelCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
 
 class TodoOperateCallback {
   OnTodoDeleteCallback? onDelete;
   OnTodoDetailQueryCallback? onDetailQuery;
   OnTodoModifyCallback? onModify;
+  OnTodoModifyCallback? onCompleted;
+  OnTodoCancelCompletedCallback? onCancelCompleted;
 
-  TodoOperateCallback({OnTodoDeleteCallback? onDelete, OnTodoDetailQueryCallback? onDetailQuery, OnTodoModifyCallback? onModify}) {
+  TodoOperateCallback({OnTodoDeleteCallback? onDelete, OnTodoDetailQueryCallback? onDetailQuery, OnTodoModifyCallback? onModify, OnTodoModifyCallback? onCompleted, OnTodoCancelCompletedCallback? onCancelCompleted}) {
     this.onDelete = onDelete;
     this.onDetailQuery = onDetailQuery;
     this.onModify = onModify;
+    this.onCompleted = onCompleted;
+    this.onCancelCompleted = onCancelCompleted;
   }
 }
 
@@ -35,7 +43,7 @@ class TodoCard extends WidgetState {
   TodoOperateCallback? operateCallback;
 
   TodoCard(this._todo, {TodoOperateCallback? operateCallback}) {
-    this.operateCallback = operateCallback;
+     this.operateCallback = operateCallback;
   }
 
   @override
@@ -43,7 +51,7 @@ class TodoCard extends WidgetState {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
       child: InkWell(
-        onTap: () {
+        onLongPress: () {
           WWDialog.showBottomDialog(
             context,
             isSystemBottomDialog: false,
@@ -57,17 +65,7 @@ class TodoCard extends WidgetState {
                 ),
               ),
             ),
-            customWidgetButtons: [
-//              defaultCustomButton(context, text: '查看', onTap: () {
-//                operateCallback?.onDetailQuery?.call(context, _todo);
-//              }),
-              defaultCustomButton(context, text: '修改', onTap: () {
-                operateCallback?.onModify?.call(context, _todo);
-              }),
-              defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
-                operateCallback?.onDelete?.call(context, _todo);
-              }),
-            ],
+            customWidgetButtons: fitOperationButtons(),
             arrangeType: buttonArrangeType.column,
           );
         },
@@ -77,14 +75,14 @@ class TodoCard extends WidgetState {
             color: Colors.white,
             border: Border.all(
               width: 1,
-              color: TodoLevel.coded(_todo.level).color,
+              color: const Color(0xFFEEEEEE),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             boxShadow: [
               if (_todo.isColorPrompt)
                 BoxShadow(
                     color: TodoLevel.coded(_todo.level).color,
-                    offset: const Offset(0.0, -2.0), // 阴影y轴偏移量
+                    offset: const Offset(0.0, -4.0), // 阴影y轴偏移量
                     blurRadius: 0, // 阴影模糊程度
                     spreadRadius: 0 // 阴影扩散程度
                     )
@@ -92,12 +90,36 @@ class TodoCard extends WidgetState {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
             // 卡片列信息
             children: _cardColumn(),
           ),
         ),
       ),
     );
+  }
+
+  // 根据事件的是否完成展示不同操作按钮
+  List<Widget> fitOperationButtons() {
+    List<Widget> allOperationBtns = [
+//              defaultCustomButton(context, text: '查看', onTap: () {
+//                operateCallback?.onDetailQuery?.call(context, _todo);
+//              }),
+      defaultCustomButton(context, text: '完成', onTap: () {
+        operateCallback?.onCompleted?.call(context, _todo);
+      }),
+      defaultCustomButton(context, text: '修改', onTap: () {
+        operateCallback?.onModify?.call(context, _todo);
+      }),
+      defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
+        operateCallback?.onDelete?.call(context, _todo);
+      }),
+      defaultCustomButton(context, text: '再想想完成没?', textColor: Colors.blue, fontWeight: FontWeight.w600, onTap: () {
+        operateCallback?.onCancelCompleted?.call(context, _todo);
+      }),
+    ];
+
+    return !_todo.completed ? allOperationBtns.sublist(0, 3) : allOperationBtns.sublist(2, 4);
   }
 
   // 卡片列信息
@@ -112,6 +134,7 @@ class TodoCard extends WidgetState {
       padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
       child: Row(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: Text(

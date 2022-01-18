@@ -38,7 +38,6 @@ Map<String, dynamic> _$TodoVOToJson(TodoVO instance) => <String, dynamic>{
       'createTime': instance.createTime.toIso8601String(),
       'updateTime': instance.updateTime.toIso8601String(),
       'content': instance.content,
-      'needPromptTime': instance.needPromptTime?.toIso8601String(),
       'location': instance.location,
       'level': instance.level,
       'completed': instance.completed,
@@ -47,5 +46,6 @@ Map<String, dynamic> _$TodoVOToJson(TodoVO instance) => <String, dynamic>{
       'tag': instance.tag,
       'remark': instance.remark,
       'subTaskList': instance.subTaskList,
+      'needPromptTime': instance.needPromptTime?.toIso8601String(),
       'promptEventId': instance.promptEventId,
     };

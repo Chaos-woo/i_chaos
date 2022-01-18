@@ -1,9 +1,11 @@
 
+// ignore_for_file: unnecessary_getters_setters
+
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 
 /// 事件表单对象
-class TodoDetailFormVO {
+class TodoFormBO {
   static const String contentLabelText = "想干啥?";
   static const String descLabelText = "简单描述下，不然忘了!";
   static const String locationLabelText = "有个地点没?";
@@ -11,13 +13,13 @@ class TodoDetailFormVO {
   static const String todayBtnText = "今日";
   static const String tomorrowBtnText = "明日";
   static const String chooseDateBtnText = "选择日期";
-  static const String noDateBtnText = "放到草稿箱";
+  static const String noDateBtnText = "草稿箱";
 
-  TodoDetailFormVO.fromTodo(TodoVO vo) {
+  TodoFormBO.fromTodo(TodoVO vo) {
     _content = vo.content;
     _remark = vo.remark;
     _subTaskVOs = vo.subTaskList;
-    _selectDate = vo.createTime; // todo：不对
+    _selectDate = vo.validTime;
     _level = vo.level;
     _location = vo.location;
   }
@@ -34,6 +36,46 @@ class TodoDetailFormVO {
   late int _level;
   // 地点
   late String? _location;
+
+  // 转换为TodoVO
+  TodoVO newValidTodo() {
+    TodoVO vo = TodoVO.empty();
+    DateTime now = DateTime.now();
+    vo.content = _content;
+    vo.createTime = now;
+    vo.updateTime = now;
+    vo.location = _location;
+    vo.completed = false;
+    vo.completedTime = null;
+    vo.period = 0;
+    vo.remark = _remark;
+    vo.subTaskList = _subTaskVOs;
+
+    vo.validTime = _selectDate;
+    vo.level = _level;
+
+    return vo;
+  }
+
+  // 将表单中的数据更新至对象中
+  TodoVO copyWithTodo(TodoVO ori) {
+    ori.content = _content;
+    ori.updateTime = DateTime.now();
+    ori.location = _location;
+    ori.remark == _remark;
+    ori.subTaskList = _subTaskVOs;
+
+    ori.validTime = _selectDate;
+    ori.level = _level;
+
+    return ori;
+  }
+
+  // 校验字段
+  bool check() {
+    return _content.isNotEmpty && _content.trim() != ''
+        && _level >= 0;
+  }
 
   String get content => _content;
 

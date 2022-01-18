@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
+import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/repository/todo_repository.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/todo_detail_form.dart';
@@ -12,11 +13,34 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
   final String appBarTitleOfEdit = '编辑';
   final String appBarTitleOfAdd = '新增';
 
+  final List<String> selectDateBtnGroupLabels = [
+    TodoFormBO.todayBtnText,
+    TodoFormBO.tomorrowBtnText,
+    TodoFormBO.chooseDateBtnText,
+    TodoFormBO.noDateBtnText
+  ];
+
+  final List<String> levelBtnGroupLabels = [
+    TodoLevel.deferrable.title,
+    TodoLevel.unimportant.title,
+    TodoLevel.normal.title,
+    TodoLevel.important.title,
+    TodoLevel.urgent.title,
+  ];
+
+  final List<Color> levelCustomBtnGroupColor = [
+    TodoLevel.deferrable.color,
+    TodoLevel.unimportant.color,
+    TodoLevel.normal.color,
+    TodoLevel.important.color,
+    TodoLevel.urgent.color,
+  ];
+
   late TodoVO _todoCopy;
   late bool _isNew;
 
   // 事件表单对象
-  late TodoDetailFormVO _todoFormVO;
+  late TodoFormBO _todoFormBO;
 
   // 事件数据仓库操作对象
   late TodoRepository _todoRepo;
@@ -39,7 +63,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
 
   bool get isNew => _isNew;
 
-  TodoDetailFormVO get todoFormForm => _todoFormVO;
+  TodoFormBO get todoForm => _todoFormBO;
 
   // 初始化资源
   void initRes(TodoVO originalTodo) {
@@ -48,25 +72,26 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
 
     if (_isNew) {
       _todoCopy.content = '';
+      _todoCopy.validTime = DateTime.now();
     }
 
-    _todoFormVO = TodoDetailFormVO.fromTodo(_todoCopy);
+    _todoFormBO = TodoFormBO.fromTodo(_todoCopy);
     _todoRepo = TodoRepository();
 
-    if (_saveBtnAvailable(_todoFormVO.content)) {
+    if (_saveBtnAvailable(_todoFormBO.content)) {
       saveBtnAvailable = true;
     } else {
       saveBtnAvailable = false;
     }
 
-    contentController = TextEditingController(text: _todoFormVO.content);
-    descController = TextEditingController(text: _todoFormVO.remark);
-    locationController = TextEditingController(text: _todoFormVO.location);
+    contentController = TextEditingController(text: _todoFormBO.content);
+    descController = TextEditingController(text: _todoFormBO.remark);
+    locationController = TextEditingController(text: _todoFormBO.location);
 
     // 添加内容值监听
     contentController.addListener(_onContentFieldChanged);
 
-    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormVO.subTaskVOs);
+    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormBO.subTaskVOs);
   }
 
   bool _saveBtnAvailable(String content) {
@@ -81,23 +106,31 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
   }
 
   // 事件保存
-  Future<bool> save() {
+  Future<bool> save() async {
     // 校验失败时保持当前页面并弹框提示
     if (!_fieldCheck()) return Future.value(false);
 
+    int res;
     if (_isNew) {
-      _todoRepo.insertTodo(TodoVO.emptyReplace());
+      res = await _todoRepo.insertTodo(_todoFormBO.newValidTodo());
     } else {
-      _todoRepo.updateTodo(TodoVO.emptyReplace());
+      res = await _todoRepo.updateTodo(_todoFormBO.copyWithTodo(_todoCopy));
     }
-
+    print('$res');
     // 校验成功时弹框提示并退出当前页面
     return Future.value(true);
   }
 
   // 表单字段校验
   bool _fieldCheck() {
-    return false;
+    _todoFormBO.content = contentController.text;
+    _todoFormBO.remark = descController.text;
+    _todoFormBO.location = locationController.text;
+
+    _todoFormBO.level = TodoLevel.coded(todoLevelBtnGroupKey.currentState!.currentIndex).code;
+    _todoFormBO.subTaskVOs = subTaskListVM.modifiableSubTaskList;
+
+    return _todoFormBO.check();
   }
 
   // 重置到进入页面时的状态
@@ -106,12 +139,12 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     if (_isNew) {
       _todoCopy.content = '';
     }
-    _todoFormVO = TodoDetailFormVO.fromTodo(_todoCopy);
-    contentController = TextEditingController(text: _todoFormVO.content);
-    descController = TextEditingController(text: _todoFormVO.remark);
-    locationController = TextEditingController(text: _todoFormVO.location);
+    _todoFormBO = TodoFormBO.fromTodo(_todoCopy);
+    contentController = TextEditingController(text: _todoFormBO.content);
+    descController = TextEditingController(text: _todoFormBO.remark);
+    locationController = TextEditingController(text: _todoFormBO.location);
 
-    DateTime? todoValidDate = _todoFormVO.selectedDate;
+    DateTime? todoValidDate = _todoFormBO.selectedDate;
     int selectDateBtnIndex = todoValidDate == null
         ? 3
         : DateTime.now().isSameDay(todoValidDate)
@@ -120,7 +153,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
                 ? 1
                 : 2;
 
-    todoLevelBtnGroupKey.currentState?.reloadIndex(_todoFormVO.level);
+    todoLevelBtnGroupKey.currentState?.reloadIndex(_todoFormBO.level);
     todoDateBtnGroupKey.currentState?.reloadIndex(selectDateBtnIndex);
     subTaskListVM.resetSubTaskList();
 
@@ -136,6 +169,22 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
       fontFamily: 'Lexend Deca',
       color: color,
     );
+  }
+
+  // 根据事件的有效时间放回日期按钮组当前应展示的下标
+  int getSelectDateIndex() {
+    DateTime? validDate = _todoFormBO.selectedDate;
+    if (validDate == null) {
+      return selectDateBtnGroupLabels.indexOf(TodoFormBO.noDateBtnText);
+    }
+
+    if (DateTime.now().isSameDay(validDate)) {
+      return selectDateBtnGroupLabels.indexOf(TodoFormBO.todayBtnText);
+    } else if (DayDateUtil.tomorrow().isSameDay(validDate)) {
+      return selectDateBtnGroupLabels.indexOf(TodoFormBO.tomorrowBtnText);
+    } else {
+      return selectDateBtnGroupLabels.indexOf(TodoFormBO.chooseDateBtnText);
+    }
   }
 
   // 释放资源

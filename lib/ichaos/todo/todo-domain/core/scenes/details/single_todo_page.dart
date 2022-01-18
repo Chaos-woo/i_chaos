@@ -12,21 +12,24 @@ import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.da
 import 'package:i_chaos/ichaos/public/widgets/button-group/variable_button_label.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_top_dialog_item_data.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_vm.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/todo_detail_form.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/pages/month_calendar_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:provider/provider.dart';
 
+typedef OnSaveCallback = void Function();
+
 class SingleTodoPage extends PageState {
   final TodoVO _originalTodo;
   late SingleTodoVM _singleTodoVM;
+  late OnSaveCallback? onSave;
 
-  SingleTodoPage(this._originalTodo);
+  SingleTodoPage(this._originalTodo, {OnSaveCallback? onSave}) {
+    this.onSave = onSave;
+  }
 
   @override
   void initState() {
@@ -66,7 +69,7 @@ class SingleTodoPage extends PageState {
                           });
                         },
                         icon: const Icon(AliIcons.ALI_ICON_MORE)),
-                    SizedBox(
+                    const SizedBox(
                       width: 14,
                     )
                   ],
@@ -119,14 +122,14 @@ class SingleTodoPage extends PageState {
                 decoration: InputDecoration(
                   counterText: '',
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
@@ -163,14 +166,14 @@ class SingleTodoPage extends PageState {
                 decoration: InputDecoration(
                   counterText: '',
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
@@ -244,43 +247,39 @@ class SingleTodoPage extends PageState {
               padding: wholePadding,
               child: RadioButtonGroup(
                 key: _singleTodoVM.todoDateBtnGroupKey,
-                buttonGroupLabels: const [
-                  TodoDetailFormVO.todayBtnText,
-                  TodoDetailFormVO.tomorrowBtnText,
-                  TodoDetailFormVO.chooseDateBtnText,
-                  TodoDetailFormVO.noDateBtnText
-                ],
+                buttonGroupLabels: _singleTodoVM.selectDateBtnGroupLabels,
                 buttonGroupIcons: const [AliIcons.ALI_ICON_FLAG, AliIcons.ALI_ICON_DOCUMENT, AliIcons.ALI_ICON_TIME, AliIcons.ALI_ICON_SERVICE],
+                defaultSelectedIndex: _singleTodoVM.getSelectDateIndex(),
                 onButtonChanged: (preIndex, index) async {
                   switch (index) {
                     case 0:
                       {
-                        _singleTodoVM.todoFormForm.selectDate = DateTime.now();
+                        _singleTodoVM.todoForm.selectDate = DateTime.now();
                       }
                       break;
                     case 1:
                       {
-                        _singleTodoVM.todoFormForm.selectDate = DayDateUtil.tomorrow();
+                        _singleTodoVM.todoForm.selectDate = DayDateUtil.tomorrow();
                       }
                       break;
                     case 2:
                       {
                         DateTime? selectDate = await push(MonthCalendarPage(canBeCloseByTouchTransparentArea: false));
-                        _singleTodoVM.todoFormForm.selectDate = selectDate ?? DateTime.now();
+                        _singleTodoVM.todoForm.selectDate = selectDate ?? DateTime.now();
                       }
                       break;
                     default:
                       {
-                        _singleTodoVM.todoFormForm.selectDate = null;
+                        _singleTodoVM.todoForm.selectDate = null;
                       }
                       break;
                   }
-                  return _singleTodoVM.todoFormForm.selectedDate;
+                  return _singleTodoVM.todoForm.selectedDate;
                 },
                 variableButtonLabels: [
                   VariableButtonLabel(2, (nextIndex, currStatus) {
                     if (nextIndex == 2) {
-                      return _singleTodoVM.todoFormForm.selectedDate?.yyyyMMdd;
+                      return _singleTodoVM.todoForm.selectedDate?.yyyyMMdd;
                     }
                     return null;
                   }),
@@ -308,26 +307,14 @@ class SingleTodoPage extends PageState {
               padding: wholePadding,
               child: RadioButtonGroup(
                 key: _singleTodoVM.todoLevelBtnGroupKey,
-                buttonGroupLabels: [
-                  TodoLevel.deferrable.title,
-                  TodoLevel.unimportant.title,
-                  TodoLevel.normal.title,
-                  TodoLevel.important.title,
-                  TodoLevel.urgent.title,
-                ],
-                customSelectedButtonColor: [
-                  TodoLevel.deferrable.color,
-                  TodoLevel.unimportant.color,
-                  TodoLevel.normal.color,
-                  TodoLevel.important.color,
-                  TodoLevel.urgent.color,
-                ],
+                buttonGroupLabels: _singleTodoVM.levelBtnGroupLabels,
+                customSelectedButtonColor: _singleTodoVM.levelCustomBtnGroupColor,
                 selectedButtonColor: Colors.teal,
                 unSelectedButtonColor: const Color(0xFFD6D6D6),
                 selectedLabelColor: Colors.white,
                 unSelectedLabelColor: Colors.white,
                 horizontal: true,
-                defaultSelectedIndex: _singleTodoVM.isNew ? 2 : _singleTodoVM.todoFormForm.level,
+                defaultSelectedIndex: _singleTodoVM.isNew ? 2 : _singleTodoVM.todoForm.level,
               ),
             ),
             Row(
@@ -354,14 +341,14 @@ class SingleTodoPage extends PageState {
                 decoration: InputDecoration(
                   counterText: '',
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0x00000000),
                       width: 1,
                     ),
@@ -374,12 +361,8 @@ class SingleTodoPage extends PageState {
                 style: _singleTodoVM.formFieldSimpleTextStyle(Colors.black),
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
-              ),
+            const SizedBox(
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(40, 24, 40, 0),
@@ -394,10 +377,13 @@ class SingleTodoPage extends PageState {
                           onPressed: () async {
                             bool saveSuccess = await _singleTodoVM.save();
                             if (!saveSuccess) {
-                              SnackBarUtil.topBar('创建失败');
+                              SnackBarUtil.topBar('保存失败');
                             } else {
-                              SnackBarUtil.topBar('创建成功');
-                              pop();
+                              SnackBarUtil.topBar('保存成功');
+                              Future.delayed(const Duration(milliseconds: 5)).whenComplete(() {
+                                onSave?.call();
+                                pop();
+                              });
                             }
                           },
                           icon: const Icon(

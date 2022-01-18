@@ -14,7 +14,9 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   int? id;
   // 事件实际生效时间
   DateTime? validTime;
+  // 创建时间
   DateTime createTime;
+  // 更新时间
   DateTime updateTime;
   // 内容
   String content;
@@ -30,6 +32,7 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   int period;
   // 关联的分类id
   int? tag;
+  // 描述/备注
   String? remark;
   // 子任务json
   List<SubTaskVO> subTaskList;
@@ -61,6 +64,7 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   @override
   TodoEntity toEntity() {
     return TodoEntity(level, completed, period, updateTime: updateTime.yyyyMMddHHmmss,
+      id: id,
       content: content,
       validTime: validTime?.yyyyMMddHHmmss,
       needPromptTime: needPromptTime?.yyyyMMddHHmmss,
@@ -91,8 +95,8 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   bool get isSubTaskInfo => subTaskList.isNotEmpty;
   bool get isTagsPrompt => level > TodoLevel.normal.code || period > 0 || (tag != null && tag! > 0);
 
-  static TodoVO emptyReplace() {
-    return TodoVO.newTodo(content: 'empty');
+  static TodoVO empty() {
+    return TodoVO.newTodo(content: '');
   }
 
   TodoVO copyWith() {

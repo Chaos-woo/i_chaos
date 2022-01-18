@@ -204,14 +204,14 @@ class _$TodoDao extends TodoDao {
   @override
   Future<void> deleteAllOfDay(String start, String end) async {
     await _queryAdapter.queryNoReturn(
-        'DELETE FROM tb_todo WHERE create_time >= ?1 and create_time <= ?2',
+        'DELETE FROM tb_todo WHERE valid_time >= ?1 and valid_time <= ?2',
         arguments: [start, end]);
   }
 
   @override
   Future<List<TodoEntity>> listByTime(String start, String end) async {
     return _queryAdapter.queryList(
-        'SELECT * FROM tb_todo WHERE create_time >= ?1 and create_time <= ?2',
+        'SELECT * FROM tb_todo WHERE valid_time >= ?1 and valid_time <= ?2',
         mapper: (Map<String, Object?> row) => TodoEntity(row['level'] as int,
             (row['completed'] as int) != 0, row['period'] as int,
             content: row['content'] as String,

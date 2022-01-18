@@ -96,6 +96,8 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
   // 滑动动画controller
   late ScrollController _scrollController;
 
+  int get currentIndex => selectedIndex;
+
   @override
   void initState() {
     super.initState();

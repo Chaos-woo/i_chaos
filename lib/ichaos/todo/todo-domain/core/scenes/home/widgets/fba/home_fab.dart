@@ -79,7 +79,9 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                     child: const Icon(Icons.add),
                     heroTag: 'add',
                     onPressed: () {
-                      push(SingleTodoPage(TodoVO.emptyReplace()));
+                      push(SingleTodoPage(TodoVO.empty(), onSave: () {
+                        filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
+                      }));
                     },
                   ),
                 ],
