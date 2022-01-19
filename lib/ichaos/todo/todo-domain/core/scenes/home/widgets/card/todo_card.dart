@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
-import 'package:i_chaos/ichaos/public/widgets/icon_text.dart';
 import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
@@ -27,7 +26,12 @@ class TodoOperateCallback {
   OnTodoModifyCallback? onCompleted;
   OnTodoCancelCompletedCallback? onCancelCompleted;
 
-  TodoOperateCallback({OnTodoDeleteCallback? onDelete, OnTodoDetailQueryCallback? onDetailQuery, OnTodoModifyCallback? onModify, OnTodoModifyCallback? onCompleted, OnTodoCancelCompletedCallback? onCancelCompleted}) {
+  TodoOperateCallback(
+      {OnTodoDeleteCallback? onDelete,
+      OnTodoDetailQueryCallback? onDetailQuery,
+      OnTodoModifyCallback? onModify,
+      OnTodoModifyCallback? onCompleted,
+      OnTodoCancelCompletedCallback? onCancelCompleted}) {
     this.onDelete = onDelete;
     this.onDetailQuery = onDetailQuery;
     this.onModify = onModify;
@@ -40,10 +44,15 @@ class TodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
 
   final TodoVO _todo;
+
+  // 事件操作回调
   TodoOperateCallback? operateCallback;
 
+  late bool expandSubTaskList; // 是否展开子任务列表
+
   TodoCard(this._todo, {TodoOperateCallback? operateCallback}) {
-     this.operateCallback = operateCallback;
+    this.operateCallback = operateCallback;
+    expandSubTaskList = _todo.subTaskList.length <= 3; // 子任务列表长度小于等于3时默认展开
   }
 
   @override
@@ -124,8 +133,15 @@ class TodoCard extends WidgetState {
 
   // 卡片列信息
   List<Widget> _cardColumn() {
-    List<Widget> baseNode = _todo.isPromptContent ? _promptInfoRow() : [];
-    baseNode.addAll([_mainContentRow(), if (_todo.isRemarkInfo) _remarkInfoRow()]);
+    List<Widget> baseNode = (_todo.isPromptLocation || _todo.isPromptDate) ? _promptInfoRow() : [];
+    baseNode.add(_mainContentRow());
+    if (_todo.isRemarkInfo) {
+      baseNode.add(_remarkInfoRow());
+    }
+    if (_todo.isSubTaskInfo) {
+      baseNode.add(_subTaskInfoRow());
+    }
+
     return baseNode;
   }
 
@@ -176,180 +192,73 @@ class TodoCard extends WidgetState {
   }
 
   List<Widget> _promptInfoRow() {
+    List<Widget> baseNode = [];
+    if (_todo.isPromptDate) {
+      baseNode.add(const Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+        child: Icon(
+          Icons.schedule,
+          color: Colors.teal,
+          size: 20,
+        ),
+      ));
+      baseNode.add(Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+        child: Text(
+          _todo.needPromptTime!.HHmm,
+          style: const TextStyle(
+            fontFamily: _cardFontFamily,
+            color: Color(0xFF8B97A2),
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ));
+    }
+
+    if (_todo.isPromptLocation) {
+      baseNode.add(
+        const Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+          child: Icon(
+            Icons.location_on_sharp,
+            color: Colors.teal,
+            size: 20,
+          ),
+        ),
+      );
+      baseNode.add(Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+        child: Text(
+          '${_todo.location}',
+          style: const TextStyle(
+            fontFamily: _cardFontFamily,
+            color: Colors.black87,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ));
+    }
+
     return <Widget>[
       Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 8),
+        padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          children: [
-            const Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-              child: Icon(
-                Icons.schedule,
-                color: Colors.teal,
-                size: 20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-              child: Text(
-                _todo.needPromptTime!.HHmm,
-                style: const TextStyle(
-                  fontFamily: _cardFontFamily,
-                  color: Color(0xFF4B39EF),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 4),
-              child: Icon(
-                Icons.location_on_sharp,
-                color: Colors.teal,
-                size: 20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-              child: Text(
-                '${_todo.location}',
-                style: const TextStyle(
-                  fontFamily: _cardFontFamily,
-                  color: Color(0xFF4B39EF),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ],
+          children: baseNode,
         ),
       ),
-      Container(
-        width: ScreenUtil.getInstance().screenWidth * 0.85,
-        height: 1,
-        decoration: const BoxDecoration(
-          color: Color(0xFFDBE2E7),
+      Center(
+        child: Container(
+          width: ScreenUtil.getInstance().screenWidth * 0.85,
+          height: 1,
+          decoration: const BoxDecoration(
+            color: Color(0xFFDBE2E7),
+          ),
         ),
       ),
     ];
-  }
-
-  /// *******************************************
-  ///  卡片UI组件.
-  ///
-  /// *******************************************
-  /// 提示颜色区域.
-  Widget _promptColorArea() {
-    return Container(
-      decoration: BoxDecoration(
-        color: TodoLevel.coded(_todo.level).color,
-      ),
-      height: 5.h,
-    );
-  }
-
-  /// 卡片信息.
-//  Widget _renderTodoCard(BuildContext rootCtx) {
-//    return Container(
-//      decoration: const BoxDecoration(
-//        color: Colors.white,
-//      ),
-//      child: Column(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-//        children: <Widget>[
-//          /// 提醒区域：包含地点和时间
-//          if (_todo.isPromptContent) _promptInfoArea(),
-//
-//          /// 主内容区域
-//          _mainContentArea(),
-//
-//          /// 子任务区域
-//          if (_todo.isSubTaskInfo) _subTaskInfoRow(),
-//
-//          /// 备注区域
-//          if (_todo.isRemarkInfo) _remarkInfoArea(),
-//        ],
-//      ),
-//    );
-//  }
-
-  /// 提醒信息区域.
-  Widget _promptInfoArea() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5.h),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _todo.location != null
-              ? IconText(
-                  _todo.location!,
-                  icon: const Icon(Icons.location_on),
-                  softWrap: false,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  padding: EdgeInsets.only(right: 5.h),
-                )
-              : Text('待办事件将在设置时间提醒您!'),
-          if (_todo.needPromptTime != null)
-            IconText(
-              (_todo.needPromptTime!.HHmm),
-              style: TextStyle(color: Colors.red, fontSize: 16.sp),
-              icon: const Icon(Icons.alarm),
-              padding: EdgeInsets.only(right: 5.h),
-            ),
-        ],
-      ),
-    );
-  }
-
-  /// 备注信息区域.
-  Widget _remarkInfoArea() {
-    return Container(
-      margin: EdgeInsets.only(top: 4.h, bottom: 4.h),
-      padding: const EdgeInsets.only(left: 20, right: 4),
-      child: Row(
-        children: <Widget>[
-          Text(
-            '备注：',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
-          Expanded(
-            child: Text(
-              _todo.remark!,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.grey,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  /// 主内容区域.
-  Widget _mainContentArea() {
-    return Container(
-      margin: EdgeInsets.only(top: 8.h, bottom: 4.h),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Text(
-        _todo.content,
-        style: const TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w500,
-        ),
-        softWrap: true,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
   }
 
   /// 子任务区域.
@@ -362,31 +271,72 @@ class TodoCard extends WidgetState {
 
       /// 去除ListView的边界水波纹效果
       child: NoRippleOverScroll(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: subTaskList.length,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(0),
-          itemBuilder: (BuildContext context, int index) {
-            final task = subTaskList[index];
-            return _todo.completed
-                ? MiniCheckboxListTitle(
-                    title: task.content,
-                    isChecked: true,
-                    activeIcon: const Icon(
-                      Icons.brightness_1,
-                      size: 10,
-                      color: GFColors.SUCCESS,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            InkWell(
+              onTap: () {
+                expandSubTaskList = !expandSubTaskList;
+                refreshState();
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                width: 60,
+                height: 20,
+                decoration: const BoxDecoration(color: Color(0xFFE0E0E0), borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: expandSubTaskList
+                          ? const Icon(
+                              Icons.arrow_drop_up,
+                              color: Colors.white,
+                              size: 25,
+                            )
+                          : const Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.white,
+                              size: 25,
+                            ),
                     ),
-                    activeBgColor: GFColors.WHITE,
-                    onTap: (val) {},
-                  )
-                : MiniCheckboxListTitle(
-                    title: task.content,
-                    isChecked: task.completed,
-                    onTap: (val) => {},
-                  );
-          },
+                    Text(
+                      '${_todo.subTaskList.where((e) => e.completed).length}/${_todo.subTaskList.length}',
+                      style: const TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            if (expandSubTaskList)
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: subTaskList.length,
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
+                itemBuilder: (BuildContext context, int index) {
+                  final task = subTaskList[index];
+                  return _todo.completed
+                      ? MiniCheckboxListTitle(
+                          title: task.content,
+                          isChecked: true,
+                          activeIcon: const Icon(
+                            Icons.brightness_1,
+                            size: 10,
+                            color: GFColors.SUCCESS,
+                          ),
+                          activeBgColor: GFColors.WHITE,
+                          onTap: (val) {},
+                        )
+                      : MiniCheckboxListTitle(
+                          title: task.content,
+                          isChecked: task.completed,
+                          onTap: (val) => {},
+                        );
+                },
+              ),
+          ],
         ),
       ),
     );
