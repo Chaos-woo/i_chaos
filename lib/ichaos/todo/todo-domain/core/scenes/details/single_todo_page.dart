@@ -207,9 +207,10 @@ class SingleTodoPage extends PageState {
                     onTap: () {
                       WWDialog.showMiddleDialog(context,
                           title: '子任务是什么?',
-                          content: '1. 任务分阶段: 将任务X分为多个子任务，当勾选某一个子任务时表示完成了该子任务。\n'
-                              '2. 当所有子任务完成时，任务X将被标识为完成。\n'
-                              '3. 若任务X被标识为完成时，其下所有的子任务将被展示为完成状态。',
+                          content: '1. 事件可认为是多个子任务的合集。\n'
+                              '2. 当事件被分为X个子任务时，X1任务完成时，事件完成度为1/X，依此类推。\n'
+                              '3. 当事件下的所有子任务完成时，该事件将被标识为完成，且被移动至【已完成】列表。\n'
+                              '4. 若直接将事件更改为完成状态，则其下的所有子任务将被展示为完成状态，如若事件从【已完成】状态变为【未完成】状态，则子任务将会展示为原来的状态。',
                           contentAlign: TextAlign.left,
                           isNeedCloseDiaLog: true,
                           buttons: ['了解啦~'],
@@ -233,14 +234,36 @@ class SingleTodoPage extends PageState {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
-                Padding(
+              children: <Widget>[
+                const Padding(
                   padding: wholePadding,
                   child: Text(
                     '是哪天需要提醒?',
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
-                )
+                ),
+                Padding(
+                  padding: wholePadding,
+                  child: InkWell(
+                    child: const Icon(
+                      AliIcons.ALI_ICON_PROMPT_FILL,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    onTap: () {
+                      WWDialog.showMiddleDialog(context,
+                          title: '日期怎么选择?',
+                          content: '1. 【今日】: 为进入该页面的当天时间。\n'
+                              '2. 【明日】: 为进入该页面的当天向后增加一天。\n'
+                              '3. 【选择日期】: 可以选择今日后的任意一天，当选择今日或明日的时间时将会自动转变为前两个选项。\n'
+                              '4. 【草稿箱】: 将会把事件存储在草稿箱中，等待被编辑至对应的日期，不展示在事件列表中。',
+                          contentAlign: TextAlign.left,
+                          isNeedCloseDiaLog: true,
+                          buttons: ['了解啦~'],
+                          onTap: (index, ctx) {});
+                    },
+                  ),
+                ),
               ],
             ),
             Padding(
@@ -264,8 +287,16 @@ class SingleTodoPage extends PageState {
                       break;
                     case 2:
                       {
-                        DateTime? selectDate = await push(PageMonthCalendar(canBeCloseByTouchTransparentArea: false));
-                        _singleTodoVM.todoForm.selectDate = selectDate ?? DateTime.now();
+                        DateTime? selectDate = await push(PageMonthCalendar(canBeCloseByTouchTransparentArea: false, canPopWhenSelectSameDateWithCurrent: true));
+                        int selectDateBtnIndex = _singleTodoVM.getRightSelectDateBtnIndex(selectDate);
+                        _singleTodoVM.todoForm.selectDate = selectDateBtnIndex == 0
+                            ? DateTime.now()
+                            : selectDateBtnIndex == 1
+                            ? DayDateUtil.tomorrow()
+                            : selectDateBtnIndex == 2
+                            ? selectDate
+                            : null;
+                        index = selectDateBtnIndex;
                       }
                       break;
                     default:
@@ -274,7 +305,7 @@ class SingleTodoPage extends PageState {
                       }
                       break;
                   }
-                  return _singleTodoVM.todoForm.selectedDate;
+                  return index;
                 },
                 variableButtonLabels: [
                   VariableButtonLabel(2, (nextIndex, currStatus) {

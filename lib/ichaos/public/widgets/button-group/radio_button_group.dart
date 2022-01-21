@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/variable_button_label.dart';
 
-typedef DateChanged = Future<dynamic> Function(int preIndex, int index);
+typedef DateChanged = Future<int?> Function(int preIndex, int index);
 
 class RadioButtonGroup extends StatefulWidget {
   // 按钮组文字
@@ -258,7 +258,8 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
   // 被选择按钮更新时所作的操作
   void selectedBtnChanged(int index, {bool needReloadBtnChangedFunc = true}) async {
     if (widget.onButtonChanged != null && needReloadBtnChangedFunc) {
-      await widget.onButtonChanged!(selectedIndex, index);
+      int? nextIndex = await widget.onButtonChanged!(selectedIndex, index);
+      index = nextIndex ?? index;
     }
 
     // 文案预处理

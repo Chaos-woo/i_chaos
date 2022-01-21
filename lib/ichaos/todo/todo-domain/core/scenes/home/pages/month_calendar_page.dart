@@ -14,11 +14,15 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
   late double _calendarWidth;
   late double _calendarHeight;
 
+  // 点击透明区域是否可退出页面
   late final bool _canBeCloseByTouchTransparentArea;
+  // 点击当天日期时是否可退出页面且返回选择日期
+  late final bool _canPopWhenSelectSameDateWithCurrent;
 
-  PageMonthCalendar({CalendarBarVM? calendarBarVM, bool canBeCloseByTouchTransparentArea = true}) {
+  PageMonthCalendar({CalendarBarVM? calendarBarVM, bool canBeCloseByTouchTransparentArea = true, bool canPopWhenSelectSameDateWithCurrent = false}) {
     _calendarBarVM = calendarBarVM;
     _canBeCloseByTouchTransparentArea = canBeCloseByTouchTransparentArea;
+    _canPopWhenSelectSameDateWithCurrent = canPopWhenSelectSameDateWithCurrent;
   }
 
   @override
@@ -44,7 +48,16 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
               return isSameDay(_selectDate, day);
             },
             onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectDate, selectedDay)) {
+              bool isSameDateWithCurrent = isSameDay(_selectDate, selectedDay);
+
+              if (isSameDateWithCurrent && _canPopWhenSelectSameDateWithCurrent) {
+                setState(() {
+                  _selectDate = selectedDay;
+                });
+                Future.delayed(const Duration(milliseconds: 50)).whenComplete(() => popAndReturn(selectedDay));
+              }
+
+              if (!isSameDateWithCurrent) {
                 setState(() {
                   _selectDate = selectedDay;
                 });

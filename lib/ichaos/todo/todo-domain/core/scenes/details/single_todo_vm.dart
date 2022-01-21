@@ -144,13 +144,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     locationController = TextEditingController(text: _todoFormBO.location);
 
     DateTime? todoValidDate = _todoFormBO.selectedDate;
-    int selectDateBtnIndex = todoValidDate == null
-        ? 3
-        : DateTime.now().isSameDay(todoValidDate)
-            ? 0
-            : DayDateUtil.tomorrow().isSameDay(todoValidDate)
-                ? 1
-                : 2;
+    int selectDateBtnIndex = getRightSelectDateBtnIndex(todoValidDate);
 
     todoLevelBtnGroupKey.currentState?.reloadIndex(_todoFormBO.level);
     todoDateBtnGroupKey.currentState?.reloadIndex(selectDateBtnIndex);
@@ -160,6 +154,17 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     contentController.addListener(_onContentFieldChanged);
 
     notifyListeners();
+  }
+
+  int getRightSelectDateBtnIndex(DateTime? validDate) {
+    int selectDateBtnIndex = validDate == null
+        ? 3
+        : DateTime.now().isSameDay(validDate)
+        ? 0
+        : DayDateUtil.tomorrow().isSameDay(validDate)
+        ? 1
+        : 2;
+    return selectDateBtnIndex;
   }
 
   // 表单字段样式
