@@ -4,7 +4,7 @@ import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
+class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
   late CalendarBarVM? _calendarBarVM;
   late DateTime _selectDate;
   late double _screenWidth;
@@ -16,7 +16,7 @@ class MonthCalendarPage extends AbstractTransparentPageY<DateTime> {
 
   late final bool _canBeCloseByTouchTransparentArea;
 
-  MonthCalendarPage({CalendarBarVM? calendarBarVM, bool canBeCloseByTouchTransparentArea = true}) {
+  PageMonthCalendar({CalendarBarVM? calendarBarVM, bool canBeCloseByTouchTransparentArea = true}) {
     _calendarBarVM = calendarBarVM;
     _canBeCloseByTouchTransparentArea = canBeCloseByTouchTransparentArea;
   }

@@ -114,7 +114,7 @@ class _MainSceneState extends State<MainScene> {
     Temporature(),
     Temporature(),
     Temporature(),
-    TodoHomePage().transformToPageWidget(),
+    PageTodoHome().transformToPageWidget(),
   ];
 
   @override
@@ -158,7 +158,11 @@ class _MainSceneState extends State<MainScene> {
 class Temporature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: Text('施工中...'),
+      ),
+    );
   }
 }
 

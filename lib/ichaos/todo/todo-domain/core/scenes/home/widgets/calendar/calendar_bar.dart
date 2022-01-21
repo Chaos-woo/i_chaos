@@ -6,10 +6,10 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calenda
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarBar extends WidgetState {
+class WidgetCalendarBar extends WidgetState {
   late CalendarBarVM _calendarBarVM;
 
-  CalendarBar();
+  WidgetCalendarBar();
 
   @override
   Widget build(BuildContext context) {

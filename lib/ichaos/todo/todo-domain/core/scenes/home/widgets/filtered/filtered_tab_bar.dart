@@ -13,10 +13,10 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import 'filtered_tab_bar_vm.dart';
 
-class FilteredTabBar extends WidgetState {
+class WidgetFilteredTabBar extends WidgetState {
   late FilteredTabBarVM _filteredTabBarVM;
 
-  FilteredTabBar();
+  WidgetFilteredTabBar();
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +101,8 @@ class FilteredTabBar extends WidgetState {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);
 
       return [
-        generateWidget(() => SingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true))),
-        generateWidget(() => SingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false)))
+        generateWidget(() => WidgetSingleTodoList(isActive: true, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, true))),
+        generateWidget(() => WidgetSingleTodoList(isActive: false, todoListScrollCallback: _filteredTabBarVM.getTodoListNotifyCallback(btnVM, false)))
       ];
     }
   }

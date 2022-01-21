@@ -114,6 +114,9 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
     }
 
     _scrollController = ScrollController();
+
+    // 文案预处理
+    processCustomBtnGroupLabels(selectedIndex);
   }
 
   @override
@@ -258,6 +261,16 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
       await widget.onButtonChanged!(selectedIndex, index);
     }
 
+    // 文案预处理
+    processCustomBtnGroupLabels(index);
+
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  // 按钮自定义文案预处理(显示前处理)
+  void processCustomBtnGroupLabels(int index) {
     for (int i = 0; i < widget.buttonGroupLabels.length; i++) {
       VariableButtonLabel? varBtn = varBtnLabelMap[i];
       if (varBtn != null) {
@@ -265,9 +278,5 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
         buttonGroupLabelsCopy[i] = label ?? widget.buttonGroupLabels[i];
       }
     }
-
-    setState(() {
-      selectedIndex = index;
-    });
   }
 }

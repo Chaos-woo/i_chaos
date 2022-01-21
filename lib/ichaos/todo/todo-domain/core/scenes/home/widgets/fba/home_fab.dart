@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
@@ -81,7 +82,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                     onPressed: () {
                       push(SingleTodoPage(TodoVO.empty(), onSave: () {
                         filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
-                      }));
+                      }), animation: PageAnimation.Slide);
                     },
                   ),
                 ],

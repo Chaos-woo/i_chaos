@@ -2,6 +2,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
+import 'package:i_chaos/ichaos/public/ali_icons.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
 import 'drawer_page.dart';
@@ -14,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar_image.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
 
-class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
+class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -62,7 +63,7 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
     final calendarBarVM = Provider.of<CalendarBarVM>(ctx);
 
     List<Widget> calendarBarWidgets = _getCalendarImage(calendarBarVM);
-    calendarBarWidgets.add(CalendarBar().transformToPageWidget());
+    calendarBarWidgets.add(WidgetCalendarBar().transformToPageWidget());
 
     return Scaffold(
       appBar: _getTodoAppBar(filteredTabBarVM),
@@ -95,7 +96,7 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 width: ScreenUtil.getInstance().screenWidth,
-                child: generateWidget(() => FilteredTabBar()),
+                child: generateWidget(() => WidgetFilteredTabBar()),
               ),
             ]),
           ),
@@ -112,7 +113,7 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
     return AppBar(
       leading: InkWell(
         onTap: () {
-          push(TodoDrawerPage());
+          push(PageTodoDrawer());
         },
         child: const Icon(Icons.widgets),
       ),
@@ -131,22 +132,13 @@ class TodoHomePage extends PageState with AutomaticKeepAliveClientMixin {
       elevation: 0,
       actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          tooltip: 'Open shopping cart',
+          icon: const Icon(AliIcons.ALI_ICON_TASKLIST_FILL),
           onPressed: () {
             // handle the press
           },
         ),
         IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          tooltip: 'Open shopping cart',
-          onPressed: () {
-            // handle the press
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          tooltip: 'Open shopping cart',
+          icon: const Icon(AliIcons.ALI_ICON_MORE),
           onPressed: () {
             // handle the press
           },

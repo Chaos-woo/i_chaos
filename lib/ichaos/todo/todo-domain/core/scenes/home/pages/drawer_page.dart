@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page.dart';
 import 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
 
-class TodoDrawerPage extends AbstractTransparentPageY {
+class PageTodoDrawer extends AbstractTransparentPageY {
   @override
   Widget buildWidget(BuildContext context) {
     return SafeArea(

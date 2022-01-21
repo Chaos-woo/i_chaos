@@ -18,8 +18,9 @@ typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCancelCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoToggleSubTaskCallback = void Function(TodoVO vo, SubTaskVO taskVO, TodoCard thisTodoWidget);
+typedef OnTodoToggleSubTaskCallback = void Function(TodoVO vo, SubTaskVO taskVO, WidgetTodoCard thisTodoWidget);
 
+// 事件卡片操作回调
 class TodoOperateCallback {
   OnTodoDeleteCallback? onDelete;
   OnTodoDetailQueryCallback? onDetailQuery;
@@ -44,7 +45,7 @@ class TodoOperateCallback {
   }
 }
 
-class TodoCard extends WidgetState {
+class WidgetTodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
 
   late final TodoVO _todo;
@@ -54,7 +55,7 @@ class TodoCard extends WidgetState {
 
   late bool expandSubTaskList; // 是否展开子任务列表
 
-  TodoCard(this._todo, {TodoOperateCallback? operateCallback}) {
+  WidgetTodoCard(this._todo, {TodoOperateCallback? operateCallback}) {
     this.operateCallback = operateCallback;
     expandSubTaskList = _todo.subTaskList.length <= 3; // 子任务列表长度小于等于3时默认展开
   }

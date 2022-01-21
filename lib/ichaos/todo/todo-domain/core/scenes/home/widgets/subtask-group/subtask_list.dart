@@ -3,7 +3,7 @@ import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
-class SubTaskList extends WidgetState {
+class WidgetSubTaskList extends WidgetState {
   // 添加按钮颜色
   final Color addButtonColor;
 
@@ -18,7 +18,7 @@ class SubTaskList extends WidgetState {
 
   final SubTaskListVM _subTaskListVM;
 
-  SubTaskList(this._subTaskListVM, {this.addButtonColor = Colors.teal, this.removeButtonColor = Colors.red});
+  WidgetSubTaskList(this._subTaskListVM, {this.addButtonColor = Colors.teal, this.removeButtonColor = Colors.red});
 
   @override
   Widget build(BuildContext context) {

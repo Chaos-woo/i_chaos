@@ -21,7 +21,7 @@ class CalendarImage extends WidgetState {
 
     return InkWell(
       onTap: () async {
-        DateTime? selectDate = await push(MonthCalendarPage(calendarBarVM: _calendarBarVM));
+        DateTime? selectDate = await push(PageMonthCalendar(calendarBarVM: _calendarBarVM));
         if (selectDate != null) {
           final calendarBarVM = Provider.of<CalendarBarVM>(context, listen: false);
           if (!calendarBarVM.selectDate.isSameDay(selectDate)) {

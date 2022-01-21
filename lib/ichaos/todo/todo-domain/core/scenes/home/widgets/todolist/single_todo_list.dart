@@ -32,14 +32,14 @@ class TodoListScrollCallback {
   }
 }
 
-class SingleTodoList extends WidgetState {
+class WidgetSingleTodoList extends WidgetState {
   late bool _isActive;
   late TodoState _todoState;
 
   // 监听事件列表回调
   TodoListScrollCallback? _todoListScrollCallback;
 
-  SingleTodoList({required bool isActive, TodoListScrollCallback? todoListScrollCallback}) {
+  WidgetSingleTodoList({required bool isActive, TodoListScrollCallback? todoListScrollCallback}) {
     _isActive = isActive;
     _todoState = _isActive ? TodoState.active : TodoState.completed;
     _todoListScrollCallback = todoListScrollCallback;
@@ -83,7 +83,7 @@ class SingleTodoList extends WidgetState {
               ),
             );
           }
-          return generateWidget(() => TodoCard(currTodoList[index],
+          return generateWidget(() => WidgetTodoCard(currTodoList[index],
               operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
                 SnackBarUtil.topBar(textSpans: [
                   const TextSpan(text: '已删除 ε==3', style: SnackBarUtil.defaultStyle),

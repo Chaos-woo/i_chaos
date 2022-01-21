@@ -227,7 +227,7 @@ class SingleTodoPage extends PageState {
                     model: _singleTodoVM.subTaskListVM,
                     onModelReady: (vm) => vm.init(),
                     builder: (ctx, vm, child) {
-                      return SubTaskList(vm).transformToPageWidget();
+                      return WidgetSubTaskList(vm).transformToPageWidget();
                     }),
               ),
             ),
@@ -264,7 +264,7 @@ class SingleTodoPage extends PageState {
                       break;
                     case 2:
                       {
-                        DateTime? selectDate = await push(MonthCalendarPage(canBeCloseByTouchTransparentArea: false));
+                        DateTime? selectDate = await push(PageMonthCalendar(canBeCloseByTouchTransparentArea: false));
                         _singleTodoVM.todoForm.selectDate = selectDate ?? DateTime.now();
                       }
                       break;
