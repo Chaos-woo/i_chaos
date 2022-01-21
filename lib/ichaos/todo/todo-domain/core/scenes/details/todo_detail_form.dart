@@ -59,16 +59,18 @@ class TodoFormBO {
 
   // 将表单中的数据更新至对象中
   TodoVO copyWithTodo(TodoVO ori) {
-    ori.content = _content;
-    ori.updateTime = DateTime.now();
-    ori.location = _location;
-    ori.remark == _remark;
-    ori.subTaskList = _subTaskVOs;
+    TodoVO copy = ori.copyWith();
 
-    ori.validTime = _selectDate;
-    ori.level = _level;
+    copy.content = _content;
+    copy.updateTime = DateTime.now();
+    copy.location = _location;
+    copy.remark = _remark;
+    copy.subTaskList = _subTaskVOs;
 
-    return ori;
+    copy.validTime = _selectDate;
+    copy.level = _level;
+
+    return copy;
   }
 
   // 校验字段

@@ -117,15 +117,15 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
   }
 
   // 更新子事件状态
-  void toggleSubTaskState(TodoVO vo, String subTaskUuid) async {
+  Future<bool> toggleSubTaskState(TodoVO vo, String subTaskUuid) async {
     int todoIndex = _activeTodoList.indexWhere((element) => element.id == vo.id);
     if (todoIndex == -1) {
-      return;
+      return false;
     }
     TodoVO newVo = vo.copyWith();
     int subTaskIndex = newVo.subTaskList.indexWhere((element) => element.uuid == subTaskUuid);
     if (subTaskIndex == -1) {
-      return;
+      return false;
     }
     // 更新子事件状态
     SubTaskVO subTask = newVo.subTaskList[subTaskIndex];
@@ -143,7 +143,8 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
       newVo.completedTime = now;
     }
 
-    await _todoRepo.updateTodo(newVo);
+    int affect = await _todoRepo.updateTodo(newVo);
+    return completedFlagOfTodo;
   }
 
   // 删除事件

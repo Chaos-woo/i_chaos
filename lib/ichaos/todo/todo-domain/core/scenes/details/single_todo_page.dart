@@ -377,9 +377,9 @@ class SingleTodoPage extends PageState {
                           onPressed: () async {
                             bool saveSuccess = await _singleTodoVM.save();
                             if (!saveSuccess) {
-                              SnackBarUtil.topBar('保存失败');
+                              SnackBarUtil.topBar(simpleContent: '保存失败');
                             } else {
-                              SnackBarUtil.topBar('保存成功');
+                              SnackBarUtil.topBar(simpleContent: '保存成功');
                               Future.delayed(const Duration(milliseconds: 5)).whenComplete(() {
                                 onSave?.call();
                                 pop();

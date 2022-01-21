@@ -35,7 +35,7 @@ class SubTaskList extends WidgetState {
     List<Widget> list = [];
 
     for (int i = 0; i < _subTaskListVM.modifiableSubTaskList.length; i++) {
-      list.add(_subTaskInput(index: i, controller: _subTaskListVM.subTaskControllerList[i], isEmpty: false));
+      list.add(_subTaskInput(index: i, controller: _subTaskListVM.subTaskControllerList[i], isNewer: false));
     }
 
     if (_subTaskListVM.modifiableSubTaskList.length < _subTaskListVM.taskLimit) {
@@ -47,7 +47,7 @@ class SubTaskList extends WidgetState {
   }
 
   // 单个子任务输入栏
-  Widget _subTaskInput({required int index, required TextEditingController controller, bool isEmpty = true}) {
+  Widget _subTaskInput({required int index, required TextEditingController controller, bool isNewer = true}) {
     return Container(
       padding: EdgeInsets.only(bottom: rowPadding),
       height: rowHeight,
@@ -106,7 +106,7 @@ class SubTaskList extends WidgetState {
             height: rowHeight,
             alignment: Alignment.center,
             child: InkResponse(
-              child: isEmpty
+              child: isNewer
                   ? const Icon(
                       Icons.add_circle_outline,
                       color: Colors.teal,
@@ -116,7 +116,7 @@ class SubTaskList extends WidgetState {
                       color: Colors.red,
                     ),
               onTap: () {
-                _subTaskListVM.onTapOfTaskOperate(index, isEmpty, controller);
+                _subTaskListVM.onTapOfTaskOperate(index, isNewer, controller);
               },
             ),
           )

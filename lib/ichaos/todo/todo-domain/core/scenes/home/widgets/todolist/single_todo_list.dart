@@ -85,7 +85,12 @@ class SingleTodoList extends WidgetState {
           }
           return generateWidget(() => TodoCard(currTodoList[index],
               operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
-                SnackBarUtil.topBar('已删除 ε==3 \n${vo.content}');
+                SnackBarUtil.topBar(textSpans: [
+                  const TextSpan(text: '已删除 ε==3', style: SnackBarUtil.defaultStyle),
+                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                  const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
+                ], textSpanLineFeedCnt: 1);
                 singleTodoListVM.deleteMainTodo(vo.id!);
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onModify: (ctx, vo) {
@@ -93,13 +98,47 @@ class SingleTodoList extends WidgetState {
                   filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
                 }));
               }, onCompleted: (ctx, vo) {
-                SnackBarUtil.topBar('完成啦~(o≖◡≖) \n${vo.content}');
+                SnackBarUtil.topBar(textSpans: [
+                  const TextSpan(text: '恭喜~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
+                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                  const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                ], textSpanLineFeedCnt: 1);
                 singleTodoListVM.toggleMainTodoState(vo.id!);
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onCancelCompleted: (ctx, vo) {
-                SnackBarUtil.topBar('点错了吧? 明明完成了(O_O)? \n${vo.content}');
+                SnackBarUtil.topBar(textSpans: [
+                  const TextSpan(text: '点错了吧? 明明完成了(O_O)?', style: SnackBarUtil.defaultStyle),
+                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                  const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
+                ], textSpanLineFeedCnt: 1);
                 singleTodoListVM.toggleMainTodoState(vo.id!);
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+              }, onTodoToggleSubTaskCallback: (vo, taskVO, thisTodoWidget) {
+                // 是否需要刷新列表：子任务全部完成时刷新列表
+                singleTodoListVM.toggleSubTaskState(vo, taskVO.uuid).then((refreshList) {
+                  if (refreshList) {
+                    SnackBarUtil.topBar(textSpans: [
+                      const TextSpan(text: '恭喜~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
+                      const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                      TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                      const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                    ], textSpanLineFeedCnt: 1);
+                    filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+                  } else {
+                    if (taskVO.completed) {
+                      SnackBarUtil.topBar(textSpans: [
+                        const TextSpan(text: '恭喜! 又迈向成功一小步~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
+                        TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                        const TextSpan(text: '子任务[ ', style: SnackBarUtil.defaultStyle),
+                        TextSpan(text: taskVO.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
+                        const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                      ], textSpanLineFeedCnt: 2);
+                    }
+                    thisTodoWidget.refreshState();
+                  }
+                });
               })));
         },
         itemCount: currTodoList.length + 1,

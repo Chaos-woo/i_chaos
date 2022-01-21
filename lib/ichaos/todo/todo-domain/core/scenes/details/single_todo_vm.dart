@@ -128,8 +128,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     _todoFormBO.location = locationController.text;
 
     _todoFormBO.level = TodoLevel.coded(todoLevelBtnGroupKey.currentState!.currentIndex).code;
-    _todoFormBO.subTaskVOs = subTaskListVM.modifiableSubTaskList;
-
+    _todoFormBO.subTaskVOs = subTaskListVM.updatedSubTaskList();
     return _todoFormBO.check();
   }
 

@@ -30,6 +30,26 @@ class SubTaskListVM extends SingleViewStateModel {
     }
   }
 
+  // 获取最新的子任务列表内容，去除空内容子任务
+  List<SubTaskVO> updatedSubTaskList() {
+    List<SubTaskVO> vos = [];
+    for(int i=0; i< modifiableSubTaskList.length; i++) {
+      SubTaskVO vo = modifiableSubTaskList[i];
+      String content = subTaskControllerList[i].text;
+
+      if (content.trim() == '') {
+        continue;
+      }
+
+      if(vo.content.compareTo(content) != 0) {
+        vo.content = subTaskControllerList[i].text;
+      }
+      vos.add(vo);
+    }
+
+    return vos;
+  }
+
   // 重置子任务列表
   void resetSubTaskList() {
     init();
@@ -37,8 +57,8 @@ class SubTaskListVM extends SingleViewStateModel {
   }
 
   // 操作子任务
-  void onTapOfTaskOperate(int index, bool isEmpty, TextEditingController controller) {
-    if (isEmpty) {
+  void onTapOfTaskOperate(int index, bool isNewer, TextEditingController controller) {
+    if (isNewer) {
       if (controller.text.isEmpty || controller.text.trim() == '') {
         return;
       }

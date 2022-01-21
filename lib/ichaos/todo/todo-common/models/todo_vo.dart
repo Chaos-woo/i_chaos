@@ -58,7 +58,7 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
 
   @override
   Map<String, dynamic> toSortMap() {
-    return <String, dynamic>{'id': id, 'needPromptTime': needPromptTime, 'location': location, 'level': level, 'validTime': validTime};
+    return <String, dynamic>{'id': id, 'needPromptTime': needPromptTime, 'level': level, 'validTime': validTime};
   }
 
   @override

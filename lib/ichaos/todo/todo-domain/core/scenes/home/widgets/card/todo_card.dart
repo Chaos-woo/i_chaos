@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_initializing_formals
+// ignore_for_file: prefer_initializing_formals, unrelated_type_equality_checks
 
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,7 @@ typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCancelCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoToggleSubTaskCallback = void Function(TodoVO vo, SubTaskVO taskVO, TodoCard thisTodoWidget);
 
 class TodoOperateCallback {
   OnTodoDeleteCallback? onDelete;
@@ -25,25 +26,28 @@ class TodoOperateCallback {
   OnTodoModifyCallback? onModify;
   OnTodoModifyCallback? onCompleted;
   OnTodoCancelCompletedCallback? onCancelCompleted;
+  OnTodoToggleSubTaskCallback? onTodoToggleSubTaskCallback;
 
   TodoOperateCallback(
       {OnTodoDeleteCallback? onDelete,
       OnTodoDetailQueryCallback? onDetailQuery,
       OnTodoModifyCallback? onModify,
       OnTodoModifyCallback? onCompleted,
-      OnTodoCancelCompletedCallback? onCancelCompleted}) {
+      OnTodoCancelCompletedCallback? onCancelCompleted,
+      OnTodoToggleSubTaskCallback? onTodoToggleSubTaskCallback}) {
     this.onDelete = onDelete;
     this.onDetailQuery = onDetailQuery;
     this.onModify = onModify;
     this.onCompleted = onCompleted;
     this.onCancelCompleted = onCancelCompleted;
+    this.onTodoToggleSubTaskCallback = onTodoToggleSubTaskCallback;
   }
 }
 
 class TodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
 
-  final TodoVO _todo;
+  late final TodoVO _todo;
 
   // 事件操作回调
   TodoOperateCallback? operateCallback;
@@ -263,8 +267,6 @@ class TodoCard extends WidgetState {
 
   /// 子任务区域.
   Widget _subTaskInfoRow() {
-    final List<SubTaskVO> subTaskList = _todo.subTaskList;
-
     return Container(
       margin: EdgeInsets.only(top: 8.h, bottom: 8.h),
       padding: const EdgeInsets.only(left: 20, right: 8),
@@ -273,72 +275,116 @@ class TodoCard extends WidgetState {
       child: NoRippleOverScroll(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            InkWell(
-              onTap: () {
-                expandSubTaskList = !expandSubTaskList;
-                refreshState();
-              },
-              child: Container(
-                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                width: 60,
-                height: 20,
-                decoration: const BoxDecoration(color: Color(0xFFE0E0E0), borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: expandSubTaskList
-                          ? const Icon(
-                              Icons.arrow_drop_up,
-                              color: Colors.white,
-                              size: 25,
-                            )
-                          : const Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                    ),
-                    Text(
-                      '${_todo.subTaskList.where((e) => e.completed).length}/${_todo.subTaskList.length}',
-                      style: const TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            if (expandSubTaskList)
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: subTaskList.length,
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(0),
-                itemBuilder: (BuildContext context, int index) {
-                  final task = subTaskList[index];
-                  return _todo.completed
-                      ? MiniCheckboxListTitle(
-                          title: task.content,
-                          isChecked: true,
-                          activeIcon: const Icon(
-                            Icons.brightness_1,
-                            size: 10,
-                            color: GFColors.SUCCESS,
-                          ),
-                          activeBgColor: GFColors.WHITE,
-                          onTap: (val) {},
-                        )
-                      : MiniCheckboxListTitle(
-                          title: task.content,
-                          isChecked: task.completed,
-                          onTap: (val) => {},
-                        );
-                },
-              ),
-          ],
+          children: _getComplexSubTaskList(),
         ),
       ),
     );
+  }
+
+  List<Widget> _getComplexSubTaskList() {
+    List<Widget> taskWidgets = [];
+    final List<SubTaskVO> subTaskList = _todo.subTaskList;
+
+    if (subTaskList.length > 2) {
+      taskWidgets.add(InkWell(
+        onTap: () {
+          expandSubTaskList = !expandSubTaskList;
+          refreshState();
+        },
+        child: Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          width: 60,
+          height: 20,
+          decoration: const BoxDecoration(color: Color(0xFFE0E0E0), borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: expandSubTaskList
+                    ? Container(
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.arrow_drop_up,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                      )
+                    : Container(
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                      ),
+              ),
+              Text(
+                '${_todo.subTaskList.where((e) => e.completed).length}/${_todo.subTaskList.length}',
+                style: const TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      ));
+    }
+
+    if (expandSubTaskList) {
+      taskWidgets.add(ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: subTaskList.length,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(0),
+        itemBuilder: (BuildContext context, int index) {
+          final task = subTaskList[index];
+
+          // 事件完成时其下的子任务全部展示为完成状态
+          return _todo.completed
+              ? MiniCheckboxListTitle(
+                  title: task.content,
+                  isChecked: true,
+                  activeIcon: const Icon(
+                    Icons.brightness_1,
+                    size: 10,
+                    color: GFColors.SUCCESS,
+                  ),
+                  activeBgColor: GFColors.WHITE,
+                  onTap: (val) {},
+                )
+              : MiniCheckboxListTitle(
+                  title: task.content,
+                  isChecked: task.completed,
+                  onTap: (val) async {
+                    Future.delayed(const Duration(milliseconds: 100)).then((value) {
+                      operateCallback?.onTodoToggleSubTaskCallback?.call(_todo, task, this);
+                    });
+                  },
+                );
+        },
+      ));
+    } else {
+      List<SubTaskVO> activeSubTasks = subTaskList.where((task) => !task.completed).toList();
+
+      taskWidgets.add(ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: activeSubTasks.length,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(0),
+        itemBuilder: (BuildContext context, int index) {
+          final task = activeSubTasks[index];
+          return MiniCheckboxListTitle(
+            title: task.content,
+            isChecked: task.completed,
+            onTap: (val) {
+              Future.delayed(const Duration(milliseconds: 100)).then((value) {
+                operateCallback?.onTodoToggleSubTaskCallback?.call(_todo, task, this);
+              });
+            },
+          );
+        },
+      ));
+    }
+
+    return taskWidgets;
   }
 }
