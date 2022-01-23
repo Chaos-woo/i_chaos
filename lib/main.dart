@@ -142,6 +142,7 @@ class _MainSceneState extends State<MainScene> {
       body: NoRippleOverScroll(
         child: PageView(
           controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
           children: _tabPages,
           onPageChanged: (index) {
             setState(() {

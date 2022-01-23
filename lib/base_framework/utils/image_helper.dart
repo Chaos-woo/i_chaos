@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageHelper {
@@ -12,7 +13,8 @@ class ImageHelper {
   static const String imagePrefix = '$baseUrl/uimg/';
 
   ///图片扩展名，：建议使用webP，使用前先了解一下它（据说安卓4.0以下可能不兼容，不过微信都放弃4.0了）
-  static const String extensionsType = ".png";
+  static const String extensionsPNGType = ".png";
+  static const String extensionsSVGType = ".svg";
 
   static String addWebp(String url) {
     return "$url.webp";
@@ -36,27 +38,27 @@ class ImageHelper {
     return imagePrefix + url;
   }
 
-  static String wrapAssets(String url, {String fileExtensions = extensionsType}) {
+  static String wrapAssets(String url, {String fileExtensions = extensionsPNGType}) {
     return "assets/images/" + url + fileExtensions;
   }
 
-  static String wrapAssetsIcon(String url, {bool need1x = false, String fileExtensions = extensionsType}) {
+  static String wrapAssetsIcon(String url, {bool need1x = false, String fileExtensions = extensionsPNGType}) {
     return 'assets/images/icons/${need1x ? "/1.0x" : ""}' + url + fileExtensions;
   }
 
-  static String wrapAssetsBG(String url, {String fileExtensions = extensionsType}) {
+  static String wrapAssetsBG(String url, {String fileExtensions = extensionsPNGType}) {
     return 'assets/images/backgrounds/' + url + fileExtensions;
   }
 
-  static String wrapAssetsLogo(String url, {String fileExtensions = extensionsType}) {
+  static String wrapAssetsLogo(String url, {String fileExtensions = extensionsPNGType}) {
     return 'assets/images/logos/' + url + fileExtensions;
   }
 
-  static String wrapAssetsDefault(String url, {String fileExtensions = extensionsType}) {
+  static String wrapAssetsDefault(String url, {String fileExtensions = extensionsPNGType}) {
     return 'assets/images/default/' + url + fileExtensions;
   }
 
-  static String wrapAssetsBanner(String url, {String fileExtensions = extensionsType}) {
+  static String wrapAssetsBanner(String url, {String fileExtensions = extensionsPNGType}) {
     return 'assets/images/backgrounds/banner/' + url + fileExtensions;
   }
 
@@ -81,6 +83,28 @@ class ImageHelper {
       height: height,
       child: Image.asset(
         wrapAssetsDefault("icon_default_goodsdetail.png"),
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
+  static Widget placeHolderLocalImg({required String imageName, double? width, double? height}) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Image.asset(
+        wrapAssets(imageName),
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
+  static Widget placeHolderLocalSVGImg({required String imageName, double? width, double? height}) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: SvgPicture.asset(
+        wrapAssets(imageName, fileExtensions: extensionsSVGType),
         fit: BoxFit.fill,
       ),
     );

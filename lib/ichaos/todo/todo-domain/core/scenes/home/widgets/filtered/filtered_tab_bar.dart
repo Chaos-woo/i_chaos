@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:badges/badges.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/utils/image_helper.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
+import 'package:i_chaos/ichaos/public/widgets/dot_loading.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list.dart';
@@ -93,9 +97,20 @@ class WidgetFilteredTabBar extends WidgetState {
 
   List<Widget> getTodoListOrPlaceholder(BuildContext ctx, bool isBusy) {
     if (isBusy) {
+      Widget loadingImageWidget = Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ImageHelper.placeHolderLocalSVGImg(imageName: 'image_loading', width: 100, height: 100),
+            DotLoading(text: '搜索中',)
+          ],
+        ),
+      );
+
       return [
-        const Text('no records'),
-        const Text('no records'),
+        loadingImageWidget,
+        loadingImageWidget,
       ];
     } else {
       final btnVM = Provider.of<TodoHomeFloatingActionBtnVM>(ctx, listen: false);

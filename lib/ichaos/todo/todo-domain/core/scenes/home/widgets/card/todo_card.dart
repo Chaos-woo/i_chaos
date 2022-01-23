@@ -12,6 +12,7 @@ import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
+import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 
 typedef OnTodoDeleteCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
@@ -126,7 +127,22 @@ class WidgetTodoCard extends WidgetState {
         operateCallback?.onModify?.call(context, _todo);
       }),
       defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
-        operateCallback?.onDelete?.call(context, _todo);
+        WWDialog.showBottomDialog(context,
+            title: '确认删除?',
+            titleAlign: TextAlign.center,
+            titleColor: Colors.red,
+            content: _todo.content,
+            contentAlign: TextAlign.start,
+            contentColor: Colors.black,
+            contentFontSize: 15.0,
+            location: DiaLogLocation.middle,
+            arrangeType: buttonArrangeType.row,
+            customWidgetButtons: [
+              defaultCustomButton(context, text: '确认', textFontSize: 15.0, buttonHeight: 35.0, onTap: () {
+                operateCallback?.onDelete?.call(context, _todo);
+              }),
+              defaultCustomButton(context, text: '再想想...', textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+            ]);
       }),
       defaultCustomButton(context, text: '再想想完成没?', textColor: Colors.blue, fontWeight: FontWeight.w600, onTap: () {
         operateCallback?.onCancelCompleted?.call(context, _todo);

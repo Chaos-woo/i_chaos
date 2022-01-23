@@ -108,8 +108,6 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
 
   // 获取appBar
   PreferredSizeWidget _getTodoAppBar(FilteredTabBarVM filteredTabBarVM) {
-    DateTime currDate = filteredTabBarVM.currentDate;
-    DateTime now = DateTime.now();
     return AppBar(
       leading: InkWell(
         onTap: () {
@@ -118,8 +116,8 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
         child: const Icon(Icons.widgets),
       ),
       title: Row(
-        children: <Widget>[
-          const Text(
+        children: const <Widget>[
+          Text(
             'ToDO',
             style: TextStyle(
               fontSize: 18,

@@ -242,6 +242,8 @@ dependencies:
   iconfont: ^1.0.0
   # 避免组件被键盘遮挡
   keyboard_avoider: ^0.1.2
+  # svg图片
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -263,6 +265,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/images/image_task.svg
+    - assets/images/image_loading.svg
+    - assets/images/image_complete.svg
+    - assets/images/image_search_empty.svg
   fonts:
     - family: iconfont
       fonts:
