@@ -18,6 +18,11 @@ class SubTaskVO {
 
   Map<String, dynamic> toJson() => _$SubTaskVOToJson(this);
 
+  @override
+  String toString() {
+    return 'SubTaskVO{uuid: $uuid, content: $content, completed: $completed, createTime: $createTime, updateTime: $updateTime}';
+  }
+
   static SubTaskVO newSubTask({required String content, DateTime? createTime}) {
     DateTime time = createTime ?? DateTime.now();
     return SubTaskVO(UuidUnit.id(), content, false, time, time);

@@ -1,5 +1,4 @@
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
-import 'package:i_chaos/ichaos/public/units/uuid.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_sort_rule.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
@@ -47,19 +46,37 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 //
 //    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
 //    _todoRepo.insertTodo(vo);
-    return _todoRepo.listTodo();
+    // 拉取当前日期的事件
+    return _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
 
   @override
   onCompleted(List<TodoVO> data) {
-    _activeTodoList = data.where((todo) => !todo.completed).toList();
-    _completedTodoList = data.where((todo) => todo.completed).toList();
+    _handleTodoListByStatus(data);
+  }
+
+  // 根据事件状态分发到不同的列表事件列表中
+  void _handleTodoListByStatus(List<TodoVO> data) {
+    _activeTodoList = data.where((todo) => !todo.completed && isValidTodo(todo)).toList();
+    _completedTodoList = data.where((todo) => todo.completed && isValidTodo(todo)).toList();
+  }
+
+  // 是否是有效的事件，事件无有效时间时标识为草稿
+  bool isValidTodo(TodoVO vo) {
+    return vo.validTime != null;
+  }
+
+  // 从数据源获取指定日期的事件列表切换内存中的事件列表
+  Future<void> switchTodoListByDate(DateTime selectDate) async {
+    _currentDate = selectDate;
+    List<TodoVO> todoList = await _todoRepo.listTodo(start: _currentDate, end: _currentDate);
+    _handleTodoListByStatus(todoList);
   }
 
   // 根据id获取内存中事件的位置
   TodoVO? _findTodoBelongTo(int id) {
-    TodoVO activeTodo = _activeTodoList.lastWhere((element) => element.id == id, orElse: () => TodoVO.emptyReplace());
-    TodoVO completedTodo = _completedTodoList.lastWhere((element) => element.id == id, orElse: () => TodoVO.emptyReplace());
+    TodoVO activeTodo = _activeTodoList.firstWhere((element) => element.id == id, orElse: () => TodoVO.empty());
+    TodoVO completedTodo = _completedTodoList.firstWhere((element) => element.id == id, orElse: () => TodoVO.empty());
     return (activeTodo.id == null && completedTodo.id == null) ? null : activeTodo.id == null ? completedTodo : activeTodo;
   }
 
@@ -96,29 +113,19 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     copy.completed = !copy.completed;
     copy.updateTime = now;
     copy.completedTime = copy.completed ? now : null;
-    int affectRow = await _todoRepo.updateTodo(copy);
-    if (affectRow > 0) {
-      if (vo.completed) {
-        _activeTodoList.add(copy);
-        _completedTodoList.removeWhere((element) => element.id == id);
-      } else {
-        _completedTodoList.add(copy);
-        _activeTodoList.removeWhere((element) => element.id == id);
-      }
-      notifyListeners(refreshSelector: true);
-    }
+    await _todoRepo.updateTodo(copy);
   }
 
   // 更新子事件状态
-  void toggleSubTaskState(TodoVO vo, String subTaskUuid) async {
+  Future<bool> toggleSubTaskState(TodoVO vo, String subTaskUuid) async {
     int todoIndex = _activeTodoList.indexWhere((element) => element.id == vo.id);
     if (todoIndex == -1) {
-      return;
+      return false;
     }
     TodoVO newVo = vo.copyWith();
     int subTaskIndex = newVo.subTaskList.indexWhere((element) => element.uuid == subTaskUuid);
     if (subTaskIndex == -1) {
-      return;
+      return false;
     }
     // 更新子事件状态
     SubTaskVO subTask = newVo.subTaskList[subTaskIndex];
@@ -137,15 +144,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     }
 
     int affect = await _todoRepo.updateTodo(newVo);
-    if (affect > 0) {
-      if (completedFlagOfTodo) {
-        _completedTodoList.add(newVo);
-        _activeTodoList.removeAt(todoIndex);
-      } else {
-        _activeTodoList[todoIndex] = newVo;
-      }
-      notifyListeners(refreshSelector: true);
-    }
+    return completedFlagOfTodo;
   }
 
   // 删除事件
@@ -156,8 +155,6 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
     }
 
     await _todoRepo.deleteTodoById(vo);
-    _activeTodoList.removeWhere((element) => element.id == id);
-    notifyListeners();
   }
 
 

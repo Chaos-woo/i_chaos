@@ -13,6 +13,7 @@ class DayDateUtil {
   static String endOfDay() => DateUtil.formatDate(DateTime.now(), format: _endPointOfDay);
   static String beginOfAssignDay(DateTime dateTime) => DateUtil.formatDate(dateTime, format: _beginPointOfDay);
   static String endOfAssignDay(DateTime dateTime) => DateUtil.formatDate(dateTime, format: _endPointOfDay);
+  static DateTime tomorrow() => DateTime.now().add(const Duration(days: 1));
 }
 
 /// 日期时间扩展
@@ -28,6 +29,15 @@ extension DateTimeExtension on DateTime {
 
   // 获取所选日期的周一的日期
   DateTime get monday => subtract(Duration(days: weekday - 1));
+
+  bool isToday() {
+    DateTime now = DateTime.now();
+    return now.year == year && now.month == month && now.day == day;
+  }
+
+  bool isSameDay(DateTime date) {
+    return date.year == year && date.month == month && date.day == day;
+  }
 }
 
 /// 时间字符串扩展

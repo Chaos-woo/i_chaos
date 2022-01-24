@@ -234,6 +234,16 @@ dependencies:
   badges: ^2.0.1
   # 去除ListView的边界水波纹效果
   noripple_overscroll: ^0.0.2
+  # tabbar样式
+  tab_indicator_styler: ^2.0.0
+  # 简单手势处理
+  simple_gesture_detector: ^0.2.0
+  # icon font 字体图标
+  iconfont: ^1.0.0
+  # 避免组件被键盘遮挡
+  keyboard_avoider: ^0.1.2
+  # svg图片
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -255,6 +265,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/images/image_task.svg
+    - assets/images/image_loading.svg
+    - assets/images/image_complete.svg
+    - assets/images/image_search_empty.svg
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/ali_icons/iconfont.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

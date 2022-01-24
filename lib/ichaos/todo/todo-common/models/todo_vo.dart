@@ -14,12 +14,12 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   int? id;
   // 事件实际生效时间
   DateTime? validTime;
+  // 创建时间
   DateTime createTime;
+  // 更新时间
   DateTime updateTime;
   // 内容
   String content;
-  // 提醒时间
-  DateTime? needPromptTime;
   // 地点信息
   String? location;
   // 事件等级
@@ -32,9 +32,14 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   int period;
   // 关联的分类id
   int? tag;
+  // 描述/备注
   String? remark;
   // 子任务json
   List<SubTaskVO> subTaskList;
+
+  /// 系统日历功能
+  // 提醒时间
+  DateTime? needPromptTime;
   // 调用日历提醒功能返回事件id
   String? promptEventId;
 
@@ -53,12 +58,13 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
 
   @override
   Map<String, dynamic> toSortMap() {
-    return <String, dynamic>{'id': id, 'needPromptTime': needPromptTime, 'location': location, 'level': level, 'validTime': validTime};
+    return <String, dynamic>{'id': id, 'needPromptTime': needPromptTime, 'level': level, 'validTime': validTime};
   }
 
   @override
   TodoEntity toEntity() {
     return TodoEntity(level, completed, period, updateTime: updateTime.yyyyMMddHHmmss,
+      id: id,
       content: content,
       validTime: validTime?.yyyyMMddHHmmss,
       needPromptTime: needPromptTime?.yyyyMMddHHmmss,
@@ -82,15 +88,16 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
   }
 
   /// 卡片区域信息分布
-  bool get isColorArea => level > TodoLevel.normal.code || level == TodoLevel.deferrable.code;
-  bool get isPromptArea => (location != null && location != '') || (needPromptTime != null);
-  bool get isMainArea => true;
-  bool get isRemarkArea => remark != null && remark != '';
-  bool get isSubTaskArea => subTaskList.isNotEmpty;
-  bool get isTagsArea => level > TodoLevel.normal.code || period > 0 || (tag != null && tag! > 0);
+  bool get isColorPrompt => level > TodoLevel.normal.code || level == TodoLevel.deferrable.code;
+  bool get isPromptLocation => location != null && location != '';
+  bool get isPromptDate => needPromptTime != null;
+  bool get isMainContent => true;
+  bool get isRemarkInfo => remark != null && remark!.trim() != '';
+  bool get isSubTaskInfo => subTaskList.isNotEmpty;
+  bool get isTagsPrompt => level > TodoLevel.normal.code || period > 0 || (tag != null && tag! > 0);
 
-  static TodoVO emptyReplace() {
-    return TodoVO.newTodo(content: 'empty');
+  static TodoVO empty() {
+    return TodoVO.newTodo(content: '');
   }
 
   TodoVO copyWith() {

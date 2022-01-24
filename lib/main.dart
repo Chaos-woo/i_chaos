@@ -4,14 +4,15 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:i_chaos/base_framework/config/app_config.dart';
+import 'package:i_chaos/ichaos/public/ali_icons.dart';
 import 'package:i_chaos/ichaos/public/config/design_config.dart';
 import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
+import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:provider/provider.dart';
 import 'package:reflectable/reflectable.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'ichaos/todo/todo-domain/core/scenes/home/todo_home_page.dart';
+import 'ichaos/todo/todo-domain/core/scenes/home/pages/todo_home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +63,7 @@ class IChaosApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const OKToast(
-        child: MainScene(),
+        child: SafeArea(child: MainScene()),
       ),
     );
   }
@@ -103,7 +104,7 @@ class _MainSceneState extends State<MainScene> {
 
     /// Todo list
     SalomonBottomBarItem(
-      icon: const Icon(Icons.format_list_numbered),
+      icon: const Icon(AliIcons.ALI_ICON_ACTIVITY),
       title: const Text("ToDO"),
       selectedColor: Colors.teal,
     ),
@@ -113,7 +114,7 @@ class _MainSceneState extends State<MainScene> {
     Temporature(),
     Temporature(),
     Temporature(),
-    TodoHomePage().transformToPageWidget(),
+    PageTodoHome().transformToPageWidget(),
   ];
 
   @override
@@ -125,7 +126,7 @@ class _MainSceneState extends State<MainScene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(244, 245, 245, 1),
+      backgroundColor: const Color.fromRGBO(244, 245, 245, 1),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         items: _bottomBarItems,
@@ -138,9 +139,18 @@ class _MainSceneState extends State<MainScene> {
           });
         },
       ),
-      body: PageView(
-        controller: _pageController,
-        children: _tabPages,
+      body: NoRippleOverScroll(
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _tabPages,
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+              _pageController.jumpToPage(_currentIndex);
+            });
+          },
+        ),
       ),
     );
   }
@@ -149,7 +159,11 @@ class _MainSceneState extends State<MainScene> {
 class Temporature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: Text('施工中...'),
+      ),
+    );
   }
 }
 

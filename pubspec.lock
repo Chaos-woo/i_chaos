@@ -403,6 +403,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -476,6 +483,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
+  iconfont:
+    dependency: "direct main"
+    description:
+      name: iconfont
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   image:
     dependency: transitive
     description:
@@ -525,6 +539,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.0.1"
+  keyboard_avoider:
+    dependency: "direct main"
+    description:
+      name: keyboard_avoider
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.2"
   launch_review:
     dependency: "direct main"
     description:
@@ -630,6 +651,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   path_provider:
     dependency: "direct main"
     description:
@@ -862,7 +897,7 @@ packages:
     source: hosted
     version: "2.0.0"
   simple_gesture_detector:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: simple_gesture_detector
       url: "https://pub.flutter-io.cn"
@@ -971,6 +1006,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
+  tab_indicator_styler:
+    dependency: "direct main"
+    description:
+      name: tab_indicator_styler
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   table_calendar:
     dependency: "direct main"
     description:
