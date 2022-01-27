@@ -3,6 +3,7 @@ import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+/// 周日历视图模型
 class CalendarBarVM extends SingleViewStateModel {
   final DateTime firstDay = DateTime(2016, 1, 1);
   final DateTime lastDay = DateTime(2099, 12, 30);

@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_initializing_formals
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:getwidget/components/toast/gf_toast.dart';
-import 'package:getwidget/position/gf_toast_position.dart';
 import 'package:i_chaos/base_framework/utils/image_helper.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
@@ -14,7 +11,6 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/card/todo_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/todolist/single_todo_list_vm.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 typedef OnTodoListScrollUpdate = void Function();
@@ -78,6 +74,7 @@ class WidgetSingleTodoList extends WidgetState {
             return _getMoreTipPlaceholder(currTodoList.length, singleTodoListVM);
           }
           return generateWidget(() => WidgetTodoCard(currTodoList[index],
+              expandBtnDisplayLimits: 4,
               operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
                 SnackBarUtil.topBar(textSpans: [
                   const TextSpan(text: '已删除 ε==3', style: SnackBarUtil.defaultStyle),

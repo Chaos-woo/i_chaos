@@ -9,6 +9,7 @@ enum FloatBtnDisplayStatus {
   show, hide
 }
 
+/// 时间首页FloatingAction按钮视图模型
 class TodoHomeFloatingActionBtnVM extends SingleViewStateModel {
   late FilteredTabBarVM _filteredTabBarVM;
   late CalendarBarVM _calendarBarVM;

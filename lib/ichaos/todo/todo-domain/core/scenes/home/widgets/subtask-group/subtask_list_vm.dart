@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
 
+/// 子任务列表视图模型
 class SubTaskListVM extends SingleViewStateModel {
   // 子任务上限
   final int taskLimit;

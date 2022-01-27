@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_initializing_formals
 
 import 'dart:async';
 
@@ -8,12 +8,14 @@ class DotLoading extends StatefulWidget {
   late Duration intervalDuration;
   late String text;
   late TextStyle textStyle;
+  late String similarDotText;
 
-  DotLoading({Key? key, Duration interval = const Duration(milliseconds: 100), String text = '', TextStyle? textStyle}) : super(key: key) {
+  DotLoading({Key? key, Duration interval = const Duration(milliseconds: 100), String text = '', TextStyle? textStyle, String similarDotText = '.'}) : super(key: key) {
     intervalDuration = interval;
     // ignore: prefer_initializing_formals
     this.text = text;
     this.textStyle = textStyle ?? const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12);
+    this.similarDotText = similarDotText;
   }
 
   @override
@@ -70,7 +72,7 @@ class _DotLoadingState extends State<DotLoading> {
   Widget _widgetLoadingDot() {
     return RichText(
       text: TextSpan(text: widget.text, style: widget.textStyle, children: [
-        for (int i = 0; i < _currDotCnt; i++) TextSpan(text: '.', style: widget.textStyle),
+        for (int i = 0; i < _currDotCnt; i++) TextSpan(text: widget.similarDotText, style: widget.textStyle),
       ]),
     );
   }

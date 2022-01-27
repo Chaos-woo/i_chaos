@@ -91,7 +91,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     // 添加内容值监听
     contentController.addListener(_onContentFieldChanged);
 
-    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormBO.subTaskVOs);
+    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormBO.subTaskVOs, taskLimit: 10);
   }
 
   bool _saveBtnAvailable(String content) {

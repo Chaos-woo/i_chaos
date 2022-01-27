@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/public/ali_icons.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/calendar/calendar_bar_vm.dart';
 import 'drawer_page.dart';
@@ -20,23 +21,27 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
 
   late SingleTodoListVM _singleTodoListVM;
+  late DraftListVM _draftListVM;
 
   @override
   void initState() {
     super.initState();
     _singleTodoListVM = SingleTodoListVM();
+    _draftListVM = DraftListVM();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return switchStatusBar2Dark(
-        child: ProviderWidget<SingleTodoListVM>(
-      model: _singleTodoListVM,
-      onModelReady: (model) {
-        model.initData();
+        child: ProviderWidget2<SingleTodoListVM, DraftListVM>(
+      model1: _singleTodoListVM,
+      model2: _draftListVM,
+      onModelReady: (singleTodoListVM, draftListVM) {
+        singleTodoListVM.initData();
+        draftListVM.initData();
       },
-      builder: (ctx, singleTodoListVM, child) {
+      builder: (ctx, singleTodoListVM, draftListVM, child) {
         return ProviderWidget<FilteredTabBarVM>(
             model: FilteredTabBarVM(singleTodoListVM: singleTodoListVM),
             builder: (ctx, filteredTabBarVM, child) {
