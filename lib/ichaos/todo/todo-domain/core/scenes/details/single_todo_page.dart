@@ -5,18 +5,18 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
-import 'package:i_chaos/ichaos/public/ali_icons.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/variable_button_label.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_top_dialog_item_data.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_vm.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/pages/month_calendar_page.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list_vm.dart';
+import '../../widgets/month_calendar_page.dart';
+import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:provider/provider.dart';
 
@@ -68,7 +68,7 @@ class SingleTodoPage extends PageState {
                             _singleTodoVM.reset(_originalTodo);
                           });
                         },
-                        icon: const Icon(AliIcons.ALI_ICON_MORE)),
+                        icon: const Icon(AliIcons.IconMore)),
                     const SizedBox(
                       width: 14,
                     )
@@ -200,7 +200,7 @@ class SingleTodoPage extends PageState {
                   padding: wholePadding,
                   child: InkWell(
                     child: const Icon(
-                      AliIcons.ALI_ICON_PROMPT_FILL,
+                      AliIcons.IconPromptFill,
                       color: Colors.grey,
                       size: 20,
                     ),
@@ -246,7 +246,7 @@ class SingleTodoPage extends PageState {
                   padding: wholePadding,
                   child: InkWell(
                     child: const Icon(
-                      AliIcons.ALI_ICON_PROMPT_FILL,
+                      AliIcons.IconPromptFill,
                       color: Colors.grey,
                       size: 20,
                     ),
@@ -271,7 +271,7 @@ class SingleTodoPage extends PageState {
               child: RadioButtonGroup(
                 key: _singleTodoVM.todoDateBtnGroupKey,
                 buttonGroupLabels: _singleTodoVM.selectDateBtnGroupLabels,
-                buttonGroupIcons: const [AliIcons.ALI_ICON_FLAG, AliIcons.ALI_ICON_DOCUMENT, AliIcons.ALI_ICON_TIME, AliIcons.ALI_ICON_SERVICE],
+                buttonGroupIcons: const [AliIcons.IconFlag, AliIcons.IconDocument, AliIcons.IconTime, AliIcons.IconService],
                 defaultSelectedIndex: _singleTodoVM.getSelectDateIndex(),
                 onButtonChanged: (preIndex, index) async {
                   switch (index) {
@@ -418,7 +418,7 @@ class SingleTodoPage extends PageState {
                             }
                           },
                           icon: const Icon(
-                            AliIcons.ALI_ICON_TASK,
+                            AliIcons.IconTask,
                             color: Colors.white,
                           ),
                           color: Colors.teal,
@@ -432,7 +432,7 @@ class SingleTodoPage extends PageState {
                           disabledColor: Color(0xFFD6D6D6),
                           disabledTextColor: Colors.white,
                           icon: Icon(
-                            AliIcons.ALI_ICON_TASK,
+                            AliIcons.IconTask,
                             color: Colors.white,
                           ),
                           size: GFSize.LARGE,

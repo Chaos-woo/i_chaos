@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/repository/todo_repository.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/repository/todo_repository.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/todo_detail_form.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list_vm.dart';
 
 /// 单事件模型
 class SingleTodoVM extends SingleViewStateModel<TodoVO> {

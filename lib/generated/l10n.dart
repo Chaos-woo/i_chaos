@@ -50,51 +50,31 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Hello`
-  String get hello {
+  /// `refresh`
+  String get refreshTwoLevel {
     return Intl.message(
-      'Hello',
-      name: 'hello',
+      'refresh',
+      name: 'refreshTwoLevel',
       desc: '',
       args: [],
     );
   }
 
-  /// `AutoBySystem`
-  String get autoBySystem {
-    return Intl.message(
-      'AutoBySystem',
-      name: 'autoBySystem',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirm`
-  String get confirm {
-    return Intl.message(
-      'Confirm',
-      name: 'confirm',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reset`
+  /// `reset`
   String get reset {
     return Intl.message(
-      'Reset',
+      'reset',
       name: 'reset',
       desc: '',
       args: [],
     );
   }
 
-  /// `refreshTwoLevel`
-  String get refreshTwoLevel {
+  /// `confirm`
+  String get confirm {
     return Intl.message(
-      'refreshTwoLevel',
-      name: 'refreshTwoLevel',
+      'confirm',
+      name: 'confirm',
       desc: '',
       args: [],
     );

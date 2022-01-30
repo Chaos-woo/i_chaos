@@ -1,8 +1,8 @@
 
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:i_chaos/ichaos/todo/todo-common/models/subtask.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 
 /// 事件表单对象
 class TodoFormBO {

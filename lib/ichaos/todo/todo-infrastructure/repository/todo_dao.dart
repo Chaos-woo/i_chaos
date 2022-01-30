@@ -1,6 +1,6 @@
 
 import 'package:floor/floor.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/entity/todo_entity.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/todo_entity.dart';
 
 const String _todoEntityTableName = 'tb_todo';
 

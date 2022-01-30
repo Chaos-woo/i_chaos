@@ -1,7 +1,5 @@
 {
-  "hello": "Hello",
-  "autoBySystem": "AutoBySystem",
-  "confirm": "Confirm",
-  "reset": "Reset",
-  "refreshTwoLevel":"refreshTwoLevel"
+  "refreshTwoLevel": "refresh",
+  "reset": "reset",
+  "confirm": "confirm"
 }

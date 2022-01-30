@@ -42,6 +42,13 @@ extension MultiSort on List {
         }
       }
 
+      if (a.get(rawProps[i]) is String && b.get(rawProps[i]) is String) {
+        String stringA = a.get(rawProps[i]);
+        String stringB = b.get(rawProps[i]);
+
+        return stringA.compareTo(stringB);
+      }
+
       if (a.get(rawProps[i]) == b.get(rawProps[i])) {
         return 0;
       } else if (a.get(rawProps[i]) > b.get(rawProps[i])) {

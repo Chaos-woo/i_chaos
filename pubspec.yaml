@@ -56,9 +56,6 @@ dependencies:
   #解决办法 参考这里：https://juejin.im/post/6864487800969003016
   #  flutter_webview_plugin: ^0.3.11
 
-  # 滴滴调试工具
-  dokit: ^0.8.0-nullsafety.0
-
   #设备信息、包信息
   device_info: ^2.0.2
   package_info: ^2.0.2
@@ -244,6 +241,8 @@ dependencies:
   keyboard_avoider: ^0.1.2
   # svg图片
   flutter_svg: ^1.0.3
+  # 国际化组件
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -252,6 +251,8 @@ dev_dependencies:
   json_serializable: ^6.0.1
   # floor框架代码自动生成
   floor_generator: ^1.2.0
+#  # 国际化字符串独立文件生成
+#  intl_generator: ^0.2.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
