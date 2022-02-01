@@ -1,6 +1,7 @@
 
 
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/fba/home_fab_vm.dart';
@@ -9,12 +10,6 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_tod
 
 /// 事件状态切换tabBar视图模型
 class FilteredTabBarVM extends SingleViewStateModel {
-
-  final Map<TodoState, String> _tabWords = {
-    TodoState.active: '进行中',
-    TodoState.completed: '已完成',
-    TodoState.all: '全部'
-  };
 
   // tabBar的总个数
   final _totalTabCnt = 2;
@@ -56,10 +51,6 @@ class FilteredTabBarVM extends SingleViewStateModel {
   DateTime get currentDate => _selectDate;
   // 获取当前tabBar下标
   int get currentTabBarIndex => _currTabIndex;
-  // 获取对应状态的标签文案
-  String tabWord(TodoState state) {
-    return _tabWords[state]!;
-  }
 
   // 获取对应状态的事件列表
   List<TodoVO> get activeTodoList => _singleTodoListVM.getTodoListByState(TodoState.active);

@@ -42,6 +42,7 @@ class _ProviderWidgetState<T extends ViewStateModel?>
     }
 
     super.initState();
+    print('Model SSSSSSSSSSS ${model == null}');
     model?.bindContext(this);
   }
 

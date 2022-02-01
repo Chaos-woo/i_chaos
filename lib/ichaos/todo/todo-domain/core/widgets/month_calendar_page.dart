@@ -1,7 +1,9 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/view_model/app_model/locale_model.dart';
 import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
@@ -27,6 +29,8 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
 
   @override
   Widget buildWidget(BuildContext context) {
+    LocaleModel localeModel = Provider.of<LocaleModel>(context, listen: false);
+
     return Padding(
       padding: EdgeInsets.only(left: _paddingWidth),
       child: Container(
@@ -44,6 +48,7 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
             headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
             focusedDay: _selectDate,
             calendarFormat: CalendarFormat.month,
+            locale: localeModel.locale,
             selectedDayPredicate: (day) {
               return isSameDay(_selectDate, day);
             },

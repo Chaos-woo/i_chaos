@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -9,16 +10,6 @@ class CalendarBarVM extends SingleViewStateModel {
   final DateTime lastDay = DateTime(2099, 12, 30);
   static DateTime publicLastDay = DateTime(2099, 12, 30);
   final int _defaultSinglePageAnimationDuration = 100;
-
-  final Map<int, String> weekLabels = {
-    7 : "周日",
-    1: "周一",
-    2: "周二",
-    3: "周三",
-    4: "周四",
-    5: "周五",
-    6: "周六"
-  };
 
   late DateTime _selectDate;
   late FilteredTabBarVM _filteredTabBarVM;
@@ -59,11 +50,6 @@ class CalendarBarVM extends SingleViewStateModel {
     // 定义为400延迟是因为日历组件内部UI刷新时间为300
     _filteredTabBarVM.selectedDateChange(selectDate, calendarPageAnimationDuration: 400);
     _selectDate = selectDate;
-  }
-
-  // 获取周标签值
-  String getWeekLabel(int weekday) {
-    return weekLabels[weekday]!;
   }
 
   // 跳转至指定日期

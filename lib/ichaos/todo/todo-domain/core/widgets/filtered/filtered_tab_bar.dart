@@ -4,6 +4,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/utils/image_helper.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/widgets/dot_loading.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/fba/home_fab_vm.dart';
@@ -21,6 +22,12 @@ class WidgetFilteredTabBar extends WidgetState {
   @override
   Widget build(BuildContext context) {
     _filteredTabBarVM = Provider.of<FilteredTabBarVM>(context, listen: false);
+
+    final Map<TodoState, String> _tabWords = {
+      TodoState.active: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_active,
+      TodoState.completed: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_completed,
+      TodoState.all: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_all
+    };
 
     return DefaultTabController(
         length: 2,
@@ -51,14 +58,14 @@ class WidgetFilteredTabBar extends WidgetState {
                                   position: BadgePosition(top: _filteredTabBarVM.activeTodoCnt >= 10 ? -1 : -4, end: -30),
                                   padding: EdgeInsets.all(_filteredTabBarVM.activeTodoCnt >= 10 ? 3 : 6),
                                   badgeColor: Colors.red,
-                                  child: Text(_filteredTabBarVM.tabWord(TodoState.active)),
+                                  child: Text(_tabWords[TodoState.active]!),
                                 )
-                              : Text(_filteredTabBarVM.tabWord(TodoState.active));
+                              : Text(_tabWords[TodoState.active]!);
                         },
                       ),
                     ),
                     Tab(
-                      text: _filteredTabBarVM.tabWord(TodoState.completed),
+                      text: _tabWords[TodoState.completed]!,
                     ),
                   ],
                   labelColor: Colors.black,
@@ -99,7 +106,7 @@ class WidgetFilteredTabBar extends WidgetState {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ImageHelper.placeHolderLocalSVGImg(imageName: 'image_loading', width: 100, height: 100),
-            DotLoading(text: '搜索中',)
+            DotLoading(text: S.of(context).todo_filtered_tab_bar_loading_label,)
           ],
         ),
       );

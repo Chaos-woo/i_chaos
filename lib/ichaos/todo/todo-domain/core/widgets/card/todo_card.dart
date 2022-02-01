@@ -5,45 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
-
-typedef OnTodoDeleteCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoCancelCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoToggleSubTaskCallback = void Function(TodoVO vo, SubTaskVO taskVO, WidgetTodoCard thisTodoWidget);
-
-// 事件卡片操作回调
-class TodoOperateCallback {
-  OnTodoDeleteCallback? onDelete;
-  OnTodoDetailQueryCallback? onDetailQuery;
-  OnTodoModifyCallback? onModify;
-  OnTodoModifyCallback? onCompleted;
-  OnTodoCancelCompletedCallback? onCancelCompleted;
-  OnTodoToggleSubTaskCallback? onTodoToggleSubTaskCallback;
-
-  TodoOperateCallback(
-      {OnTodoDeleteCallback? onDelete,
-      OnTodoDetailQueryCallback? onDetailQuery,
-      OnTodoModifyCallback? onModify,
-      OnTodoModifyCallback? onCompleted,
-      OnTodoCancelCompletedCallback? onCancelCompleted,
-      OnTodoToggleSubTaskCallback? onTodoToggleSubTaskCallback}) {
-    this.onDelete = onDelete;
-    this.onDetailQuery = onDetailQuery;
-    this.onModify = onModify;
-    this.onCompleted = onCompleted;
-    this.onCancelCompleted = onCancelCompleted;
-    this.onTodoToggleSubTaskCallback = onTodoToggleSubTaskCallback;
-  }
-}
 
 class WidgetTodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
@@ -76,9 +46,9 @@ class WidgetTodoCard extends WidgetState {
             isSystemBottomDialog: false,
             customTitleWidget: Container(
               padding: const EdgeInsets.symmetric(vertical: 15),
-              child: const Text(
-                '更多操作',
-                style: TextStyle(
+              child: Text(
+                S.of(context).todo_card_more_option,
+                style: const TextStyle(
                   fontSize: 17.0,
                   fontWeight: FontWeight.w500,
                 ),
@@ -124,15 +94,15 @@ class WidgetTodoCard extends WidgetState {
 //              defaultCustomButton(context, text: '查看', onTap: () {
 //                operateCallback?.onDetailQuery?.call(context, _todo);
 //              }),
-      defaultCustomButton(context, text: '完成', onTap: () {
+      defaultCustomButton(context, text: S.of(context).todo_card_option_btn_completed, onTap: () {
         operateCallback?.onCompleted?.call(context, _todo);
       }),
-      defaultCustomButton(context, text: '修改', onTap: () {
+      defaultCustomButton(context, text: S.of(context).todo_card_option_btn_modify, onTap: () {
         operateCallback?.onModify?.call(context, _todo);
       }),
-      defaultCustomButton(context, text: '删除', textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
+      defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete, textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
         WWDialog.showBottomDialog(context,
-            title: '确认删除?',
+            title: S.of(context).todo_card_option_btn_delete_tip_title,
             titleAlign: TextAlign.center,
             titleColor: Colors.red,
             content: _todo.content,
@@ -142,13 +112,13 @@ class WidgetTodoCard extends WidgetState {
             location: DiaLogLocation.middle,
             arrangeType: buttonArrangeType.row,
             customWidgetButtons: [
-              defaultCustomButton(context, text: '确认', textFontSize: 15.0, buttonHeight: 35.0, onTap: () {
+              defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_confirm, textFontSize: 15.0, buttonHeight: 35.0, onTap: () {
                 operateCallback?.onDelete?.call(context, _todo);
               }),
-              defaultCustomButton(context, text: '再想想...', textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+              defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_cancel, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
             ]);
       }),
-      defaultCustomButton(context, text: '再想想完成没?', textColor: Colors.blue, fontWeight: FontWeight.w600, onTap: () {
+      defaultCustomButton(context, text: S.of(context).todo_card_option_btn_unaccomplished, textColor: Colors.blue, fontWeight: FontWeight.w600, onTap: () {
         operateCallback?.onCancelCompleted?.call(context, _todo);
       }),
     ];
@@ -344,7 +314,7 @@ class WidgetTodoCard extends WidgetState {
               ),
               Text(
                 expandAllList
-                    ? '收起'
+                    ? S.of(context).todo_card_subtask_btn_retract
                     : _todo.completed
                         ? '${_todo.subTaskList.length}/${_todo.subTaskList.length}'
                         : '${_todo.subTaskList.where((e) => e.completed).length}/${_todo.subTaskList.length}',

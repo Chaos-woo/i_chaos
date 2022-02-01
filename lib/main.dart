@@ -63,8 +63,8 @@ class IChaosApp extends StatelessWidget {
       child: Consumer<LocaleModel>(
         builder: (ctx, localeModel, _) {
           // 支持的多语言，默认中文优先
-          List<Locale> supportedLocales = [const Locale.fromSubtags(languageCode: 'zh')];
-          supportedLocales.addAll(S.delegate.supportedLocales.where((locale) => locale.languageCode != 'zh').toList());
+//          List<Locale> supportedLocales = [const Locale.fromSubtags(languageCode: 'zh')];
+//          supportedLocales.addAll(S.delegate.supportedLocales.where((locale) => locale.languageCode != 'zh').toList());
 
           return MaterialApp(
             title: 'iChaos',
@@ -82,7 +82,7 @@ class IChaosApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate //文本方向等
             ],
-            supportedLocales: supportedLocales,
+            supportedLocales: S.delegate.supportedLocales,
             home: const OKToast(
               child: SafeArea(child: MainScene()),
             ),
@@ -107,21 +107,21 @@ class _MainSceneState extends State<MainScene> {
   final List<SalomonBottomBarItem> _bottomBarItems = [
     /// Money
     SalomonBottomBarItem(
-      icon: const Icon(Icons.book),
+      icon: const Icon(AliIcons.IconCoupons),
       title: const Text("Asset"),
       selectedColor: Colors.orange,
     ),
 
     /// rss
     SalomonBottomBarItem(
-      icon: const Icon(Icons.rss_feed),
+      icon: const Icon(AliIcons.IconShake),
       title: const Text("Feed"),
       selectedColor: Colors.lightBlueAccent,
     ),
 
     /// blog of me
     SalomonBottomBarItem(
-      icon: const Icon(Icons.web),
+      icon: const Icon(AliIcons.IconWorkbench),
       title: const Text("Me-log"),
       selectedColor: Colors.red[700],
     ),
@@ -132,6 +132,13 @@ class _MainSceneState extends State<MainScene> {
       title: const Text("ToDO"),
       selectedColor: Colors.teal,
     ),
+
+    /// Setting
+    SalomonBottomBarItem(
+      icon: const Icon(AliIcons.IconSetup),
+      title: const Text("Setting"),
+      selectedColor: Colors.black54,
+    ),
   ];
 
   final List<Widget> _tabPages = [
@@ -139,6 +146,7 @@ class _MainSceneState extends State<MainScene> {
     Temporature(),
     Temporature(),
     PageTodoHome().transformToPageWidget(),
+    Temporature(),
   ];
 
   @override
@@ -186,7 +194,7 @@ class Temporature extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('施工中...'),
+        child: Text(S.of(context).common_designing_label),
       ),
     );
   }

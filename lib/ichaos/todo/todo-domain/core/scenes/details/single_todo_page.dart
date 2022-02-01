@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,6 +7,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
@@ -46,7 +49,7 @@ class SingleTodoPage extends PageState {
               return Scaffold(
                 appBar: AppBar(
                   title: Text(
-                    _singleTodoVM.isNew ? _singleTodoVM.appBarTitleOfAdd : _singleTodoVM.appBarTitleOfEdit,
+                    _singleTodoVM.isNew ? S.of(context).todo_edit_appbar_title_add : S.of(context).todo_edit_appbar_title_edit,
                     style: const TextStyle(
                       fontSize: 18,
                     ),
@@ -63,7 +66,7 @@ class SingleTodoPage extends PageState {
                               contentColor: Colors.black,
                               contentFontSize: 14,
                               listDatasource: [
-                                TopDialogItemData('重置', '0'),
+                                TopDialogItemData(S.of(context).todo_edit_reset, '0'),
                               ], onTap: (TopDialogItemData item) {
                             _singleTodoVM.reset(_originalTodo);
                           });
@@ -100,12 +103,12 @@ class SingleTodoPage extends PageState {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Padding(
                   padding: wholePadding,
                   child: Text(
-                    '快记录下要做什么?',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_content_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 )
               ],
@@ -144,12 +147,12 @@ class SingleTodoPage extends PageState {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Padding(
                   padding: wholePadding,
                   child: Text(
-                    '描述一下呗?',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_desc_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 )
               ],
@@ -189,11 +192,11 @@ class SingleTodoPage extends PageState {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Padding(
+                Padding(
                   padding: wholePadding,
                   child: Text(
-                    '需要把任务分阶段完成吗?',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_subtask_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 ),
                 Padding(
@@ -206,14 +209,11 @@ class SingleTodoPage extends PageState {
                     ),
                     onTap: () {
                       WWDialog.showMiddleDialog(context,
-                          title: '子任务是什么?',
-                          content: '1. 事件可认为是多个子任务的合集。\n'
-                              '2. 当事件被分为X个子任务时，X1任务完成时，事件完成度为1/X，依此类推。\n'
-                              '3. 当事件下的所有子任务完成时，该事件将被标识为完成，且被移动至【已完成】列表。\n'
-                              '4. 若直接将事件更改为完成状态，则其下的所有子任务将被展示为完成状态，如若事件从【已完成】状态变为【未完成】状态，则子任务将会展示为原来的状态。',
+                          title: S.of(context).todo_edit_subtask_tip_title,
+                          content: S.of(context).todo_edit_subtask_tip_content,
                           contentAlign: TextAlign.left,
                           isNeedCloseDiaLog: true,
-                          buttons: ['了解啦~'],
+                          buttons: [S.of(context).todo_edit_subtask_tip_btn_confirm],
                           onTap: (index, ctx) {});
                     },
                   ),
@@ -235,11 +235,11 @@ class SingleTodoPage extends PageState {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Padding(
+                Padding(
                   padding: wholePadding,
                   child: Text(
-                    '是哪天需要提醒?',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_valid_date_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 ),
                 Padding(
@@ -252,14 +252,11 @@ class SingleTodoPage extends PageState {
                     ),
                     onTap: () {
                       WWDialog.showMiddleDialog(context,
-                          title: '日期怎么选择?',
-                          content: '1. 【今日】: 为进入该页面的当天时间。\n'
-                              '2. 【明日】: 为进入该页面的当天向后增加一天。\n'
-                              '3. 【选择日期】: 可以选择今日后的任意一天，当选择今日或明日的时间时将会自动转变为前两个选项。\n'
-                              '4. 【草稿箱】: 将会把事件存储在草稿箱中，等待被编辑至对应的日期，不展示在事件列表中。',
+                          title: S.of(context).todo_edit_valid_date_tip_title,
+                          content: S.of(context).todo_edit_valid_date_tip_content,
                           contentAlign: TextAlign.left,
                           isNeedCloseDiaLog: true,
-                          buttons: ['了解啦~'],
+                          buttons: [S.of(context).todo_edit_valid_date_tip_btn_confirm],
                           onTap: (index, ctx) {});
                     },
                   ),
@@ -270,7 +267,12 @@ class SingleTodoPage extends PageState {
               padding: wholePadding,
               child: RadioButtonGroup(
                 key: _singleTodoVM.todoDateBtnGroupKey,
-                buttonGroupLabels: _singleTodoVM.selectDateBtnGroupLabels,
+                buttonGroupLabels: [
+                  S.of(context).todo_edit_valid_date_btn_today,
+                  S.of(context).todo_edit_valid_date_btn_tomorrow,
+                  S.of(context).todo_edit_valid_date_btn_select_date,
+                  S.of(context).todo_edit_valid_date_btn_draft,
+                ],
                 buttonGroupIcons: const [AliIcons.IconFlag, AliIcons.IconDocument, AliIcons.IconTime, AliIcons.IconService],
                 defaultSelectedIndex: _singleTodoVM.getSelectDateIndex(),
                 onButtonChanged: (preIndex, index) async {
@@ -324,12 +326,12 @@ class SingleTodoPage extends PageState {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Padding(
                   padding: wholePadding,
                   child: Text(
-                    '很重要的事情会排在前面喔!',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_level_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 )
               ],
@@ -338,7 +340,13 @@ class SingleTodoPage extends PageState {
               padding: wholePadding,
               child: RadioButtonGroup(
                 key: _singleTodoVM.todoLevelBtnGroupKey,
-                buttonGroupLabels: _singleTodoVM.levelBtnGroupLabels,
+                buttonGroupLabels: [
+                  S.of(context).todo_edit_level_btn_deferrable,
+                  S.of(context).todo_edit_level_btn_unimportant,
+                  S.of(context).todo_edit_level_btn_normal,
+                  S.of(context).todo_edit_level_btn_important,
+                  S.of(context).todo_edit_level_btn_urgent
+                ],
                 customSelectedButtonColor: _singleTodoVM.levelCustomBtnGroupColor,
                 selectedButtonColor: Colors.teal,
                 unSelectedButtonColor: const Color(0xFFD6D6D6),
@@ -350,12 +358,12 @@ class SingleTodoPage extends PageState {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Padding(
                   padding: wholePadding,
                   child: Text(
-                    '需要记录下地点吗?',
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    S.of(context).todo_edit_location_label,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 )
               ],
@@ -403,14 +411,14 @@ class SingleTodoPage extends PageState {
                 builder: (ctx, saveBtnAvailable, _) {
                   return saveBtnAvailable
                       ? GFButton(
-                          text: '保存',
+                          text: S.of(context).todo_edit_btn_save,
                           textStyle: const TextStyle(fontFamily: 'Lexend Deca', fontSize: 15),
                           onPressed: () async {
                             bool saveSuccess = await _singleTodoVM.save();
                             if (!saveSuccess) {
-                              SnackBarUtil.topBar(simpleContent: '保存失败');
+                              SnackBarUtil.topBar(simpleContent: S.of(context).todo_edit_toast_save_failure);
                             } else {
-                              SnackBarUtil.topBar(simpleContent: '保存成功');
+                              SnackBarUtil.topBar(simpleContent: S.of(context).todo_edit_toast_save_success);
                               Future.delayed(const Duration(milliseconds: 5)).whenComplete(() {
                                 onSave?.call();
                                 pop();
@@ -425,13 +433,13 @@ class SingleTodoPage extends PageState {
                           size: GFSize.LARGE,
                           fullWidthButton: true,
                         )
-                      : const GFButton(
-                          text: '保存',
-                          textStyle: TextStyle(fontFamily: 'Lexend Deca', fontSize: 15),
+                      : GFButton(
+                          text: S.of(context).todo_edit_btn_save,
+                          textStyle: const TextStyle(fontFamily: 'Lexend Deca', fontSize: 15),
                           onPressed: null,
                           disabledColor: Color(0xFFD6D6D6),
                           disabledTextColor: Colors.white,
-                          icon: Icon(
+                          icon: const Icon(
                             AliIcons.IconTask,
                             color: Colors.white,
                           ),

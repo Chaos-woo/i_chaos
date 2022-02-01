@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
@@ -65,9 +66,9 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                   if (!_actionBtnVM.isToday())
                     FloatingActionButton(
                       backgroundColor: Colors.grey[50],
-                      child: const Text(
-                        '今',
-                        style: TextStyle(fontSize: 18, color: Colors.teal),
+                      child: Text(
+                        S.of(context).todo_home_fba_btn_today,
+                        style: const TextStyle(fontSize: 18, color: Colors.teal),
                       ),
                       heroTag: 'today', // 避免多个FloatingActionButton重复使用默认tag的异常
                       onPressed: () {

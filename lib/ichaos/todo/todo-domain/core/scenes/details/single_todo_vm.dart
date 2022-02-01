@@ -10,23 +10,22 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subta
 
 /// 单事件模型
 class SingleTodoVM extends SingleViewStateModel<TodoVO> {
-  final String appBarTitleOfEdit = '编辑';
-  final String appBarTitleOfAdd = '新增';
 
-  final List<String> selectDateBtnGroupLabels = [
-    TodoFormBO.todayBtnText,
-    TodoFormBO.tomorrowBtnText,
-    TodoFormBO.chooseDateBtnText,
-    TodoFormBO.noDateBtnText
-  ];
+  /// 下面获取对应文字使用固定的下标
+//  final List<String> selectDateBtnGroupLabels = [
+//    TodoFormBO.todayBtnText,
+//    TodoFormBO.tomorrowBtnText,
+//    TodoFormBO.chooseDateBtnText,
+//    TodoFormBO.noDateBtnText
+//  ];
 
-  final List<String> levelBtnGroupLabels = [
-    TodoLevel.deferrable.title,
-    TodoLevel.unimportant.title,
-    TodoLevel.normal.title,
-    TodoLevel.important.title,
-    TodoLevel.urgent.title,
-  ];
+//  final List<String> levelBtnGroupLabels = [
+//    TodoLevel.deferrable.title,
+//    TodoLevel.unimportant.title,
+//    TodoLevel.normal.title,
+//    TodoLevel.important.title,
+//    TodoLevel.urgent.title,
+//  ];
 
   final List<Color> levelCustomBtnGroupColor = [
     TodoLevel.deferrable.color,
@@ -179,15 +178,15 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
   int getSelectDateIndex() {
     DateTime? validDate = _todoFormBO.selectedDate;
     if (validDate == null) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.noDateBtnText);
+      return 3;
     }
 
     if (DateTime.now().isSameDay(validDate)) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.todayBtnText);
+      return 0;
     } else if (DayDateUtil.tomorrow().isSameDay(validDate)) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.tomorrowBtnText);
+      return 1;
     } else {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.chooseDateBtnText);
+      return 2;
     }
   }
 

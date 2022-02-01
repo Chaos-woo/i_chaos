@@ -1,6 +1,7 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
@@ -25,9 +26,9 @@ class CalendarImage extends WidgetState {
         if (selectDate != null) {
           final calendarBarVM = Provider.of<CalendarBarVM>(context, listen: false);
           if (!calendarBarVM.selectDate.isSameDay(selectDate)) {
-            SnackBarUtil.topBar(simpleContent: '跳转至 ${selectDate.yyyyMMdd} ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*');
+            SnackBarUtil.topBar(simpleContent: '${S.of(context).todo_calendar_switch_toast_text1} ${selectDate.yyyyMMdd} ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*');
             SnackBarUtil.topBar(textSpans: [
-              const TextSpan(text: '跳转至 ', style: SnackBarUtil.defaultStyle),
+              TextSpan(text: '${S.of(context).todo_calendar_switch_toast_text1} ', style: SnackBarUtil.defaultStyle),
               TextSpan(text: selectDate.yyyyMMdd, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
               const TextSpan(text: ' ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*', style: SnackBarUtil.defaultStyle)
             ], textSpanLineFeedCnt: 0);

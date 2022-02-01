@@ -1,13 +1,9 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:i_chaos/generated/l10n.dart';
 
 class LocaleModel extends ChangeNotifier {
-//  static const localeNameList = ['auto', '中文', 'English'];
-  ///Platform.localeName
   static const localeValueList = ['zh', 'en'];
-  // 无法获取系统语言时默认使用中文
-  static const int defaultLocaleLanguage = 0;
+  static const int _defaultLocaleLanguage = 0;
 
   static const kLocaleIndex = 'kLocaleIndex';
 
@@ -22,13 +18,18 @@ class LocaleModel extends ChangeNotifier {
       var value = localeValueList[_localeIndex!].split("-");
       return Locale(value[0], value.length == 2 ? value[1] : '');
     }
-    // 跟随系统
-    return null;
+    // 默认使用中文
+    _localeIndex = _defaultLocaleLanguage;
+    SpUtil.putInt(kLocaleIndex, _localeIndex!);
   }
 
   LocaleModel() {
     int? localLocaleIndex = SpUtil.getInt(kLocaleIndex, defValue: -1);
-    _localeIndex = localLocaleIndex == -1 ? defaultLocaleLanguage : localLocaleIndex;
+    bool invalidSpLocaleIndex = localLocaleIndex == null || localLocaleIndex < 0;
+    _localeIndex = invalidSpLocaleIndex ? _defaultLocaleLanguage : localLocaleIndex;
+    if (invalidSpLocaleIndex) {
+      SpUtil.putInt(kLocaleIndex, _localeIndex!);
+    }
   }
 
   switchLocale(int index) {
@@ -37,7 +38,7 @@ class LocaleModel extends ChangeNotifier {
     SpUtil.putInt(kLocaleIndex, index);
   }
 
-  static String localeName(index, context) {
+  static String localeName(index) {
     switch (index) {
       case 0:
         return '简体中文';

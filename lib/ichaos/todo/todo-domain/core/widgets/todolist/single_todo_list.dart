@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/utils/image_helper.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_card.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_todo_list_vm.dart';
 import 'package:provider/provider.dart';
@@ -77,8 +79,8 @@ class WidgetSingleTodoList extends WidgetState {
               expandBtnDisplayLimits: 4,
               operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
                 SnackBarUtil.topBar(textSpans: [
-                  const TextSpan(text: '已删除 ε==3', style: SnackBarUtil.defaultStyle),
-                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: S.of(context).todo_card_toast_delete_text1, style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: '${S.of(context).todo_card_toast_delete_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
                   const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
                 ], textSpanLineFeedCnt: 1);
@@ -90,17 +92,17 @@ class WidgetSingleTodoList extends WidgetState {
                 }));
               }, onCompleted: (ctx, vo) {
                 SnackBarUtil.topBar(textSpans: [
-                  const TextSpan(text: '恭喜~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
-                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: S.of(context).todo_card_toast_completed_text1, style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: '${S.of(context).todo_card_toast_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                  const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: ' ] ${S.of(context).todo_card_toast_completed_text3}', style: SnackBarUtil.defaultStyle),
                 ], textSpanLineFeedCnt: 1);
                 singleTodoListVM.toggleMainTodoState(vo.id!);
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onCancelCompleted: (ctx, vo) {
                 SnackBarUtil.topBar(textSpans: [
-                  const TextSpan(text: '点错了吧? 明明完成了(O_O)?', style: SnackBarUtil.defaultStyle),
-                  const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: S.of(context).todo_card_toast_unaccomplished_text1, style: SnackBarUtil.defaultStyle),
+                  TextSpan(text: '${S.of(context).todo_card_toast_unaccomplished_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
                   const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
                 ], textSpanLineFeedCnt: 1);
@@ -111,20 +113,20 @@ class WidgetSingleTodoList extends WidgetState {
                 singleTodoListVM.toggleSubTaskState(vo, taskVO.uuid).then((refreshList) {
                   if (refreshList) {
                     SnackBarUtil.topBar(textSpans: [
-                      const TextSpan(text: '恭喜~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
-                      const TextSpan(text: '任务[ ', style: SnackBarUtil.defaultStyle),
+                      TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text1, style: SnackBarUtil.defaultStyle),
+                      TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
                       TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                      const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                      TextSpan(text: ' ] ${S.of(context).todo_card_toast_subtask_completed_text3}', style: SnackBarUtil.defaultStyle),
                     ], textSpanLineFeedCnt: 1);
                     filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
                   } else {
                     if (taskVO.completed) {
                       SnackBarUtil.topBar(textSpans: [
-                        const TextSpan(text: '恭喜! 又迈向成功一小步~(o≖◡≖)', style: SnackBarUtil.defaultStyle),
+                        TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text4, style: SnackBarUtil.defaultStyle),
                         TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                        const TextSpan(text: '子任务[ ', style: SnackBarUtil.defaultStyle),
+                        TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text5} [ ', style: SnackBarUtil.defaultStyle),
                         TextSpan(text: taskVO.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                        const TextSpan(text: ' ]完成了', style: SnackBarUtil.defaultStyle),
+                        TextSpan(text: ' ] ${S.of(context).todo_card_toast_subtask_completed_text6}', style: SnackBarUtil.defaultStyle),
                       ], textSpanLineFeedCnt: 2);
                     }
                     thisTodoWidget.refreshState();
@@ -140,12 +142,12 @@ class WidgetSingleTodoList extends WidgetState {
   // 仅有当前ListView下标和事件列表长度相同时获取占位
   Widget _getMoreTipPlaceholder(int currentTodListLength, SingleTodoListVM singleTodoListVM) {
     if (currentTodListLength > 0) {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Center(
           child: Text(
-            '-- 没有更多记录啦 --',
-            style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
+            '-- ${S.of(context).todo_list_placeholder_no_data} --',
+            style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
           ),
         ),
       );
@@ -162,8 +164,8 @@ class WidgetSingleTodoList extends WidgetState {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100),
-              const Text('什么都没有找到呢~',
-                  style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
+              Text(S.of(context).todo_list_placeholder_not_found,
+                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
             ],
           ),
         ),
@@ -179,13 +181,13 @@ class WidgetSingleTodoList extends WidgetState {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ImageHelper.placeHolderLocalSVGImg(imageName: 'image_complete', width: 100, height: 100),
-                    const Text('ToDO都完成啦~',
+                    Text(S.of(context).todo_list_placeholder_completed,
                         style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
                   ],
                 )
-              : const Text(
-                  '-- 没有更多记录啦 --',
-                  style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
+              : Text(
+                  '-- ${S.of(context).todo_list_placeholder_no_data} --',
+                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
                 ),
         ),
       );
@@ -198,13 +200,13 @@ class WidgetSingleTodoList extends WidgetState {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ImageHelper.placeHolderLocalSVGImg(imageName: 'image_task', width: 100, height: 100),
-                    const Text('还有待完成的事项喔~',
-                        style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
+                        Text(S.of(context).todo_list_placeholder_more_todo,
+                        style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
                   ],
                 )
-              : const Text(
-                  '-- 没有更多记录啦 --',
-                  style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
+              : Text(
+            '-- ${S.of(context).todo_list_placeholder_no_data} --',
+                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
                 ),
         ),
       );

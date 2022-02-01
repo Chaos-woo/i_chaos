@@ -2,6 +2,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -9,12 +10,23 @@ import 'calendar_bar_vm.dart';
 
 class WidgetCalendarBar extends WidgetState {
   late CalendarBarVM _calendarBarVM;
+  late Map<int, String> _weekLabels;
 
   WidgetCalendarBar();
 
   @override
   Widget build(BuildContext context) {
     _calendarBarVM = Provider.of<CalendarBarVM>(context);
+
+    _weekLabels = {
+      7: S.of(_calendarBarVM.context!).todo_week_label_abbr_sun,
+      1: S.of(_calendarBarVM.context!).todo_week_label_abbr_mon,
+      2: S.of(_calendarBarVM.context!).todo_week_label_abbr_tue,
+      3: S.of(_calendarBarVM.context!).todo_week_label_abbr_wed,
+      4: S.of(_calendarBarVM.context!).todo_week_label_abbr_thu,
+      5: S.of(_calendarBarVM.context!).todo_week_label_abbr_fri,
+      6: S.of(_calendarBarVM.context!).todo_week_label_abbr_sat
+    };
 
     return Container(
       margin: const EdgeInsets.only(top: 0),
@@ -44,7 +56,7 @@ class WidgetCalendarBar extends WidgetState {
           pageAnimationDuration: Duration(milliseconds: _calendarBarVM.pageAnimationDuration),
           calendarBuilders: CalendarBuilders(
             dowBuilder: (context, day) {
-              String weekLabel = _calendarBarVM.getWeekLabel(day.weekday);
+              String weekLabel = _getWeekLabel(day.weekday);
               return Center(
                 child: Text(
                   weekLabel,
@@ -72,5 +84,10 @@ class WidgetCalendarBar extends WidgetState {
         ),
       ),
     );
+  }
+
+  // 获取周标签值
+  String _getWeekLabel(int weekday) {
+    return _weekLabels[weekday]!;
   }
 }
