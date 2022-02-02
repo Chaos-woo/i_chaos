@@ -31,6 +31,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("Designing..."),
+        "setting_language_set_text1":
+            MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
+        "setting_language_set_text2":
+            MessageLookupByLibrary.simpleMessage("English"),
+        "setting_option_language_text":
+            MessageLookupByLibrary.simpleMessage("Language setting"),
+        "setting_option_theme_text":
+            MessageLookupByLibrary.simpleMessage("Theme"),
+        "setting_page_appbar_title":
+            MessageLookupByLibrary.simpleMessage("Setting"),
+        "setting_page_group_tip_text1":
+            MessageLookupByLibrary.simpleMessage("Basic setting"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("Date has been switched to"),
         "todo_card_more_option":

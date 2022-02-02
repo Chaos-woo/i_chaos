@@ -48,7 +48,7 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
             headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
             focusedDay: _selectDate,
             calendarFormat: CalendarFormat.month,
-            locale: localeModel.locale,
+            locale: localeModel.localeString,
             selectedDayPredicate: (day) {
               return isSameDay(_selectDate, day);
             },

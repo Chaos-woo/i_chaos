@@ -11,6 +11,18 @@ class LocaleModel extends ChangeNotifier {
 
   int? get localeIndex => _localeIndex;
 
+  String? get localeString {
+    //初始化放在全局， 放在下面会导致每次刷新index 并且导致国际化切换失败
+    //_localeIndex = 1;
+    if (_localeIndex! > 0) {
+      var value = localeValueList[_localeIndex!].split("-");
+      return value[0];
+    }
+    // 默认使用中文
+    _localeIndex = _defaultLocaleLanguage;
+    SpUtil.putInt(kLocaleIndex, _localeIndex!);
+  }
+
   Locale? get locale {
     //初始化放在全局， 放在下面会导致每次刷新index 并且导致国际化切换失败
     //_localeIndex = 1;

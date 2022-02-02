@@ -9,6 +9,7 @@ import 'package:i_chaos/base_framework/config/global_provider_manager.dart';
 import 'package:i_chaos/base_framework/view_model/app_model/locale_model.dart';
 import 'package:i_chaos/ichaos/public/config/design_config.dart';
 import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
+import 'package:i_chaos/ichaos/setting/setting-domain/core/scenes/home/setting_home_page.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
@@ -146,7 +147,7 @@ class _MainSceneState extends State<MainScene> {
     Temporature(),
     Temporature(),
     PageTodoHome().transformToPageWidget(),
-    Temporature(),
+    PageSettingHome().transformToPageWidget(),
   ];
 
   @override

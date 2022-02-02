@@ -129,6 +129,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
           ),
         ],
       ),
+      backgroundColor: Colors.teal,
       titleSpacing: -5,
       toolbarHeight: 40,
       elevation: 0,

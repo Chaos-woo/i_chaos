@@ -759,6 +759,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Setting`
+  String get setting_page_appbar_title {
+    return Intl.message(
+      'Setting',
+      name: 'setting_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic setting`
+  String get setting_page_group_tip_text1 {
+    return Intl.message(
+      'Basic setting',
+      name: 'setting_page_group_tip_text1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language setting`
+  String get setting_option_language_text {
+    return Intl.message(
+      'Language setting',
+      name: 'setting_option_language_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Simplified Chinese`
+  String get setting_language_set_text1 {
+    return Intl.message(
+      'Simplified Chinese',
+      name: 'setting_language_set_text1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get setting_language_set_text2 {
+    return Intl.message(
+      'English',
+      name: 'setting_language_set_text2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get setting_option_theme_text {
+    return Intl.message(
+      'Theme',
+      name: 'setting_option_theme_text',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

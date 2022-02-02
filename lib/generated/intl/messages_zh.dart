@@ -30,6 +30,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("施工中..."),
+        "setting_language_set_text1":
+            MessageLookupByLibrary.simpleMessage("简体中文"),
+        "setting_language_set_text2":
+            MessageLookupByLibrary.simpleMessage("英语"),
+        "setting_option_language_text":
+            MessageLookupByLibrary.simpleMessage("语言设置"),
+        "setting_option_theme_text": MessageLookupByLibrary.simpleMessage("主题"),
+        "setting_page_appbar_title": MessageLookupByLibrary.simpleMessage("设置"),
+        "setting_page_group_tip_text1":
+            MessageLookupByLibrary.simpleMessage("基础设置"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("跳转至"),
         "todo_card_more_option": MessageLookupByLibrary.simpleMessage("更多操作"),
