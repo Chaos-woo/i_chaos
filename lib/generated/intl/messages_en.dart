@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_language_set_text2":
             MessageLookupByLibrary.simpleMessage("English"),
         "setting_option_language_text":
-            MessageLookupByLibrary.simpleMessage("Language setting"),
+            MessageLookupByLibrary.simpleMessage("Language"),
         "setting_option_theme_text":
             MessageLookupByLibrary.simpleMessage("Theme"),
         "setting_page_appbar_title":
@@ -45,6 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Basic setting"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("Date has been switched to"),
+        "todo_card_detail_query_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "todo_card_detail_query_title":
+            MessageLookupByLibrary.simpleMessage("ToDO Detail"),
         "todo_card_more_option":
             MessageLookupByLibrary.simpleMessage("More options"),
         "todo_card_option_btn_completed":

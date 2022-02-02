@@ -48,6 +48,12 @@ class SingleTodoPage extends PageState {
             builder: (ctx, vm, child) {
               return Scaffold(
                 appBar: AppBar(
+                  leading: InkWell(
+                    child: const Icon(AliIcons.IconReturn),
+                    onTap: () {
+                      pop();
+                    },
+                  ),
                   title: Text(
                     _singleTodoVM.isNew ? S.of(context).todo_edit_appbar_title_add : S.of(context).todo_edit_appbar_title_edit,
                     style: const TextStyle(
@@ -273,7 +279,7 @@ class SingleTodoPage extends PageState {
                   S.of(context).todo_edit_valid_date_btn_select_date,
                   S.of(context).todo_edit_valid_date_btn_draft,
                 ],
-                buttonGroupIcons: const [AliIcons.IconFlag, AliIcons.IconDocument, AliIcons.IconTime, AliIcons.IconService],
+                buttonGroupIcons: const [AliIcons.IconFlag, AliIcons.IconDocument, AliIcons.IconTime, AliIcons.IconTasklist],
                 defaultSelectedIndex: _singleTodoVM.getSelectDateIndex(),
                 onButtonChanged: (preIndex, index) async {
                   switch (index) {
@@ -347,6 +353,7 @@ class SingleTodoPage extends PageState {
                   S.of(context).todo_edit_level_btn_important,
                   S.of(context).todo_edit_level_btn_urgent
                 ],
+                buttonGroupIcons: const [AliIcons.IconDynamic, AliIcons.IconOrder, AliIcons.IconZhtn, AliIcons.IconShake, AliIcons.IconWarning],
                 customSelectedButtonColor: _singleTodoVM.levelCustomBtnGroupColor,
                 selectedButtonColor: Colors.teal,
                 unSelectedButtonColor: const Color(0xFFD6D6D6),

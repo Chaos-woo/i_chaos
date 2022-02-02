@@ -12,6 +12,7 @@ import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_detail_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 
@@ -40,6 +41,16 @@ class WidgetTodoCard extends WidgetState {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
       child: InkWell(
+        onTap: () {
+          WWDialog.showMiddleDialog(context,
+              title: S.of(context).todo_card_detail_query_title,
+              contentAlign: TextAlign.left,
+              isNeedCloseDiaLog: true,
+              titleAlign: TextAlign.left,
+              customContentWidget: WidgetTodoDetailCard(_todo, onDetailQuery: operateCallback!.onDetailQuery).transformToPageWidget(),
+              buttons: [S.of(context).todo_card_detail_query_btn_confirm],
+              onTap: (index, ctx) {});
+        },
         onLongPress: () {
           WWDialog.showBottomDialog(
             context,
@@ -91,9 +102,6 @@ class WidgetTodoCard extends WidgetState {
   // 根据事件的是否完成展示不同操作按钮
   List<Widget> fitOperationButtons() {
     List<Widget> allOperationBtns = [
-//              defaultCustomButton(context, text: '查看', onTap: () {
-//                operateCallback?.onDetailQuery?.call(context, _todo);
-//              }),
       defaultCustomButton(context, text: S.of(context).todo_card_option_btn_completed, onTap: () {
         operateCallback?.onCompleted?.call(context, _todo);
       }),

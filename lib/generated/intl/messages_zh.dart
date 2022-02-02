@@ -42,6 +42,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("基础设置"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("跳转至"),
+        "todo_card_detail_query_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("好的~"),
+        "todo_card_detail_query_title":
+            MessageLookupByLibrary.simpleMessage("ToDO 详情"),
         "todo_card_more_option": MessageLookupByLibrary.simpleMessage("更多操作"),
         "todo_card_option_btn_completed":
             MessageLookupByLibrary.simpleMessage("完成"),

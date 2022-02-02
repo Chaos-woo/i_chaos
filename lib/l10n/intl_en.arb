@@ -47,6 +47,8 @@
   "todo_card_option_btn_delete_tip_cancel": "Cancel",
   "todo_card_option_btn_unaccomplished": "Not finished",
   "todo_card_subtask_btn_retract": "retract",
+  "todo_card_detail_query_title": "ToDO Detail",
+  "todo_card_detail_query_btn_confirm": "Ok",
   "todo_home_fba_btn_today": "☀",
   "todo_filtered_tab_bar_loading_label": "Searching",
   "todo_filtered_tab_bar_state_active": "Underway",
@@ -72,7 +74,7 @@
   "todo_calendar_switch_toast_text1": "Date has been switched to",
   "setting_page_appbar_title": "Setting",
   "setting_page_group_tip_text1": "Basic setting",
-  "setting_option_language_text": "Language setting",
+  "setting_option_language_text": "Language",
   "setting_language_set_text1": "Simplified Chinese",
   "setting_language_set_text2": "English",
   "setting_option_theme_text": "Theme"

@@ -147,7 +147,7 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
       throw Exception('not found button group icons');
     }
 
-    return Icon(widget.buttonGroupIcons![index], color: _isCurrentSelected(index) ? widget.selectedLabelColor : widget.unSelectedLabelColor);
+    return Icon(widget.buttonGroupIcons![index], color: _isCurrentSelected(index) ? widget.selectedLabelColor : widget.unSelectedLabelColor, size: widget.fontSize + 2);
   }
 
   // 按钮是否自定义颜色

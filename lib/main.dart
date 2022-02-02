@@ -85,7 +85,7 @@ class IChaosApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             home: const OKToast(
-              child: SafeArea(child: MainScene()),
+              child: MainScene(),
             ),
           );
         },

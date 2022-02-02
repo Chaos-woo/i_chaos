@@ -530,6 +530,26 @@ class S {
     );
   }
 
+  /// `ToDO Detail`
+  String get todo_card_detail_query_title {
+    return Intl.message(
+      'ToDO Detail',
+      name: 'todo_card_detail_query_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get todo_card_detail_query_btn_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'todo_card_detail_query_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `☀`
   String get todo_home_fba_btn_today {
     return Intl.message(
@@ -780,10 +800,10 @@ class S {
     );
   }
 
-  /// `Language setting`
+  /// `Language`
   String get setting_option_language_text {
     return Intl.message(
-      'Language setting',
+      'Language',
       name: 'setting_option_language_text',
       desc: '',
       args: [],
