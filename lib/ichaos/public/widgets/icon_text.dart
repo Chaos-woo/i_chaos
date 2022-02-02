@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 /// icon text
@@ -16,7 +18,7 @@ class IconText extends StatelessWidget {
   final TextAlign? textAlign;
 
   IconText(this.text,
-      {this.icon,
+      {Key? key, this.icon,
       this.iconSize,
       this.direction = Axis.horizontal,
       this.style,
@@ -24,7 +26,7 @@ class IconText extends StatelessWidget {
       this.softWrap,
       this.padding,
       this.textAlign,
-      this.overflow = TextOverflow.ellipsis});
+      this.overflow = TextOverflow.ellipsis}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
 import 'package:i_chaos/ichaos/public/widgets/button-group/radio_button_group.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/enums/todo_level.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/models/todo_vo.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/repository/todo_repository.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/repository/todo_repository.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/todo_detail_form.dart';
 import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/widgets/subtask-group/subtask_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list_vm.dart';
 
 /// 单事件模型
 class SingleTodoVM extends SingleViewStateModel<TodoVO> {
-  final String appBarTitleOfEdit = '编辑';
-  final String appBarTitleOfAdd = '新增';
 
-  final List<String> selectDateBtnGroupLabels = [
-    TodoFormBO.todayBtnText,
-    TodoFormBO.tomorrowBtnText,
-    TodoFormBO.chooseDateBtnText,
-    TodoFormBO.noDateBtnText
-  ];
+  /// 下面获取对应文字使用固定的下标
+//  final List<String> selectDateBtnGroupLabels = [
+//    TodoFormBO.todayBtnText,
+//    TodoFormBO.tomorrowBtnText,
+//    TodoFormBO.chooseDateBtnText,
+//    TodoFormBO.noDateBtnText
+//  ];
 
-  final List<String> levelBtnGroupLabels = [
-    TodoLevel.deferrable.title,
-    TodoLevel.unimportant.title,
-    TodoLevel.normal.title,
-    TodoLevel.important.title,
-    TodoLevel.urgent.title,
-  ];
+//  final List<String> levelBtnGroupLabels = [
+//    TodoLevel.deferrable.title,
+//    TodoLevel.unimportant.title,
+//    TodoLevel.normal.title,
+//    TodoLevel.important.title,
+//    TodoLevel.urgent.title,
+//  ];
 
   final List<Color> levelCustomBtnGroupColor = [
     TodoLevel.deferrable.color,
@@ -91,7 +90,7 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     // 添加内容值监听
     contentController.addListener(_onContentFieldChanged);
 
-    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormBO.subTaskVOs);
+    subTaskListVM = SubTaskListVM(originalSubTaskList: _todoFormBO.subTaskVOs, taskLimit: 10);
   }
 
   bool _saveBtnAvailable(String content) {
@@ -179,15 +178,15 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
   int getSelectDateIndex() {
     DateTime? validDate = _todoFormBO.selectedDate;
     if (validDate == null) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.noDateBtnText);
+      return 3;
     }
 
     if (DateTime.now().isSameDay(validDate)) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.todayBtnText);
+      return 0;
     } else if (DayDateUtil.tomorrow().isSameDay(validDate)) {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.tomorrowBtnText);
+      return 1;
     } else {
-      return selectDateBtnGroupLabels.indexOf(TodoFormBO.chooseDateBtnText);
+      return 2;
     }
   }
 

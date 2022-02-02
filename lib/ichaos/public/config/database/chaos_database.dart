@@ -1,7 +1,7 @@
 
 import 'dart:async';
 import 'package:floor/floor.dart';
-import 'package:i_chaos/ichaos/todo/todo-common/entity/todo_entity.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/todo_entity.dart';
 import '../../../todo/todo-infrastructure/repository/todo_dao.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 

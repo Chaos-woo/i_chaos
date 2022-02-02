@@ -42,6 +42,14 @@ class _ProviderWidgetState<T extends ViewStateModel?>
     }
 
     super.initState();
+    print('Model SSSSSSSSSSS ${model == null}');
+    model?.bindContext(this);
+  }
+
+  @override
+  void dispose() {
+    model?.releaseContext();
+    super.dispose();
   }
 
   @override
@@ -102,6 +110,15 @@ class _ProviderWidgetState2<A extends ViewStateModel?,
     }
 
     super.initState();
+    model1?.bindContext(this);
+    model2?.bindContext(this);
+  }
+
+  @override
+  void dispose() {
+    model1?.releaseContext();
+    model2?.releaseContext();
+    super.dispose();
   }
 
   @override
@@ -181,6 +198,19 @@ class ProviderWidgetState4<
     }
 
     super.initState();
+    model_1?.bindContext(this);
+    model_2?.bindContext(this);
+    model_3?.bindContext(this);
+    model_4?.bindContext(this);
+  }
+
+  @override
+  void dispose() {
+    model_1?.releaseContext();
+    model_2?.releaseContext();
+    model_3?.releaseContext();
+    model_4?.releaseContext();
+    super.dispose();
   }
 
   @override
