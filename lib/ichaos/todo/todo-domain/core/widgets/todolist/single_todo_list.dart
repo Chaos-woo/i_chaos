@@ -132,6 +132,12 @@ class WidgetSingleTodoList extends WidgetState {
                     thisTodoWidget.refreshState();
                   }
                 });
+              }, onDetailQuery: (ctx, vo, thisTodoCardWidget, clickSubTask) {
+                // 是否需要刷新列表：子任务全部完成时刷新列表
+                singleTodoListVM.toggleSubTaskState(currTodoList[index], clickSubTask.uuid).then((refreshList) {
+                  filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+                  thisTodoCardWidget.refreshState();
+                });
               })));
         },
         itemCount: currTodoList.length + 1,
@@ -200,12 +206,12 @@ class WidgetSingleTodoList extends WidgetState {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ImageHelper.placeHolderLocalSVGImg(imageName: 'image_task', width: 100, height: 100),
-                        Text(S.of(context).todo_list_placeholder_more_todo,
+                    Text(S.of(context).todo_list_placeholder_more_todo,
                         style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
                   ],
                 )
               : Text(
-            '-- ${S.of(context).todo_list_placeholder_no_data} --',
+                  '-- ${S.of(context).todo_list_placeholder_no_data} --',
                   style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
                 ),
         ),

@@ -13,6 +13,7 @@ class MiniCheckboxListTitle extends StatelessWidget {
   final double? bottomPadding;
   final double? iconTitlePadding;
   final TextStyle? textStyle;
+  final int? maxLines;
   final GFCheckboxType? type;
   final Widget? activeIcon;
   final Widget? inactiveIcon;
@@ -28,6 +29,7 @@ class MiniCheckboxListTitle extends StatelessWidget {
     this.textStyle = const TextStyle(
       height: 1.1,
     ),
+    this.maxLines = 1,
     this.isChecked = false,
     this.type = GFCheckboxType.circle,
     this.activeIcon = const Icon(
@@ -62,7 +64,7 @@ class MiniCheckboxListTitle extends StatelessWidget {
             Expanded(child: Text(
               title ?? '',
               style: textStyle,
-              maxLines: 1,
+              maxLines: maxLines,
               softWrap: false,
               overflow: TextOverflow.ellipsis,
             ),),

@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_language_set_text2":
             MessageLookupByLibrary.simpleMessage("English"),
         "setting_option_language_text":
-            MessageLookupByLibrary.simpleMessage("Language setting"),
+            MessageLookupByLibrary.simpleMessage("Language"),
         "setting_option_theme_text":
             MessageLookupByLibrary.simpleMessage("Theme"),
         "setting_page_appbar_title":
@@ -45,6 +45,34 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Basic setting"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("Date has been switched to"),
+        "todo_card_detail_query_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "todo_card_detail_query_completed_date_label":
+            MessageLookupByLibrary.simpleMessage("Completed date"),
+        "todo_card_detail_query_content_label":
+            MessageLookupByLibrary.simpleMessage("Content"),
+        "todo_card_detail_query_crete_date_label":
+            MessageLookupByLibrary.simpleMessage("Create date"),
+        "todo_card_detail_query_desc_label":
+            MessageLookupByLibrary.simpleMessage("Description"),
+        "todo_card_detail_query_has_completed":
+            MessageLookupByLibrary.simpleMessage("Completed"),
+        "todo_card_detail_query_is_completed_label":
+            MessageLookupByLibrary.simpleMessage("status"),
+        "todo_card_detail_query_level_label":
+            MessageLookupByLibrary.simpleMessage("Emergency degree"),
+        "todo_card_detail_query_location_label":
+            MessageLookupByLibrary.simpleMessage("Location infomation"),
+        "todo_card_detail_query_not_completed":
+            MessageLookupByLibrary.simpleMessage("Not finished"),
+        "todo_card_detail_query_subtask_label":
+            MessageLookupByLibrary.simpleMessage("Sub task(s)"),
+        "todo_card_detail_query_title":
+            MessageLookupByLibrary.simpleMessage("ToDO Detail"),
+        "todo_card_detail_query_update_date_label":
+            MessageLookupByLibrary.simpleMessage("Update date"),
+        "todo_card_detail_query_valid_date_label":
+            MessageLookupByLibrary.simpleMessage("Valid date"),
         "todo_card_more_option":
             MessageLookupByLibrary.simpleMessage("More options"),
         "todo_card_option_btn_completed":
@@ -90,9 +118,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_toast_unaccomplished_text2":
             MessageLookupByLibrary.simpleMessage("Task"),
         "todo_edit_appbar_title_add":
-            MessageLookupByLibrary.simpleMessage("Add a ToDO"),
+            MessageLookupByLibrary.simpleMessage("New ToDO"),
         "todo_edit_appbar_title_edit":
-            MessageLookupByLibrary.simpleMessage("Edit"),
+            MessageLookupByLibrary.simpleMessage("Edit ToDO"),
         "todo_edit_btn_save": MessageLookupByLibrary.simpleMessage("Save"),
         "todo_edit_content_label":
             MessageLookupByLibrary.simpleMessage("ToDO Content"),
@@ -114,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Location information"),
         "todo_edit_reset": MessageLookupByLibrary.simpleMessage("reset"),
         "todo_edit_subtask_label":
-            MessageLookupByLibrary.simpleMessage("Sub task"),
+            MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_edit_subtask_tip_btn_confirm":
             MessageLookupByLibrary.simpleMessage("Ok"),
         "todo_edit_subtask_tip_content": MessageLookupByLibrary.simpleMessage(

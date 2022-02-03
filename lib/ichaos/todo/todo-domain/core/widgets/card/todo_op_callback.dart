@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_card.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_detail_card.dart';
 
 typedef OnTodoDeleteCallback = void Function(BuildContext ctx, TodoVO vo);
-typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo);
+typedef OnTodoDetailQueryCallback = void Function(BuildContext ctx, TodoVO vo, WidgetTodoDetailCard thisTodoCardWidget, SubTaskVO clickSubTask);
 typedef OnTodoModifyCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCompletedCallback = void Function(BuildContext ctx, TodoVO vo);
 typedef OnTodoCancelCompletedCallback = void Function(BuildContext ctx, TodoVO vo);

@@ -12,6 +12,7 @@ import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_detail_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 
@@ -40,6 +41,39 @@ class WidgetTodoCard extends WidgetState {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
       child: InkWell(
+        onTap: () {
+          WWDialog.showMiddleDialog(context,
+              title: S.of(context).todo_card_detail_query_title,
+              contentAlign: TextAlign.left,
+              isNeedCloseDiaLog: true,
+              titleAlign: TextAlign.left,
+              customContentWidget: WidgetTodoDetailCard(_todo, onDetailQuery: operateCallback!.onDetailQuery).transformToPageWidget(),
+              customWidgetButtons: [
+                defaultCustomButton(context, text: S.of(context).todo_card_detail_query_btn_confirm, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+                defaultCustomButton(context, text: S.of(context).todo_card_option_btn_modify, textFontSize: 15.0, buttonHeight: 35.0, textColor: const Color(0xFF2989F2), onTap: () {
+                  operateCallback?.onModify?.call(context, _todo);
+                }),
+                defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.red, onTap: () {
+                  WWDialog.showBottomDialog(context,
+                      title: S.of(context).todo_card_option_btn_delete_tip_title,
+                      titleAlign: TextAlign.center,
+                      titleColor: Colors.red,
+                      content: _todo.content,
+                      contentAlign: TextAlign.start,
+                      contentColor: Colors.black,
+                      contentFontSize: 15.0,
+                      location: DiaLogLocation.middle,
+                      arrangeType: buttonArrangeType.row,
+                      customWidgetButtons: [
+                        defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_confirm, textFontSize: 15.0, buttonHeight: 35.0, onTap: () {
+                          operateCallback?.onDelete?.call(context, _todo);
+                        }),
+                        defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_cancel, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+                      ]);
+                }),
+              ],
+              );
+        },
         onLongPress: () {
           WWDialog.showBottomDialog(
             context,
@@ -91,9 +125,6 @@ class WidgetTodoCard extends WidgetState {
   // 根据事件的是否完成展示不同操作按钮
   List<Widget> fitOperationButtons() {
     List<Widget> allOperationBtns = [
-//              defaultCustomButton(context, text: '查看', onTap: () {
-//                operateCallback?.onDetailQuery?.call(context, _todo);
-//              }),
       defaultCustomButton(context, text: S.of(context).todo_card_option_btn_completed, onTap: () {
         operateCallback?.onCompleted?.call(context, _todo);
       }),
@@ -286,7 +317,7 @@ class WidgetTodoCard extends WidgetState {
         },
         child: Container(
           margin: const EdgeInsets.only(top: 5, bottom: 5),
-          width: 60,
+          width: 65,
           height: 20,
           decoration: const BoxDecoration(color: Color(0xFFE0E0E0), borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Row(
