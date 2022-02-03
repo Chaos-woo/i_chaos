@@ -100,20 +100,20 @@ class S {
     );
   }
 
-  /// `Edit`
+  /// `Edit ToDO`
   String get todo_edit_appbar_title_edit {
     return Intl.message(
-      'Edit',
+      'Edit ToDO',
       name: 'todo_edit_appbar_title_edit',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add a ToDO`
+  /// `New ToDO`
   String get todo_edit_appbar_title_add {
     return Intl.message(
-      'Add a ToDO',
+      'New ToDO',
       name: 'todo_edit_appbar_title_add',
       desc: '',
       args: [],
@@ -545,6 +545,126 @@ class S {
     return Intl.message(
       'Ok',
       name: 'todo_card_detail_query_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Content`
+  String get todo_card_detail_query_content_label {
+    return Intl.message(
+      'Content',
+      name: 'todo_card_detail_query_content_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get todo_card_detail_query_desc_label {
+    return Intl.message(
+      'Description',
+      name: 'todo_card_detail_query_desc_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency degree`
+  String get todo_card_detail_query_level_label {
+    return Intl.message(
+      'Emergency degree',
+      name: 'todo_card_detail_query_level_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `status`
+  String get todo_card_detail_query_is_completed_label {
+    return Intl.message(
+      'status',
+      name: 'todo_card_detail_query_is_completed_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get todo_card_detail_query_has_completed {
+    return Intl.message(
+      'Completed',
+      name: 'todo_card_detail_query_has_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not finished`
+  String get todo_card_detail_query_not_completed {
+    return Intl.message(
+      'Not finished',
+      name: 'todo_card_detail_query_not_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed date`
+  String get todo_card_detail_query_completed_date_label {
+    return Intl.message(
+      'Completed date',
+      name: 'todo_card_detail_query_completed_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location infomation`
+  String get todo_card_detail_query_location_label {
+    return Intl.message(
+      'Location infomation',
+      name: 'todo_card_detail_query_location_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sub tasks`
+  String get todo_card_detail_query_subtask_label {
+    return Intl.message(
+      'Sub tasks',
+      name: 'todo_card_detail_query_subtask_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid date`
+  String get todo_card_detail_query_valid_date_label {
+    return Intl.message(
+      'Valid date',
+      name: 'todo_card_detail_query_valid_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create date`
+  String get todo_card_detail_query_crete_date_label {
+    return Intl.message(
+      'Create date',
+      name: 'todo_card_detail_query_crete_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update date`
+  String get todo_card_detail_query_update_date_label {
+    return Intl.message(
+      'Update date',
+      name: 'todo_card_detail_query_update_date_label',
       desc: '',
       args: [],
     );

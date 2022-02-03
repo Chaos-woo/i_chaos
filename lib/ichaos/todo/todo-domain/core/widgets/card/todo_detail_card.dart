@@ -45,31 +45,31 @@ class WidgetTodoDetailCard extends WidgetState {
 
   Widget _widgetCustomTodoContentDialog() {
     List<Widget> contentList = [];
-    contentList.add(_widgetMainSubContent(_todo.content, 'content'));
+    contentList.add(_widgetMainSubContent(_todo.content, S.of(context).todo_card_detail_query_content_label));
 
     if (_todo.isRemarkInfo) {
-      contentList.add(_widgetMainSubContent(_todo.remark!, 'remark'));
+      contentList.add(_widgetMainSubContent(_todo.remark!, S.of(context).todo_card_detail_query_desc_label));
     }
 
-    contentList.add(_widgetMainSubContent(todoLevelString[_todo.level], 'level', mainContentPreColor: TodoLevel.coded(_todo.level).color));
-    contentList.add(_widgetMainSubContent(_todo.completed ? '已完成' : '未完成', 'completed'));
+    contentList.add(_widgetMainSubContent(todoLevelString[_todo.level], S.of(context).todo_card_detail_query_level_label, mainContentPreColor: TodoLevel.coded(_todo.level).color));
+    contentList.add(_widgetMainSubContent(_todo.completed ? S.of(context).todo_card_detail_query_has_completed : S.of(context).todo_card_detail_query_not_completed, S.of(context).todo_card_detail_query_is_completed_label));
 
     if (_todo.completedTime != null) {
-      contentList.add(_widgetMainSubContent(_todo.completedTime!.yyyyMMddHHmmss, 'completed time'));
+      contentList.add(_widgetMainSubContent(_todo.completedTime!.yyyyMMddHHmmss, S.of(context).todo_card_detail_query_completed_date_label));
     }
 
     if (_todo.location != null && _todo.location!.trim() != '') {
-      contentList.add(_widgetMainSubContent(_todo.location!, 'location info'));
+      contentList.add(_widgetMainSubContent(_todo.location!, S.of(context).todo_card_detail_query_location_label));
     }
 
     if (_todo.subTaskList.isNotEmpty) {
-      contentList.add(_widgetMainSubContent('', 'Sub Tasks'));
+      contentList.add(_widgetMainSubContent('', S.of(context).todo_card_detail_query_subtask_label));
       contentList.addAll(_getComplexSubTaskList());
     }
 
-    contentList.add(_widgetMainSubContent(_todo.validTime!.yyyyMMdd, 'valid time'));
-    contentList.add(_widgetMainSubContent(_todo.createTime.yyyyMMddHHmmss, 'create time'));
-    contentList.add(_widgetMainSubContent(_todo.updateTime.yyyyMMddHHmmss, 'update time'));
+    contentList.add(_widgetMainSubContent(_todo.validTime!.yyyyMMdd, S.of(context).todo_card_detail_query_valid_date_label));
+    contentList.add(_widgetMainSubContent(_todo.createTime.yyyyMMddHHmmss, S.of(context).todo_card_detail_query_crete_date_label));
+    contentList.add(_widgetMainSubContent(_todo.updateTime.yyyyMMddHHmmss, S.of(context).todo_card_detail_query_update_date_label));
 
     double contentHeight = contentList.length * 38.0;
     contentHeight = min(contentHeight, ScreenUtil.getInstance().screenHeight / 2);
@@ -166,6 +166,10 @@ class WidgetTodoDetailCard extends WidgetState {
           return MiniCheckboxListTitle(
             title: task.content,
             isChecked: true,
+            textStyle: const TextStyle(
+              height: 1.1,
+              fontSize: 14
+            ),
             activeIcon: const Icon(
               Icons.brightness_1,
               size: 10,
@@ -184,6 +188,10 @@ class WidgetTodoDetailCard extends WidgetState {
         taskWidgets.add(MiniCheckboxListTitle(
           title: task.content,
           isChecked: task.completed,
+          textStyle: const TextStyle(
+              height: 1.1,
+              fontSize: 14
+          ),
           maxLines: 2,
           onTap: (val) async {
             Future.delayed(const Duration(milliseconds: 20)).then((value) {

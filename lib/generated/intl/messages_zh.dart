@@ -43,9 +43,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("跳转至"),
         "todo_card_detail_query_btn_confirm":
-            MessageLookupByLibrary.simpleMessage("好的~"),
+            MessageLookupByLibrary.simpleMessage("了解"),
+        "todo_card_detail_query_completed_date_label":
+            MessageLookupByLibrary.simpleMessage("完成时间"),
+        "todo_card_detail_query_content_label":
+            MessageLookupByLibrary.simpleMessage("内容"),
+        "todo_card_detail_query_crete_date_label":
+            MessageLookupByLibrary.simpleMessage("创建时间"),
+        "todo_card_detail_query_desc_label":
+            MessageLookupByLibrary.simpleMessage("备注"),
+        "todo_card_detail_query_has_completed":
+            MessageLookupByLibrary.simpleMessage("已完成"),
+        "todo_card_detail_query_is_completed_label":
+            MessageLookupByLibrary.simpleMessage("是否完成"),
+        "todo_card_detail_query_level_label":
+            MessageLookupByLibrary.simpleMessage("重要等级"),
+        "todo_card_detail_query_location_label":
+            MessageLookupByLibrary.simpleMessage("地点"),
+        "todo_card_detail_query_not_completed":
+            MessageLookupByLibrary.simpleMessage("未完成"),
+        "todo_card_detail_query_subtask_label":
+            MessageLookupByLibrary.simpleMessage("子任务"),
         "todo_card_detail_query_title":
             MessageLookupByLibrary.simpleMessage("ToDO 详情"),
+        "todo_card_detail_query_update_date_label":
+            MessageLookupByLibrary.simpleMessage("更新时间"),
+        "todo_card_detail_query_valid_date_label":
+            MessageLookupByLibrary.simpleMessage("ToDO展示时间"),
         "todo_card_more_option": MessageLookupByLibrary.simpleMessage("更多操作"),
         "todo_card_option_btn_completed":
             MessageLookupByLibrary.simpleMessage("完成"),
