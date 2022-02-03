@@ -94,7 +94,7 @@ class WidgetTodoDetailCard extends WidgetState {
 
   Widget _widgetMainSubContent(String mainContent, String subContent, {Color? mainContentPreColor}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.only(top: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

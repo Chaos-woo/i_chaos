@@ -48,8 +48,31 @@ class WidgetTodoCard extends WidgetState {
               isNeedCloseDiaLog: true,
               titleAlign: TextAlign.left,
               customContentWidget: WidgetTodoDetailCard(_todo, onDetailQuery: operateCallback!.onDetailQuery).transformToPageWidget(),
-              buttons: [S.of(context).todo_card_detail_query_btn_confirm],
-              onTap: (index, ctx) {});
+              customWidgetButtons: [
+                defaultCustomButton(context, text: S.of(context).todo_card_detail_query_btn_confirm, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+                defaultCustomButton(context, text: S.of(context).todo_card_option_btn_modify, textFontSize: 15.0, buttonHeight: 35.0, textColor: const Color(0xFF2989F2), onTap: () {
+                  operateCallback?.onModify?.call(context, _todo);
+                }),
+                defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.red, onTap: () {
+                  WWDialog.showBottomDialog(context,
+                      title: S.of(context).todo_card_option_btn_delete_tip_title,
+                      titleAlign: TextAlign.center,
+                      titleColor: Colors.red,
+                      content: _todo.content,
+                      contentAlign: TextAlign.start,
+                      contentColor: Colors.black,
+                      contentFontSize: 15.0,
+                      location: DiaLogLocation.middle,
+                      arrangeType: buttonArrangeType.row,
+                      customWidgetButtons: [
+                        defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_confirm, textFontSize: 15.0, buttonHeight: 35.0, onTap: () {
+                          operateCallback?.onDelete?.call(context, _todo);
+                        }),
+                        defaultCustomButton(context, text: S.of(context).todo_card_option_btn_delete_tip_cancel, textFontSize: 15.0, buttonHeight: 35.0, textColor: Colors.grey, onTap: () {}),
+                      ]);
+                }),
+              ],
+              );
         },
         onLongPress: () {
           WWDialog.showBottomDialog(
