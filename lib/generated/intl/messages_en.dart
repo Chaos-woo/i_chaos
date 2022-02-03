@@ -66,7 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_not_completed":
             MessageLookupByLibrary.simpleMessage("Not finished"),
         "todo_card_detail_query_subtask_label":
-            MessageLookupByLibrary.simpleMessage("Sub tasks"),
+            MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_card_detail_query_title":
             MessageLookupByLibrary.simpleMessage("ToDO Detail"),
         "todo_card_detail_query_update_date_label":
@@ -142,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Location information"),
         "todo_edit_reset": MessageLookupByLibrary.simpleMessage("reset"),
         "todo_edit_subtask_label":
-            MessageLookupByLibrary.simpleMessage("Sub task"),
+            MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_edit_subtask_tip_btn_confirm":
             MessageLookupByLibrary.simpleMessage("Ok"),
         "todo_edit_subtask_tip_content": MessageLookupByLibrary.simpleMessage(

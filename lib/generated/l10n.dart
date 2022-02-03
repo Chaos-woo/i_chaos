@@ -150,10 +150,10 @@ class S {
     );
   }
 
-  /// `Sub task`
+  /// `Sub task(s)`
   String get todo_edit_subtask_label {
     return Intl.message(
-      'Sub task',
+      'Sub task(s)',
       name: 'todo_edit_subtask_label',
       desc: '',
       args: [],
@@ -630,10 +630,10 @@ class S {
     );
   }
 
-  /// `Sub tasks`
+  /// `Sub task(s)`
   String get todo_card_detail_query_subtask_label {
     return Intl.message(
-      'Sub tasks',
+      'Sub task(s)',
       name: 'todo_card_detail_query_subtask_label',
       desc: '',
       args: [],

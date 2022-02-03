@@ -317,7 +317,7 @@ class WidgetTodoCard extends WidgetState {
         },
         child: Container(
           margin: const EdgeInsets.only(top: 5, bottom: 5),
-          width: 60,
+          width: 65,
           height: 20,
           decoration: const BoxDecoration(color: Color(0xFFE0E0E0), borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Row(
