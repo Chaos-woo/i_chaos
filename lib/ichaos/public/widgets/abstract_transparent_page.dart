@@ -53,14 +53,14 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
 
     leftStartDirection = leftStartDirection ?? true;
     // 初始根据进入方向来判断距离left的位置
-    _startPos = leftStartDirection! ? -widgetMaxWidth! : _screenWidth;
+    _startPos = leftStartDirection! ? -widgetMaxWidth! - leftPadding! : _screenWidth;
     reOpenRadio = reOpenRadio ?? 3;
-    _reOpenOrCloseFlagDistance = widgetMaxWidth! / reOpenRadio!;
+    _reOpenOrCloseFlagDistance = (widgetMaxWidth! + leftPadding!)/ reOpenRadio!;
     opacity = opacity ?? 0.3;
 
     _realStartPos = EdgeInsets.only(left: _startPos);
     // 结束位置根据进入方向来判断距离left的位置
-    EdgeInsets realEndPos = leftStartDirection! ? EdgeInsets.only(left: 0 + leftPadding!) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth! - leftPadding!);
+    EdgeInsets realEndPos = leftStartDirection! ? const EdgeInsets.only(left: 0) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth! - leftPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
@@ -107,7 +107,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
           onVerticalDragEnd: dragEndV,
           onTap: () {
             if (canBeCloseByTouchTransparentArea!) {
-              close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth!);
+              close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth! - leftPadding!);
             }
           },
           child: Container(
@@ -140,7 +140,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
 
   dragEnd(DragEndDetails details) {
     if ((leftStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
-        (!leftStartDirection! && _startPos > widgetMaxWidth! + _reOpenOrCloseFlagDistance!)) {
+        (!leftStartDirection! && _startPos > (widgetMaxWidth! + leftPadding!) + _reOpenOrCloseFlagDistance!)) {
       if (canBeCloseByTouchTransparentArea!) {
         close(_startPos);
       } else {
@@ -162,7 +162,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   }
 
   popAndReturn(R? result) {
-    closeAndReturn(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth!, result);
+    closeAndReturn(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth! - leftPadding!, result);
   }
 
   reOpen(double start) {
@@ -229,14 +229,14 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
 
     topStartDirection = topStartDirection ?? true;
     // 初始根据进入方向来判断距离top的位置
-    _startPos = topStartDirection! ? -widgetMaxHeight! : _screenHeight;
+    _startPos = topStartDirection! ? -widgetMaxHeight! - topPadding! : _screenHeight;
     reOpenRadio = reOpenRadio ?? 3;
-    _reOpenOrCloseFlagDistance = widgetMaxHeight! / reOpenRadio!;
+    _reOpenOrCloseFlagDistance = (widgetMaxHeight! + topPadding!)/ reOpenRadio!;
     opacity = opacity ?? 0.3;
 
     _realStartPos = EdgeInsets.only(top: _startPos);
     // 结束位置根据进入方向来判断距离top的位置
-    EdgeInsets realEndPos = topStartDirection! ? EdgeInsets.only(top: 0 + topPadding!) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight! - topPadding!);
+    EdgeInsets realEndPos = topStartDirection! ? EdgeInsets.only(top: 0) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight! - topPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
@@ -283,7 +283,7 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
           onVerticalDragEnd: dragEndV,
           onTap: () {
             if (canBeCloseByTouchTransparentArea!) {
-              close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight!);
+              close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight! - topPadding!);
             }
           },
           child: Container(
@@ -319,7 +319,7 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
   }
 
   popAndReturn(R? result) {
-    closeAndReturn(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight!, result);
+    closeAndReturn(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight! - topPadding!, result);
   }
 
   reOpen(double start) {
@@ -342,7 +342,7 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
 
   dragEndV(DragEndDetails details) {
     if ((topStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
-        (!topStartDirection! && _startPos > widgetMaxHeight! + _reOpenOrCloseFlagDistance!)) {
+        (!topStartDirection! && _startPos > (widgetMaxHeight! + topPadding!) + _reOpenOrCloseFlagDistance!)) {
       if (canBeCloseByTouchTransparentArea!) {
         close(_startPos);
       } else {

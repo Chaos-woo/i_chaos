@@ -83,14 +83,17 @@ class SingleTodoPage extends PageState {
                     )
                   ],
                 ),
-                body: KeyboardAvoider(
-                  autoScroll: true,
-                  child: Selector<SingleTodoVM, SingleTodoVM>(
-                    selector: (ctx, vm) => vm,
-                    shouldRebuild: (pre, next) => true,
-                    builder: (ctx, vm, _) {
-                      return _buildForm(vm);
-                    },
+                body: Container(
+                  color: Colors.grey[100],
+                  child: KeyboardAvoider(
+                    autoScroll: true,
+                    child: Selector<SingleTodoVM, SingleTodoVM>(
+                      selector: (ctx, vm) => vm,
+                      shouldRebuild: (pre, next) => true,
+                      builder: (ctx, vm, _) {
+                        return _buildForm(vm);
+                      },
+                    ),
                   ),
                 ),
               );
