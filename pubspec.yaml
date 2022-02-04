@@ -224,7 +224,7 @@ dependencies:
   # 组件链式调用
   widget_chain: ^0.1.0
   # 组件滑动操作
-  flutter_slidable: ^1.0.0-dev.8
+  flutter_slidable: ^1.2.0
   # 日历组件
   table_calendar: ^3.0.3
   # badges / mini chip

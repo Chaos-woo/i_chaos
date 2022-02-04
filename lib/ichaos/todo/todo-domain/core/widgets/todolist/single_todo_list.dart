@@ -9,6 +9,7 @@ import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
@@ -88,6 +89,7 @@ class WidgetSingleTodoList extends WidgetState {
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onModify: (ctx, vo) {
                 push(SingleTodoPage(vo, onSave: () {
+                  Provider.of<DraftListVM>(context,listen: false).refresh();
                   filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
                 }));
               }, onCompleted: (ctx, vo) {
@@ -188,7 +190,7 @@ class WidgetSingleTodoList extends WidgetState {
                   children: [
                     ImageHelper.placeHolderLocalSVGImg(imageName: 'image_complete', width: 100, height: 100),
                     Text(S.of(context).todo_list_placeholder_completed,
-                        style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
+                        style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
                   ],
                 )
               : Text(

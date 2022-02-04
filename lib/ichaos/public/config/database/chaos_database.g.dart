@@ -197,6 +197,17 @@ class _$TodoDao extends TodoDao {
   }
 
   @override
+  Future<void> deleteByIds(List<int> ids) async {
+    const offset = 1;
+    final _sqliteVariablesForIds =
+        Iterable<String>.generate(ids.length, (i) => '?${i + offset}')
+            .join(',');
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM tb_todo WHERE id in (' + _sqliteVariablesForIds + ')',
+        arguments: [...ids]);
+  }
+
+  @override
   Future<void> deleteAll() async {
     await _queryAdapter.queryNoReturn('DELETE FROM tb_todo');
   }
@@ -227,6 +238,26 @@ class _$TodoDao extends TodoDao {
             createTime: row['create_time'] as String?,
             updateTime: row['update_time'] as String),
         arguments: [start, end]);
+  }
+
+  @override
+  Future<List<TodoEntity>> listByNoValidTime() async {
+    return _queryAdapter.queryList(
+        'SELECT * FROM tb_todo WHERE valid_time is null or valid_time = \'\'',
+        mapper: (Map<String, Object?> row) => TodoEntity(row['level'] as int,
+            (row['completed'] as int) != 0, row['period'] as int,
+            content: row['content'] as String,
+            validTime: row['valid_time'] as String?,
+            needPromptTime: row['need_prompt_time'] as String?,
+            location: row['location'] as String?,
+            completedTime: row['completed_time'] as String?,
+            tag: row['tag'] as int?,
+            subTask: row['subTask'] as String?,
+            remark: row['remark'] as String?,
+            promptEventId: row['prompt_event_id'] as String?,
+            id: row['id'] as int?,
+            createTime: row['create_time'] as String?,
+            updateTime: row['update_time'] as String));
   }
 
   @override

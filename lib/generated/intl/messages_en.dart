@@ -117,6 +117,39 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Right? (O_O)?"),
         "todo_card_toast_unaccomplished_text2":
             MessageLookupByLibrary.simpleMessage("Task"),
+        "todo_draft_appbar_option_delete_all":
+            MessageLookupByLibrary.simpleMessage("Delete all"),
+        "todo_draft_appbar_option_delete_all_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "todo_draft_appbar_option_delete_all_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Yes"),
+        "todo_draft_appbar_option_delete_all_tip_content":
+            MessageLookupByLibrary.simpleMessage(
+                "Delete all draft and can not found any ?"),
+        "todo_draft_appbar_option_delete_all_tip_title":
+            MessageLookupByLibrary.simpleMessage("Delete all draft ?"),
+        "todo_draft_list_item_option_delete":
+            MessageLookupByLibrary.simpleMessage("Delete"),
+        "todo_draft_list_item_option_delete_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "todo_draft_list_item_option_delete_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Yes"),
+        "todo_draft_list_item_option_delete_tip_content":
+            MessageLookupByLibrary.simpleMessage("Delete draft ?"),
+        "todo_draft_list_item_option_delete_tip_title":
+            MessageLookupByLibrary.simpleMessage("Delete draft ?"),
+        "todo_draft_list_item_option_modify":
+            MessageLookupByLibrary.simpleMessage("Modify"),
+        "todo_draft_list_item_option_move_to_today":
+            MessageLookupByLibrary.simpleMessage("Move to Today"),
+        "todo_draft_list_item_option_move_to_tomorrow":
+            MessageLookupByLibrary.simpleMessage("Move to Tomorrow"),
+        "todo_draft_list_item_option_select_date":
+            MessageLookupByLibrary.simpleMessage("Select Date"),
+        "todo_draft_list_not_found_tip_text":
+            MessageLookupByLibrary.simpleMessage("Not found any draft..."),
+        "todo_draft_page_appbar_title":
+            MessageLookupByLibrary.simpleMessage("Draft list"),
         "todo_edit_appbar_title_add":
             MessageLookupByLibrary.simpleMessage("New ToDO"),
         "todo_edit_appbar_title_edit":

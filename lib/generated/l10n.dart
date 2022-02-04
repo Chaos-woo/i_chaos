@@ -900,6 +900,166 @@ class S {
     );
   }
 
+  /// `Draft list`
+  String get todo_draft_page_appbar_title {
+    return Intl.message(
+      'Draft list',
+      name: 'todo_draft_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all`
+  String get todo_draft_appbar_option_delete_all {
+    return Intl.message(
+      'Delete all',
+      name: 'todo_draft_appbar_option_delete_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all draft ?`
+  String get todo_draft_appbar_option_delete_all_tip_title {
+    return Intl.message(
+      'Delete all draft ?',
+      name: 'todo_draft_appbar_option_delete_all_tip_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all draft and can not found any ?`
+  String get todo_draft_appbar_option_delete_all_tip_content {
+    return Intl.message(
+      'Delete all draft and can not found any ?',
+      name: 'todo_draft_appbar_option_delete_all_tip_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get todo_draft_appbar_option_delete_all_tip_btn_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todo_draft_appbar_option_delete_all_tip_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todo_draft_appbar_option_delete_all_tip_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todo_draft_appbar_option_delete_all_tip_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move to Today`
+  String get todo_draft_list_item_option_move_to_today {
+    return Intl.message(
+      'Move to Today',
+      name: 'todo_draft_list_item_option_move_to_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move to Tomorrow`
+  String get todo_draft_list_item_option_move_to_tomorrow {
+    return Intl.message(
+      'Move to Tomorrow',
+      name: 'todo_draft_list_item_option_move_to_tomorrow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get todo_draft_list_item_option_select_date {
+    return Intl.message(
+      'Select Date',
+      name: 'todo_draft_list_item_option_select_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify`
+  String get todo_draft_list_item_option_modify {
+    return Intl.message(
+      'Modify',
+      name: 'todo_draft_list_item_option_modify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get todo_draft_list_item_option_delete {
+    return Intl.message(
+      'Delete',
+      name: 'todo_draft_list_item_option_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete draft ?`
+  String get todo_draft_list_item_option_delete_tip_title {
+    return Intl.message(
+      'Delete draft ?',
+      name: 'todo_draft_list_item_option_delete_tip_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete draft ?`
+  String get todo_draft_list_item_option_delete_tip_content {
+    return Intl.message(
+      'Delete draft ?',
+      name: 'todo_draft_list_item_option_delete_tip_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get todo_draft_list_item_option_delete_tip_btn_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todo_draft_list_item_option_delete_tip_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todo_draft_list_item_option_delete_tip_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todo_draft_list_item_option_delete_tip_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not found any draft...`
+  String get todo_draft_list_not_found_tip_text {
+    return Intl.message(
+      'Not found any draft...',
+      name: 'todo_draft_list_not_found_tip_text',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Setting`
   String get setting_page_appbar_title {
     return Intl.message(

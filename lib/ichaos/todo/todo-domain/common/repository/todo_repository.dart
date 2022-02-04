@@ -28,13 +28,18 @@ class TodoRepository extends RootRepository {
     return await todoDao.updateTodo(vo.toEntity());
   }
 
-  Future<void> deleteTodoById(TodoVO vo) async {
+  Future<void> deleteTodoByVO(TodoVO vo) async {
     final todoDao = await getTodoDao();
     if(vo.id != null) {
       todoDao.deleteById(vo.id!);
     } else {
       throw Exception(ErrorCode.internalCodeError.customToString());
     }
+  }
+
+  Future<void> deleteTodoById(int id) async {
+    final todoDao = await getTodoDao();
+    todoDao.deleteById(id);
   }
 
   Future<void> deleteAllTodo({DateTime? start, DateTime? end}) async {
@@ -46,5 +51,16 @@ class TodoRepository extends RootRepository {
     } else if (start != null && end == null) {
       todoDao.deleteAllOfDay(start.yyyyMMddHHmmss, DateTime.now().yyyyMMddHHmmss);
     }
+  }
+
+  Future<List<TodoVO>> listDraft() async {
+    final todoDao = await getTodoDao();
+    List<TodoEntity> todoEntities = await todoDao.listByNoValidTime();
+    return todoEntities.map((entity) => entity.fromEntity()).toList();
+  }
+
+  Future<void> deleteByIds(List<int> ids) async {
+    final todoDao = await getTodoDao();
+    todoDao.deleteByIds(ids);
   }
 }

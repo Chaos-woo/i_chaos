@@ -66,7 +66,7 @@ class SingleTodoPage extends PageState {
                         onPressed: () {
                           // 展示重置按钮
                           WWDialog.showTopDialog(context,
-                              dialogWidth: 100,
+                              dialogWidth: ScreenUtil.getInstance().screenWidth / 2,
                               triangleType: DiaLogTriangleType.right,
                               bgColor: Colors.white,
                               contentColor: Colors.black,

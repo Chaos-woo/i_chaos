@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
@@ -16,9 +18,11 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
   late AnimationController _btnAnimationController;
   late Animation<Offset> _offsetAnimation;
   late TodoHomeFloatingActionBtnVM _actionBtnVM;
+  late VoidCallback? _backToHomePageCallback;
 
-  TodoHomeFloatingActionBtn({required TodoHomeFloatingActionBtnVM actionBtnVM}) {
+  TodoHomeFloatingActionBtn({required TodoHomeFloatingActionBtnVM actionBtnVM, VoidCallback? backToHomePageCallback}) {
     _actionBtnVM = actionBtnVM;
+    _backToHomePageCallback = backToHomePageCallback;
   }
 
   @override
@@ -80,10 +84,11 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                   FloatingActionButton(
                     child: const Icon(Icons.add),
                     heroTag: 'add',
-                    onPressed: () {
-                      push(SingleTodoPage(TodoVO.empty(), onSave: () {
-                        filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
+                    onPressed: () async {
+                      var result = await push(SingleTodoPage(TodoVO.empty(), onSave: () {
+                        _backToHomePageCallback?.call();
                       }), animation: PageAnimation.Slide);
+                      _backToHomePageCallback?.call();
                     },
                   ),
                 ],

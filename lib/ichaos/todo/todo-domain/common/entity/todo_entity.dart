@@ -62,4 +62,9 @@ class TodoEntity extends RootEntity<TodoVO>{
     taskList.sort((SubTaskVO a, SubTaskVO b) => a.createTime.isAfter(b.createTime) ? 1 : -1);
     return taskList;
   }
+
+  @override
+  String toString() {
+    return 'TodoEntity{content: $content, validTime: $validTime, needPromptTime: $needPromptTime, location: $location, level: $level, completed: $completed, completedTime: $completedTime, period: $period, tag: $tag, remark: $remark, subTask: $subTask, promptEventId: $promptEventId}';
+  }
 }

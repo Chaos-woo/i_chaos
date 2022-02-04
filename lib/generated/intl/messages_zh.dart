@@ -113,6 +113,38 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("点错了吧? 明明完成了 (O_O)?"),
         "todo_card_toast_unaccomplished_text2":
             MessageLookupByLibrary.simpleMessage("任务"),
+        "todo_draft_appbar_option_delete_all":
+            MessageLookupByLibrary.simpleMessage("全部删除"),
+        "todo_draft_appbar_option_delete_all_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "todo_draft_appbar_option_delete_all_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
+        "todo_draft_appbar_option_delete_all_tip_content":
+            MessageLookupByLibrary.simpleMessage("是否删除全部草稿 ?"),
+        "todo_draft_appbar_option_delete_all_tip_title":
+            MessageLookupByLibrary.simpleMessage("删除全部草稿 ?"),
+        "todo_draft_list_item_option_delete":
+            MessageLookupByLibrary.simpleMessage("删除"),
+        "todo_draft_list_item_option_delete_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "todo_draft_list_item_option_delete_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
+        "todo_draft_list_item_option_delete_tip_content":
+            MessageLookupByLibrary.simpleMessage("是否删除草稿 ?"),
+        "todo_draft_list_item_option_delete_tip_title":
+            MessageLookupByLibrary.simpleMessage("删除草稿 ?"),
+        "todo_draft_list_item_option_modify":
+            MessageLookupByLibrary.simpleMessage("修改"),
+        "todo_draft_list_item_option_move_to_today":
+            MessageLookupByLibrary.simpleMessage("移至今日"),
+        "todo_draft_list_item_option_move_to_tomorrow":
+            MessageLookupByLibrary.simpleMessage("移至明日"),
+        "todo_draft_list_item_option_select_date":
+            MessageLookupByLibrary.simpleMessage("选择日期"),
+        "todo_draft_list_not_found_tip_text":
+            MessageLookupByLibrary.simpleMessage("没有找到任何草稿喔~"),
+        "todo_draft_page_appbar_title":
+            MessageLookupByLibrary.simpleMessage("草稿箱"),
         "todo_edit_appbar_title_add":
             MessageLookupByLibrary.simpleMessage("新增"),
         "todo_edit_appbar_title_edit":
