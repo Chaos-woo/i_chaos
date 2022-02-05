@@ -22,7 +22,7 @@ class PageSettingHome extends PageState with AutomaticKeepAliveClientMixin {
       OptionBarItem(S.of(context).setting_option_language_text, icon: AliIcons.IconInt, rightIcon: AliIcons.IconEnter, targetPageBuilder: () async {
         return await push(PageLanguageSetting());
       }),
-      OptionBarItem(S.of(context).setting_option_theme_text, icon: AliIcons.IconFlipFill, rightIcon: AliIcons.IconEnter, ),
+      OptionBarItem(S.of(context).setting_option_theme_text, icon: AliIcons.IconFlipFill, ),
     ];
 
     Map<int, String> optionGroupTip = {

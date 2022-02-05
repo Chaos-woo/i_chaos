@@ -62,9 +62,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_level_label":
             MessageLookupByLibrary.simpleMessage("Emergency degree"),
         "todo_card_detail_query_location_label":
-            MessageLookupByLibrary.simpleMessage("Location infomation"),
+            MessageLookupByLibrary.simpleMessage("Location information"),
         "todo_card_detail_query_not_completed":
-            MessageLookupByLibrary.simpleMessage("Not finished"),
+            MessageLookupByLibrary.simpleMessage("Doing"),
         "todo_card_detail_query_subtask_label":
             MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_card_detail_query_title":
@@ -147,7 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_draft_list_item_option_select_date":
             MessageLookupByLibrary.simpleMessage("Select Date"),
         "todo_draft_list_not_found_tip_text":
-            MessageLookupByLibrary.simpleMessage("Not found any draft..."),
+            MessageLookupByLibrary.simpleMessage("Not found any draft ..."),
         "todo_draft_page_appbar_title":
             MessageLookupByLibrary.simpleMessage("Draft list"),
         "todo_edit_appbar_title_add":
@@ -205,7 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_filtered_tab_bar_loading_label":
             MessageLookupByLibrary.simpleMessage("Searching"),
         "todo_filtered_tab_bar_state_active":
-            MessageLookupByLibrary.simpleMessage("Underway"),
+            MessageLookupByLibrary.simpleMessage("Doing"),
         "todo_filtered_tab_bar_state_all":
             MessageLookupByLibrary.simpleMessage("All"),
         "todo_filtered_tab_bar_state_completed":

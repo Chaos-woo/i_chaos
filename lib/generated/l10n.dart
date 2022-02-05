@@ -600,10 +600,10 @@ class S {
     );
   }
 
-  /// `Not finished`
+  /// `Doing`
   String get todo_card_detail_query_not_completed {
     return Intl.message(
-      'Not finished',
+      'Doing',
       name: 'todo_card_detail_query_not_completed',
       desc: '',
       args: [],
@@ -620,10 +620,10 @@ class S {
     );
   }
 
-  /// `Location infomation`
+  /// `Location information`
   String get todo_card_detail_query_location_label {
     return Intl.message(
-      'Location infomation',
+      'Location information',
       name: 'todo_card_detail_query_location_label',
       desc: '',
       args: [],
@@ -690,10 +690,10 @@ class S {
     );
   }
 
-  /// `Underway`
+  /// `Doing`
   String get todo_filtered_tab_bar_state_active {
     return Intl.message(
-      'Underway',
+      'Doing',
       name: 'todo_filtered_tab_bar_state_active',
       desc: '',
       args: [],
@@ -1050,10 +1050,10 @@ class S {
     );
   }
 
-  /// `Not found any draft...`
+  /// `Not found any draft ...`
   String get todo_draft_list_not_found_tip_text {
     return Intl.message(
-      'Not found any draft...',
+      'Not found any draft ...',
       name: 'todo_draft_list_not_found_tip_text',
       desc: '',
       args: [],
