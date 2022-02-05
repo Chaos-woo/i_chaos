@@ -24,6 +24,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   late Animation animation;
   late EdgeInsets _realStartPos;
   final double _screenWidth = ScreenUtil.getInstance().screenWidth;
+  final ScreenUtil _scUtil = ScreenUtil.getInstance();
 
   // 组件初始位置
   late double _startPos;
@@ -55,7 +56,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
     // 初始根据进入方向来判断距离left的位置
     _startPos = leftStartDirection! ? -widgetMaxWidth! - leftPadding! : _screenWidth;
     reOpenRadio = reOpenRadio ?? 3;
-    _reOpenOrCloseFlagDistance = (widgetMaxWidth! + leftPadding!)/ reOpenRadio!;
+    _reOpenOrCloseFlagDistance = (widgetMaxWidth! + leftPadding!) / reOpenRadio!;
     opacity = opacity ?? 0.3;
 
     _realStartPos = EdgeInsets.only(left: _startPos);
@@ -139,13 +140,8 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   }
 
   dragEnd(DragEndDetails details) {
-    if ((leftStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
-        (!leftStartDirection! && _startPos > (widgetMaxWidth! + leftPadding!) + _reOpenOrCloseFlagDistance!)) {
-      if (canBeCloseByTouchTransparentArea!) {
-        close(_startPos);
-      } else {
-        reOpen(_startPos);
-      }
+    if ((startPoint.dx - lastPoint.dx).abs() > _reOpenOrCloseFlagDistance!) {
+      close(_startPos);
     } else {
       reOpen(_startPos);
     }
@@ -341,13 +337,8 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
   }
 
   dragEndV(DragEndDetails details) {
-    if ((topStartDirection! && _startPos < _reOpenOrCloseFlagDistance!) ||
-        (!topStartDirection! && _startPos > (widgetMaxHeight! + topPadding!) + _reOpenOrCloseFlagDistance!)) {
-      if (canBeCloseByTouchTransparentArea!) {
-        close(_startPos);
-      } else {
-        reOpen(_startPos);
-      }
+    if ((startPoint.dy - lastPoint.dy).abs() < _reOpenOrCloseFlagDistance!) {
+      close(_startPos);
     } else {
       reOpen(_startPos);
     }
