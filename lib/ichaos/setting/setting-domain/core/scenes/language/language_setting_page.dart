@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -52,6 +53,7 @@ class PageLanguageSetting extends PageState {
             }),
           ];
           return Container(
+            width: ScreenUtil.getInstance().screenWidth,
             color: Colors.grey[300],
             child: OptionBarList(optionBarItemGroups: [lanOptionItems]),
           );

@@ -1,13 +1,27 @@
 
 import 'dart:async';
 import 'package:floor/floor.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/tag_entity.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/todo_entity.dart';
-import '../../../todo/todo-infrastructure/repository/todo_dao.dart';
+import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/tag_dao.dart';
+import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/todo_dao.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'chaos_database.g.dart'; // the generated code will be there
 
-@Database(version: 1, entities: [TodoEntity])
+///
+/// 新增表操作：
+/// 1.新增entity类
+/// 2.新增对应的vo类
+/// 3.新增对应的dao类(基础操作)
+/// 4.新增对应的repository类(业务)
+/// 5.在此处新增对应的类
+/// 6.RootRepository类增加对应的dao类获取
+/// 7.执行命令：flutter packages pub run build_runner build --delete-conflicting-outputs
+///
+
+@Database(version: 1, entities: [TodoEntity, TagEntity])
 abstract class ChaosDatabase extends FloorDatabase {
   TodoDao get todoDao;
+  TagDao get tagDao;
 }

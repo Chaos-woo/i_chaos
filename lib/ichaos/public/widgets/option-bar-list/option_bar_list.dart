@@ -17,20 +17,23 @@ class OptionBarList extends StatelessWidget {
   // 选项条高度
   late double optionItemHeight;
 
+  // 选项条背景色
+  late Color optionBarItemColor;
+
   OptionBarList(
       {required List<List<OptionBarItem>> optionBarItemGroups,
       Map<int, String>? optionGroupTips,
       TextStyle tipTextStyle = const TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Colors.black54),
-      double optionItemHeight = 40}) {
+      double optionItemHeight = 40, Color optionBarItemColor = Colors.white}) {
     this.optionBarItemGroups = optionBarItemGroups;
     this.optionGroupTips = optionGroupTips;
     this.tipTextStyle = tipTextStyle;
     this.optionItemHeight = optionItemHeight;
+    this.optionBarItemColor = optionBarItemColor;
   }
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil _scInstance = ScreenUtil.getInstance();
     int optionItemCnt = 0;
     for (int i = 0; i < optionBarItemGroups.length; i++) {
       optionItemCnt += optionBarItemGroups[i].length;
@@ -41,7 +44,6 @@ class OptionBarList extends StatelessWidget {
     }
 
     return Container(
-      width: _scInstance.screenWidth,
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           List<OptionBarItem> optionItemGroup = optionBarItemGroups[index];
@@ -51,12 +53,14 @@ class OptionBarList extends StatelessWidget {
           if (optionGroupTips != null) {
             String? tip = optionGroupTips![index];
             if (tip != null) {
-              widgetOptionItems.add(SizedBox(
-                width: _scInstance.screenWidth,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(tip, style: tipTextStyle),
-                ),
+              widgetOptionItems.add(Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(tip, style: tipTextStyle),
+                  )
+                ],
               ));
               widgetOptionItems.add(const SizedBox(
                 height: 3,
@@ -89,7 +93,7 @@ class OptionBarList extends StatelessWidget {
   }
 
   Widget _widgetOptionItem(OptionBarItem item) {
-    double iconSize = 20;
+    double iconSize = item.textStyle!.fontSize! + 2;
 
     Widget leftWidgetRow = Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -143,7 +147,7 @@ class OptionBarList extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        color: Colors.white,
+        color: optionBarItemColor,
         height: optionItemHeight,
         child: Center(
           child: Row(

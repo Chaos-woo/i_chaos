@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/generated/l10n.dart';
@@ -49,6 +50,7 @@ class PageSettingHome extends PageState with AutomaticKeepAliveClientMixin {
       ),
       body: switchStatusBar2Dark(
         child: Container(
+          width: ScreenUtil.getInstance().screenWidth,
           color: Colors.grey[300],
           child: OptionBarList(optionBarItemGroups: [optionItems], optionGroupTips: optionGroupTip,),
         ),

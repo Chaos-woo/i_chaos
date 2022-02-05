@@ -1,9 +1,11 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/todo_drawer_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar_image.dart';
@@ -13,7 +15,6 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_t
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_todo_list_vm.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
-import 'drawer_page.dart';
 import 'package:provider/provider.dart';
 
 // ToDO主页
@@ -184,7 +185,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
               icon: const Icon(AliIcons.IconTasklistFill),
               onPressed: () async {
                 await _draftListVM.refresh();
-                await push(PageDraftList(_draftListVM, _singleTodoListVM));
+                await push(PageDraftList(_draftListVM, _singleTodoListVM), animation: PageAnimation.Slide);
                 await _draftListVM.refresh();
                 filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
               },

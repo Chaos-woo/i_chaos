@@ -24,7 +24,6 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   late Animation animation;
   late EdgeInsets _realStartPos;
   final double _screenWidth = ScreenUtil.getInstance().screenWidth;
-  final ScreenUtil _scUtil = ScreenUtil.getInstance();
 
   // 组件初始位置
   late double _startPos;
