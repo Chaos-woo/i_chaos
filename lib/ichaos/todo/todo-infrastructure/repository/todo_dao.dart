@@ -35,4 +35,7 @@ abstract class TodoDao {
 
   @update
   Future<int> updateTodo(TodoEntity todo);
+
+  @Query('UPDATE $_todoEntityTableName SET tag=null WHERE tag=:tagId')
+  Future<int?> updateTodoTag(int tagId);
 }

@@ -4,6 +4,7 @@ import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_bar_item.dart';
 import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_bar_list.dart';
+import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_group_tip.dart';
 import 'package:i_chaos/ichaos/setting/setting-domain/core/scenes/language/language_setting_page.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
@@ -26,8 +27,8 @@ class PageSettingHome extends PageState with AutomaticKeepAliveClientMixin {
       OptionBarItem(S.of(context).setting_option_theme_text, icon: AliIcons.IconFlipFill, ),
     ];
 
-    Map<int, String> optionGroupTip = {
-      0: S.of(context).setting_page_group_tip_text1
+    Map<int, OptionGroupTipTool> optionGroupTip = {
+      0: OptionGroupTipTool(tip: S.of(context).setting_page_group_tip_text1)
     };
 
     return Scaffold(

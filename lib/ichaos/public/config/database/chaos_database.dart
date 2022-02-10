@@ -17,10 +17,12 @@ part 'chaos_database.g.dart'; // the generated code will be there
 /// 4.新增对应的repository类(业务)
 /// 5.在此处新增对应的类
 /// 6.RootRepository类增加对应的dao类获取
-/// 7.执行命令：flutter packages pub run build_runner build --delete-conflicting-outputs
+/// 7.参考https://stackoverflow.com/questions/63347032/how-do-you-upgrade-a-flutter-app-with-sqlite-database编写数据库(root_repository.dart)升级回调(onCreate不需要处理，floor框架已自动生成)
+/// 8.@Database版本号更改
+/// *.执行命令：flutter packages pub run build_runner build --delete-conflicting-outputs
 ///
 
-@Database(version: 1, entities: [TodoEntity, TagEntity])
+@Database(version: 2, entities: [TodoEntity, TagEntity])
 abstract class ChaosDatabase extends FloorDatabase {
   TodoDao get todoDao;
   TagDao get tagDao;

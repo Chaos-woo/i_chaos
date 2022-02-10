@@ -24,6 +24,12 @@ abstract class TagDao {
   @Query('DELETE FROM $_tagEntityTableName')
   Future<void> deleteAll();
 
+  @Query('SELECT * FROM $_tagEntityTableName WHERE name = :name')
+  Future<TagEntity?> findByName(String name);
+
   @update
-  Future<int> updateTodo(TagEntity tag);
+  Future<int> updateTag(TagEntity tag);
+
+  @update
+  Future<int> updateTags(List<TagEntity> tags);
 }

@@ -63,4 +63,9 @@ class TodoRepository extends RootRepository {
     final todoDao = await getTodoDao();
     todoDao.deleteByIds(ids);
   }
+
+  Future<int?> clearTodoTagByTagId(int tagId) async {
+    final todoDao = await getTodoDao();
+    return await todoDao.updateTodoTag(tagId);
+  }
 }

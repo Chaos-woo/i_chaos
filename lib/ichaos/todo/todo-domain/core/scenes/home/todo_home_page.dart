@@ -6,6 +6,7 @@ import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/todo_drawer_page.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/tag/todo_tag_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar_image.dart';
@@ -24,43 +25,52 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
 
   late SingleTodoListVM _singleTodoListVM;
   late DraftListVM _draftListVM;
+  late TodoTagVM _todoTagVM;
 
   @override
   void initState() {
     super.initState();
     _singleTodoListVM = SingleTodoListVM();
     _draftListVM = DraftListVM();
+    _todoTagVM = TodoTagVM();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return switchStatusBar2Dark(
-        child: ProviderWidget2<SingleTodoListVM, DraftListVM>(
-      model1: _singleTodoListVM,
-      model2: _draftListVM,
-      onModelReady: (singleTodoListVM, draftListVM) {
-        singleTodoListVM.initData();
-        draftListVM.refresh();
-      },
-      builder: (ctx, singleTodoListVM, draftListVM, child) {
-        return ProviderWidget<FilteredTabBarVM>(
-            model: FilteredTabBarVM(singleTodoListVM: singleTodoListVM),
-            builder: (ctx, filteredTabBarVM, child) {
-              return ProviderWidget<CalendarBarVM>(
-                model: CalendarBarVM(filteredTabBarVM: filteredTabBarVM),
-                builder: (ctx, calendarBarVM, _) {
-                  return ProviderWidget<TodoHomeFloatingActionBtnVM>(
-                    model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
-                    builder: (ctx, actionBtnVM, _) {
-                      return _getMainScaffold(ctx);
-                    },
-                  );
+        child: ProviderWidget<TodoTagVM>(
+            model: _todoTagVM,
+            onModelReady: (todoTagVM) {
+              todoTagVM.refresh();
+            },
+            builder: (ctx, tagVM, _) {
+              return ProviderWidget2<SingleTodoListVM, DraftListVM>(
+                model1: _singleTodoListVM,
+                model2: _draftListVM,
+                onModelReady: (singleTodoListVM, draftListVM) {
+                  singleTodoListVM.initData();
+                  draftListVM.refresh();
+                },
+                builder: (ctx, singleTodoListVM, draftListVM, child) {
+                  return ProviderWidget<FilteredTabBarVM>(
+                      model: FilteredTabBarVM(singleTodoListVM: singleTodoListVM),
+                      builder: (ctx, filteredTabBarVM, child) {
+                        return ProviderWidget<CalendarBarVM>(
+                          model: CalendarBarVM(filteredTabBarVM: filteredTabBarVM),
+                          builder: (ctx, calendarBarVM, _) {
+                            return ProviderWidget<TodoHomeFloatingActionBtnVM>(
+                              model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
+                              builder: (ctx, actionBtnVM, _) {
+                                return _getMainScaffold(ctx);
+                              },
+                            );
+                          },
+                        );
+                      });
                 },
               );
-            });
-      },
-    ));
+            }));
   }
 
   // 获取主首页结构组件
@@ -121,7 +131,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
     return AppBar(
       leading: InkWell(
         onTap: () {
-          push(PageTodoDrawer());
+          push(PageTodoDrawer(_todoTagVM, _singleTodoListVM));
         },
         child: const Icon(Icons.widgets),
       ),

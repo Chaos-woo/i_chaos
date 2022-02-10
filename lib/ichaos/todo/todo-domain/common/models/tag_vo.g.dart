@@ -11,7 +11,7 @@ TagVO _$TagVOFromJson(Map<String, dynamic> json) => TagVO(
       DateTime.parse(json['createTime'] as String),
       DateTime.parse(json['updateTime'] as String),
       json['name'] as String,
-      json['colorRGBA'] as String,
+      const _ColorConverter().fromJson(json['colorRGBA'] as String),
       json['order'] as int,
     );
 
@@ -20,6 +20,6 @@ Map<String, dynamic> _$TagVOToJson(TagVO instance) => <String, dynamic>{
       'createTime': instance.createTime.toIso8601String(),
       'updateTime': instance.updateTime.toIso8601String(),
       'name': instance.name,
-      'colorRGBA': instance.colorRGBA,
+      'colorRGBA': const _ColorConverter().toJson(instance.colorRGBA),
       'order': instance.order,
     };

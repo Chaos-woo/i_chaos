@@ -88,7 +88,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
         selectedList = [];
         break;
     }
-    SortUnit.sort(selectedList, _defaultOrders);
+    SortUnit.sortTodo(selectedList, _defaultOrders);
     return selectedList;
   }
 
@@ -150,6 +150,10 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
   // 事件更新
   void updateTodo(TodoVO vo) {
     _todoRepo.updateTodo(vo);
+  }
+
+  Future<void> clearTodoTag(int tagId) async {
+    await _todoRepo.clearTodoTagByTagId(tagId);
   }
 
 }

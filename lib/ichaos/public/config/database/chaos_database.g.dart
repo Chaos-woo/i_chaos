@@ -68,7 +68,7 @@ class _$ChaosDatabase extends ChaosDatabase {
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
-      version: 1,
+      version: 2,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
         await callback?.onConfigure?.call(database);
@@ -270,6 +270,13 @@ class _$TodoDao extends TodoDao {
   }
 
   @override
+  Future<int?> updateTodoTag(int tagId) async {
+    await _queryAdapter.queryNoReturn(
+        'UPDATE tb_todo SET tag=null WHERE tag=?1',
+        arguments: [tagId]);
+  }
+
+  @override
   Future<int> insertTodo(TodoEntity todo) {
     return _todoEntityInsertionAdapter.insertAndReturnId(
         todo, OnConflictStrategy.abort);
@@ -365,14 +372,32 @@ class _$TagDao extends TagDao {
   }
 
   @override
+  Future<TagEntity?> findByName(String name) async {
+    return _queryAdapter.query('SELECT * FROM tb_tag WHERE name = ?1',
+        mapper: (Map<String, Object?> row) => TagEntity(
+            row['name'] as String, row['color_rgba'] as String,
+            order: row['order'] as int,
+            id: row['id'] as int?,
+            createTime: row['create_time'] as String?,
+            updateTime: row['update_time'] as String),
+        arguments: [name]);
+  }
+
+  @override
   Future<int> insertTag(TagEntity tag) {
     return _tagEntityInsertionAdapter.insertAndReturnId(
         tag, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> updateTodo(TagEntity tag) {
+  Future<int> updateTag(TagEntity tag) {
     return _tagEntityUpdateAdapter.updateAndReturnChangedRows(
         tag, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<int> updateTags(List<TagEntity> tags) {
+    return _tagEntityUpdateAdapter.updateListAndReturnChangedRows(
+        tags, OnConflictStrategy.abort);
   }
 }

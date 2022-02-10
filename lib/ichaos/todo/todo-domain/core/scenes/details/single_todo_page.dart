@@ -426,9 +426,9 @@ class SingleTodoPage extends PageState {
                           onPressed: () async {
                             bool saveSuccess = await _singleTodoVM.save();
                             if (!saveSuccess) {
-                              SnackBarUtil.topBar(simpleContent: S.of(context).todo_edit_toast_save_failure);
+                              SnackBarUtil.snack(simpleContent: S.of(context).todo_edit_toast_save_failure);
                             } else {
-                              SnackBarUtil.topBar(simpleContent: S.of(context).todo_edit_toast_save_success);
+                              SnackBarUtil.snack(simpleContent: S.of(context).todo_edit_toast_save_success);
                               Future.delayed(const Duration(milliseconds: 5)).whenComplete(() {
                                 onSave?.call();
                                 pop();

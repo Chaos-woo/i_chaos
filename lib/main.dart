@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'dart:async';
 
 import 'package:flustars/flustars.dart';
@@ -63,10 +65,6 @@ class IChaosApp extends StatelessWidget {
       providers: providers,
       child: Consumer<LocaleModel>(
         builder: (ctx, localeModel, _) {
-          // 支持的多语言，默认中文优先
-//          List<Locale> supportedLocales = [const Locale.fromSubtags(languageCode: 'zh')];
-//          supportedLocales.addAll(S.delegate.supportedLocales.where((locale) => locale.languageCode != 'zh').toList());
-
           return MaterialApp(
             title: 'iChaos',
             theme: ThemeData(
@@ -84,8 +82,8 @@ class IChaosApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate //文本方向等
             ],
             supportedLocales: S.delegate.supportedLocales,
-            home: const OKToast(
-              child: MainScene(),
+            home: OKToast(
+              child: mainScene,
             ),
           );
         },
@@ -94,11 +92,19 @@ class IChaosApp extends StatelessWidget {
   }
 }
 
+MainScene mainScene = MainScene();
+
 class MainScene extends StatefulWidget {
-  const MainScene({Key? key}) : super(key: key);
+  MainScene({Key? key}) : super(key: key);
+
+  final _MainSceneState _mainSceneState = _MainSceneState();
+
+  void switchMainSceneTap(int tapIndex) {
+    _mainSceneState.switchTap(tapIndex);
+  }
 
   @override
-  _MainSceneState createState() => _MainSceneState();
+  _MainSceneState createState() => _mainSceneState;
 }
 
 class _MainSceneState extends State<MainScene> {
@@ -156,6 +162,14 @@ class _MainSceneState extends State<MainScene> {
     _pageController = PageController(initialPage: _currentIndex);
   }
 
+  void switchTap(int index) {
+    setState(() {
+      _currentIndex = index;
+      /// 保持页面状态，避免页面跳转时重复加载
+      _pageController.jumpToPage(_currentIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,12 +179,7 @@ class _MainSceneState extends State<MainScene> {
         items: _bottomBarItems,
         duration: const Duration(milliseconds: 800),
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-
-            /// 保持页面状态，避免页面跳转时重复加载
-            _pageController.jumpToPage(_currentIndex);
-          });
+          switchTap(index);
         },
       ),
       body: NoRippleOverScroll(
@@ -179,10 +188,7 @@ class _MainSceneState extends State<MainScene> {
           physics: const NeverScrollableScrollPhysics(),
           children: _tabPages,
           onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-              _pageController.jumpToPage(_currentIndex);
-            });
+            switchTap(index);
           },
         ),
       ),
@@ -191,6 +197,7 @@ class _MainSceneState extends State<MainScene> {
 }
 
 class Temporature extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Container(

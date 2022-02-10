@@ -26,8 +26,8 @@ class CalendarImage extends WidgetState {
         if (selectDate != null) {
           final calendarBarVM = Provider.of<CalendarBarVM>(context, listen: false);
           if (!calendarBarVM.selectDate.isSameDay(selectDate)) {
-            SnackBarUtil.topBar(simpleContent: '${S.of(context).todo_calendar_switch_toast_text1} ${selectDate.yyyyMMdd} ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*');
-            SnackBarUtil.topBar(textSpans: [
+            SnackBarUtil.snack(simpleContent: '${S.of(context).todo_calendar_switch_toast_text1} ${selectDate.yyyyMMdd} ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*');
+            SnackBarUtil.snack(textSpans: [
               TextSpan(text: '${S.of(context).todo_calendar_switch_toast_text1} ', style: SnackBarUtil.defaultStyle),
               TextSpan(text: selectDate.yyyyMMdd, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
               const TextSpan(text: ' ⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*', style: SnackBarUtil.defaultStyle)

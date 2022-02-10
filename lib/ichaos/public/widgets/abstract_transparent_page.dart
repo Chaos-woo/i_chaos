@@ -7,16 +7,23 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   /// 可自定义参数
   // 组件最大宽度
   late double? widgetMaxWidth;
+  late double? widgetMaxHeight;
+
   // 组件移动时间
   late int? animationDuration;
+
   // 进入方向
   late bool? leftStartDirection;
+
   // 组件左方padding或组件右方padding
   late double? leftPadding;
+
   // 关闭或重新打开距离标识比例
   late int? reOpenRadio;
+
   // 背景透明度
   late double? opacity;
+
   // 触摸透明区域是否可退出当前页
   late bool? canBeCloseByTouchTransparentArea;
 
@@ -38,6 +45,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   @override
   void initState() {
     widgetMaxWidth = null;
+    widgetMaxHeight = null;
     leftStartDirection = null;
     _realStartPos = const EdgeInsets.only(left: 0.0);
     animationDuration = 200;
@@ -51,6 +59,8 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
       throw Exception('transparent page[horizontal] max width can not be null');
     }
 
+    widgetMaxHeight = widgetMaxWidth ?? ScreenUtil.getInstance().screenHeight;
+
     leftStartDirection = leftStartDirection ?? true;
     // 初始根据进入方向来判断距离left的位置
     _startPos = leftStartDirection! ? -widgetMaxWidth! - leftPadding! : _screenWidth;
@@ -60,7 +70,8 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
 
     _realStartPos = EdgeInsets.only(left: _startPos);
     // 结束位置根据进入方向来判断距离left的位置
-    EdgeInsets realEndPos = leftStartDirection! ? const EdgeInsets.only(left: 0) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth! - leftPadding!);
+    EdgeInsets realEndPos =
+        leftStartDirection! ? EdgeInsets.only(left: 0 + leftPadding!) : EdgeInsets.only(left: _screenWidth - widgetMaxWidth! - leftPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
@@ -105,8 +116,18 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
           onVerticalDragStart: dragStartV,
           onVerticalDragUpdate: dragUpdateV,
           onVerticalDragEnd: dragEndV,
-          onTap: () {
-            if (canBeCloseByTouchTransparentArea!) {
+          onTapUp: (details) {
+            double dx = details.globalPosition.dx;
+            double dy = details.globalPosition.dy;
+            if (leftStartDirection!
+                && (dx > (widgetMaxWidth! + leftPadding!) || dx < leftPadding!)
+                && canBeCloseByTouchTransparentArea!) {
+              close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth! - leftPadding!);
+            }
+
+            if (!leftStartDirection!
+                && (dx < (_screenWidth - widgetMaxWidth! - leftPadding!) || (dx < _screenWidth && dx > _screenWidth - leftPadding!))
+                && canBeCloseByTouchTransparentArea!) {
               close(leftStartDirection! ? 0.0 : _screenWidth - widgetMaxWidth! - leftPadding!);
             }
           },
@@ -150,6 +171,11 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
     closeAndReturn(start, null);
   }
 
+  Future<void> directClose() async {
+    await controller.reverse(from: double.parse(animationDuration!.toString()));
+    pop();
+  }
+
   closeAndReturn(double start, R? result) {
     controller.reverse(from: double.parse(animationDuration!.toString())).whenComplete(() {
       pop(result: Future.value(result));
@@ -177,16 +203,22 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
   /// 可自定义参数
   // 组件最大高度
   late double? widgetMaxHeight;
+
   // 组件移动时间
   late int? animationDuration;
+
   // 进入方向
   late bool? topStartDirection;
+
   // 组件上方padding或组件下方padding
   late double? topPadding;
+
   // 关闭或重新打开距离标识比例
   late int? reOpenRadio;
+
   // 背景透明度
   late double? opacity;
+
   // 触摸透明区域是否可退出当前页
   late bool? canBeCloseByTouchTransparentArea;
 
@@ -226,12 +258,13 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
     // 初始根据进入方向来判断距离top的位置
     _startPos = topStartDirection! ? -widgetMaxHeight! - topPadding! : _screenHeight;
     reOpenRadio = reOpenRadio ?? 3;
-    _reOpenOrCloseFlagDistance = (widgetMaxHeight! + topPadding!)/ reOpenRadio!;
+    _reOpenOrCloseFlagDistance = (widgetMaxHeight! + topPadding!) / reOpenRadio!;
     opacity = opacity ?? 0.3;
 
     _realStartPos = EdgeInsets.only(top: _startPos);
     // 结束位置根据进入方向来判断距离top的位置
-    EdgeInsets realEndPos = topStartDirection! ? EdgeInsets.only(top: 0) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight! - topPadding!);
+    EdgeInsets realEndPos =
+        topStartDirection! ? EdgeInsets.only(top: 0 + topPadding!) : EdgeInsets.only(top: _screenHeight - widgetMaxHeight! - topPadding!);
 
     controller = AnimationController(vsync: this, duration: Duration(milliseconds: animationDuration!));
     animation = EdgeInsetsTween(begin: _realStartPos, end: realEndPos).animate(controller);
@@ -276,8 +309,18 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
           onVerticalDragStart: dragStartV,
           onVerticalDragUpdate: dragUpdateV,
           onVerticalDragEnd: dragEndV,
-          onTap: () {
-            if (canBeCloseByTouchTransparentArea!) {
+          onTapUp: (details) {
+            double dx = details.globalPosition.dx;
+            double dy = details.globalPosition.dy;
+            if (topStartDirection!
+                && (dy > (widgetMaxHeight! + topPadding!) || dy < topPadding!)
+                && canBeCloseByTouchTransparentArea!) {
+              close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight! - topPadding!);
+            }
+
+            if (!topStartDirection!
+                && (dy < (_screenHeight - widgetMaxHeight! - topPadding!) || (dy < _screenHeight && dy > _screenHeight - topPadding!))
+                && canBeCloseByTouchTransparentArea!) {
               close(topStartDirection! ? 0.0 : _screenHeight - widgetMaxHeight! - topPadding!);
             }
           },
@@ -305,6 +348,11 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
 
   close(double start) {
     closeAndReturn(start, null);
+  }
+
+  Future<void> directClose() async {
+    await controller.reverse(from: double.parse(animationDuration!.toString()));
+    pop();
   }
 
   closeAndReturn(double start, R? result) {
@@ -343,4 +391,3 @@ abstract class AbstractTransparentPageY<R extends Object> extends PageState with
     }
   }
 }
-

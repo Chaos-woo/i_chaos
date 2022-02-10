@@ -15,7 +15,7 @@ class DraftListVM extends ListViewStateModel<TodoVO> {
   late TodoRepository _todoRepo;
 
   DraftListVM() {
-    initLocalDraft();
+    initMemoryDraft();
     _todoRepo = TodoRepository();
   }
 
@@ -26,7 +26,7 @@ class DraftListVM extends ListViewStateModel<TodoVO> {
 
   @override
   Future<List<TodoVO>?> loadData() {
-    initLocalDraft();
+    initMemoryDraft();
     return _todoRepo.listDraft();
   }
 
@@ -47,7 +47,7 @@ class DraftListVM extends ListViewStateModel<TodoVO> {
   }
 
   // vm新建或刷新时需要先将本地列表重置
-  void initLocalDraft() {
+  void initMemoryDraft() {
     _draftTodoList = [];
     _draftTodoMapOrderKeys = [];
     _draftTodoMap = {};
