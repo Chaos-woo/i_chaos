@@ -22,12 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(custom_params) => "${custom_params}";
 
+  static String m1(name, createTime) =>
+      "Tag information: \n1. Tag name: ${name};\n2. Create date: ${createTime}.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "bedrock_confirm": MessageLookupByLibrary.simpleMessage("confirm"),
+        "bedrock_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "bedrock_refreshTwoLevel":
-            MessageLookupByLibrary.simpleMessage("refresh"),
-        "bedrock_reset": MessageLookupByLibrary.simpleMessage("reset"),
+            MessageLookupByLibrary.simpleMessage("Refresh"),
+        "bedrock_reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("Designing..."),
@@ -43,6 +46,53 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Setting"),
         "setting_page_group_tip_text1":
             MessageLookupByLibrary.simpleMessage("Basic setting"),
+        "tag_detail_appbar_title_edit":
+            MessageLookupByLibrary.simpleMessage("Edit tag"),
+        "tag_detail_appbar_title_new":
+            MessageLookupByLibrary.simpleMessage("New tag"),
+        "tag_detail_btn_confirm": MessageLookupByLibrary.simpleMessage("Save"),
+        "tag_detail_color_picker_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "tag_detail_save_tip_duplicate_name":
+            MessageLookupByLibrary.simpleMessage(
+                "duplicate tag name, please input different name"),
+        "tag_detail_save_tip_empty_name": MessageLookupByLibrary.simpleMessage(
+            "empty tag name, please input some text"),
+        "tag_detail_tag_info_label": MessageLookupByLibrary.simpleMessage(
+            "Pick up a color you like and edit tag name"),
+        "tag_drawer_item_daily_todo":
+            MessageLookupByLibrary.simpleMessage("Daily ToDOs"),
+        "tag_drawer_item_new_tag":
+            MessageLookupByLibrary.simpleMessage("Add new tag"),
+        "tag_drawer_item_no_tag_todo":
+            MessageLookupByLibrary.simpleMessage("ToDOs without tag"),
+        "tag_drawer_item_recently_todo":
+            MessageLookupByLibrary.simpleMessage("Recently ToDOs"),
+        "tag_drawer_item_tip_basic":
+            MessageLookupByLibrary.simpleMessage("Basic list"),
+        "tag_drawer_item_tip_tag":
+            MessageLookupByLibrary.simpleMessage("Tagged list"),
+        "tag_drawer_menu_item_delete":
+            MessageLookupByLibrary.simpleMessage("Delete"),
+        "tag_drawer_menu_item_delete_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "tag_drawer_menu_item_delete_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Yes"),
+        "tag_drawer_menu_item_delete_tip_content": m1,
+        "tag_drawer_menu_item_delete_tip_title":
+            MessageLookupByLibrary.simpleMessage("Want to delete this tag ?"),
+        "tag_drawer_menu_item_edit":
+            MessageLookupByLibrary.simpleMessage("Edit"),
+        "tag_drawer_menu_item_sort":
+            MessageLookupByLibrary.simpleMessage("Sort"),
+        "tag_sort_appbar_title":
+            MessageLookupByLibrary.simpleMessage("Sort tag(s)"),
+        "tag_sort_item_btn_move_down_text":
+            MessageLookupByLibrary.simpleMessage("Down"),
+        "tag_sort_item_btn_move_up_text":
+            MessageLookupByLibrary.simpleMessage("Up"),
+        "tag_sort_tag_list_empty_tip":
+            MessageLookupByLibrary.simpleMessage("No tag, let\'s create ..."),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("Date has been switched to"),
         "todo_card_detail_query_btn_confirm":
@@ -64,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_location_label":
             MessageLookupByLibrary.simpleMessage("Location information"),
         "todo_card_detail_query_not_completed":
-            MessageLookupByLibrary.simpleMessage("Doing"),
+            MessageLookupByLibrary.simpleMessage("Underway"),
         "todo_card_detail_query_subtask_label":
             MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_card_detail_query_title":
@@ -173,7 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Emergency degree"),
         "todo_edit_location_label":
             MessageLookupByLibrary.simpleMessage("Location information"),
-        "todo_edit_reset": MessageLookupByLibrary.simpleMessage("reset"),
+        "todo_edit_reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "todo_edit_subtask_label":
             MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_edit_subtask_tip_btn_confirm":
@@ -205,7 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_filtered_tab_bar_loading_label":
             MessageLookupByLibrary.simpleMessage("Searching"),
         "todo_filtered_tab_bar_state_active":
-            MessageLookupByLibrary.simpleMessage("Doing"),
+            MessageLookupByLibrary.simpleMessage("Underway"),
         "todo_filtered_tab_bar_state_all":
             MessageLookupByLibrary.simpleMessage("All"),
         "todo_filtered_tab_bar_state_completed":

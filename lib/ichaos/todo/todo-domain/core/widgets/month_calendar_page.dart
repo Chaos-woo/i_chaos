@@ -1,7 +1,7 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/app_model/locale_model.dart';
-import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page.dart';
+import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page_y.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';

@@ -50,30 +50,30 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `refresh`
+  /// `Refresh`
   String get bedrock_refreshTwoLevel {
     return Intl.message(
-      'refresh',
+      'Refresh',
       name: 'bedrock_refreshTwoLevel',
       desc: '',
       args: [],
     );
   }
 
-  /// `reset`
+  /// `Reset`
   String get bedrock_reset {
     return Intl.message(
-      'reset',
+      'Reset',
       name: 'bedrock_reset',
       desc: '',
       args: [],
     );
   }
 
-  /// `confirm`
+  /// `Confirm`
   String get bedrock_confirm {
     return Intl.message(
-      'confirm',
+      'Confirm',
       name: 'bedrock_confirm',
       desc: '',
       args: [],
@@ -120,10 +120,10 @@ class S {
     );
   }
 
-  /// `reset`
+  /// `Reset`
   String get todo_edit_reset {
     return Intl.message(
-      'reset',
+      'Reset',
       name: 'todo_edit_reset',
       desc: '',
       args: [],
@@ -600,10 +600,10 @@ class S {
     );
   }
 
-  /// `Doing`
+  /// `Underway`
   String get todo_card_detail_query_not_completed {
     return Intl.message(
-      'Doing',
+      'Underway',
       name: 'todo_card_detail_query_not_completed',
       desc: '',
       args: [],
@@ -690,10 +690,10 @@ class S {
     );
   }
 
-  /// `Doing`
+  /// `Underway`
   String get todo_filtered_tab_bar_state_active {
     return Intl.message(
-      'Doing',
+      'Underway',
       name: 'todo_filtered_tab_bar_state_active',
       desc: '',
       args: [],
@@ -1055,6 +1055,247 @@ class S {
     return Intl.message(
       'Not found any draft ...',
       name: 'todo_draft_list_not_found_tip_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic list`
+  String get tag_drawer_item_tip_basic {
+    return Intl.message(
+      'Basic list',
+      name: 'tag_drawer_item_tip_basic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tagged list`
+  String get tag_drawer_item_tip_tag {
+    return Intl.message(
+      'Tagged list',
+      name: 'tag_drawer_item_tip_tag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily ToDOs`
+  String get tag_drawer_item_daily_todo {
+    return Intl.message(
+      'Daily ToDOs',
+      name: 'tag_drawer_item_daily_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recently ToDOs`
+  String get tag_drawer_item_recently_todo {
+    return Intl.message(
+      'Recently ToDOs',
+      name: 'tag_drawer_item_recently_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDOs without tag`
+  String get tag_drawer_item_no_tag_todo {
+    return Intl.message(
+      'ToDOs without tag',
+      name: 'tag_drawer_item_no_tag_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new tag`
+  String get tag_drawer_item_new_tag {
+    return Intl.message(
+      'Add new tag',
+      name: 'tag_drawer_item_new_tag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get tag_drawer_menu_item_edit {
+    return Intl.message(
+      'Edit',
+      name: 'tag_drawer_menu_item_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get tag_drawer_menu_item_delete {
+    return Intl.message(
+      'Delete',
+      name: 'tag_drawer_menu_item_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Want to delete this tag ?`
+  String get tag_drawer_menu_item_delete_tip_title {
+    return Intl.message(
+      'Want to delete this tag ?',
+      name: 'tag_drawer_menu_item_delete_tip_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tag information: \n1. Tag name: {name};\n2. Create date: {createTime}.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.`
+  String tag_drawer_menu_item_delete_tip_content(
+      Object name, Object createTime) {
+    return Intl.message(
+      'Tag information: \n1. Tag name: $name;\n2. Create date: $createTime.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.',
+      name: 'tag_drawer_menu_item_delete_tip_content',
+      desc: '',
+      args: [name, createTime],
+    );
+  }
+
+  /// `Yes`
+  String get tag_drawer_menu_item_delete_tip_btn_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'tag_drawer_menu_item_delete_tip_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get tag_drawer_menu_item_delete_tip_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'tag_drawer_menu_item_delete_tip_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get tag_drawer_menu_item_sort {
+    return Intl.message(
+      'Sort',
+      name: 'tag_drawer_menu_item_sort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort tag(s)`
+  String get tag_sort_appbar_title {
+    return Intl.message(
+      'Sort tag(s)',
+      name: 'tag_sort_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tag, let's create ...`
+  String get tag_sort_tag_list_empty_tip {
+    return Intl.message(
+      'No tag, let\'s create ...',
+      name: 'tag_sort_tag_list_empty_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Up`
+  String get tag_sort_item_btn_move_up_text {
+    return Intl.message(
+      'Up',
+      name: 'tag_sort_item_btn_move_up_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Down`
+  String get tag_sort_item_btn_move_down_text {
+    return Intl.message(
+      'Down',
+      name: 'tag_sort_item_btn_move_down_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New tag`
+  String get tag_detail_appbar_title_new {
+    return Intl.message(
+      'New tag',
+      name: 'tag_detail_appbar_title_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit tag`
+  String get tag_detail_appbar_title_edit {
+    return Intl.message(
+      'Edit tag',
+      name: 'tag_detail_appbar_title_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick up a color you like and edit tag name`
+  String get tag_detail_tag_info_label {
+    return Intl.message(
+      'Pick up a color you like and edit tag name',
+      name: 'tag_detail_tag_info_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get tag_detail_btn_confirm {
+    return Intl.message(
+      'Save',
+      name: 'tag_detail_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get tag_detail_color_picker_btn_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'tag_detail_color_picker_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `empty tag name, please input some text`
+  String get tag_detail_save_tip_empty_name {
+    return Intl.message(
+      'empty tag name, please input some text',
+      name: 'tag_detail_save_tip_empty_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `duplicate tag name, please input different name`
+  String get tag_detail_save_tip_duplicate_name {
+    return Intl.message(
+      'duplicate tag name, please input different name',
+      name: 'tag_detail_save_tip_duplicate_name',
       desc: '',
       args: [],
     );

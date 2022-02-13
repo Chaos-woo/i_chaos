@@ -6,7 +6,7 @@ import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/todo_drawer_page.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/tag/todo_tag_vm.dart';
+import '../tag/tag-operation/todo_tag_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar_image.dart';
@@ -130,7 +130,8 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   PreferredSizeWidget _widgetTodoAppBar(FilteredTabBarVM filteredTabBarVM) {
     return AppBar(
       leading: InkWell(
-        onTap: () {
+        onTap: () async {
+          await _todoTagVM.refresh();
           push(PageTodoDrawer(_todoTagVM, _singleTodoListVM));
         },
         child: const Icon(Icons.widgets),
@@ -138,7 +139,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
       title: Row(
         children: const <Widget>[
           Text(
-            'ToDO',
+            'ToDOs',
             style: TextStyle(
               fontSize: 18,
             ),
