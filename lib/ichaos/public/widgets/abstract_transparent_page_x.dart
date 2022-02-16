@@ -73,21 +73,26 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   // 子组件首次构建需要使用BuildContext，在didChangeDependencies首次调用后不再构建子组件
   bool _childFirstBuildWithBuildContext = false;
 
+  // 初始化页面参数前的子组件自定义参数初始化
+  void childWidgetInitWithoutBuildContext();
+
   // 初始化页面参数
   AtpXPageConfig? initPageConfig();
 
-  // 构建页面组件
+  // 构建页面组件，可用context
   Widget buildWidget();
 
   // 自定义组件销毁
   void pageDispose();
 
+  // 子组件状态初始化，可用context
   void childWidgetInitState();
 
   Widget get childWidget => _childWidget;
 
   @override
   void initState() {
+    childWidgetInitWithoutBuildContext();
     super.initState();
     // 初始化页面参数
     _initChildPageConfig();
@@ -95,8 +100,6 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
     _initChildAnimationPosition();
     // 初始动画组件
     _initAnimation();
-
-
 
     WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       _animationController.forward();

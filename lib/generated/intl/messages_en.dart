@@ -34,6 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("Designing..."),
+        "month_calendar_page_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "month_calendar_page_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("Ok"),
         "setting_language_set_text1":
             MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
         "setting_language_set_text2":
@@ -63,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tag_drawer_item_daily_todo":
             MessageLookupByLibrary.simpleMessage("Daily ToDOs"),
         "tag_drawer_item_new_tag":
-            MessageLookupByLibrary.simpleMessage("Add new tag"),
+            MessageLookupByLibrary.simpleMessage("New tag"),
         "tag_drawer_item_no_tag_todo":
             MessageLookupByLibrary.simpleMessage("ToDOs without tag"),
         "tag_drawer_item_recently_todo":
@@ -106,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_desc_label":
             MessageLookupByLibrary.simpleMessage("Description"),
         "todo_card_detail_query_has_completed":
-            MessageLookupByLibrary.simpleMessage("Completed"),
+            MessageLookupByLibrary.simpleMessage("Doing"),
         "todo_card_detail_query_is_completed_label":
             MessageLookupByLibrary.simpleMessage("status"),
         "todo_card_detail_query_level_label":
@@ -114,7 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_location_label":
             MessageLookupByLibrary.simpleMessage("Location information"),
         "todo_card_detail_query_not_completed":
-            MessageLookupByLibrary.simpleMessage("Underway"),
+            MessageLookupByLibrary.simpleMessage("Done"),
         "todo_card_detail_query_subtask_label":
             MessageLookupByLibrary.simpleMessage("Sub task(s)"),
         "todo_card_detail_query_title":
@@ -126,7 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_more_option":
             MessageLookupByLibrary.simpleMessage("More options"),
         "todo_card_option_btn_completed":
-            MessageLookupByLibrary.simpleMessage("Completed"),
+            MessageLookupByLibrary.simpleMessage("Done"),
         "todo_card_option_btn_delete":
             MessageLookupByLibrary.simpleMessage("Delete"),
         "todo_card_option_btn_delete_tip_cancel":

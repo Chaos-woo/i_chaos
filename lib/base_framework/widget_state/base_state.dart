@@ -7,6 +7,8 @@ import 'package:i_chaos/base_framework/widget_state/base_stateless_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
+import 'package:nested/nested.dart';
+import 'package:provider/provider.dart';
 
 import 'binding/manipulate_widget_binding.dart';
 export 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
@@ -187,8 +189,13 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
 
   /// [routeName]  => 你的页面类名
   @override
-  PageRoute<T> buildRoute<T>(Widget page, String routeName, {PageAnimation? animation = PageAnimation.Non, Object? args}) {
+  PageRoute<T> buildRoute<T>(Widget page, String routeName, {PageAnimation? animation = PageAnimation.Non, Object? args, List<SingleChildWidget>? providers}) {
     final r = RouteSettings(name: routeName, arguments: args);
+
+    page = providers != null && providers.isNotEmpty ? MultiProvider(
+      providers: providers,
+      child: page,
+    ) : page;
 
     switch (animation) {
       case PageAnimation.Fade:
@@ -207,14 +214,14 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
   ///see details in [PageAnimationBuilder]
 
   @override
-  Future push<T extends PageState>(T targetPage, {PageAnimation? animation}) {
-    return Navigator.of(context).push(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation));
+  Future push<T extends PageState>(T targetPage, {PageAnimation? animation, Object? args, List<SingleChildWidget>? providers}) {
+    return Navigator.of(context).push(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation, args: args, providers: providers));
   }
 
   @override
-  Future pushReplacement<T extends Object, TO extends PageState>(TO targetPage, {PageAnimation? animation, T? result}) {
+  Future pushReplacement<T extends Object, TO extends PageState>(TO targetPage, {PageAnimation? animation, T? result, Object? args, List<SingleChildWidget>? providers}) {
     return Navigator.of(context)
-        .pushReplacement(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation), result: result);
+        .pushReplacement(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation, args: args, providers: providers), result: result);
   }
 
   @override

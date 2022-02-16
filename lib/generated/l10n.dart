@@ -100,6 +100,26 @@ class S {
     );
   }
 
+  /// `Ok`
+  String get month_calendar_page_btn_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'month_calendar_page_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get month_calendar_page_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'month_calendar_page_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Edit ToDO`
   String get todo_edit_appbar_title_edit {
     return Intl.message(
@@ -450,10 +470,10 @@ class S {
     );
   }
 
-  /// `Completed`
+  /// `Done`
   String get todo_card_option_btn_completed {
     return Intl.message(
-      'Completed',
+      'Done',
       name: 'todo_card_option_btn_completed',
       desc: '',
       args: [],
@@ -590,20 +610,20 @@ class S {
     );
   }
 
-  /// `Completed`
+  /// `Doing`
   String get todo_card_detail_query_has_completed {
     return Intl.message(
-      'Completed',
+      'Doing',
       name: 'todo_card_detail_query_has_completed',
       desc: '',
       args: [],
     );
   }
 
-  /// `Underway`
+  /// `Done`
   String get todo_card_detail_query_not_completed {
     return Intl.message(
-      'Underway',
+      'Done',
       name: 'todo_card_detail_query_not_completed',
       desc: '',
       args: [],
@@ -1110,10 +1130,10 @@ class S {
     );
   }
 
-  /// `Add new tag`
+  /// `New tag`
   String get tag_drawer_item_new_tag {
     return Intl.message(
-      'Add new tag',
+      'New tag',
       name: 'tag_drawer_item_new_tag',
       desc: '',
       args: [],

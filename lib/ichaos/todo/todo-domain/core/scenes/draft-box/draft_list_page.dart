@@ -259,7 +259,7 @@ class PageDraftList extends PageState {
                   setState(() {});
                 }),
                 _inkText(S.of(context).todo_draft_list_item_option_select_date, needDivide: false, onTap: () async {
-                  DateTime? selectDate = await push(PageMonthCalendar(canPopWhenSelectSameDateWithCurrent: true));
+                  DateTime? selectDate = await push(PageMonthCalendar());
                   if (selectDate != null) {
                     vo.validTime = selectDate;
                     _singleTodoListVM.updateTodo(vo);

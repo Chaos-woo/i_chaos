@@ -13,7 +13,6 @@ class DotLoading extends StatefulWidget {
   DotLoading({Key? key, Duration interval = const Duration(milliseconds: 100), String text = '', TextStyle? textStyle, String similarDotText = '.'})
       : super(key: key) {
     intervalDuration = interval;
-    // ignore: prefer_initializing_formals
     this.text = text;
     this.textStyle = textStyle ?? const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12);
     this.similarDotText = similarDotText;

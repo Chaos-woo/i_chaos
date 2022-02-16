@@ -16,6 +16,9 @@ import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_top_dialog_item_data.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/tag/tag-operation/todo_tag_vm.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/fba/home_fab_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/subtask-group/subtask_list_vm.dart';
 import '../../widgets/month_calendar_page.dart';
@@ -60,13 +63,15 @@ class SingleTodoPage extends PageState {
                       fontSize: 18,
                     ),
                   ),
+                  titleSpacing: -5,
                   toolbarHeight: 40,
+                  elevation: 0,
                   actions: <Widget>[
                     IconButton(
                         onPressed: () {
                           // 展示重置按钮
                           WWDialog.showTopDialog(context,
-                              dialogWidth: ScreenUtil.getInstance().screenWidth / 2,
+                              dialogWidth: S.of(context).todo_edit_reset.codeUnits.length * 14,
                               triangleType: DiaLogTriangleType.right,
                               bgColor: Colors.white,
                               contentColor: Colors.black,
@@ -80,7 +85,7 @@ class SingleTodoPage extends PageState {
                         icon: const Icon(AliIcons.IconMore)),
                     const SizedBox(
                       width: 14,
-                    )
+                    ),
                   ],
                 ),
                 body: Container(
@@ -298,15 +303,16 @@ class SingleTodoPage extends PageState {
                       break;
                     case 2:
                       {
-                        DateTime? selectDate = await push(PageMonthCalendar(canBeCloseByTouchTransparentArea: false, canPopWhenSelectSameDateWithCurrent: true));
+                        DateTime? selectDate =
+                            await push(PageMonthCalendar(closeByTouchTransparentArea: false,));
                         int selectDateBtnIndex = _singleTodoVM.getRightSelectDateBtnIndex(selectDate);
                         _singleTodoVM.todoForm.selectDate = selectDateBtnIndex == 0
                             ? DateTime.now()
                             : selectDateBtnIndex == 1
-                            ? DayDateUtil.tomorrow()
-                            : selectDateBtnIndex == 2
-                            ? selectDate
-                            : null;
+                                ? DayDateUtil.tomorrow()
+                                : selectDateBtnIndex == 2
+                                    ? selectDate
+                                    : null;
                         index = selectDateBtnIndex;
                       }
                       break;

@@ -136,7 +136,7 @@ class _MainSceneState extends State<MainScene> {
     /// Todo list
     SalomonBottomBarItem(
       icon: const Icon(AliIcons.IconActivity),
-      title: const Text("ToDO"),
+      title: const Text("ToDOs"),
       selectedColor: Colors.teal,
     ),
 

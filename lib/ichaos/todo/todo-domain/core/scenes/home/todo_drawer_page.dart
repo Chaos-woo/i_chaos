@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
 import 'package:i_chaos/generated/l10n.dart';
+import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 import 'package:i_chaos/ichaos/public/widgets/abstract_transparent_page_x.dart';
 import 'package:i_chaos/ichaos/public/widgets/custom-pop-up-menu/custom_pop_up_menu.dart';
 import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_bar_item.dart';
@@ -14,13 +16,13 @@ import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_group_tip.d
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/tag_menu_item.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/tag_vo.dart';
-import '../tag/tag-operation/tag_detail_page.dart';
-import '../tag/tag-operation/tag_sorting_list_page.dart';
-import '../tag/tag-operation/todo_tag_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_todo_list_vm.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:i_chaos/main.dart';
-import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
+
+import '../tag/tag-operation/tag_detail_page.dart';
+import '../tag/tag-operation/tag_sorting_list_page.dart';
+import '../tag/tag-operation/todo_tag_vm.dart';
 
 class PageTodoDrawer extends AbstractTransparentPageX {
   late double maxWidth;
@@ -54,7 +56,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
         AbstractTransparentPageX thisPage = args[0] as AbstractTransparentPageX;
         TagVO tag = args[1] as TagVO;
 
-        await thisPage.push(PageTagDetail(_tagVM, tag));
+        await thisPage.push(PageTagDetail(_tagVM, tag), animation: PageAnimation.Slide);
         await _tagVM.refresh();
         _updateDrawerTagItems();
       }),
@@ -93,7 +95,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
       TagMenuItem(S.of(context).tag_drawer_menu_item_sort, Icons.sort, Colors.blue, TagMenuFlag.sort, onTap: (args) async {
         AbstractTransparentPageX thisPage = args[0] as AbstractTransparentPageX;
 
-        await thisPage.push(PageTagSorting(_tagVM));
+        await thisPage.push(PageTagSorting(_tagVM), animation: PageAnimation.Slide);
         await _tagVM.refresh();
         _updateDrawerTagItems();
       }),
@@ -108,8 +110,8 @@ class PageTodoDrawer extends AbstractTransparentPageX {
   // 抽屉基础选项
   List<OptionBarItem> _drawerBaseOption() {
     return [
-      OptionBarItem(S.of(context).tag_drawer_item_daily_todo,
-          textStyle: optionTextStyle, icon: Icons.assignment, rightIcon: AliIcons.IconEnter, onTap: () {
+      OptionBarItem(S.of(context).tag_drawer_item_daily_todo, textStyle: optionTextStyle, icon: Icons.assignment, rightIcon: AliIcons.IconEnter,
+          onTap: () {
         directClose();
         mainScene.switchMainSceneTap(3);
       }),
@@ -317,6 +319,10 @@ class PageTodoDrawer extends AbstractTransparentPageX {
   @override
   void pageDispose() {
     _disposeMenuController();
+  }
+
+  @override
+  void childWidgetInitWithoutBuildContext() {
   }
 
   // 标签菜单选项controller销毁

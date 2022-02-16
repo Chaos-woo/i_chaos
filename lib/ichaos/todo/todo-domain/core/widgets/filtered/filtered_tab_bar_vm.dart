@@ -33,13 +33,10 @@ class FilteredTabBarVM extends SingleViewStateModel {
 
   // 选择的日期切换
   Future<void> selectedDateChange(DateTime selectDate, {int calendarPageAnimationDuration = 400}) async {
-    setBusy(true);
-    notifyListeners(refreshSelector: true);
     Future.delayed(Duration(milliseconds: calendarPageAnimationDuration), () async {
       await _singleTodoListVM.switchTodoListByDate(selectDate);
       _selectDate = selectDate;
       setBusy(false);
-      notifyListeners(refreshSelector: true);
     });
   }
 

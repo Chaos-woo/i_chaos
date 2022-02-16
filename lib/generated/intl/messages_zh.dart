@@ -33,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("施工中..."),
+        "month_calendar_page_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "month_calendar_page_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
         "setting_language_set_text1":
             MessageLookupByLibrary.simpleMessage("简体中文"),
         "setting_language_set_text2":
@@ -105,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_location_label":
             MessageLookupByLibrary.simpleMessage("地点"),
         "todo_card_detail_query_not_completed":
-            MessageLookupByLibrary.simpleMessage("未完成"),
+            MessageLookupByLibrary.simpleMessage("处理中"),
         "todo_card_detail_query_subtask_label":
             MessageLookupByLibrary.simpleMessage("子任务"),
         "todo_card_detail_query_title":

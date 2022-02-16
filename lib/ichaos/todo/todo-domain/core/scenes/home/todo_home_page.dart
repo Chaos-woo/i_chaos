@@ -6,7 +6,6 @@ import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/todo_drawer_page.dart';
-import '../tag/tag-operation/todo_tag_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar/calendar_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/calendar_image.dart';
@@ -18,6 +17,8 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_tod
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:provider/provider.dart';
 
+import '../tag/tag-operation/todo_tag_vm.dart';
+
 // ToDO主页
 class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   @override
@@ -26,6 +27,9 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   late SingleTodoListVM _singleTodoListVM;
   late DraftListVM _draftListVM;
   late TodoTagVM _todoTagVM;
+  late FilteredTabBarVM _filteredTabBarVM;
+  late CalendarBarVM _calendarBarVM;
+  late TodoHomeFloatingActionBtnVM _todoHomeFloatingActionBtnVM;
 
   @override
   void initState() {
@@ -38,6 +42,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return switchStatusBar2Dark(
         child: ProviderWidget<TodoTagVM>(
             model: _todoTagVM,
@@ -56,12 +61,18 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
                   return ProviderWidget<FilteredTabBarVM>(
                       model: FilteredTabBarVM(singleTodoListVM: singleTodoListVM),
                       builder: (ctx, filteredTabBarVM, child) {
+                        _filteredTabBarVM = filteredTabBarVM;
+
                         return ProviderWidget<CalendarBarVM>(
                           model: CalendarBarVM(filteredTabBarVM: filteredTabBarVM),
                           builder: (ctx, calendarBarVM, _) {
+                            _calendarBarVM = calendarBarVM;
+
                             return ProviderWidget<TodoHomeFloatingActionBtnVM>(
                               model: TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM),
                               builder: (ctx, actionBtnVM, _) {
+                                _todoHomeFloatingActionBtnVM = actionBtnVM;
+
                                 return _getMainScaffold(ctx);
                               },
                             );
@@ -154,9 +165,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
         _widgetDraftIconBtn(filteredTabBarVM),
         IconButton(
           icon: const Icon(AliIcons.IconMore),
-          onPressed: () {
-            // handle the press
-          },
+          onPressed: () async {},
         ),
       ],
     );
