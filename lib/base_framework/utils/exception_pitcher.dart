@@ -1,7 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/5/29
-*/
 
 import 'dart:collection';
 
@@ -14,21 +10,17 @@ class ExceptionPitcher with _ExceptionNotifyBinding {
 
   factory ExceptionPitcher() => getSingleton()!;
 
-  ExceptionPitcher._internal() {
-    //todo
-  }
+  ExceptionPitcher._internal();
 
   static ExceptionPitcher? getSingleton() {
-    if (_instance == null) {
-      _instance = ExceptionPitcher._internal();
-    }
+    _instance ??= ExceptionPitcher._internal();
     return _instance;
   }
 
   /// * 根据code 转换Exception
-  Exception transformException(ResponseData responseData) {
+  Exception transformException(ResponseData? responseData) {
     assert(responseData != null, 'responseData can not be null!');
-    final Exception exception = _transferException(responseData);
+    final Exception exception = _transferException(responseData!);
 
     return exception;
   }
