@@ -35,7 +35,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Manipul
 
   ///占位widget
   /// * 可以直接使用 [num.vGap] 或 [num.hGap]
-  /// * 参考[SizeAdapterExtension]
+  /// * 参考[SizeAdapterExt]
   @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
   Widget getSizeBox({double width = 1, double height = 1}) {
     return SizedBox(
@@ -101,13 +101,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Manipul
 
   ///得到适配后的高度
   /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
+  /// * 参考[SizeAdapterExt]
   @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
   double getHeightPx(double height) => height.h;
 
   ///得到适配后的宽度
   /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
+  /// * 参考[SizeAdapterExt]
   @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
   double getWidthPx(double width) => width.w;
 
@@ -125,7 +125,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Manipul
 
   ///得到适配后的字号
   /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
+  /// * 参考[SizeAdapterExt]
   @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
   double getSp(double fontSize) => fontSize.sp;
 
@@ -189,7 +189,7 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
 
   /// [routeName]  => 你的页面类名
   @override
-  PageRoute<T> buildRoute<T>(Widget page, String routeName, {PageAnimation? animation = PageAnimation.Non, Object? args, List<SingleChildWidget>? providers}) {
+  PageRoute<T> buildRoute<T>(Widget page, String routeName, {PageAnimation? animation = PageAnimation.non, Object? args, List<SingleChildWidget>? providers}) {
     final r = RouteSettings(name: routeName, arguments: args);
 
     page = providers != null && providers.isNotEmpty ? MultiProvider(
@@ -198,14 +198,14 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
     ) : page;
 
     switch (animation) {
-      case PageAnimation.Fade:
-        return pageBuilder!.wrapWithFadeAnim(page, r) as PageRoute<T>;
-      case PageAnimation.Scale:
-        return pageBuilder!.wrapWithScaleAnim(page, r) as PageRoute<T>;
-      case PageAnimation.Slide:
-        return pageBuilder!.wrapWithSlideAnim(page, r) as PageRoute<T>;
+      case PageAnimation.fade:
+        return pageBuilder!.wrapWithFadeAnimation(page, r) as PageRoute<T>;
+      case PageAnimation.scale:
+        return pageBuilder!.wrapWithScaleAnimation(page, r) as PageRoute<T>;
+      case PageAnimation.slide:
+        return pageBuilder!.wrapWithSlideAnimation(page, r) as PageRoute<T>;
       default:
-        return pageBuilder!.wrapWithNoAnim(page, r) as PageRoute<T>;
+        return pageBuilder!.wrapWithNoAnimation(page, r) as PageRoute<T>;
     }
   }
 

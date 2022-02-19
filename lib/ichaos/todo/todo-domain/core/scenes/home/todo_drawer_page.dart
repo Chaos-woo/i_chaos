@@ -56,7 +56,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
         AbstractTransparentPageX thisPage = args[0] as AbstractTransparentPageX;
         TagVO tag = args[1] as TagVO;
 
-        await thisPage.push(PageTagDetail(_tagVM, tag), animation: PageAnimation.Slide);
+        await thisPage.push(PageTagDetail(_tagVM, tag), animation: PageAnimation.slide);
         await _tagVM.refresh();
         _updateDrawerTagItems();
       }),
@@ -95,7 +95,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
       TagMenuItem(S.of(context).tag_drawer_menu_item_sort, Icons.sort, Colors.blue, TagMenuFlag.sort, onTap: (args) async {
         AbstractTransparentPageX thisPage = args[0] as AbstractTransparentPageX;
 
-        await thisPage.push(PageTagSorting(_tagVM), animation: PageAnimation.Slide);
+        await thisPage.push(PageTagSorting(_tagVM), animation: PageAnimation.slide);
         await _tagVM.refresh();
         _updateDrawerTagItems();
       }),

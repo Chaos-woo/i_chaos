@@ -5,8 +5,6 @@ enum ViewState {
   busy,
   empty,
   error,
-  unAuthorized ,
-  unBind,
   noNet
 }
 

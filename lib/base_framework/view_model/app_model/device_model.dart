@@ -22,7 +22,7 @@ class DeviceModel extends ChangeNotifier{
       await deviceInfoPlugin.androidInfo.then((deviceInfo){
         isAndroid = true;
         androidDeviceInfo = deviceInfo;
-        SpUtil.putString(BaseFrameConstant.DEVICE_UUID, deviceInfo.androidId);
+        SpUtil.putString(BaseFrameConstant.deviceUuid, deviceInfo.androidId);
       });
 
     }else{
@@ -30,7 +30,7 @@ class DeviceModel extends ChangeNotifier{
       await deviceInfoPlugin.iosInfo.then((deviceInfo){
         isIOS = true;
         iosDeviceInfo = deviceInfo;
-        SpUtil.putString(BaseFrameConstant.DEVICE_UUID, deviceInfo.identifierForVendor);
+        SpUtil.putString(BaseFrameConstant.deviceUuid, deviceInfo.identifierForVendor);
 
       });
 

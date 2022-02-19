@@ -64,10 +64,6 @@ abstract class ViewStateModel with ChangeNotifier {
 
   bool get error => viewState == ViewState.error;
 
-  bool get unAuthorized => viewState == ViewState.unAuthorized;
-
-  bool get unBind => viewState == ViewState.unBind;
-
   bool get noNet => viewState == ViewState.noNet;
 
 
@@ -90,18 +86,6 @@ abstract class ViewStateModel with ChangeNotifier {
   void setIdle(){
     _errorMessage = null;
     viewState = ViewState.idle;
-  }
-
-  void setUnAuthorized({String? toast}) {
-    _errorMessage = toast;
-    showShortToast(toast);
-    viewState = ViewState.unAuthorized;
-  }
-
-  void setUnBind({String? toast}){
-    _errorMessage = toast;
-    showShortToast(toast);
-    viewState = ViewState.unBind;
   }
 
   void setNoNet({String? toast}){

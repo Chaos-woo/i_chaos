@@ -55,7 +55,7 @@ class HeaderInterceptor extends InterceptorsWrapper {
 
     ///这里加入版本信息 在header，可以根据需求更改
     var appVersion = await PlatformUtils.getAppVersion();
-    var deviceInfo = SpUtil.getString(BaseFrameConstant.DEVICE_UUID);
+    var deviceInfo = SpUtil.getString(BaseFrameConstant.deviceUuid);
 
     //var token = CookieManager.getCookies(cookies);
 

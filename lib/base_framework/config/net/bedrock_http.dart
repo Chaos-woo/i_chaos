@@ -6,7 +6,7 @@ import 'package:i_chaos/base_framework/config/storage_manager.dart';
 import 'package:i_chaos/base_framework/view_model/handle/exception_handler.dart';
 import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
 
-import '../../utils/exception_pitcher.dart';
+import 'package:i_chaos/base_framework/utils/exception_pitcher.dart';
 
 final BedRock bedRock = BedRock();
 
@@ -68,6 +68,7 @@ class ApiInterceptor extends InterceptorsWrapper {
 }
 
 class ResponseData extends BaseResponseData {
+  @override
   bool get success => (code == 1 || code == 200);
 
   ResponseData.fromJson(Map<String, dynamic> json) {

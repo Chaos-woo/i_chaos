@@ -205,7 +205,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
               icon: const Icon(AliIcons.IconTasklistFill),
               onPressed: () async {
                 await _draftListVM.refresh();
-                await push(PageDraftList(_draftListVM, _singleTodoListVM), animation: PageAnimation.Slide);
+                await push(PageDraftList(_draftListVM, _singleTodoListVM), animation: PageAnimation.slide);
                 await _draftListVM.refresh();
                 filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
               },

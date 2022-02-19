@@ -3,7 +3,7 @@
 
 import 'package:package_info/package_info.dart';
 
-const bool inProduction = const bool.fromEnvironment("dart.vm.product");
+const bool inProduction = bool.fromEnvironment("dart.vm.product");
 
 class PlatformUtils {
   /// * 获取包信息

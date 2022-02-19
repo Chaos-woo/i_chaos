@@ -87,7 +87,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
                     onPressed: () async {
                       var result = await push(SingleTodoPage(TodoVO.empty(), onSave: () {
                         _backToHomePageCallback?.call();
-                      }), animation: PageAnimation.Slide);
+                      }), animation: PageAnimation.slide);
                       _backToHomePageCallback?.call();
                     },
                   ),

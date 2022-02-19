@@ -57,7 +57,6 @@ void main() async {
 class IChaosApp extends StatelessWidget {
   const IChaosApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     setDesignWHD(DesignConfig.designWidth, DesignConfig.designHeight, density: DesignConfig.designDensity);
@@ -67,12 +66,12 @@ class IChaosApp extends StatelessWidget {
         builder: (ctx, localeModel, _) {
           return MaterialApp(
             title: 'iChaos',
-            theme: ThemeData(
-              primarySwatch: Colors.teal,
-            ),
+//            theme: ThemeData(
+//              primarySwatch: Colors.teal,
+//            ),
             debugShowCheckedModeBanner: false,
             locale: localeModel.locale,
-            //国际化工厂代理
+            // 国际化工厂代理
             localizationsDelegates: const [
               // Intl 插件（需要安装）
               S.delegate,
