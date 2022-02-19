@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:i_chaos/base_framework/ui/animation/page_route_anim/fade_animation.dart';
-import 'package:i_chaos/base_framework/ui/animation/page_route_anim/no_animation.dart';
-import 'package:i_chaos/base_framework/ui/animation/page_route_anim/size_scale_animation.dart';
-import 'package:i_chaos/base_framework/ui/animation/page_route_anim/slide_animation.dart';
+import 'package:i_chaos/base_framework/ui/animation/page_route_animation/fade_animation.dart';
+import 'package:i_chaos/base_framework/ui/animation/page_route_animation/no_animation.dart';
+import 'package:i_chaos/base_framework/ui/animation/page_route_animation/size_scale_animation.dart';
+import 'package:i_chaos/base_framework/ui/animation/page_route_animation/slide_animation.dart';
 
 final PageAnimationBuilder? pageBuilder = PageAnimationBuilder.getInstance();
 

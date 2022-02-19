@@ -2,7 +2,7 @@
 import 'dart:collection';
 
 import 'package:i_chaos/base_framework/config/net/base_http.dart';
-import 'package:i_chaos/base_framework/config/net/bedrock_http.dart';
+import 'package:i_chaos/base_framework/config/net/me_http.dart';
 import 'package:i_chaos/base_framework/exception/un_handle_exception.dart';
 
 class ExceptionPitcher with _ExceptionNotifyBinding {
@@ -28,9 +28,6 @@ class ExceptionPitcher with _ExceptionNotifyBinding {
   /// 异常分拣
   Exception _transferException(ResponseData responseData) {
     switch (responseData.code) {
-
-      ///仅为以下测试代码
-      case -2:
       default:
         return UnHandleException(responseData.message ?? "un handle exception");
     }

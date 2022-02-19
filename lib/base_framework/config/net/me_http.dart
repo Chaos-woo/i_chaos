@@ -8,9 +8,9 @@ import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
 
 import 'package:i_chaos/base_framework/utils/exception_pitcher.dart';
 
-final BedRock bedRock = BedRock();
+final MeHttpClient bedRock = MeHttpClient();
 
-class BedRock extends BaseHttp {
+class MeHttpClient extends BaseHttp {
   final String china = "https://wanandroid.com/";
 
   @override
