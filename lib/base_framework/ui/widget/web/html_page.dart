@@ -1,7 +1,4 @@
 /*
-* Author : LiJiqqi
-* Date : 2020/6/3
-*
 * 用于显示富文本
 */
 
@@ -18,18 +15,14 @@ class HtmlPageState extends PageState {
   Widget build(BuildContext context) {
     return switchStatusBar2Dark(
         child: Container(
-      width: getWidthPx(750),
-      height: getHeightPx(1334),
+      width: 750.w,
+      height: 1334.h,
       child: Column(
         children: <Widget>[
-          commonAppBar(
-              leftWidget: buildAppBarLeft(),
-              leftPadding: getWidthPx(40),
-              rightPadding: getWidthPx(40)),
+          commonAppBar(leftWidget: buildAppBarLeft(), leftPadding: 40.w, rightPadding: 40.w),
           Expanded(
             child: WebView(
-              initialUrl: Uri.dataFromString(htmlContent, mimeType: 'text/html')
-                  .toString(),
+              initialUrl: Uri.dataFromString(htmlContent, mimeType: 'text/html').toString(),
             ),
           ),
         ],

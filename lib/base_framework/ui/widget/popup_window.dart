@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, no_logic_in_create_state
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -32,7 +34,9 @@ class PopupWindowButton<T> extends StatefulWidget {
 
   final Function? windowDismiss;
 
-  final Function? pressCallBack;///点击时调用
+  final Function? pressCallBack;
+
+  ///点击时调用
   /// 显示按钮button
   final Widget? child;
 
@@ -54,10 +58,9 @@ class PopupWindowButton<T> extends StatefulWidget {
 
   final bool barrierDismissible;
 
-  late _PopupWindowRoute popupWindowRoute ;
+  late _PopupWindowRoute popupWindowRoute;
 
   late PopupWindowButtonState popWindowState;
-
 
   @override
   PopupWindowButtonState createState() {
@@ -66,54 +69,47 @@ class PopupWindowButton<T> extends StatefulWidget {
   }
 }
 
-void showWindow<T>({
-  required _PopupWindowRoute popupWindowRoute,
-  required BuildContext context,
-  RelativeRect? position,
-  required Widget? window,
-  double elevation = 8.0,
-  int duration = _windowPopupDuration,
-  String? semanticLabel,
-  MaterialType? type,
-  Function? windowDismiss
-}) {
-
+void showWindow<T>(
+    {required _PopupWindowRoute popupWindowRoute,
+    required BuildContext context,
+    RelativeRect? position,
+    required Widget? window,
+    double elevation = 8.0,
+    int duration = _windowPopupDuration,
+    String? semanticLabel,
+    MaterialType? type,
+    Function? windowDismiss}) {
   Navigator.push(
     context,
     popupWindowRoute,
-  ).then((_){
+  ).then((_) {
     windowDismiss!();
   });
 }
 
 class PopupWindowButtonState<T> extends State<PopupWindowButton> {
-
-
-
   void mShowWindow() {
     final RenderBox button = context.findRenderObject() as RenderBox;
     final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(widget.offset, ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero),
-            ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay),
       ),
       Offset.zero & overlay.size,
     );
 
     widget.popupWindowRoute = _PopupWindowRoute<T>(
-      isLocalToGlobal: widget.isLocalToGlobal,
-      globalOffset: widget.globalOffset,
-      barrierC: widget.barrierColor,
+        isLocalToGlobal: widget.isLocalToGlobal,
+        globalOffset: widget.globalOffset,
+        barrierC: widget.barrierColor,
         barrierDis: widget.barrierDismissible,
         position: position,
         child: widget.window,
         elevation: widget.elevation,
         duration: widget.duration,
         semanticLabel: null,
-        barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         type: widget.type);
 
     showWindow<T>(
@@ -123,15 +119,16 @@ class PopupWindowButtonState<T> extends State<PopupWindowButton> {
         position: position,
         duration: widget.duration,
         elevation: widget.elevation,
-        type: widget.type,windowDismiss: widget.windowDismiss);
+        type: widget.type,
+        windowDismiss: widget.windowDismiss);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         mShowWindow();
-        if(widget.pressCallBack != null) widget.pressCallBack!();
+        if (widget.pressCallBack != null) widget.pressCallBack!();
       },
       child: widget.child,
     );
@@ -162,10 +159,7 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
 
   @override
   Animation<double> createAnimation() {
-    return CurvedAnimation(
-        parent: super.createAnimation(),
-        curve: Curves.linear,
-        reverseCurve: const Interval(0.0, _kWindowCloseIntervalEnd));
+    return CurvedAnimation(parent: super.createAnimation(), curve: Curves.linear, reverseCurve: const Interval(0.0, _kWindowCloseIntervalEnd));
   }
 
   final RelativeRect? position;
@@ -179,8 +173,7 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
   final MaterialType type;
 
   @override
-  Duration get transitionDuration =>
-      duration == 0 ? _kWindowDuration : Duration(milliseconds: duration!);
+  Duration get transitionDuration => duration == 0 ? _kWindowDuration : Duration(milliseconds: duration!);
 
   @override
   bool get barrierDismissible => barrierDis!;
@@ -189,15 +182,13 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
   Color? get barrierColor => barrierC;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
-    final CurveTween opacity =
-        CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
 
     return Builder(
       builder: (BuildContext context) {
         return CustomSingleChildLayout(
-          delegate: _PopupWindowLayout(position,isLocalToGlobal,globalOffset),
+          delegate: _PopupWindowLayout(position, isLocalToGlobal, globalOffset),
           child: AnimatedBuilder(
               child: child,
               animation: animation,
@@ -219,7 +210,7 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
 }
 
 class _PopupWindowLayout extends SingleChildLayoutDelegate {
-  _PopupWindowLayout(this.position,this.isLocalToGlobal,this.globalOffset);
+  _PopupWindowLayout(this.position, this.isLocalToGlobal, this.globalOffset);
 
   // Rectangle of underlying button, relative to the overlay's dimensions.
   final RelativeRect? position;

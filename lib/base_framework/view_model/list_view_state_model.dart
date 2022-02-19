@@ -1,7 +1,6 @@
 import 'handle/exception_handler.dart';
 import 'view_state_model.dart';
 
-/// 基于
 abstract class ListViewStateModel<T> extends ViewStateModel {
   /// 分页第一页页码
   final int pageNumFirst = 1;
@@ -19,7 +18,6 @@ abstract class ListViewStateModel<T> extends ViewStateModel {
   initData() async {
     setBusy(true);
     if (cacheDataFactory != null) {
-      ///
       bool netStatus = await checkNet();
       if (netStatus) {
         ///没网 的情况下
@@ -32,7 +30,6 @@ abstract class ListViewStateModel<T> extends ViewStateModel {
 
   // 下拉刷新
   refresh({bool init = false}) async {
-    //firstInit = init;
     try {
       List<T>? data = await loadData();
       if (data == null || data.isEmpty) {

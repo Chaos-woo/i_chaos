@@ -1,18 +1,16 @@
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/mixin/screen/screen_adapter.mixin.dart';
+import 'package:i_chaos/base_framework/mixin/toast/toast_mixin.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/utils/exception_pitcher.dart';
 import 'package:i_chaos/base_framework/view_model/interface/cache_data_factory.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
-import 'package:oktoast/oktoast.dart';
 
 import 'view_state.dart';
 
-
-abstract class ViewStateModel with ChangeNotifier {
-
+abstract class ViewStateModel with ChangeNotifier, ToastMixin, ScreenAdapterMixin {
   bool disposed = false;
 
   ViewState _viewState;
@@ -20,8 +18,7 @@ abstract class ViewStateModel with ChangeNotifier {
   /// 根据状态构造
   ///
   /// 子类可以在构造函数指定需要的页面状态
-  ViewStateModel({ViewState? viewState})
-      : _viewState = viewState ?? ViewState.idle;
+  ViewStateModel({ViewState? viewState}) : _viewState = viewState ?? ViewState.idle;
 
   ViewState get viewState => _viewState;
 
@@ -55,7 +52,6 @@ abstract class ViewStateModel with ChangeNotifier {
 
   String? get errorMessage => _errorMessage;
 
-
   bool get busy => viewState == ViewState.busy;
 
   bool get idle => viewState == ViewState.idle;
@@ -65,7 +61,6 @@ abstract class ViewStateModel with ChangeNotifier {
   bool get error => viewState == ViewState.error;
 
   bool get noNet => viewState == ViewState.noNet;
-
 
   void setBusy(bool value) {
     _errorMessage = null;
@@ -79,26 +74,28 @@ abstract class ViewStateModel with ChangeNotifier {
 
   void setError(String message) {
     _errorMessage = message;
-    showToast(_errorMessage!);
+    showSimpleToast(_errorMessage!);
+//    showToast(_errorMessage!);
     viewState = ViewState.error;
   }
 
-  void setIdle(){
+  void setIdle() {
     _errorMessage = null;
     viewState = ViewState.idle;
   }
 
-  void setNoNet({String? toast}){
+  void setNoNet({String? toast}) {
     _errorMessage = toast;
-    showShortToast(toast);
+    showSimpleToast(toast);
+//    showShortToast(toast);
     viewState = ViewState.noNet;
   }
 
-  showShortToast(String? toast){
-    if(toast != null && toast.isNotEmpty){
-      showToast(toast);
-    }
-  }
+//  showShortToast(String? toast) {
+//    if (toast != null && toast.isNotEmpty) {
+//      showToast(toast);
+//    }
+//  }
 
   @override
   String toString() {
@@ -113,7 +110,7 @@ abstract class ViewStateModel with ChangeNotifier {
   @override
   void notifyListeners({bool refreshSelector = false}) {
     if (!disposed) {
-      if(!refreshSelector) notifyInvokeCount ++ ;
+      if (!refreshSelector) notifyInvokeCount++;
       super.notifyListeners();
     }
   }
@@ -129,46 +126,44 @@ abstract class ViewStateModel with ChangeNotifier {
   /// 你也可以根据自己的需求定制
 
   CacheDataFactory? cacheDataFactory;
-  injectCache(CacheDataFactory cacheDataFactory){
+
+  injectCache(CacheDataFactory cacheDataFactory) {
     this.cacheDataFactory = cacheDataFactory;
   }
 
   ///检查网络状态
-  Future<bool> checkNet()async{
+  Future<bool> checkNet() async {
     debugPrint('检查网络');
     var connectivityResult = await (Connectivity().checkConnectivity());
     return connectivityResult == ConnectivityResult.none;
   }
-
-
 }
-
 
 /// 虽然 * ViewModel 已经对 [loadData()]的业务异常进行捕捉，但由于其位置的特殊性，
 /// 使页面内其他的接口异常无法捕捉到，为此提供下面的功能。
 /// 页面或者widget[PageState],[WidgetState]需要对api所触发的业务异常进行监听时
 /// 可以为ViewModel混入此类
 
-mixin ExceptionBinding on ViewStateModel implements ExceptionListener{
+mixin ExceptionBinding on ViewStateModel implements ExceptionListener {
   ExceptionListener? _listener;
+
   ///混入此类后，实现[ExceptionListener]并调用此方法进行注册
-  bindToExceptionHandler(ExceptionListener listener){
-    if(listener == null) return;
+  bindToExceptionHandler(ExceptionListener? listener) {
+    if (listener == null) return;
     _listener = listener;
     addExceptionListener();
   }
 
   ///增加(业务)异常监听
-  addExceptionListener(){
+  addExceptionListener() {
     ExceptionPitcher().addListener(_listener);
   }
+
   ///移除(业务)异常监听
   /// * 默认会在dispose中自动移除
-  removeExceptionListener(){
-    if(_listener != null)
-      ExceptionPitcher().removeListener(_listener);
+  removeExceptionListener() {
+    if (_listener != null) ExceptionPitcher().removeListener(_listener);
   }
-
 
   ///理论上，不需要你手动移除[ExceptionListener]，此处会自动处理
   @override
@@ -176,5 +171,4 @@ mixin ExceptionBinding on ViewStateModel implements ExceptionListener{
     removeExceptionListener();
     super.dispose();
   }
-
 }

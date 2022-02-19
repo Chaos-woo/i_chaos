@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +28,11 @@ class ProviderWidget<T extends ViewStateModel?> extends StatefulWidget {
     this.onModelReady,
   }) : super(key: key);
 
+  @override
   _ProviderWidgetState<T> createState() => _ProviderWidgetState<T>();
 }
 
-class _ProviderWidgetState<T extends ViewStateModel?>
-    extends State<ProviderWidget<T>> {
+class _ProviderWidgetState<T extends ViewStateModel?> extends State<ProviderWidget<T>> {
   late T model;
 
   @override
@@ -55,12 +57,12 @@ class _ProviderWidgetState<T extends ViewStateModel?>
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>(
       create: (context) => model,
-      child: Selector<T,int>(
-        selector: (ctx,model) {
+      child: Selector<T, int>(
+        selector: (ctx, model) {
           return model!.notifyInvokeCount;
         },
-        builder: (ctx,value,child) {
-          return widget.builder(ctx,model,child);
+        builder: (ctx, value, child) {
+          return widget.builder(ctx, model, child);
         },
         child: widget.child,
       ),
@@ -68,15 +70,12 @@ class _ProviderWidgetState<T extends ViewStateModel?>
   }
 }
 
-
 ///由于多vm，所以具体selector的刷新范围如何确定，可以参考上面[ProviderWidget]的调整，
 ///根据自身需求修改
 ///* 默认参照放上面的规范进行处理，更多ViewModel可以以此类推
 
-class ProviderWidget2<A extends ViewStateModel?, B extends ViewStateModel?>
-    extends StatefulWidget {
-  final Widget Function(BuildContext context, A model1, B model2, Widget? child)
-      builder;
+class ProviderWidget2<A extends ViewStateModel?, B extends ViewStateModel?> extends StatefulWidget {
+  final Widget Function(BuildContext context, A model1, B model2, Widget? child) builder;
   final A model1;
   final B model2;
   final Widget? child;
@@ -91,11 +90,11 @@ class ProviderWidget2<A extends ViewStateModel?, B extends ViewStateModel?>
     this.onModelReady,
   }) : super(key: key);
 
+  @override
   _ProviderWidgetState2<A, B> createState() => _ProviderWidgetState2<A, B>();
 }
 
-class _ProviderWidgetState2<A extends ViewStateModel?,
-    B extends ViewStateModel?> extends State<ProviderWidget2<A?, B?>> {
+class _ProviderWidgetState2<A extends ViewStateModel?, B extends ViewStateModel?> extends State<ProviderWidget2<A?, B?>> {
   A? model1;
   B? model2;
 
@@ -131,7 +130,7 @@ class _ProviderWidgetState2<A extends ViewStateModel?,
             create: (context) => model2,
           )
         ],
-        child: Selector2<A, B,int>(
+        child: Selector2<A, B, int>(
           selector: (ctx, m1, m2) => (m1!.notifyInvokeCount + m2!.notifyInvokeCount),
           builder: (ctx, value, child) {
             return widget.builder(ctx, model1, model2, child);
@@ -141,13 +140,9 @@ class _ProviderWidgetState2<A extends ViewStateModel?,
   }
 }
 
-class ProviderWidget4<
-    A extends ViewStateModel?,
-    B extends ViewStateModel?,
-    C extends ViewStateModel?,
-    D extends ViewStateModel?> extends StatefulWidget {
-  final Widget Function(BuildContext context, A model_1, B model_2, C model_3,
-      D model_4, Widget? child)? builder;
+class ProviderWidget4<A extends ViewStateModel?, B extends ViewStateModel?, C extends ViewStateModel?, D extends ViewStateModel?>
+    extends StatefulWidget {
+  final Widget Function(BuildContext context, A model_1, B model_2, C model_3, D model_4, Widget? child)? builder;
 
   final A? model_1;
   final B? model_2;
@@ -156,29 +151,16 @@ class ProviderWidget4<
   final Widget? child;
   final Function(A, B, C, D)? onModelReady;
 
-  ProviderWidget4(
-      {Key? key,
-      this.builder,
-      this.model_1,
-      this.model_2,
-      this.model_3,
-      this.model_4,
-      this.child,
-      this.onModelReady})
-      : super(key: key);
+  ProviderWidget4({Key? key, this.builder, this.model_1, this.model_2, this.model_3, this.model_4, this.child, this.onModelReady}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return ProviderWidgetState4<A, B, C, D>();
   }
 }
 
-class ProviderWidgetState4<
-    A extends ViewStateModel?,
-    B extends ViewStateModel?,
-    C extends ViewStateModel?,
-    D extends ViewStateModel?> extends State<ProviderWidget4<A?, B?, C?, D?>> {
+class ProviderWidgetState4<A extends ViewStateModel?, B extends ViewStateModel?, C extends ViewStateModel?, D extends ViewStateModel?>
+    extends State<ProviderWidget4<A?, B?, C?, D?>> {
   A? model_1;
   B? model_2;
   C? model_3;
@@ -186,8 +168,6 @@ class ProviderWidgetState4<
 
   @override
   void initState() {
-    // TODO: implement initState
-
     model_1 = widget.model_1;
     model_2 = widget.model_2;
     model_3 = widget.model_3;
@@ -214,7 +194,6 @@ class ProviderWidgetState4<
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<A?>(

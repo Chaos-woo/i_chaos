@@ -7,7 +7,7 @@ mixin ToastMixin {
       TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w200);
 
   void showSimpleToast(
-    String msg, {
+    String? msg, {
     Duration? duration = const Duration(seconds: 2),
     ToastPosition? position = ToastPosition.bottom,
     TextStyle? textStyle = defaultTextStyle,
@@ -15,10 +15,12 @@ mixin ToastMixin {
     double? radius = 20,
     TextAlign? textAlign = TextAlign.center,
   }) {
-    showToast(msg,
-        duration: duration, position: position,
-        textStyle: textStyle, backgroundColor: backgroundColor,
-        radius: radius, textAlign: textAlign);
+    if (msg != null && msg.isNotEmpty) {
+      showToast(msg,
+          duration: duration, position: position,
+          textStyle: textStyle, backgroundColor: backgroundColor,
+          radius: radius, textAlign: textAlign);
+    }
   }
 
   void showRichToast(List<TextSpan> textSpans,

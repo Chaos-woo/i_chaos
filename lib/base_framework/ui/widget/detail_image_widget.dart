@@ -26,8 +26,8 @@ class DetailImageWidgetState extends PageState {
             children: <Widget>[
               Container(
                 color: Colors.black,
-                width: getWidthPx(750),
-                height: getHeightPx(1334),
+                width: 750.w,
+                height: 1334.h,
 
                 ///可增加滑动退出等功能、具体可以查看插件的文档
                 child: ExtendedImageGesturePageView.builder(
@@ -54,7 +54,7 @@ class DetailImageWidgetState extends PageState {
                 ),
               ),
               commonAppBar(
-                  title: "$indexStr/${imageList!.length}", leftWidget: buildAppBarLeft(), leftPadding: getWidthPx(40), rightPadding: getWidthPx(40)),
+                  title: "$indexStr/${imageList!.length}", leftWidget: buildAppBarLeft(), leftPadding: 40.w, rightPadding: 40.h),
             ],
           ),
         ));

@@ -17,6 +17,8 @@ abstract class BaseSkeletonWidget extends BaseStatelessWidget {
 
   final bool _enabled = true;
 
+  BaseSkeletonWidget({Key? key}) : super(key: key);
+
   ///自动给child 增加 闪闪亮特效！
   Widget getShimmer(Widget child) {
     return Shimmer(

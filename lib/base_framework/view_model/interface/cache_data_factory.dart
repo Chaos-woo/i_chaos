@@ -1,7 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/6/15
-*/
 
 import 'package:flustars/flustars.dart';
 import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
