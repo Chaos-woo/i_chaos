@@ -1,33 +1,13 @@
-import 'package:cookie_jar/cookie_jar.dart';
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:i_chaos/base_framework/config/net/base_http.dart';
-import 'package:i_chaos/base_framework/config/storage_manager.dart';
-import 'package:i_chaos/base_framework/view_model/handle/exception_handler.dart';
-import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
+import '../../../utils/exception/exception_pitcher.dart';
 
-import 'package:i_chaos/base_framework/utils/exception_pitcher.dart';
+import '../base_http_client.dart';
 
-final MeHttpClient bedRock = MeHttpClient();
-
-class MeHttpClient extends BaseHttp {
-  final String china = "https://wanandroid.com/";
-
+class DefaultApiInterceptor extends InterceptorsWrapper {
   @override
-  void init() {
-    options.baseUrl = china;
-    interceptors
-      ..add(CookieManager(PersistCookieJar(
-          storage: FileStorage(StorageManager.appDirectory.path))))
-      ..add(ApiInterceptor())
-      ..add(LogInterceptor());
-  }
-}
-
-class ApiInterceptor extends InterceptorsWrapper {
-  @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     ///这里将空值参数去除掉，可根据自己的需求更改
 //    options.queryParameters.removeWhere((key, value) => value == null);
 //
@@ -57,23 +37,11 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    ResponseData responseData = ResponseData.fromJson(response.data);
+    BaseResponseData responseData = BaseResponseData.fromJson(response.data);
     if (responseData.success) {
       return super.onResponse(response, handler);
     } else {
-      ///抛出业务异常
       throw ExceptionPitcher().transformException(responseData);
     }
-  }
-}
-
-class ResponseData extends BaseResponseData {
-  @override
-  bool get success => (code == 1 || code == 200);
-
-  ResponseData.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    message = json['message'];
-    data = json['data'];
   }
 }

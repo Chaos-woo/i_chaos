@@ -1,9 +1,9 @@
-
 import 'dart:collection';
 
-import 'package:i_chaos/base_framework/config/net/base_http.dart';
-import 'package:i_chaos/base_framework/config/net/me_http.dart';
+import 'package:i_chaos/base_framework/config/net/base_http_client.dart';
 import 'package:i_chaos/base_framework/exception/un_handle_exception.dart';
+
+import 'exception_listener.dart';
 
 class ExceptionPitcher with _ExceptionNotifyBinding {
   static ExceptionPitcher? _instance;
@@ -18,19 +18,16 @@ class ExceptionPitcher with _ExceptionNotifyBinding {
   }
 
   /// * 根据code 转换Exception
-  Exception transformException(ResponseData? responseData) {
+  Exception transformException(BaseResponseData? responseData) {
     assert(responseData != null, 'responseData can not be null!');
     final Exception exception = _transferException(responseData!);
 
     return exception;
   }
 
-  /// 异常分拣
-  Exception _transferException(ResponseData responseData) {
-    switch (responseData.code) {
-      default:
-        return UnHandleException(responseData.message ?? "un handle exception");
-    }
+  /// 业务code异常转换
+  Exception _transferException(BaseResponseData responseData) {
+    return UnHandleException(responseData.message ?? 'Unknown Exception!');
   }
 }
 
@@ -54,12 +51,6 @@ mixin _ExceptionNotifyBinding {
       }
     }
   }
-}
-
-/// api 异常监听回调
-abstract class ExceptionListener<E extends Exception, T extends BaseResponseData> {
-  /// what kind of [exception] was happened,with api's [rawData]
-  void notifyException({E? exception, T? rawData});
 }
 
 /// package  exception with listener

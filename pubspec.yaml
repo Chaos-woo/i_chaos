@@ -67,8 +67,8 @@ dependencies:
   #  json_annotation: ^2.4.0
   #  dio: ^2.1.16
   dio: ^4.0.1
-  dio_cookie_manager: ^2.0.0
-  cookie_jar: ^3.0.1
+#  dio_cookie_manager: ^2.0.0
+#  cookie_jar: ^3.0.1
   path_provider: ^2.0.5
   #应用更新
   #flutter_downloader: ^1.4.4
