@@ -1,7 +1,4 @@
-
-
-
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 const bool inProduction = bool.fromEnvironment("dart.vm.product");
 
@@ -22,7 +19,4 @@ class PlatformUtils {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.buildNumber;
   }
-
-
-
 }

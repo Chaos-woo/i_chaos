@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:i_chaos/base_framework/exception/internal_exception.dart';
+import 'package:i_chaos/base_framework/utils/exception/exception_pitcher.dart';
 import 'package:i_chaos/base_framework/view_model/view_state_model.dart';
 
 class ExceptionHandler {
@@ -18,12 +19,10 @@ class ExceptionHandler {
   /// [e],有可能是Error,也有可能是Exception.所以需要判断处理
   /// [s] 为堆栈信息
   void handleException<T extends ViewStateModel>(T model, e, s) {
-    debugPrint("e :    $e");
-    debugPrint("s :    $s");
     if (e is DioError) {
-      if (e.type == DioErrorType.connectTimeout) {
-        //todo
-      }
+      throw ExceptionPitcher().transformException(dioErr: e, withNotifyMode: false);
+    } else {
+      throw InternalException('${e.runtimeType}: ${s.toString()}');
     }
   }
 }

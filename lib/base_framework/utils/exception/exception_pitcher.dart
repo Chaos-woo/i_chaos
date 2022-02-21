@@ -1,9 +1,19 @@
 import 'dart:collection';
 
+import 'package:dio/dio.dart';
 import 'package:i_chaos/base_framework/config/net/base_http_client.dart';
-import 'package:i_chaos/base_framework/exception/un_handle_exception.dart';
+import 'package:i_chaos/base_framework/exception/base_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/cancel_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/connect_timeout_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/other_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/receive_timeout_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/response_exception.dart';
+import 'package:i_chaos/base_framework/exception/dio/send_timeout_exception.dart';
+import 'package:i_chaos/base_framework/exception/internal_exception.dart';
 
 import 'exception_listener.dart';
+
+typedef ResponseDioExceptionProvider = BaseException Function(DioError err);
 
 class ExceptionPitcher with _ExceptionNotifyBinding {
   static ExceptionPitcher? _instance;
@@ -18,16 +28,43 @@ class ExceptionPitcher with _ExceptionNotifyBinding {
   }
 
   /// * 根据code 转换Exception
-  Exception transformException(BaseResponseData? responseData) {
-    assert(responseData != null, 'responseData can not be null!');
-    final Exception exception = _transferException(responseData!);
+  Exception transformException({DioError? dioErr, BaseResponseData? responseData,
+      Map<DioErrorType, ResponseDioExceptionProvider>? dioExceptionProvider, bool withNotifyMode = false, Map<int, BaseException>? bizExceptionProvider, BaseException? defaultException}) {
+
+    Exception exception = defaultException ?? InternalException('');
+    if (!withNotifyMode) {
+      exception = _transferDioException(dioErr!, dioExceptionProvider);
+    } else {
+      exception = _transferBizException(responseData!, bizExceptionProvider);
+      for (_ExceptionPackage package in _packages) {
+        package._listener?.notifyException(exception: exception, rawData: responseData);
+      }
+    }
 
     return exception;
   }
 
+  /// 网络异常转换
+  Exception _transferDioException(DioError err, Map<DioErrorType, ResponseDioExceptionProvider>? dioExceptionProvider) {
+    switch(err.type) {
+      case DioErrorType.connectTimeout:
+        return dioExceptionProvider?[DioErrorType.connectTimeout]?.call(err) ?? ConnectTimeoutException('Connect timeout');
+      case DioErrorType.sendTimeout:
+        return dioExceptionProvider?[DioErrorType.sendTimeout]?.call(err) ?? SendTimeoutException('Write data timeout');
+      case DioErrorType.receiveTimeout:
+        return dioExceptionProvider?[DioErrorType.receiveTimeout]?.call(err) ?? ReceiveTimeoutException('Read data timeout');
+      case DioErrorType.response:
+        return dioExceptionProvider?[DioErrorType.response]?.call(err) ?? ResponseException(err ,'Http request error');
+      case DioErrorType.cancel:
+        return dioExceptionProvider?[DioErrorType.cancel]?.call(err) ?? CancelException('Request cancel');
+      case DioErrorType.other:
+        return dioExceptionProvider?[DioErrorType.other]?.call(err) ?? OtherException('Other error');
+    }
+  }
+
   /// 业务code异常转换
-  Exception _transferException(BaseResponseData responseData) {
-    return UnHandleException(responseData.message ?? 'Unknown Exception!');
+  Exception _transferBizException(BaseResponseData responseData, Map<int, BaseException>? bizExceptionProvider) {
+    return bizExceptionProvider?[responseData.code] ?? InternalException('Response is not success. Biz error code: ${responseData.code}');
   }
 }
 

@@ -1,7 +1,9 @@
 abstract class BaseException implements Exception {
-  String message = "";
+  String _message = '';
 
-  BaseException(this.message);
+  BaseException(this._message);
+
+  String get message => _message;
 
   @override
   String toString() {

@@ -1,8 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/4/17
-*/
-
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
@@ -53,8 +48,7 @@ class DetailImageWidgetState extends PageState {
                   },
                 ),
               ),
-              commonAppBar(
-                  title: "$indexStr/${imageList!.length}", leftWidget: buildAppBarLeft(), leftPadding: 40.w, rightPadding: 40.h),
+              commonAppBar(title: "$indexStr/${imageList!.length}", leftWidget: buildAppBarLeft(), leftPadding: 40.w, rightPadding: 40.h),
             ],
           ),
         ));

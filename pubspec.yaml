@@ -49,7 +49,7 @@ dependencies:
   # WebView iOS添加键值对 o.flutter.embedded_views_preview = YES
   #flutter 官方插件，
   #这个不会覆盖widget，但是html支持不好。
-  webview_flutter: ^2.0.2
+  webview_flutter: ^3.0.0
   #  webview_flutter: ^0.3.21
   #这个文档齐全(支持富文本的显示：这个插件有个bug、会覆盖其它widget(不用页面切换动画是没问题的)，你用的时候更一下看看修复没有)
   #此插件为flutter社区开发，非官方，但是性能比官方号（所写时的版本），如果遇到上面所提bug
@@ -57,8 +57,8 @@ dependencies:
   #  flutter_webview_plugin: ^0.3.11
 
   #设备信息、包信息
-  device_info: ^2.0.2
-  package_info: ^2.0.2
+  device_info_plus: ^3.2.2
+  package_info_plus: ^1.4.0
 
   # 加解密
   encrypt: ^5.0.1
@@ -95,7 +95,7 @@ dependencies:
   #很强大的插件，瀑布流、滑动退出、手势放大等等等等，请查看文档
   #大佬的文章 https://juejin.im/post/5dee2ab36fb9a01610796a20
   #https://github.com/fluttercandies/extended_image
-  extended_image: ^5.1.2
+  extended_image: ^5.1.0
   #https://pub.dev/packages/flutter_xupdate 漂亮的更新弹窗
   #flutter_xupdate: ^0.0.3
   #刮刮卡  https://github.com/826327700/flutter_plugins_demo
@@ -129,18 +129,12 @@ dependencies:
   # android权限弹窗
   #  permission_handler: ^3.3.0
   permission_handler: '>=8.1.6 <8.2.0'
-  #屏幕适配
-  #flutter_screenutil: ^0.5.3
-  #数据库
-  #sqflite: ^1.1.7
   #下方两个为常用工具类 详见文档：https://github.com/Sky24n/common_utils
   #适配、sp本地缓存、路径util等
   flustars: ^2.0.1
-  #字符串util、日期格式化、加解密、日志、等等
-  common_utils: ^2.0.2
 
   # 网络状态
-  connectivity: ^3.0.6
+  connectivity: ^3.0.3
 
   #  #高德地图
   #  amap_location: ^0.2.0
@@ -180,7 +174,7 @@ dependencies:
   #fcm
   #firebase_messaging: ^6.0.13
   #滚动到制定item的list--- 个人经验，目前最好使的了
-  scrollable_positioned_list: ^0.2.2
+  scrollable_positioned_list: ^0.2.3
 
   #通知插件， https://pub.flutter-io.cn/packages/flutter_local_notifications
   #flutter_local_notifications: ^1.4.2

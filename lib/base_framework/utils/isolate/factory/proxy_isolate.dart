@@ -1,8 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/9/1
-*/
-
 
 import 'dart:async';
 import 'dart:isolate';
