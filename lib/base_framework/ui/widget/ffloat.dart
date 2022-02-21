@@ -209,7 +209,7 @@ class FFloat extends StatefulWidget {
   _FFloat? _float;
 
   FFloat(
-    this.builder, {
+    this.builder, {Key? key,
     this.anchor,
     this.location,
     this.margin = EdgeInsets.zero,
@@ -234,7 +234,7 @@ class FFloat extends StatefulWidget {
     this.shadowBlur = 1.0,
     this.shadowColor,
     this.shadowOffset,
-  });
+  }) : super(key: key);
 
   @override
   _FFloatState createState() => _FFloatState();

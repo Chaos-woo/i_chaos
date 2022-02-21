@@ -36,16 +36,6 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
 
   @override
   Future<List<TodoVO>>? loadData() {
-//    DateTime now = DateTime.now();
-//    List<SubTaskVO> vos = [
-//      SubTaskVO.newSubTask(content: 'subtask context1'),
-//      SubTaskVO.newSubTask(content: 'subtask context2'),
-//      SubTaskVO.newSubTask(content: 'subtask context3'),
-//      SubTaskVO.newSubTask(content: 'subtask context4'),
-//    ];
-//
-//    TodoVO vo = TodoVO.newTodo(content: 'new Todo content $now', subTaskList: vos, level: 3);
-//    _todoRepo.insertTodo(vo);
     // 拉取当前日期的事件
     return _todoRepo.listTodo(start: _currentDate, end: _currentDate);
   }
@@ -98,7 +88,7 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
         selectedList = [];
         break;
     }
-    SortUnit.sort(selectedList, _defaultOrders);
+    SortUnit.sortTodo(selectedList, _defaultOrders);
     return selectedList;
   }
 
@@ -154,30 +144,16 @@ class SingleTodoListVM extends SingleViewStateModel<List<TodoVO>> {
       return;
     }
 
-    await _todoRepo.deleteTodoById(vo);
+    await _todoRepo.deleteTodoByVO(vo);
   }
 
+  // 事件更新
+  void updateTodo(TodoVO vo) {
+    _todoRepo.updateTodo(vo);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  Future<void> clearTodoTag(int tagId) async {
+    await _todoRepo.clearTodoTagByTagId(tagId);
+  }
 
 }

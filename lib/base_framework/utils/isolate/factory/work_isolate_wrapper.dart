@@ -1,8 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/9/2
-* 注意： 请勿使用任何dart:ui内的东西（即涉及到flutter的代码）
-*/
 
 import 'dart:isolate';
 

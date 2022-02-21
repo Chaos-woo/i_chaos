@@ -1,14 +1,18 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
+import 'package:i_chaos/base_framework/mixin/screen/screen_adapter.mixin.dart';
+import 'package:i_chaos/base_framework/mixin/toast/toast_mixin.dart';
 import 'package:i_chaos/base_framework/ui/behavior/over_scroll_behavior.dart';
 import 'package:i_chaos/base_framework/ui/widget/progress_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/base_stateless_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
-import 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
+import 'package:nested/nested.dart';
+import 'package:provider/provider.dart';
 
 import 'binding/manipulate_widget_binding.dart';
+
 export 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
 
 ///用于创建 state
@@ -21,24 +25,13 @@ typedef StateBuilder = State Function();
 ///
 /// 此处扩展功能应该是 page和view通用功能
 
-abstract class BaseState<T extends StatefulWidget> extends State<T> with ManipulateWidgetBinding {
+abstract class BaseState<T extends StatefulWidget> extends State<T> with ManipulateWidgetBinding, ToastMixin, ScreenAdapterMixin {
   ///去掉 scroll view的 水印  e.g : listView scrollView
   ///当滑动到顶部或者底部时，继续拖动出现的蓝色水印
   Widget getNoInkWellListView({required Widget scrollView}) {
     return ScrollConfiguration(
       behavior: OverScrollBehavior(),
       child: scrollView,
-    );
-  }
-
-  ///占位widget
-  /// * 可以直接使用 [num.vGap] 或 [num.hGap]
-  /// * 参考[SizeAdapterExtension]
-  @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
-  Widget getSizeBox({double width = 1, double height = 1}) {
-    return SizedBox(
-      width: width,
-      height: height,
     );
   }
 
@@ -87,77 +80,15 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Manipul
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _dialogLoadingController = null;
     super.dispose();
   }
-
-  /*
-  * size adapter with tool ScreenUtil
-  *
-  * */
-
-  ///得到适配后的高度
-  /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
-  @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
-  double getHeightPx(double height) => height.h;
-
-  ///得到适配后的宽度
-  /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
-  @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
-  double getWidthPx(double width) => width.w;
-
-  ///屏幕宽度
-  double getScreenWidth() => ScreenUtil.getInstance().screenWidth;
-
-  ///屏幕高度
-  double getScreenHeight() => ScreenUtil.getInstance().screenHeight;
 
   //目前仅对于手机： 因为手机大多数情况下是长度变化较大，
   // 所以以高度来算出半径，保证异形屏的弧度不会缩小
   //有其他需求，还需要重改
   /// 得到适配后的圆角半径
   double getRadiusFromHeight(double radius) => ScreenUtil.getInstance().getHeightPx(radius);
-
-  ///得到适配后的字号
-  /// * 可以直接使用 [num.w] 或 [num.h] 来获取适配后的尺寸
-  /// * 参考[SizeAdapterExtension]
-  @Deprecated("已废弃，建议使用size_adapter_extension中的方法")
-  double getSp(double fontSize) => fontSize.sp;
-
-/*
-  * app 生命周期，建议在需要的地方自己注册监听
-  *
-  * */
-
-//
-//  /// current widget is visible and focusable if is true;
-//  bool isResumed = true;
-//
-//  ///
-//  bool isInactive = true;
-//
-//  ///cant not interact with user
-//  bool isPause = false;
-
-  ///生命周期变化时回调
-//  resumed:应用可见并可响应用户操作
-//  inactive:用户可见，但不可响应用户操作
-//  paused:已经暂停了，用户不可见、不可操作
-//  suspending：应用被挂起，此状态IOS永远不会回调
-
-  /// just trigger at user is pressing home or back button;
-//  @override
-//  void didChangeAppLifecycleState(AppLifecycleState state) {
-//    isResumed = state == AppLifecycleState.resumed;
-//
-//    isInactive = state == AppLifecycleState.inactive;
-//    isPause = state == AppLifecycleState.paused;
-//
-//  }
-
 }
 
 ///widget生成器
@@ -187,18 +118,26 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
 
   /// [routeName]  => 你的页面类名
   @override
-  PageRoute<T> buildRoute<T>(Widget page, String routeName, {PageAnimation? animation = PageAnimation.Non, Object? args}) {
+  PageRoute<T> buildRoute<T>(Widget page, String routeName,
+      {PageAnimation? animation = PageAnimation.non, Object? args, List<SingleChildWidget>? providers}) {
     final r = RouteSettings(name: routeName, arguments: args);
 
+    page = providers != null && providers.isNotEmpty
+        ? MultiProvider(
+            providers: providers,
+            child: page,
+          )
+        : page;
+
     switch (animation) {
-      case PageAnimation.Fade:
-        return pageBuilder!.wrapWithFadeAnim(page, r) as PageRoute<T>;
-      case PageAnimation.Scale:
-        return pageBuilder!.wrapWithScaleAnim(page, r) as PageRoute<T>;
-      case PageAnimation.Slide:
-        return pageBuilder!.wrapWithSlideAnim(page, r) as PageRoute<T>;
+      case PageAnimation.fade:
+        return pageBuilder!.wrapWithFadeAnimation(page, r) as PageRoute<T>;
+      case PageAnimation.scale:
+        return pageBuilder!.wrapWithScaleAnimation(page, r) as PageRoute<T>;
+      case PageAnimation.slide:
+        return pageBuilder!.wrapWithSlideAnimation(page, r) as PageRoute<T>;
       default:
-        return pageBuilder!.wrapWithNoAnim(page, r) as PageRoute<T>;
+        return pageBuilder!.wrapWithNoAnimation(page, r) as PageRoute<T>;
     }
   }
 
@@ -207,14 +146,17 @@ mixin WidgetGenerator on BaseState implements _RouteGenerator, _NavigateActor {
   ///see details in [PageAnimationBuilder]
 
   @override
-  Future push<T extends PageState>(T targetPage, {PageAnimation? animation}) {
-    return Navigator.of(context).push(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation));
+  Future push<T extends PageState>(T targetPage, {PageAnimation? animation, Object? args, List<SingleChildWidget>? providers}) {
+    return Navigator.of(context).push(
+        buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation, args: args, providers: providers));
   }
 
   @override
-  Future pushReplacement<T extends Object, TO extends PageState>(TO targetPage, {PageAnimation? animation, T? result}) {
-    return Navigator.of(context)
-        .pushReplacement(buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation), result: result);
+  Future pushReplacement<T extends Object, TO extends PageState>(TO targetPage,
+      {PageAnimation? animation, T? result, Object? args, List<SingleChildWidget>? providers}) {
+    return Navigator.of(context).pushReplacement(
+        buildRoute(targetPage.transformToPageWidget(), targetPage.runtimeType.toString(), animation: animation, args: args, providers: providers),
+        result: result);
   }
 
   @override

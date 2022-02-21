@@ -10,9 +10,9 @@ class DotLoading extends StatefulWidget {
   late TextStyle textStyle;
   late String similarDotText;
 
-  DotLoading({Key? key, Duration interval = const Duration(milliseconds: 100), String text = '', TextStyle? textStyle, String similarDotText = '.'}) : super(key: key) {
+  DotLoading({Key? key, Duration interval = const Duration(milliseconds: 100), String text = '', TextStyle? textStyle, String similarDotText = '.'})
+      : super(key: key) {
     intervalDuration = interval;
-    // ignore: prefer_initializing_formals
     this.text = text;
     this.textStyle = textStyle ?? const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12);
     this.similarDotText = similarDotText;
@@ -58,9 +58,18 @@ class _DotLoadingState extends State<DotLoading> {
 
   void _startLoadingTimer() {
     _timer = Timer.periodic(widget.intervalDuration, (timer) {
-      setState(() {
-        _currDotCnt = _nextDotCnt();
-      });
+      try {
+        setState(() {
+          _currDotCnt = _nextDotCnt();
+        });
+      } catch (e) {
+        if (_timer != null) {
+          if (_timer!.isActive) {
+            _timer!.cancel();
+            _timer = null;
+          }
+        }
+      }
     });
   }
 

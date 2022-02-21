@@ -24,9 +24,9 @@ class WidgetFilteredTabBar extends WidgetState {
     _filteredTabBarVM = Provider.of<FilteredTabBarVM>(context, listen: false);
 
     final Map<TodoState, String> _tabWords = {
-      TodoState.active: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_active,
-      TodoState.completed: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_completed,
-      TodoState.all: S.of(_filteredTabBarVM.context!).todo_filtered_tab_bar_state_all
+      TodoState.active: S.of(context).todo_filtered_tab_bar_state_active,
+      TodoState.completed: S.of(context).todo_filtered_tab_bar_state_completed,
+      TodoState.all: S.of(context).todo_filtered_tab_bar_state_all
     };
 
     return DefaultTabController(

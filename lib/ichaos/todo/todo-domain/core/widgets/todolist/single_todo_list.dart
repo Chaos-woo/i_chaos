@@ -9,6 +9,7 @@ import 'package:i_chaos/ichaos/public/units/snack_bar_util.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_state.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/details/single_todo_page.dart';
+import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_card.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
@@ -78,7 +79,7 @@ class WidgetSingleTodoList extends WidgetState {
           return generateWidget(() => WidgetTodoCard(currTodoList[index],
               expandBtnDisplayLimits: 4,
               operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
-                SnackBarUtil.topBar(textSpans: [
+                SnackBarUtil.snack(textSpans: [
                   TextSpan(text: S.of(context).todo_card_toast_delete_text1, style: SnackBarUtil.defaultStyle),
                   TextSpan(text: '${S.of(context).todo_card_toast_delete_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
@@ -88,10 +89,11 @@ class WidgetSingleTodoList extends WidgetState {
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onModify: (ctx, vo) {
                 push(SingleTodoPage(vo, onSave: () {
+                  Provider.of<DraftListVM>(context,listen: false).refresh();
                   filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
                 }));
               }, onCompleted: (ctx, vo) {
-                SnackBarUtil.topBar(textSpans: [
+                SnackBarUtil.snack(textSpans: [
                   TextSpan(text: S.of(context).todo_card_toast_completed_text1, style: SnackBarUtil.defaultStyle),
                   TextSpan(text: '${S.of(context).todo_card_toast_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
@@ -100,7 +102,7 @@ class WidgetSingleTodoList extends WidgetState {
                 singleTodoListVM.toggleMainTodoState(vo.id!);
                 filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
               }, onCancelCompleted: (ctx, vo) {
-                SnackBarUtil.topBar(textSpans: [
+                SnackBarUtil.snack(textSpans: [
                   TextSpan(text: S.of(context).todo_card_toast_unaccomplished_text1, style: SnackBarUtil.defaultStyle),
                   TextSpan(text: '${S.of(context).todo_card_toast_unaccomplished_text2} [ ', style: SnackBarUtil.defaultStyle),
                   TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
@@ -112,7 +114,7 @@ class WidgetSingleTodoList extends WidgetState {
                 // 是否需要刷新列表：子任务全部完成时刷新列表
                 singleTodoListVM.toggleSubTaskState(vo, taskVO.uuid).then((refreshList) {
                   if (refreshList) {
-                    SnackBarUtil.topBar(textSpans: [
+                    SnackBarUtil.snack(textSpans: [
                       TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text1, style: SnackBarUtil.defaultStyle),
                       TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
                       TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
@@ -121,7 +123,7 @@ class WidgetSingleTodoList extends WidgetState {
                     filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
                   } else {
                     if (taskVO.completed) {
-                      SnackBarUtil.topBar(textSpans: [
+                      SnackBarUtil.snack(textSpans: [
                         TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text4, style: SnackBarUtil.defaultStyle),
                         TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
                         TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text5} [ ', style: SnackBarUtil.defaultStyle),
@@ -149,7 +151,7 @@ class WidgetSingleTodoList extends WidgetState {
   Widget _getMoreTipPlaceholder(int currentTodListLength, SingleTodoListVM singleTodoListVM) {
     if (currentTodListLength > 0) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Center(
           child: Text(
             '-- ${S.of(context).todo_list_placeholder_no_data} --',
@@ -188,7 +190,7 @@ class WidgetSingleTodoList extends WidgetState {
                   children: [
                     ImageHelper.placeHolderLocalSVGImg(imageName: 'image_complete', width: 100, height: 100),
                     Text(S.of(context).todo_list_placeholder_completed,
-                        style: TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
+                        style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
                   ],
                 )
               : Text(

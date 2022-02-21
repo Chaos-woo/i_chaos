@@ -115,7 +115,6 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
     } else {
       res = await _todoRepo.updateTodo(_todoFormBO.copyWithTodo(_todoCopy));
     }
-    print('$res');
     // 校验成功时弹框提示并退出当前页面
     return Future.value(true);
   }

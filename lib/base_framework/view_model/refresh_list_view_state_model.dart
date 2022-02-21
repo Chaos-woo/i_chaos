@@ -4,10 +4,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'list_view_state_model.dart';
 
-/// 基于
 abstract class RefreshListViewStateModel<T> extends ListViewStateModel<T> {
-  RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   RefreshController get refreshController => _refreshController;
 
@@ -20,8 +18,8 @@ abstract class RefreshListViewStateModel<T> extends ListViewStateModel<T> {
   get pageDataSize => pageSize;
 
   /// 下拉刷新
+  @override
   Future<List<T>?> refresh({bool init = false}) async {
-    //firstInit = init;
     try {
       _currentPageNum = pageNumFirst;
       list.clear();
@@ -87,6 +85,7 @@ abstract class RefreshListViewStateModel<T> extends ListViewStateModel<T> {
   }
 
   // 加载数据
+  @override
   Future<List<T>?> loadData({int? pageNum});
 
   @override

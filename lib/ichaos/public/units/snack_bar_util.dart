@@ -10,7 +10,7 @@ class SnackBarUtil {
 
   static const TextStyle defaultStyle = TextStyle(color: GFColors.WHITE, fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w200);
 
-  static void topBar({String? simpleContent, Duration? duration = const Duration(seconds: 3), List<TextSpan>? textSpans, int? textSpanLineFeedCnt}) {
+  static void snack({String? simpleContent, Duration? duration = const Duration(seconds: 3), List<TextSpan>? textSpans, int? textSpanLineFeedCnt, ToastPosition position = top}) {
     Widget _snackContainer = SafeArea(
         child: Container(
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -41,7 +41,7 @@ class SnackBarUtil {
       ),
     ));
 
-    showToastWidget(_snackContainer, duration: duration, position: top);
+    showToastWidget(_snackContainer, duration: duration, position: position);
   }
 
   static List<TextSpan> _getRichText(List<TextSpan>? textSpans, int? textSpanLineFeedCnt) {

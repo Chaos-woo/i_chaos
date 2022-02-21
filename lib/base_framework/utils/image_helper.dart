@@ -8,11 +8,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageHelper {
-  ///这里需要更换为对应地址
   static const String baseUrl = 'http://www.baidu.com';
-  static const String imagePrefix = '$baseUrl/uimg/';
+  static const String imagePrefix = '$baseUrl/';
 
-  ///图片扩展名，：建议使用webP，使用前先了解一下它（据说安卓4.0以下可能不兼容，不过微信都放弃4.0了）
   static const String extensionsPNGType = ".png";
   static const String extensionsSVGType = ".svg";
 
@@ -64,28 +62,6 @@ class ImageHelper {
 
   static Widget placeHolder({required double width, double? height}) {
     return SizedBox(width: width, height: height, child: CupertinoActivityIndicator(radius: min(10.0, width / 3)));
-  }
-
-  static Widget placeHolderGoodsDefaultImg({double? width, double? height}) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: Image.asset(
-        wrapAssetsDefault("icon_default_goodsdetail.png"),
-        fit: BoxFit.fill,
-      ),
-    );
-  }
-
-  static Widget goodsErrorStatusImg({double? width, double? height}) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: Image.asset(
-        wrapAssetsDefault("icon_default_goodsdetail.png"),
-        fit: BoxFit.fill,
-      ),
-    );
   }
 
   static Widget placeHolderLocalImg({required String imageName, double? width, double? height}) {

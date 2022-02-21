@@ -6,11 +6,6 @@ import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 
 /// 事件表单对象
 class TodoFormBO {
-  static const String todayBtnText = "今日";
-  static const String tomorrowBtnText = "明日";
-  static const String chooseDateBtnText = "选择日期";
-  static const String noDateBtnText = "草稿箱";
-
   TodoFormBO.fromTodo(TodoVO vo) {
     _content = vo.content;
     _remark = vo.remark;

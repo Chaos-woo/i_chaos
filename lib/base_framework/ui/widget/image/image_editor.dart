@@ -34,8 +34,8 @@ class ImageEditorState extends PageState {
         isSetDark: true,
         child: Container(
           color: Colors.white,
-          width: getWidthPx(750),
-          height: getHeightPx(1334),
+          width: 750.w,
+          height: 1334.h,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -67,7 +67,7 @@ class ImageEditorState extends PageState {
   bottomBar() {
     return Container(
       color: Colors.white,
-      height: getHeightPx(100),
+      height: 100.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
@@ -79,13 +79,13 @@ class ImageEditorState extends PageState {
               side: MaterialStateProperty.resolveWith<BorderSide>(
                 (Set<MaterialState> states) {
                   return BorderSide(
-                      color: Colors.black54, width: getWidthPx(2));
+                      color: Colors.black54, width: 2.w);
                 },
               ),
             ),
             child: Text(
               S.of(context).bedrock_reset,
-              style: TextStyle(color: Colors.black54, fontSize: getSp(28)),
+              style: TextStyle(color: Colors.black54, fontSize: 28.sp),
             ),
           ),
           OutlinedButton(
@@ -96,13 +96,13 @@ class ImageEditorState extends PageState {
               side: MaterialStateProperty.resolveWith<BorderSide>(
                 (Set<MaterialState> states) {
                   return BorderSide(
-                      color: Colors.black54, width: getWidthPx(2));
+                      color: Colors.black54, width: 2.w);
                 },
               ),
             ),
             child: Text(
               S.of(context).bedrock_confirm,
-              style: TextStyle(color: Colors.black54, fontSize: getSp(28)),
+              style: TextStyle(color: Colors.black54, fontSize: 28.sp),
             ),
           ),
         ],

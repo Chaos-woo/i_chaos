@@ -1,11 +1,6 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/9/8
-*/
-
 import 'package:i_chaos/base_framework/widget_state/base_state.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
-import 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
+
 export 'package:i_chaos/base_framework/extension/size_adapter_extension.dart';
 
 /// * 如果是页面，继承 [PageState]

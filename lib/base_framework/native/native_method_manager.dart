@@ -1,26 +1,18 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/7/6
-*/
-
-
 import 'dart:io';
 
 import 'package:flutter/services.dart';
 
 class NativeMethodManager{
 
-  static const MethodChannel _channel = const MethodChannel('com.lijiaqi.bedrock');
+  static const MethodChannel _channel = MethodChannel('com.lijiaqi.bedrock');
 
-  static final String methodInstall = 'install_apk';
+  static const String methodInstall = 'install_apk';
 
 
   static NativeMethodManager? _singleton;
 
   static NativeMethodManager? getInstance(){
-    if(_singleton == null){
-      _singleton = NativeMethodManager._();
-    }
+    _singleton ??= NativeMethodManager._();
     return _singleton;
   }
   NativeMethodManager._();
@@ -38,9 +30,9 @@ class NativeMethodManager{
 
   ///=====================Test===============================
   ///android端异常测试
-  static final String childThreadException = 'child_exception';
-  static final String uIThreadException = 'ui_exception';
-  static final String startUpException = 'start_up_exception';
+  static const String childThreadException = 'child_exception';
+  static const String uIThreadException = 'ui_exception';
+  static const String startUpException = 'start_up_exception';
 
   void throwChildThreadException()async{
     if(isAndroid()){

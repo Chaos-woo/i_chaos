@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(custom_params) => "${custom_params}";
 
+  static String m1(name, createTime) =>
+      "标签基本信息如下: \n1. 标签名: ${name};\n2. 创建时间: ${createTime}。\n3. 小提示：在删除该标签后，该标签下的所有ToDO将会移出该标签列表。";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bedrock_confirm": MessageLookupByLibrary.simpleMessage("确认"),
@@ -30,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "common_custom_params": m0,
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("施工中..."),
+        "month_calendar_page_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "month_calendar_page_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
         "setting_language_set_text1":
             MessageLookupByLibrary.simpleMessage("简体中文"),
         "setting_language_set_text2":
@@ -40,6 +47,47 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_page_appbar_title": MessageLookupByLibrary.simpleMessage("设置"),
         "setting_page_group_tip_text1":
             MessageLookupByLibrary.simpleMessage("基础设置"),
+        "tag_detail_appbar_title_edit":
+            MessageLookupByLibrary.simpleMessage("编辑标签"),
+        "tag_detail_appbar_title_new":
+            MessageLookupByLibrary.simpleMessage("新增标签"),
+        "tag_detail_btn_confirm": MessageLookupByLibrary.simpleMessage("保存"),
+        "tag_detail_color_picker_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
+        "tag_detail_save_tip_duplicate_name":
+            MessageLookupByLibrary.simpleMessage("重复的标签名，请重新输入"),
+        "tag_detail_save_tip_empty_name":
+            MessageLookupByLibrary.simpleMessage("请输入非空白的标签名"),
+        "tag_detail_tag_info_label":
+            MessageLookupByLibrary.simpleMessage("请选择一个喜欢的颜色和输入标签名"),
+        "tag_drawer_item_daily_todo":
+            MessageLookupByLibrary.simpleMessage("日常 ToDO"),
+        "tag_drawer_item_new_tag": MessageLookupByLibrary.simpleMessage("新建标签"),
+        "tag_drawer_item_no_tag_todo":
+            MessageLookupByLibrary.simpleMessage("未分类事件列表"),
+        "tag_drawer_item_recently_todo":
+            MessageLookupByLibrary.simpleMessage("最近 ToDO"),
+        "tag_drawer_item_tip_basic":
+            MessageLookupByLibrary.simpleMessage("基础列表"),
+        "tag_drawer_item_tip_tag": MessageLookupByLibrary.simpleMessage("标签列表"),
+        "tag_drawer_menu_item_delete":
+            MessageLookupByLibrary.simpleMessage("删除"),
+        "tag_drawer_menu_item_delete_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "tag_drawer_menu_item_delete_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认删除"),
+        "tag_drawer_menu_item_delete_tip_content": m1,
+        "tag_drawer_menu_item_delete_tip_title":
+            MessageLookupByLibrary.simpleMessage("确认删除标签 ?"),
+        "tag_drawer_menu_item_edit": MessageLookupByLibrary.simpleMessage("编辑"),
+        "tag_drawer_menu_item_sort": MessageLookupByLibrary.simpleMessage("排序"),
+        "tag_sort_appbar_title": MessageLookupByLibrary.simpleMessage("标签排序"),
+        "tag_sort_item_btn_move_down_text":
+            MessageLookupByLibrary.simpleMessage("下移"),
+        "tag_sort_item_btn_move_up_text":
+            MessageLookupByLibrary.simpleMessage("上移"),
+        "tag_sort_tag_list_empty_tip":
+            MessageLookupByLibrary.simpleMessage("还没标签，快去创建吧~"),
         "todo_calendar_switch_toast_text1":
             MessageLookupByLibrary.simpleMessage("跳转至"),
         "todo_card_detail_query_btn_confirm":
@@ -61,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_detail_query_location_label":
             MessageLookupByLibrary.simpleMessage("地点"),
         "todo_card_detail_query_not_completed":
-            MessageLookupByLibrary.simpleMessage("未完成"),
+            MessageLookupByLibrary.simpleMessage("处理中"),
         "todo_card_detail_query_subtask_label":
             MessageLookupByLibrary.simpleMessage("子任务"),
         "todo_card_detail_query_title":
@@ -113,6 +161,38 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("点错了吧? 明明完成了 (O_O)?"),
         "todo_card_toast_unaccomplished_text2":
             MessageLookupByLibrary.simpleMessage("任务"),
+        "todo_draft_appbar_option_delete_all":
+            MessageLookupByLibrary.simpleMessage("全部删除"),
+        "todo_draft_appbar_option_delete_all_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "todo_draft_appbar_option_delete_all_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
+        "todo_draft_appbar_option_delete_all_tip_content":
+            MessageLookupByLibrary.simpleMessage("是否删除全部草稿 ?"),
+        "todo_draft_appbar_option_delete_all_tip_title":
+            MessageLookupByLibrary.simpleMessage("删除全部草稿 ?"),
+        "todo_draft_list_item_option_delete":
+            MessageLookupByLibrary.simpleMessage("删除"),
+        "todo_draft_list_item_option_delete_tip_btn_cancel":
+            MessageLookupByLibrary.simpleMessage("取消"),
+        "todo_draft_list_item_option_delete_tip_btn_confirm":
+            MessageLookupByLibrary.simpleMessage("确认"),
+        "todo_draft_list_item_option_delete_tip_content":
+            MessageLookupByLibrary.simpleMessage("是否删除草稿 ?"),
+        "todo_draft_list_item_option_delete_tip_title":
+            MessageLookupByLibrary.simpleMessage("删除草稿 ?"),
+        "todo_draft_list_item_option_modify":
+            MessageLookupByLibrary.simpleMessage("修改"),
+        "todo_draft_list_item_option_move_to_today":
+            MessageLookupByLibrary.simpleMessage("移至今日"),
+        "todo_draft_list_item_option_move_to_tomorrow":
+            MessageLookupByLibrary.simpleMessage("移至明日"),
+        "todo_draft_list_item_option_select_date":
+            MessageLookupByLibrary.simpleMessage("选择日期"),
+        "todo_draft_list_not_found_tip_text":
+            MessageLookupByLibrary.simpleMessage("没有找到任何草稿喔~"),
+        "todo_draft_page_appbar_title":
+            MessageLookupByLibrary.simpleMessage("草稿箱"),
         "todo_edit_appbar_title_add":
             MessageLookupByLibrary.simpleMessage("新增"),
         "todo_edit_appbar_title_edit":

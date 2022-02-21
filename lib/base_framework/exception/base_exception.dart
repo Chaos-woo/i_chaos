@@ -1,24 +1,12 @@
+abstract class BaseException implements Exception {
+  String _message = '';
 
+  BaseException(this._message);
 
-
-
-abstract class BaseException implements Exception{
-  String message = "";
-
-
-  BaseException(this.message);
+  String get message => _message;
 
   @override
   String toString() {
-
-    return "${this.runtimeType} : $message";
+    return "$runtimeType : $message";
   }
 }
-
-
-
-
-
-
-
-

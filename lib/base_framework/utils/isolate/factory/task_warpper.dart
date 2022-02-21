@@ -1,8 +1,3 @@
-/*
-* Author : LiJiqqi
-* Date : 2020/9/2
-*/
-
 
 class TaskWrapper{
   final String? methodName;

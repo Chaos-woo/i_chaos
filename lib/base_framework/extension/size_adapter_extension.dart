@@ -1,15 +1,15 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 
-extension SizeAdapterExtension on num {
+extension SizeAdapterExt on num {
   ///获取适配后的宽度
-  double get w => ScreenUtil.getInstance().getWidthPx(this.toDouble());
+  double get w => ScreenUtil.getInstance().getWidthPx(toDouble());
 
   ///获取适配后的高度
-  double get h => ScreenUtil.getInstance().getHeightPx(this.toDouble());
+  double get h => ScreenUtil.getInstance().getHeightPx(toDouble());
 
   ///获取适配后的文本尺寸
-  double get sp => ScreenUtil.getInstance().getSp(this.toDouble());
+  double get sp => ScreenUtil.getInstance().getSp(toDouble());
 
   ///获取一个用于纵向占位的[SizedBox]
   /// * eg. [Column] 的空间占位
