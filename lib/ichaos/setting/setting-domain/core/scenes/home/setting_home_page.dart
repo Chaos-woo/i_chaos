@@ -8,6 +8,7 @@ import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_group_tip.d
 import 'package:i_chaos/ichaos/setting/setting-domain/core/scenes/language/language_setting_page.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
+// 设置首页
 class PageSettingHome extends PageState with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -20,40 +21,46 @@ class PageSettingHome extends PageState with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    // 选项列表
     List<OptionBarItem> optionItems = [
-      OptionBarItem(S.of(context).setting_option_language_text, icon: AliIcons.IconInt, rightIcon: AliIcons.IconEnter, targetPageBuilder: () async {
-        return await push(PageLanguageSetting());
-      }),
-      OptionBarItem(S.of(context).setting_option_theme_text, icon: AliIcons.IconFlipFill, ),
+      // 多语言设置
+      OptionBarItem(
+        S.of(context).setting_option_language_text,
+        icon: AliIcons.IconInt,
+        rightIcon: AliIcons.IconEnter,
+        targetPageBuilder: () async {
+          return await push(PageLanguageSetting());
+        },
+      ),
+      // 主题色设置
+      OptionBarItem(
+        S.of(context).setting_option_theme_text,
+        icon: AliIcons.IconFlipFill,
+      ),
     ];
 
+    // 分组提示
     Map<int, OptionGroupTipTool> optionGroupTip = {
-      0: OptionGroupTipTool(tip: S.of(context).setting_page_group_tip_text1)
+      0: OptionGroupTipTool(
+        tip: S.of(context).setting_page_group_tip_text1,
+      ),
     };
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.settings),
-        title: Row(
-          children: <Widget>[
-            Text(
-              S.of(context).setting_page_appbar_title,
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-        titleSpacing: -5,
-        toolbarHeight: 40,
-        elevation: 0,
+      appBar: customCommonAppBar(
+        title: S.of(context).setting_page_appbar_title,
+        leadingButtonIcon: Icons.settings,
         backgroundColor: Colors.black,
       ),
       body: switchStatusBar2Dark(
         child: Container(
           width: ScreenUtil.getInstance().screenWidth,
           color: Colors.grey[300],
-          child: OptionBarList(optionBarItemGroups: [optionItems], optionGroupTips: optionGroupTip,),
+          child: OptionBarList(
+            optionBarItemGroups: [optionItems],
+            optionGroupTips: optionGroupTip,
+          ),
         ),
       ),
     );

@@ -13,44 +13,52 @@ import 'package:provider/provider.dart';
 class PageLanguageSetting extends PageState {
   @override
   Widget build(BuildContext context) {
+    const appBarTitleIcon = Padding(
+      padding: EdgeInsets.only(right: 5),
+      child: Icon(
+        AliIcons.IconInt,
+        size: 20,
+      ),
+    );
+
+    final appBarTitleText = Text(
+      S.of(context).setting_option_language_text,
+      style: const TextStyle(
+        fontSize: 18,
+      ),
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          child: const Icon(AliIcons.IconReturn),
-          onTap: () {
-            pop();
-          },
-        ),
-        title: Row(
+      appBar: customCommonAppBar(
+        needPop: true,
+        backgroundColor: Colors.black,
+        customTitle: Row(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(right: 5),
-              child: Icon(AliIcons.IconInt, size: 20,),
-            ),
-            Text(
-              S.of(context).setting_option_language_text,
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
+            appBarTitleIcon,
+            appBarTitleText,
           ],
         ),
-        titleSpacing: -5,
-        toolbarHeight: 40,
-        elevation: 0,
-        backgroundColor: Colors.black,
       ),
       body: Consumer<LocaleModel>(
         builder: (ctx, localeModel, _) {
           int localeIndex = localeModel.localeIndex!;
 
+          // 多语言选项
           List<OptionBarItem> lanOptionItems = [
-            OptionBarItem(S.of(context).setting_language_set_text1, rightIcon: localeIndex == 0 ? AliIcons.IconRight : null, onTap: () {
-              _switchLocal(localeModel, 0);
-            }),
-            OptionBarItem(S.of(context).setting_language_set_text2, rightIcon: localeIndex == 1 ? AliIcons.IconRight : null, onTap: () {
-              _switchLocal(localeModel, 1);
-            }),
+            OptionBarItem(
+              S.of(context).setting_language_set_text1,
+              rightIcon: localeIndex == 0 ? AliIcons.IconRight : null,
+              onTap: () {
+                _switchLocal(localeModel, 0);
+              },
+            ),
+            OptionBarItem(
+              S.of(context).setting_language_set_text2,
+              rightIcon: localeIndex == 1 ? AliIcons.IconRight : null,
+              onTap: () {
+                _switchLocal(localeModel, 1);
+              },
+            ),
           ];
           return Container(
             width: ScreenUtil.getInstance().screenWidth,

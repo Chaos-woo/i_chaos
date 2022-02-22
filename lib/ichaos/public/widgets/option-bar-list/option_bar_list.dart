@@ -22,12 +22,13 @@ class OptionBarList extends StatelessWidget {
   // 选项条背景色
   late Color optionBarItemColor;
 
-  OptionBarList(
-      {required List<List<OptionBarItem>> optionBarItemGroups,
-      Map<int, OptionGroupTipTool>? optionGroupTips,
-      TextStyle tipTextStyle = const TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Colors.black54),
-      double optionItemHeight = 40,
-      Color optionBarItemColor = Colors.white}) {
+  OptionBarList({
+    required List<List<OptionBarItem>> optionBarItemGroups,
+    Map<int, OptionGroupTipTool>? optionGroupTips,
+    TextStyle tipTextStyle = const TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Colors.black54),
+    double optionItemHeight = 40,
+    Color optionBarItemColor = Colors.white,
+  }) {
     this.optionBarItemGroups = optionBarItemGroups;
     this.optionGroupTips = optionGroupTips;
     this.tipTextStyle = tipTextStyle;
@@ -52,6 +53,7 @@ class OptionBarList extends StatelessWidget {
         List<OptionBarItem> optionItemGroup = optionBarItemGroups[index];
         int currentItemGroupLength = optionItemGroup.length;
 
+        // 添加分组提示文案和可选的自定义组件
         List<Widget> widgetOptionItems = [];
         if (optionGroupTips != null && optionGroupTips![index] != null) {
           widgetOptionItems.add(_widgetOptionGroupTipTool(optionGroupTips![index]!));
@@ -60,6 +62,7 @@ class OptionBarList extends StatelessWidget {
           ));
         }
 
+        // 添加当前分组的选项
         for (int i = 0; i < currentItemGroupLength; i++) {
           if (i != 0) {
             widgetOptionItems.add(const Divider(
@@ -83,11 +86,13 @@ class OptionBarList extends StatelessWidget {
     );
   }
 
+  // 选项组自定义文案和组件
   Widget _widgetOptionGroupTipTool(OptionGroupTipTool groupTipTool) {
     List<Widget> rowLeftWidgets = [];
     List<Widget> rowRightWidgets = [];
 
     if (groupTipTool.tip != null && groupTipTool.tool != null) {
+      // 处理分组提示文案和组件的位置
       if (groupTipTool.tipPosition == OptionGroupTipPosition.left && groupTipTool.toolPosition == OptionGroupTipPosition.left) {
         if (groupTipTool.tipFirst) {
           rowLeftWidgets.add(Text(groupTipTool.tip!, style: tipTextStyle));
@@ -118,6 +123,7 @@ class OptionBarList extends StatelessWidget {
         }
       }
     } else if (groupTipTool.tip != null) {
+      // 处理仅有分组提示文案
       Text tipText = Text(groupTipTool.tip!, style: tipTextStyle);
       if (groupTipTool.tipPosition == OptionGroupTipPosition.left) {
         rowLeftWidgets.add(tipText);
@@ -125,6 +131,7 @@ class OptionBarList extends StatelessWidget {
         rowRightWidgets.add(tipText);
       }
     } else if (groupTipTool.tool != null) {
+      // 处理仅有分组自定义组件
       if (groupTipTool.toolPosition == OptionGroupTipPosition.left) {
         rowLeftWidgets.add(groupTipTool.tool!);
       } else {
@@ -151,11 +158,13 @@ class OptionBarList extends StatelessWidget {
     );
   }
 
+  // 选项组件
   Widget _widgetOptionItem(OptionBarItem item) {
     double iconSize = item.iconSize ?? item.textStyle!.fontSize! + 2;
     double rightIconSize = item.rightIconSize ?? item.textStyle!.fontSize! + 2;
 
-    Widget leftWidgetRow = Row(
+    // 选项左边组件
+    final Widget leftWidgetRow = Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         if (item.icon != null)
@@ -175,7 +184,8 @@ class OptionBarList extends StatelessWidget {
       ],
     );
 
-    Widget rightWidgetRow = Row(
+    // 选项右边组件
+    final Widget rightWidgetRow = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         for (Widget w in _widgetExtensionList(item, OptionExtensionContentPosition.right)) w,
@@ -190,12 +200,12 @@ class OptionBarList extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        // tap
+        // 选项点击回调
         item.onTap?.call();
-
-        // target page result pop
+        // 若选项点击需要跳转页面，此处等待页面返回值
         if (item.targetPageBuilder != null) {
           dynamic result = await item.targetPageBuilder!.call();
+          // 处理页面返回值
           item.pagePopCallback?.call(result);
         }
       },
