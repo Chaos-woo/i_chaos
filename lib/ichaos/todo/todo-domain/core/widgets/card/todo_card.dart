@@ -18,15 +18,11 @@ import 'package:noripple_overscroll/noripple_overscroll.dart';
 
 class WidgetTodoCard extends WidgetState {
   static const String _cardFontFamily = 'Lexend Deca';
-
   late final TodoVO _todo;
-
   // 事件操作回调
   TodoOperateCallback? operateCallback;
-
   // 是否展开子任务列表
   late bool expandAllList;
-
   // 子任务列表是否出现展开/收起按钮的任务数量上限
   late int expandBtnDisplayLimits;
 

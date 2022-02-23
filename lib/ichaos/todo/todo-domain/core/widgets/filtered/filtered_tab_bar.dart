@@ -75,9 +75,9 @@ class WidgetFilteredTabBar extends WidgetState {
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(15)),
               ),
             ),
-            Selector<FilteredTabBarVM, DateTime>(
-              selector: (ctx, vm) => vm.currentDate,
-              shouldRebuild: (pre, next) => true,
+            Selector<FilteredTabBarVM, bool>(
+              selector: (ctx, vm) => vm.busy,
+              shouldRebuild: (pre, next) => pre != next,
               builder: (ctx, currentDate, child) {
                 return TabBarView(
                   children: getTodoListOrPlaceholder(context, _filteredTabBarVM.busy),

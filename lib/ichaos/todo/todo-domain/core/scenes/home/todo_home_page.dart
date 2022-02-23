@@ -133,7 +133,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
           backToHomePageCallback: () {
             _draftListVM.refresh();
             filteredTabBarVM.selectedDateChange(filteredTabBarVM.currentDate);
-          })),
+          }),),
     );
   }
 

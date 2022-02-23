@@ -85,11 +85,12 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
         backgroundColor: Colors.teal,
         heroTag: 'add',
         onPressed: () async {
-          await push(
-              SingleTodoPage(TodoVO.empty(), onSave: () {
-                _backToHomePageCallback?.call();
-              }),
-              animation: PageAnimation.slide);
+          var r = await push(
+            SingleTodoPage(TodoVO.empty(), onSave: () {
+              _backToHomePageCallback?.call();
+            }),
+            animation: PageAnimation.slide,
+          );
           _backToHomePageCallback?.call();
         },
       ),
