@@ -180,7 +180,7 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
         child: Container(
           width: 20,
           height: 20,
-          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.teal),
+          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10),), color: Colors.teal),
         ),
       ),
       Positioned(

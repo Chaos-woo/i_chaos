@@ -191,32 +191,39 @@ class PageTodoDrawer extends AbstractTransparentPageX {
     Map<int, OptionGroupTipTool> optionGroupTip = {
       0: OptionGroupTipTool(tip: S.of(context).tag_drawer_item_tip_basic),
       1: OptionGroupTipTool(
-          tip: S.of(context).tag_drawer_item_tip_tag,
-          tool: _widgetCustomPopMenu(
-              childIcon: const Icon(
-                Icons.settings,
-                color: Colors.grey,
-                size: 14,
-              ),
-              iconBox: 18,
-              controller: sortingMenuItemController,
-              items: [_menuItems[2]]),
-          toolPosition: OptionGroupTipPosition.right)
+        tip: S.of(context).tag_drawer_item_tip_tag,
+        tool: _widgetCustomPopMenu(
+            childIcon: const Icon(
+              Icons.settings,
+              color: Colors.grey,
+              size: 14,
+            ),
+            iconBox: 18,
+            controller: sortingMenuItemController,
+            items: [_menuItems[2]]),
+        toolPosition: OptionGroupTipPosition.right,
+      ),
     };
 
     _drawer = _WidgetTodoDrawer(
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
-        screen: screen,
-        drawerBaseOptionBarItems: drawerBaseOptionBarItems,
-        drawerTodoTagOptionBarItems: drawerTodoTagOptionBarItems,
-        optionGroupTip: optionGroupTip);
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      screen: screen,
+      drawerBaseOptionBarItems: drawerBaseOptionBarItems,
+      drawerTodoTagOptionBarItems: drawerTodoTagOptionBarItems,
+      optionGroupTip: optionGroupTip,
+    );
     return _drawer;
   }
 
   // 自定义弹出菜单
-  Widget _widgetCustomPopMenu(
-      {required Icon childIcon, double? iconBox = 38, required CustomPopupMenuController controller, TagVO? tag, required List<TagMenuItem> items}) {
+  Widget _widgetCustomPopMenu({
+    required Icon childIcon,
+    double? iconBox = 38,
+    required CustomPopupMenuController controller,
+    TagVO? tag,
+    required List<TagMenuItem> items,
+  }) {
     int menuItemCnt = items.length;
 
     int maxTextLength = 0;
@@ -322,8 +329,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
   }
 
   @override
-  void childWidgetInitWithoutBuildContext() {
-  }
+  void childWidgetInitWithoutBuildContext() {}
 
   // 标签菜单选项controller销毁
   void _disposeMenuController() {
@@ -367,6 +373,19 @@ class _WidgetTodoDrawer extends StatefulWidget {
 class _WidgetTodoDrawerState extends State<_WidgetTodoDrawer> {
   @override
   Widget build(BuildContext context) {
+    final optionBarList = SizedBox(
+      width: widget.maxWidth,
+      height: widget.maxHeight - widget.screen.statusBarHeight,
+      child: OptionBarList(
+        optionBarItemGroups: [
+          widget.drawerBaseOptionBarItems,
+          widget.drawerTodoTagOptionBarItems,
+        ],
+        optionGroupTips: widget.optionGroupTip,
+        optionItemHeight: 38,
+      ),
+    );
+
     return Container(
       color: Colors.grey[200],
       width: widget.maxWidth,
@@ -375,14 +394,7 @@ class _WidgetTodoDrawerState extends State<_WidgetTodoDrawer> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(width: widget.maxWidth, height: widget.screen.statusBarHeight, color: Colors.teal),
-          SizedBox(
-            width: widget.maxWidth,
-            height: widget.maxHeight - widget.screen.statusBarHeight,
-            child: OptionBarList(
-                optionBarItemGroups: [widget.drawerBaseOptionBarItems, widget.drawerTodoTagOptionBarItems],
-                optionGroupTips: widget.optionGroupTip,
-                optionItemHeight: 38),
-          ),
+          optionBarList,
         ],
       ),
     );
