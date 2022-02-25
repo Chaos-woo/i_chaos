@@ -322,7 +322,7 @@ class SingleTodoPage extends PageState {
               case 2:
                 {
                   DateTime? selectDate = await push(PageMonthCalendar(
-                    closeByTouchTransparentArea: false,
+                    barrierDismissible: false,
                   ));
                   int selectDateBtnIndex = vm.getRightSelectDateBtnIndex(selectDate);
                   vm.todoForm.selectDate = selectDateBtnIndex == 0

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
 import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
+import 'package:i_chaos/ichaos/public/mixin/wwdialog_mixin.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/home/todo_drawer_page.dart';
@@ -20,7 +21,7 @@ import 'package:provider/provider.dart';
 import '../tag/tag-operation/todo_tag_vm.dart';
 
 // ToDO主页
-class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
+class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin, WWDialogMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -165,7 +166,9 @@ class PageTodoHome extends PageState with AutomaticKeepAliveClientMixin {
         _widgetDraftIconBtn(filteredTabBarVM),
         IconButton(
           icon: const Icon(AliIcons.IconMore),
-          onPressed: () async {},
+          onPressed: () {
+
+          },
         ),
       ],
     );

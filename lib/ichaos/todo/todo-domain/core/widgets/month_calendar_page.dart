@@ -15,11 +15,11 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
   late double _calendarHeight;
 
   // 点击透明区域是否可退出页面
-  late final bool _closeByTouchTransparentArea;
+  late final bool barrierDismissible;
 
-  PageMonthCalendar({CalendarBarVM? calendarBarVM, bool closeByTouchTransparentArea = true}) {
+  PageMonthCalendar({CalendarBarVM? calendarBarVM, bool barrierDismissible = true}) {
     _calendarBarVM = calendarBarVM;
-    _closeByTouchTransparentArea = closeByTouchTransparentArea;
+    barrierDismissible = barrierDismissible;
   }
 
   @override
@@ -62,7 +62,7 @@ class PageMonthCalendar extends AbstractTransparentPageY<DateTime> {
     return AtpYPageConfig(
         childWidgetMaxHeight: _calendarHeight,
         animationDuration: 250,
-        closeByTouchTransparentArea: _closeByTouchTransparentArea,
+        closeByTouchTransparentArea: barrierDismissible,
         childWidgetPadding: (screenHeight - _calendarHeight) * 0.5,
         direction: AtpYPageEnterDirection.bottom);
   }
