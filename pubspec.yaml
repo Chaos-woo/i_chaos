@@ -49,7 +49,7 @@ dependencies:
   # WebView iOS添加键值对 o.flutter.embedded_views_preview = YES
   #flutter 官方插件，
   #这个不会覆盖widget，但是html支持不好。
-  webview_flutter: ^3.0.0
+  webview_flutter: ^3.0.1
   #  webview_flutter: ^0.3.21
   #这个文档齐全(支持富文本的显示：这个插件有个bug、会覆盖其它widget(不用页面切换动画是没问题的)，你用的时候更一下看看修复没有)
   #此插件为flutter社区开发，非官方，但是性能比官方号（所写时的版本），如果遇到上面所提bug
@@ -229,6 +229,10 @@ dependencies:
   intl: ^0.17.0
   # 色盘
   flutter_colorpicker: ^1.0.3
+  # getX
+  get: ^4.6.1
+  # google fonts
+  google_fonts: 2.1.0
 
 dev_dependencies:
   flutter_test:
