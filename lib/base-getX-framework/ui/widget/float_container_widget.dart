@@ -1,12 +1,10 @@
 /*
 * 浮层，用于承载类似对话框的widget
-*
-*
-* 基础性浮层 ：仅提供一个 container，具体复现内容由你定。
+* 基础性浮层 ：仅提供一个 container，具体内容自定义
 */
 
 import 'package:flutter/cupertino.dart';
-import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
+import 'package:i_chaos/base-getX-framework/view/page/base_stateless_view.dart';
 
 typedef FloatWidgetDismiss = void Function(BuildContext context);
 
@@ -14,7 +12,7 @@ typedef FloatWidgetDismiss = void Function(BuildContext context);
 /// * 某些情况，可能需要当前route的名字，故这里标记上。
 const String floatLayerRouteName = 'FloatContainerWidget';
 
-class FloatContainerWidget extends WidgetState {
+class FloatContainerWidget extends BaseStatelessView {
   ///背景颜色
   final Color? bgColor;
   final Widget child;
@@ -29,7 +27,7 @@ class FloatContainerWidget extends WidgetState {
   ///例如，我们需要做一个动画后再弹出。
   final FloatWidgetDismiss floatWidgetDismiss;
 
-  FloatContainerWidget(this.child, {required this.floatWidgetDismiss, this.bgColor, this.alignment, this.barrierDismissible});
+  FloatContainerWidget(this.child, {Key? key, required this.floatWidgetDismiss, this.bgColor, this.alignment, this.barrierDismissible}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -6,9 +6,10 @@ import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/toast_mixin.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_binding_mixin.dart';
 
 abstract class BaseControllerView<T extends BaseViewStateController> extends GetView<T>
-    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, ScreenAdapterMixin {
+    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, ScreenAdapterMixin, ManipulateWidgetBinding {
 
   BaseControllerView({Key? key}) : super(key: key) {
     initViewRes();
