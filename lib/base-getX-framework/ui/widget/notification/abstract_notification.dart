@@ -20,7 +20,7 @@ abstract class AbstractNotification {
 
   // 建议在根页面调用此方法
   void init(BuildContext context) {
-    if (this.context == null) {
+    if (this.context != null) {
       return;
     }
     this.context = context;

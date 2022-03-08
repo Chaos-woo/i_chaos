@@ -114,7 +114,11 @@ class NotificationHandler extends AbstractNotification {
   ///批量显示通知
   /// * 依然要慎重使用，例如： 服务器积压过多通知，导致用户界面长期弹出通知造成较差的用户体验
   @override
-  Future showNotifyListFromTop({required List<Widget> children, Duration? animationDuration, Duration? notifyDwellTime}) async {
+  Future showNotifyListFromTop({
+    required List<Widget> children,
+    Duration? animationDuration,
+    Duration? notifyDwellTime,
+  }) async {
     listCompleter = Completer();
 
     children.forEach((element) {
