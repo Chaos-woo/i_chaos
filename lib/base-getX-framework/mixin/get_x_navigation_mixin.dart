@@ -22,4 +22,8 @@ mixin GetXNavigationMixin {
   T getRouteArguments<T>() {
     return Get.arguments as T;
   }
+
+  T getRouteParameters<T>(String name) {
+    return Get.parameters[name] as T;
+  }
 }

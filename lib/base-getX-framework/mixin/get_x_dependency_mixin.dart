@@ -1,14 +1,17 @@
-
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 mixin GetXDependencyMixin {
-  K findDependency<K extends BaseViewStateController>({String? tag}) {
+  K findDependency<K extends GetxController>({String? tag}) {
     return Get.find<K>(tag: tag);
   }
 
-  K putDependency<K extends BaseViewStateController>(K dependency, {String? tag}) {
+  K putDependency<K extends GetxController>(K dependency, {String? tag}) {
     return Get.put<K>(dependency, tag: tag);
+  }
+
+  void lazyPutDependency<K extends GetxController>(K dependency, {String? tag}) {
+    Get.lazyPut(() => dependency, tag: tag);
   }
 }
