@@ -142,7 +142,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                               widget.title!,
                               style: TextStyle(color: widget.titleColor, fontSize: widget.titleFontSize, fontWeight: widget.titleFontWeight),
                             ),
-                            margin: EdgeInsets.only(top: 15.0),
+                            margin: EdgeInsets.only(top: 10.0),
                           )
                       ),
                       Container(
@@ -155,7 +155,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                             widget.content!,
                             style: TextStyle(color: widget.contentColor, fontSize: widget.contentFontSize,fontWeight: widget.contentFontWeight),
                           ),
-                          margin: EdgeInsets.all(15.0),
+                          margin: EdgeInsets.all(10.0),
                         ),
                         // height: 45,
                         width: double.infinity,
@@ -213,7 +213,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                  padding: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                   child: Stack(
                     children: [
                       Align(
@@ -250,7 +250,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                     ],
                   ),
                 ),
-                SizedBox(height: emptyTitle ? 20 : 10),
+                SizedBox(height: emptyTitle ? 10 : 10),
                 emptyContent
                     ? Container()
                     : _getContentWidget(emptyTitle, emptyContent),

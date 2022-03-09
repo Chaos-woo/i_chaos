@@ -102,37 +102,60 @@ abstract class PageState extends BaseState with WidgetGenerator, RouteAware, _Ro
   }
 
   // 自定义通用appBar
-  Widget customCommonAppBar(
-      {required String title,
+  AppBar customCommonAppBar(
+      {String? title,
+        Widget? customTitle,
       Color titleColor = Colors.white,
       List<Widget>? actions,
       Color backgroundColor = Colors.black,
       bool centerTitle = false,
       double? elevation = 0.0,
       Color leadingButtonColor = Colors.white,
-      bool backLeadingButton = true,
-      IconData leadingButtonIcon = AliIcons.IconReturn,
+      bool? needPop,
+      IconData? leadingButtonIcon,
       VoidCallback? leadingButtonOnTap}) {
+    Widget? leadingWidget;
+    if (needPop != null && needPop) {
+      leadingWidget = InkWell(
+        child: Icon(
+          AliIcons.IconReturn,
+          color: leadingButtonColor,
+        ),
+        onTap: () {
+          pop();
+        },
+      );
+    } else {
+      if (leadingButtonIcon != null) {
+        leadingWidget = leadingButtonOnTap != null
+            ? InkWell(
+                child: Icon(
+                  leadingButtonIcon,
+                  color: leadingButtonColor,
+                ),
+                onTap: () {
+                  leadingButtonOnTap.call();
+                },
+              )
+            : Icon(
+                leadingButtonIcon,
+                color: leadingButtonColor,
+              );
+      }
+    }
+
     return AppBar(
-      titleSpacing: -5,
+      titleSpacing: leadingWidget != null ? -5 : null,
       toolbarHeight: 40,
       elevation: elevation,
       centerTitle: centerTitle,
       actions: actions,
-      title: Text(
+      title: title != null ? Text(
         title,
         style: TextStyle(color: titleColor, fontSize: 18, fontFamily: 'Lexend Deca'),
-      ),
+      ) : customTitle,
       backgroundColor: backgroundColor,
-      leading: InkWell(
-        child: Icon(
-          leadingButtonIcon,
-          color: leadingButtonColor,
-        ),
-        onTap: () {
-          backLeadingButton ? pop() : leadingButtonOnTap?.call();
-        },
-      ),
+      leading: leadingWidget,
     );
   }
 

@@ -145,32 +145,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not finished"),
         "todo_card_subtask_btn_retract":
             MessageLookupByLibrary.simpleMessage("retract"),
-        "todo_card_toast_completed_text1":
-            MessageLookupByLibrary.simpleMessage("Congratulations~(o≖◡≖)"),
-        "todo_card_toast_completed_text2":
-            MessageLookupByLibrary.simpleMessage("Task"),
-        "todo_card_toast_completed_text3":
-            MessageLookupByLibrary.simpleMessage("has been completed"),
+        "todo_card_toast_completed_text1": MessageLookupByLibrary.simpleMessage(
+            "Congratulations~\nToDO completed"),
         "todo_card_toast_delete_text1":
-            MessageLookupByLibrary.simpleMessage("Deleted ε==3"),
-        "todo_card_toast_delete_text2":
-            MessageLookupByLibrary.simpleMessage("Task"),
+            MessageLookupByLibrary.simpleMessage("ToDO Deleted"),
         "todo_card_toast_subtask_completed_text1":
-            MessageLookupByLibrary.simpleMessage("Congratulations~(o≖◡≖)"),
-        "todo_card_toast_subtask_completed_text2":
-            MessageLookupByLibrary.simpleMessage("Task"),
-        "todo_card_toast_subtask_completed_text3":
-            MessageLookupByLibrary.simpleMessage("has been completed"),
+            MessageLookupByLibrary.simpleMessage("Sub task(s) all completed"),
         "todo_card_toast_subtask_completed_text4":
-            MessageLookupByLibrary.simpleMessage("Congratulations! Go~(o≖◡≖)"),
-        "todo_card_toast_subtask_completed_text5":
-            MessageLookupByLibrary.simpleMessage("Sub task"),
-        "todo_card_toast_subtask_completed_text6":
-            MessageLookupByLibrary.simpleMessage("has been completed"),
+            MessageLookupByLibrary.simpleMessage("Sub task completed"),
         "todo_card_toast_unaccomplished_text1":
-            MessageLookupByLibrary.simpleMessage("Right? (O_O)?"),
-        "todo_card_toast_unaccomplished_text2":
-            MessageLookupByLibrary.simpleMessage("Task"),
+            MessageLookupByLibrary.simpleMessage("ToDO not finished"),
         "todo_draft_appbar_option_delete_all":
             MessageLookupByLibrary.simpleMessage("Delete all"),
         "todo_draft_appbar_option_delete_all_tip_btn_cancel":

@@ -35,11 +35,14 @@ class WidgetCalendarBar extends WidgetState {
       child: NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {
           if (notification.depth == 0 && notification is ScrollEndNotification) {
-            final PageMetrics metrics = notification.metrics as PageMetrics;
-            final int currentPage = metrics.page!.round();
-            // 保存当前页(TableCalendar根据firstDay生成翻页)
-            _calendarBarVM.currentPage = currentPage;
-            _calendarBarVM.swipeDateChange(_calendarBarVM.selectDate);
+            // 把滑动更新ToDOs的逻辑下移到后一个event loop，避免组件build时setState()发生异常
+            Future.delayed(const Duration(milliseconds: 0)).whenComplete(() {
+              final PageMetrics metrics = notification.metrics as PageMetrics;
+              final int currentPage = metrics.page!.round();
+              // 保存当前页(TableCalendar根据firstDay生成翻页)
+              _calendarBarVM.currentPage = currentPage;
+              _calendarBarVM.swipeDateChange(_calendarBarVM.selectDate);
+            });
           }
           return false;
         },

@@ -16,7 +16,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 
 class WidgetTodoDetailCard extends WidgetState {
-  late TodoVO _todo;
+  late final TodoVO _todo;
   late OnTodoDetailQueryCallback? onDetailQuery;
 
   // 事件等级多语言字符串
@@ -36,7 +36,9 @@ class WidgetTodoDetailCard extends WidgetState {
       S.of(context).todo_edit_level_btn_urgent
     ];
 
-    if (_todo.subTaskList.isNotEmpty && _todo.subTaskList.where((task) => task.completed).length == _todo.subTaskList.length) {
+    if (_todo.subTaskList.isNotEmpty
+        && _todo.subTaskList.where((task) => task.completed).length == _todo.subTaskList.length) {
+
       _todo.completed = true;
     }
 

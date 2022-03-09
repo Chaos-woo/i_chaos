@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_initializing_formals
+// ignore_for_file: prefer_initializing_formals, import_of_legacy_library_into_null_safe, implementation_imports
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,6 +15,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callba
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_todo_list_vm.dart';
 import 'package:provider/provider.dart';
+import 'package:widget_chain/widget_chain.dart';
 
 typedef OnTodoListScrollUpdate = void Function();
 typedef OnTodoListScrollEnd = void Function();
@@ -52,6 +53,57 @@ class WidgetSingleTodoList extends WidgetState {
     FilteredTabBarVM filteredTabBarVM = Provider.of<FilteredTabBarVM>(context, listen: false);
     List<TodoVO> currTodoList = singleTodoListVM.getTodoListByState(_todoState);
 
+    final todoOperateCallback = TodoOperateCallback(
+      // 事件删除回调
+      onDelete: (ctx, vo) {
+        showSimpleToast(S.of(context).todo_card_toast_delete_text1);
+        singleTodoListVM.deleteMainTodo(vo.id!);
+        filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+      },
+      // 事件修改回调
+      onModify: (ctx, vo) {
+        push(SingleTodoPage(vo, onSave: () {
+          Provider.of<DraftListVM>(context, listen: false).refresh();
+          filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+        }));
+      },
+      // 事件完成回调
+      onCompleted: (ctx, vo) {
+        showSimpleToast(S.of(context).todo_card_toast_completed_text1);
+        singleTodoListVM.toggleMainTodoState(vo.id!);
+        filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+      },
+      // 事件取消完成回调
+      onCancelCompleted: (ctx, vo) {
+        showSimpleToast(S.of(context).todo_card_toast_unaccomplished_text1);
+        singleTodoListVM.toggleMainTodoState(vo.id!);
+        filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+      },
+      // 事件触发子任务状态回调
+      onTodoToggleSubTaskCallback: (vo, taskVO, thisTodoWidget) {
+        // 是否需要刷新列表：子任务全部完成时刷新列表
+        singleTodoListVM.toggleSubTaskState(vo, taskVO.uuid).then((refreshList) {
+          if (refreshList) {
+            showSimpleToast(S.of(context).todo_card_toast_subtask_completed_text1);
+            filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+          } else {
+            if (taskVO.completed) {
+              showSimpleToast(S.of(context).todo_card_toast_subtask_completed_text4);
+            }
+            thisTodoWidget.refreshState();
+          }
+        });
+      },
+      // 事件查看回调
+      onDetailQuery: (ctx, vo, thisTodoCardWidget, clickSubTask) {
+        // 是否需要刷新列表：子任务全部完成时刷新列表
+        singleTodoListVM.toggleSubTaskState(vo, clickSubTask.uuid).then((refreshList) {
+          filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
+          thisTodoCardWidget.refreshState();
+        });
+      },
+    );
+
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification.depth == 0) {
@@ -76,71 +128,11 @@ class WidgetSingleTodoList extends WidgetState {
           if (index == currTodoList.length) {
             return _getMoreTipPlaceholder(currTodoList.length, singleTodoListVM);
           }
-          return generateWidget(() => WidgetTodoCard(currTodoList[index],
-              expandBtnDisplayLimits: 4,
-              operateCallback: TodoOperateCallback(onDelete: (ctx, vo) {
-                SnackBarUtil.snack(textSpans: [
-                  TextSpan(text: S.of(context).todo_card_toast_delete_text1, style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: '${S.of(context).todo_card_toast_delete_text2} [ ', style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                  const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
-                ], textSpanLineFeedCnt: 1);
-                singleTodoListVM.deleteMainTodo(vo.id!);
-                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-              }, onModify: (ctx, vo) {
-                push(SingleTodoPage(vo, onSave: () {
-                  Provider.of<DraftListVM>(context,listen: false).refresh();
-                  filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-                }));
-              }, onCompleted: (ctx, vo) {
-                SnackBarUtil.snack(textSpans: [
-                  TextSpan(text: S.of(context).todo_card_toast_completed_text1, style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: '${S.of(context).todo_card_toast_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                  TextSpan(text: ' ] ${S.of(context).todo_card_toast_completed_text3}', style: SnackBarUtil.defaultStyle),
-                ], textSpanLineFeedCnt: 1);
-                singleTodoListVM.toggleMainTodoState(vo.id!);
-                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-              }, onCancelCompleted: (ctx, vo) {
-                SnackBarUtil.snack(textSpans: [
-                  TextSpan(text: S.of(context).todo_card_toast_unaccomplished_text1, style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: '${S.of(context).todo_card_toast_unaccomplished_text2} [ ', style: SnackBarUtil.defaultStyle),
-                  TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                  const TextSpan(text: ' ]', style: SnackBarUtil.defaultStyle),
-                ], textSpanLineFeedCnt: 1);
-                singleTodoListVM.toggleMainTodoState(vo.id!);
-                filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-              }, onTodoToggleSubTaskCallback: (vo, taskVO, thisTodoWidget) {
-                // 是否需要刷新列表：子任务全部完成时刷新列表
-                singleTodoListVM.toggleSubTaskState(vo, taskVO.uuid).then((refreshList) {
-                  if (refreshList) {
-                    SnackBarUtil.snack(textSpans: [
-                      TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text1, style: SnackBarUtil.defaultStyle),
-                      TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text2} [ ', style: SnackBarUtil.defaultStyle),
-                      TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                      TextSpan(text: ' ] ${S.of(context).todo_card_toast_subtask_completed_text3}', style: SnackBarUtil.defaultStyle),
-                    ], textSpanLineFeedCnt: 1);
-                    filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-                  } else {
-                    if (taskVO.completed) {
-                      SnackBarUtil.snack(textSpans: [
-                        TextSpan(text: S.of(context).todo_card_toast_subtask_completed_text4, style: SnackBarUtil.defaultStyle),
-                        TextSpan(text: vo.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                        TextSpan(text: '${S.of(context).todo_card_toast_subtask_completed_text5} [ ', style: SnackBarUtil.defaultStyle),
-                        TextSpan(text: taskVO.content, style: SnackBarUtil.snackBarTextStyleWithColor(Colors.orange)),
-                        TextSpan(text: ' ] ${S.of(context).todo_card_toast_subtask_completed_text6}', style: SnackBarUtil.defaultStyle),
-                      ], textSpanLineFeedCnt: 2);
-                    }
-                    thisTodoWidget.refreshState();
-                  }
-                });
-              }, onDetailQuery: (ctx, vo, thisTodoCardWidget, clickSubTask) {
-                // 是否需要刷新列表：子任务全部完成时刷新列表
-                singleTodoListVM.toggleSubTaskState(currTodoList[index], clickSubTask.uuid).then((refreshList) {
-                  filteredTabBarVM.selectedDateChange(singleTodoListVM.currentDate);
-                  thisTodoCardWidget.refreshState();
-                });
-              })));
+          return generateWidget(() => WidgetTodoCard(
+                currTodoList[index],
+                expandBtnDisplayLimits: 4,
+                operateCallback: todoOperateCallback,
+              ));
         },
         itemCount: currTodoList.length + 1,
       ),
@@ -148,16 +140,12 @@ class WidgetSingleTodoList extends WidgetState {
   }
 
   // 仅有当前ListView下标和事件列表长度相同时获取占位
-  Widget _getMoreTipPlaceholder(int currentTodListLength, SingleTodoListVM singleTodoListVM) {
-    if (currentTodListLength > 0) {
+  Widget _getMoreTipPlaceholder(int currentTodoListLength, SingleTodoListVM singleTodoListVM) {
+    if (currentTodoListLength > 0) {
+      // 当前列表数据大于0时，最后展示数据加载完的提示
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Center(
-          child: Text(
-            '-- ${S.of(context).todo_list_placeholder_no_data} --',
-            style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
-          ),
-        ),
+        child: tipText(S.of(context).todo_list_placeholder_no_data).intoCenter(),
       );
     }
 
@@ -165,59 +153,51 @@ class WidgetSingleTodoList extends WidgetState {
     int activeTodoCnt = singleTodoListVM.activeTodoCnt;
 
     if (completedTodoCnt == 0 && activeTodoCnt == 0) {
+      // 未完成/已完成均无数据时展示查找为空提示
+      final Widget tip = ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100)
+          .addNeighbor(tipText(S.of(context).todo_list_placeholder_not_found))
+          .intoColumn(mainAxisAlignment: MainAxisAlignment.center);
+
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 40),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100),
-              Text(S.of(context).todo_list_placeholder_not_found,
-                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
-            ],
-          ),
-        ),
+        child: tip.intoCenter(),
       );
     }
 
     if (_isActive) {
+      // 当前为未完成列表&已完成列表有数据则展示所有事件完成的提示
+      final Widget tip = (completedTodoCnt > 0
+          ? ImageHelper.placeHolderLocalSVGImg(imageName: 'image_complete', width: 100, height: 100)
+              .addNeighbor(tipText(S.of(context).todo_list_placeholder_completed))
+              .intoColumn(mainAxisAlignment: MainAxisAlignment.center)
+          : tipText(S.of(context).todo_list_placeholder_no_data));
+
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 40),
-        child: Center(
-          child: completedTodoCnt > 0
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ImageHelper.placeHolderLocalSVGImg(imageName: 'image_complete', width: 100, height: 100),
-                    Text(S.of(context).todo_list_placeholder_completed,
-                        style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
-                  ],
-                )
-              : Text(
-                  '-- ${S.of(context).todo_list_placeholder_no_data} --',
-                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
-                ),
-        ),
+        child: tip.intoCenter(),
       );
     } else {
+      // 当前为已完成列表&未完成列表有数据则展示还有未完成事件的提示
+      final Widget tip = (activeTodoCnt > 0
+          ? ImageHelper.placeHolderLocalSVGImg(imageName: 'image_task', width: 100, height: 100)
+              .addNeighbor(tipText(S.of(context).todo_list_placeholder_more_todo))
+              .intoColumn(mainAxisAlignment: MainAxisAlignment.center)
+          : tipText(S.of(context).todo_list_placeholder_no_data));
+
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 40),
-        child: Center(
-          child: activeTodoCnt > 0
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ImageHelper.placeHolderLocalSVGImg(imageName: 'image_task', width: 100, height: 100),
-                    Text(S.of(context).todo_list_placeholder_more_todo,
-                        style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
-                  ],
-                )
-              : Text(
-                  '-- ${S.of(context).todo_list_placeholder_no_data} --',
-                  style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12),
-                ),
-        ),
+        child: tip.intoCenter(),
       );
     }
+  }
+
+  Widget tipText(String text) {
+    return Text('-- $text --',
+        style: const TextStyle(
+          color: Color(0xFF757575),
+          fontFamily: 'Lexend Deca',
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+        ));
   }
 }

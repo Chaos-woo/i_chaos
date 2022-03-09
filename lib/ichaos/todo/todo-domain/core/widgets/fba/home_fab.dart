@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:i_chaos/base_framework/factory/page/page_animation_builder.dart';
-import 'package:i_chaos/base_framework/ui/widget/provider_widget.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
@@ -35,6 +34,7 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     // 组件生命周期添加和重新添加属性监听执行动作
     _actionBtnVM.addListenerOfBtnState((isDisplay) {
       if (isDisplay) {
@@ -57,43 +57,51 @@ class TodoHomeFloatingActionBtn extends WidgetState with SingleTickerProviderSta
     final filteredTabBarVM = Provider.of<FilteredTabBarVM>(context, listen: false);
     final calendarBarVM = Provider.of<CalendarBarVM>(context);
 
-    return SlideTransition(
-        child: ProviderWidget2(
-            model1: filteredTabBarVM,
-            model2: Provider.of<CalendarBarVM>(context),
-            builder: (ctx, fTabVM, cBarVM, _) {
-              _actionBtnVM = TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM);
+    _actionBtnVM = TodoHomeFloatingActionBtnVM(filteredTabBarVM: filteredTabBarVM, calendarBarVM: calendarBarVM);
 
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  if (!_actionBtnVM.isToday())
-                    FloatingActionButton(
-                      backgroundColor: Colors.grey[50],
-                      child: Text(
-                        S.of(context).todo_home_fba_btn_today,
-                        style: const TextStyle(fontSize: 18, color: Colors.teal),
-                      ),
-                      heroTag: 'today', // 避免多个FloatingActionButton重复使用默认tag的异常
-                      onPressed: () {
-                        _actionBtnVM.backToToday();
-                      },
-                    ),
-                  if (_actionBtnVM.isToday()) 0.hGap,
-                  20.hGap,
-                  FloatingActionButton(
-                    child: const Icon(Icons.add),
-                    heroTag: 'add',
-                    onPressed: () async {
-                      var result = await push(SingleTodoPage(TodoVO.empty(), onSave: () {
-                        _backToHomePageCallback?.call();
-                      }), animation: PageAnimation.slide);
-                      _backToHomePageCallback?.call();
-                    },
-                  ),
-                ],
-              );
+    List<Widget> floatingActionButtons = [];
+    if (!_actionBtnVM.isToday()) {
+      floatingActionButtons.add(
+        FloatingActionButton(
+          backgroundColor: Colors.grey[50],
+          child: Text(
+            S.of(context).todo_home_fba_btn_today,
+            style: const TextStyle(fontSize: 18, color: Colors.teal),
+          ),
+          heroTag: 'today', // 避免多个FloatingActionButton重复使用默认tag的异常
+          onPressed: () {
+            _actionBtnVM.backToToday();
+          },
+        ),
+      );
+      floatingActionButtons.add(
+        20.hGap,
+      );
+    }
+
+    floatingActionButtons.add(
+      FloatingActionButton(
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.teal,
+        heroTag: 'add',
+        onPressed: () async {
+          var r = await push(
+            SingleTodoPage(TodoVO.empty(), onSave: () {
+              _backToHomePageCallback?.call();
             }),
-        position: _offsetAnimation);
+            animation: PageAnimation.slide,
+          );
+          _backToHomePageCallback?.call();
+        },
+      ),
+    );
+
+    return SlideTransition(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: floatingActionButtons,
+      ),
+      position: _offsetAnimation,
+    );
   }
 }

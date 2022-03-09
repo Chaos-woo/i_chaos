@@ -12,6 +12,7 @@ import 'package:i_chaos/ichaos/todo/todo-domain/core/scenes/draft-box/draft_list
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/month_calendar_page.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/todolist/single_todo_list_vm.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
+import 'package:widget_chain/widget_chain.dart';
 
 // 草稿事件列表
 class PageDraftList extends PageState {
@@ -27,84 +28,60 @@ class PageDraftList extends PageState {
 
   @override
   Widget build(BuildContext context) {
+    final Widget draftTitle = const Icon(AliIcons.IconTasklistFill, size: 20)
+        .intoPadding(padding: const EdgeInsets.only(right: 5))
+        .addNeighbor(Text(S.of(context).todo_draft_page_appbar_title, style: const TextStyle(fontSize: 18)))
+        .intoRow();
+
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          child: const Icon(AliIcons.IconReturn),
-          onTap: () {
-            pop();
-          },
-        ),
-        title: Row(
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(right: 5),
-              child: Icon(
-                AliIcons.IconTasklistFill,
-                size: 20,
-              ),
-            ),
-            Text(
-              S.of(context).todo_draft_page_appbar_title,
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-            ),
-          ],
-        ),
-        titleSpacing: -5,
-        toolbarHeight: 40,
-        elevation: 0,
-        backgroundColor: Colors.teal,
-        actions: <Widget>[
-          if (_draftListVM.draftListCnt > 0)
-            IconButton(
-                onPressed: () {
-                  // 展示一键删除草稿按钮
-                  WWDialog.showTopDialog(context,
-                      dialogWidth: ScreenUtil.getInstance().screenWidth / 2,
-                      triangleType: DiaLogTriangleType.right,
-                      bgColor: Colors.white,
-                      contentColor: Colors.black,
-                      contentFontSize: 14,
-                      customListDatasource: [
-                        defaultCustomButton(context,
-                            text: S.of(context).todo_draft_appbar_option_delete_all, textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
-                          WWDialog.showBottomDialog(context,
-                              title: S.of(context).todo_draft_appbar_option_delete_all_tip_title,
-                              titleAlign: TextAlign.center,
-                              titleColor: Colors.red,
-                              content: S.of(context).todo_draft_appbar_option_delete_all_tip_content,
-                              contentAlign: TextAlign.start,
-                              contentColor: Colors.black,
-                              contentFontSize: 15.0,
-                              location: DiaLogLocation.middle,
-                              arrangeType: buttonArrangeType.row,
-                              customWidgetButtons: [
-                                defaultCustomButton(context,
-                                    text: S.of(context).todo_draft_appbar_option_delete_all_tip_btn_confirm,
-                                    textFontSize: 15.0,
-                                    buttonHeight: 35.0, onTap: () async {
-                                  _draftListVM.deleteDraftByIds(_draftListVM.draftList.map((e) => e.id!).toList());
-                                  await _draftListVM.refresh();
-                                  setState(() {});
-                                }),
-                                defaultCustomButton(context,
-                                    text: S.of(context).todo_draft_appbar_option_delete_all_tip_btn_cancel,
-                                    textFontSize: 15.0,
-                                    buttonHeight: 35.0,
-                                    textColor: Colors.grey,
-                                    onTap: () {}),
-                              ]);
-                        })
-                      ]);
-                },
-                icon: const Icon(AliIcons.IconMore)),
-          const SizedBox(
-            width: 14,
-          )
-        ],
-      ),
+      appBar: customCommonAppBar(customTitle: draftTitle, needPop: true, backgroundColor: Colors.teal, actions: <Widget>[
+        if (_draftListVM.draftListCnt > 0)
+          IconButton(
+              onPressed: () {
+                // 展示一键删除草稿按钮
+                WWDialog.showTopDialog(context,
+                    dialogWidth: ScreenUtil.getInstance().screenWidth / 2,
+                    triangleType: DiaLogTriangleType.right,
+                    bgColor: Colors.white,
+                    contentColor: Colors.black,
+                    contentFontSize: 14,
+                    customListDatasource: [
+                      defaultCustomButton(context,
+                          text: S.of(context).todo_draft_appbar_option_delete_all, textColor: Colors.red, fontWeight: FontWeight.w600, onTap: () {
+                        WWDialog.showBottomDialog(context,
+                            title: S.of(context).todo_draft_appbar_option_delete_all_tip_title,
+                            titleAlign: TextAlign.center,
+                            titleColor: Colors.red,
+                            content: S.of(context).todo_draft_appbar_option_delete_all_tip_content,
+                            contentAlign: TextAlign.start,
+                            contentColor: Colors.black,
+                            contentFontSize: 15.0,
+                            location: DiaLogLocation.middle,
+                            arrangeType: buttonArrangeType.row,
+                            customWidgetButtons: [
+                              defaultCustomButton(context,
+                                  text: S.of(context).todo_draft_appbar_option_delete_all_tip_btn_confirm,
+                                  textFontSize: 15.0,
+                                  buttonHeight: 35.0, onTap: () async {
+                                _draftListVM.deleteDraftByIds(_draftListVM.draftList.map((e) => e.id!).toList());
+                                await _draftListVM.refresh();
+                                setState(() {});
+                              }),
+                              defaultCustomButton(context,
+                                  text: S.of(context).todo_draft_appbar_option_delete_all_tip_btn_cancel,
+                                  textFontSize: 15.0,
+                                  buttonHeight: 35.0,
+                                  textColor: Colors.grey,
+                                  onTap: () {}),
+                            ]);
+                      })
+                    ]);
+              },
+              icon: const Icon(AliIcons.IconMore)),
+        const SizedBox(
+          width: 14,
+        )
+      ]),
       body: Container(
         color: _draftListVM.draftListCnt > 0 ? Colors.grey[300] : Colors.white,
         width: ScreenUtil.getInstance().screenWidth,
@@ -115,17 +92,28 @@ class PageDraftList extends PageState {
   }
 
   Widget _widgetEmptyImage() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100),
-          Text(S.of(context).todo_draft_list_not_found_tip_text,
-              style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
-        ],
-      ),
-    );
+    return ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100)
+        .addNeighbor(Text(S.of(context).todo_draft_list_not_found_tip_text,
+            style: const TextStyle(
+              color: Color(0xFF757575),
+              fontFamily: 'Lexend Deca',
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            )))
+        .intoColumn(mainAxisAlignment: MainAxisAlignment.start)
+        .intoPadding(padding: const EdgeInsets.symmetric(vertical: 40));
+
+//    return Padding(
+//      padding: const EdgeInsets.symmetric(vertical: 40),
+//      child: Column(
+//        mainAxisAlignment: MainAxisAlignment.start,
+//        children: [
+//          ImageHelper.placeHolderLocalSVGImg(imageName: 'image_search_empty', width: 100, height: 100),
+//          Text(S.of(context).todo_draft_list_not_found_tip_text,
+//              style: const TextStyle(color: Color(0xFF757575), fontFamily: 'Lexend Deca', fontWeight: FontWeight.w500, fontSize: 12))
+//        ],
+//      ),
+//    );
   }
 
   Widget _widgetDraftList() {
@@ -217,6 +205,30 @@ class PageDraftList extends PageState {
   }
 
   Widget _widgetSingleDraft(TodoVO vo) {
+    List<Widget> inkTextList = [
+      _inkText(S.of(context).todo_draft_list_item_option_move_to_today, onTap: () async {
+        vo.validTime = DateTime.now();
+        _singleTodoListVM.updateTodo(vo);
+        await _draftListVM.refresh();
+        setState(() {});
+      }),
+      _inkText(S.of(context).todo_draft_list_item_option_move_to_tomorrow, onTap: () async {
+        vo.validTime = DateTime.now().add(const Duration(days: 1));
+        _singleTodoListVM.updateTodo(vo);
+        await _draftListVM.refresh();
+        setState(() {});
+      }),
+      _inkText(S.of(context).todo_draft_list_item_option_select_date, needDivide: false, onTap: () async {
+        DateTime? selectDate = await push(PageMonthCalendar());
+        if (selectDate != null) {
+          vo.validTime = selectDate;
+          _singleTodoListVM.updateTodo(vo);
+          await _draftListVM.refresh();
+          setState(() {});
+        }
+      }),
+    ];
+
     return Container(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       width: ScreenUtil.getInstance().screenWidth,
@@ -245,29 +257,7 @@ class PageDraftList extends PageState {
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                _inkText(S.of(context).todo_draft_list_item_option_move_to_today, onTap: () async {
-                  vo.validTime = DateTime.now();
-                  _singleTodoListVM.updateTodo(vo);
-                  await _draftListVM.refresh();
-                  setState(() {});
-                }),
-                _inkText(S.of(context).todo_draft_list_item_option_move_to_tomorrow, onTap: () async {
-                  vo.validTime = DateTime.now().add(const Duration(days: 1));
-                  _singleTodoListVM.updateTodo(vo);
-                  await _draftListVM.refresh();
-                  setState(() {});
-                }),
-                _inkText(S.of(context).todo_draft_list_item_option_select_date, needDivide: false, onTap: () async {
-                  DateTime? selectDate = await push(PageMonthCalendar());
-                  if (selectDate != null) {
-                    vo.validTime = selectDate;
-                    _singleTodoListVM.updateTodo(vo);
-                    await _draftListVM.refresh();
-                    setState(() {});
-                  }
-                }),
-              ],
+              children: inkTextList,
             ),
           )
         ],

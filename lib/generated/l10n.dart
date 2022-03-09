@@ -740,131 +740,51 @@ class S {
     );
   }
 
-  /// `Deleted ε==3`
+  /// `ToDO Deleted`
   String get todo_card_toast_delete_text1 {
     return Intl.message(
-      'Deleted ε==3',
+      'ToDO Deleted',
       name: 'todo_card_toast_delete_text1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Task`
-  String get todo_card_toast_delete_text2 {
-    return Intl.message(
-      'Task',
-      name: 'todo_card_toast_delete_text2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Congratulations~(o≖◡≖)`
+  /// `Congratulations~\nToDO completed`
   String get todo_card_toast_completed_text1 {
     return Intl.message(
-      'Congratulations~(o≖◡≖)',
+      'Congratulations~\nToDO completed',
       name: 'todo_card_toast_completed_text1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Task`
-  String get todo_card_toast_completed_text2 {
-    return Intl.message(
-      'Task',
-      name: 'todo_card_toast_completed_text2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `has been completed`
-  String get todo_card_toast_completed_text3 {
-    return Intl.message(
-      'has been completed',
-      name: 'todo_card_toast_completed_text3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Right? (O_O)?`
+  /// `ToDO not finished`
   String get todo_card_toast_unaccomplished_text1 {
     return Intl.message(
-      'Right? (O_O)?',
+      'ToDO not finished',
       name: 'todo_card_toast_unaccomplished_text1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Task`
-  String get todo_card_toast_unaccomplished_text2 {
-    return Intl.message(
-      'Task',
-      name: 'todo_card_toast_unaccomplished_text2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Congratulations~(o≖◡≖)`
+  /// `Sub task(s) all completed`
   String get todo_card_toast_subtask_completed_text1 {
     return Intl.message(
-      'Congratulations~(o≖◡≖)',
+      'Sub task(s) all completed',
       name: 'todo_card_toast_subtask_completed_text1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Task`
-  String get todo_card_toast_subtask_completed_text2 {
-    return Intl.message(
-      'Task',
-      name: 'todo_card_toast_subtask_completed_text2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `has been completed`
-  String get todo_card_toast_subtask_completed_text3 {
-    return Intl.message(
-      'has been completed',
-      name: 'todo_card_toast_subtask_completed_text3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Congratulations! Go~(o≖◡≖)`
+  /// `Sub task completed`
   String get todo_card_toast_subtask_completed_text4 {
     return Intl.message(
-      'Congratulations! Go~(o≖◡≖)',
+      'Sub task completed',
       name: 'todo_card_toast_subtask_completed_text4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub task`
-  String get todo_card_toast_subtask_completed_text5 {
-    return Intl.message(
-      'Sub task',
-      name: 'todo_card_toast_subtask_completed_text5',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `has been completed`
-  String get todo_card_toast_subtask_completed_text6 {
-    return Intl.message(
-      'has been completed',
-      name: 'todo_card_toast_subtask_completed_text6',
       desc: '',
       args: [],
     );

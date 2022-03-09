@@ -136,31 +136,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "todo_card_subtask_btn_retract":
             MessageLookupByLibrary.simpleMessage("收起"),
         "todo_card_toast_completed_text1":
-            MessageLookupByLibrary.simpleMessage("恭喜~(o≖◡≖)"),
-        "todo_card_toast_completed_text2":
-            MessageLookupByLibrary.simpleMessage("任务"),
-        "todo_card_toast_completed_text3":
-            MessageLookupByLibrary.simpleMessage("完成了"),
+            MessageLookupByLibrary.simpleMessage("ToDO已完成"),
         "todo_card_toast_delete_text1":
-            MessageLookupByLibrary.simpleMessage("已删除 ε==3"),
-        "todo_card_toast_delete_text2":
-            MessageLookupByLibrary.simpleMessage("任务"),
+            MessageLookupByLibrary.simpleMessage("ToDO删除完成"),
         "todo_card_toast_subtask_completed_text1":
-            MessageLookupByLibrary.simpleMessage("恭喜~(o≖◡≖)"),
-        "todo_card_toast_subtask_completed_text2":
-            MessageLookupByLibrary.simpleMessage("任务"),
-        "todo_card_toast_subtask_completed_text3":
-            MessageLookupByLibrary.simpleMessage("完成了"),
+            MessageLookupByLibrary.simpleMessage("子任务已全部完成"),
         "todo_card_toast_subtask_completed_text4":
-            MessageLookupByLibrary.simpleMessage("恭喜! 又迈向成功一小步~(o≖◡≖)"),
-        "todo_card_toast_subtask_completed_text5":
-            MessageLookupByLibrary.simpleMessage("子任务"),
-        "todo_card_toast_subtask_completed_text6":
-            MessageLookupByLibrary.simpleMessage("完成了"),
+            MessageLookupByLibrary.simpleMessage("子任务已完成"),
         "todo_card_toast_unaccomplished_text1":
-            MessageLookupByLibrary.simpleMessage("点错了吧? 明明完成了 (O_O)?"),
-        "todo_card_toast_unaccomplished_text2":
-            MessageLookupByLibrary.simpleMessage("任务"),
+            MessageLookupByLibrary.simpleMessage("ToDO还未完成"),
         "todo_draft_appbar_option_delete_all":
             MessageLookupByLibrary.simpleMessage("全部删除"),
         "todo_draft_appbar_option_delete_all_tip_btn_cancel":

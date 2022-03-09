@@ -4,14 +4,14 @@ import 'package:oktoast/oktoast.dart';
 
 mixin ToastMixin {
   static const TextStyle defaultTextStyle =
-      TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w200);
+      TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w400);
 
   void showSimpleToast(
     String? msg, {
     Duration? duration = const Duration(seconds: 2),
     ToastPosition? position = ToastPosition.bottom,
     TextStyle? textStyle = defaultTextStyle,
-    Color? backgroundColor = const Color.fromRGBO(0, 0, 0, 0.4),
+    Color? backgroundColor = const Color.fromRGBO(0, 0, 0, 0.7),
     double? radius = 20,
     TextAlign? textAlign = TextAlign.center,
   }) {
