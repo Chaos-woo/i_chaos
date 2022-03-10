@@ -84,7 +84,9 @@ abstract class BaseViewStateController extends GetxController with ToastMixin, S
   }
 
   // 校验在更新controller状态时是否要同时更新视图view
-  bool stateUpdateViewPredicate(ViewState pre, ViewState next);
+  bool stateUpdateViewPredicate(ViewState pre, ViewState next) {
+    return true;
+  }
 
   void setLoading({bool? loading = true}) {
     _viewState = loading! ? ViewState.loading : ViewState.idle;

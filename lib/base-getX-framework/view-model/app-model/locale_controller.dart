@@ -4,10 +4,12 @@ import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controlle
 
 class LocaleController extends BaseViewStateController {
   static const localeValueList = ['zh', 'en'];
+
   // 默认语言下标
   static const int _defaultLanguageIndex = 0;
+
   // app本地化存储用户选择的国际化语言下标
-  static const appLocaleIndex = 'app_user_locale_index';
+  static const kAppLocaleIndex = 'kAppLocaleIndex';
 
   // 当前选择的语言下标状态
   int _currentLanguageIndex = -1;
@@ -18,7 +20,7 @@ class LocaleController extends BaseViewStateController {
 
   // 初始化全局语言资源
   void _initGlobalLocaleRes() {
-    int? localLocaleIndex = SpUtil.getInt(appLocaleIndex, defValue: -1);
+    int? localLocaleIndex = SpUtil.getInt(kAppLocaleIndex, defValue: -1);
     bool invalidSpLocaleIndex = localLocaleIndex == null || localLocaleIndex < 0;
     _currentLanguageIndex = invalidSpLocaleIndex ? _defaultLanguageIndex : localLocaleIndex;
     _cacheLocaleRes();
@@ -26,7 +28,7 @@ class LocaleController extends BaseViewStateController {
 
   // 保存当前用户选择语言
   void _cacheLocaleRes() {
-    SpUtil.putInt(appLocaleIndex, _currentLanguageIndex);
+    SpUtil.putInt(kAppLocaleIndex, _currentLanguageIndex);
   }
 
   String? get localeString {
@@ -50,17 +52,8 @@ class LocaleController extends BaseViewStateController {
   }
 
   @override
-  void onStateDispose() {
-
-  }
+  void onStateDispose() {}
 
   @override
-  void onStateInit() {
-
-  }
-
-  @override
-  bool stateUpdateViewPredicate(ViewState pre, ViewState next) {
-    return true;
-  }
+  void onStateInit() {}
 }
