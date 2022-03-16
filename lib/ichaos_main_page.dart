@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
 import 'package:i_chaos/ichaos/setting-module/setting-home/setting_home_page.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
@@ -83,39 +84,56 @@ class IChaosMainPage extends BaseStatefulView {
   }
 
   List<SalomonBottomBarItem> _getBottomBarItem() {
+    FontFamilyController fontSettingCtrl = findDependency();
+
     return [
       /// Money
       SalomonBottomBarItem(
         icon: const Icon(AliIcons.IconCoupons),
-        title: Text(S.current.app_tab_assert),
+        title: Text(
+          S.current.app_tab_assert,
+          style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
+        ),
         selectedColor: Colors.orange,
       ),
 
       /// rss
       SalomonBottomBarItem(
         icon: const Icon(AliIcons.IconShake),
-        title: Text(S.current.app_tab_feed),
+        title: Text(
+          S.current.app_tab_feed,
+          style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
+        ),
         selectedColor: Colors.lightBlueAccent,
       ),
 
       /// blog of me
       SalomonBottomBarItem(
         icon: const Icon(AliIcons.IconWorkbench),
-        title: Text(S.current.app_tab_log),
+        title: Text(
+          S.current.app_tab_log,
+          style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
+        ),
         selectedColor: Colors.red[700],
       ),
 
       /// Todo list
       SalomonBottomBarItem(
         icon: const Icon(AliIcons.IconActivity),
-        title: Text(S.current.app_tab_todos),
+        title: Text(
+          S.current.app_tab_todos,
+          style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
+        ),
         selectedColor: Colors.teal,
       ),
 
       /// Setting
       SalomonBottomBarItem(
         icon: const Icon(AliIcons.IconSetup),
-        title: Text(S.current.app_tab_setting),
+        title: Text(
+          S.current.app_tab_setting,
+          style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
+        ),
         selectedColor: Colors.indigo,
       ),
     ];
