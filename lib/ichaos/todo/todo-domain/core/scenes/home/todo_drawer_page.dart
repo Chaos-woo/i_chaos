@@ -113,7 +113,7 @@ class PageTodoDrawer extends AbstractTransparentPageX {
       OptionBarItem(S.of(context).tag_drawer_item_daily_todo, textStyle: optionTextStyle, icon: Icons.assignment, rightIcon: AliIcons.IconEnter,
           onTap: () {
         directClose();
-        mainScene.switchMainSceneTap(3);
+//        mainScene.switchMainSceneTap(3);
       }),
       OptionBarItem(S.of(context).tag_drawer_item_recently_todo,
           icon: Icons.assessment_rounded, textStyle: optionTextStyle, rightIcon: AliIcons.IconEnter, targetPageBuilder: () async {}),

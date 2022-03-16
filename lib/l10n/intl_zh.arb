@@ -2,6 +2,11 @@
   "bedrock_refreshTwoLevel": "刷新",
   "bedrock_reset": "重置",
   "bedrock_confirm": "确认",
+  "app_tab_assert": "Assert",
+  "app_tab_feed": "Feed",
+  "app_tab_log": "Me-log",
+  "app_tab_todos": "ToDOs",
+  "app_tab_setting": "Setting",
   "common_custom_params": "{custom_params}",
   "common_designing_label": "施工中...",
   "month_calendar_page_btn_confirm": "确认",
@@ -121,7 +126,14 @@
   "setting_page_appbar_title": "设置",
   "setting_page_group_tip_text1": "基础设置",
   "setting_option_language_text": "语言设置",
+  "setting_language_set_options": "{choice, select, lan_0 {简体中文} lan_1 {英语}}",
   "setting_language_set_text1": "简体中文",
   "setting_language_set_text2": "英语",
-  "setting_option_theme_text": "主题"
+  "setting_option_theme_text": "主题设置",
+  "setting_theme_set_options": "{choice, select, theme_0 {巴哈马蓝石} theme_1 {曼迪红豆} theme_2 {绿色钞票} theme_3 {金色爱恋} theme_4 {浓情咖啡} theme_5 {圣胡安蓝海} theme_6 {红葡萄酒} theme_7 {春意盎然}}",
+  "setting_option_theme_mode_text": "外观模式设置",
+  "setting_theme_mode_set_options": "{choice, select, mode_0 {自动（跟随系统）} mode_1 {浅色} mode_2 {深色}}",
+  "setting_option_text_font_text": "字体设置",
+  "setting_option_text_font_set_display_text": "示例: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890",
+  "setting_option_text_font_tip_text1": "支持的字体"
 }

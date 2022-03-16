@@ -22,11 +22,38 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(custom_params) => "${custom_params}";
 
-  static String m1(name, createTime) =>
+  static String m1(choice) => "${Intl.select(choice, {
+            'lan_0': '简体中文',
+            'lan_1': '英语',
+          })}";
+
+  static String m2(choice) => "${Intl.select(choice, {
+            'mode_0': '自动（跟随系统）',
+            'mode_1': '浅色',
+            'mode_2': '深色',
+          })}";
+
+  static String m3(choice) => "${Intl.select(choice, {
+            'theme_0': '巴哈马蓝石',
+            'theme_1': '曼迪红豆',
+            'theme_2': '绿色钞票',
+            'theme_3': '金色爱恋',
+            'theme_4': '浓情咖啡',
+            'theme_5': '圣胡安蓝海',
+            'theme_6': '红葡萄酒',
+            'theme_7': '春意盎然',
+          })}";
+
+  static String m4(name, createTime) =>
       "标签基本信息如下: \n1. 标签名: ${name};\n2. 创建时间: ${createTime}。\n3. 小提示：在删除该标签后，该标签下的所有ToDO将会移出该标签列表。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "app_tab_assert": MessageLookupByLibrary.simpleMessage("Assert"),
+        "app_tab_feed": MessageLookupByLibrary.simpleMessage("Feed"),
+        "app_tab_log": MessageLookupByLibrary.simpleMessage("Me-log"),
+        "app_tab_setting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "app_tab_todos": MessageLookupByLibrary.simpleMessage("ToDOs"),
         "bedrock_confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "bedrock_refreshTwoLevel": MessageLookupByLibrary.simpleMessage("刷新"),
         "bedrock_reset": MessageLookupByLibrary.simpleMessage("重置"),
@@ -37,16 +64,29 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("取消"),
         "month_calendar_page_btn_confirm":
             MessageLookupByLibrary.simpleMessage("确认"),
+        "setting_language_set_options": m1,
         "setting_language_set_text1":
             MessageLookupByLibrary.simpleMessage("简体中文"),
         "setting_language_set_text2":
             MessageLookupByLibrary.simpleMessage("英语"),
         "setting_option_language_text":
             MessageLookupByLibrary.simpleMessage("语言设置"),
-        "setting_option_theme_text": MessageLookupByLibrary.simpleMessage("主题"),
+        "setting_option_text_font_set_display_text":
+            MessageLookupByLibrary.simpleMessage(
+                "示例: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890"),
+        "setting_option_text_font_text":
+            MessageLookupByLibrary.simpleMessage("字体设置"),
+        "setting_option_text_font_tip_text1":
+            MessageLookupByLibrary.simpleMessage("支持的字体"),
+        "setting_option_theme_mode_text":
+            MessageLookupByLibrary.simpleMessage("外观模式设置"),
+        "setting_option_theme_text":
+            MessageLookupByLibrary.simpleMessage("主题设置"),
         "setting_page_appbar_title": MessageLookupByLibrary.simpleMessage("设置"),
         "setting_page_group_tip_text1":
             MessageLookupByLibrary.simpleMessage("基础设置"),
+        "setting_theme_mode_set_options": m2,
+        "setting_theme_set_options": m3,
         "tag_detail_appbar_title_edit":
             MessageLookupByLibrary.simpleMessage("编辑标签"),
         "tag_detail_appbar_title_new":
@@ -76,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("取消"),
         "tag_drawer_menu_item_delete_tip_btn_confirm":
             MessageLookupByLibrary.simpleMessage("确认删除"),
-        "tag_drawer_menu_item_delete_tip_content": m1,
+        "tag_drawer_menu_item_delete_tip_content": m4,
         "tag_drawer_menu_item_delete_tip_title":
             MessageLookupByLibrary.simpleMessage("确认删除标签 ?"),
         "tag_drawer_menu_item_edit": MessageLookupByLibrary.simpleMessage("编辑"),

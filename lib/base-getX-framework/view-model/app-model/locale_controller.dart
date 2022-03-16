@@ -1,5 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
 
 class LocaleController extends BaseViewStateController {
@@ -42,18 +43,20 @@ class LocaleController extends BaseViewStateController {
   // 语言切换
   switchLocale(int index) {
     _currentLanguageIndex = index;
-    updateListener();
     _cacheLocaleRes();
+    Get.updateLocale(locale!);
+    updateListener();
   }
 
   @override
   void onStateBizHandle() {
-    _initGlobalLocaleRes();
   }
 
   @override
   void onStateDispose() {}
 
   @override
-  void onStateInit() {}
+  void onStateInit() {
+    _initGlobalLocaleRes();
+  }
 }

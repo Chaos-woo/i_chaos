@@ -2,6 +2,7 @@
 
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
+import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/toast_mixin.dart';
@@ -19,7 +20,8 @@ enum ViewState {
   noNet, // 无网络状态
 }
 
-abstract class BaseViewStateController extends GetxController with ToastMixin, ScreenAdapterMixin, GetXNavigationMixin {
+abstract class BaseViewStateController extends GetxController
+    with ToastMixin, ScreenAdapterMixin, GetXNavigationMixin, GetXDependencyMixin {
   // 当前状态
   ViewState _viewState = ViewState.idle;
 

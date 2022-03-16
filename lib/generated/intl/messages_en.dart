@@ -22,11 +22,38 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(custom_params) => "${custom_params}";
 
-  static String m1(name, createTime) =>
+  static String m1(choice) => "${Intl.select(choice, {
+            'lan_0': 'Simplified Chinese',
+            'lan_1': 'English',
+          })}";
+
+  static String m2(choice) => "${Intl.select(choice, {
+            'mode_0': 'Auto (System)',
+            'mode_1': 'Light',
+            'mode_2': 'Dark',
+          })}";
+
+  static String m3(choice) => "${Intl.select(choice, {
+            'theme_0': 'Bahama Blue',
+            'theme_1': 'Mandy Red',
+            'theme_2': 'Money',
+            'theme_3': 'Mango',
+            'theme_4': 'Espresso',
+            'theme_5': 'San Juan Blue',
+            'theme_6': 'Red Wine',
+            'theme_7': 'forest',
+          })}";
+
+  static String m4(name, createTime) =>
       "Tag information: \n1. Tag name: ${name};\n2. Create date: ${createTime}.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "app_tab_assert": MessageLookupByLibrary.simpleMessage("Assert"),
+        "app_tab_feed": MessageLookupByLibrary.simpleMessage("Feed"),
+        "app_tab_log": MessageLookupByLibrary.simpleMessage("Me-log"),
+        "app_tab_setting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "app_tab_todos": MessageLookupByLibrary.simpleMessage("ToDOs"),
         "bedrock_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "bedrock_refreshTwoLevel":
             MessageLookupByLibrary.simpleMessage("Refresh"),
@@ -38,18 +65,30 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cancel"),
         "month_calendar_page_btn_confirm":
             MessageLookupByLibrary.simpleMessage("Ok"),
+        "setting_language_set_options": m1,
         "setting_language_set_text1":
             MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
         "setting_language_set_text2":
             MessageLookupByLibrary.simpleMessage("English"),
         "setting_option_language_text":
             MessageLookupByLibrary.simpleMessage("Language"),
+        "setting_option_text_font_set_display_text":
+            MessageLookupByLibrary.simpleMessage(
+                "Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890"),
+        "setting_option_text_font_text":
+            MessageLookupByLibrary.simpleMessage("Font"),
+        "setting_option_text_font_tip_text1":
+            MessageLookupByLibrary.simpleMessage("Support fonts"),
+        "setting_option_theme_mode_text":
+            MessageLookupByLibrary.simpleMessage("Theme mode"),
         "setting_option_theme_text":
             MessageLookupByLibrary.simpleMessage("Theme"),
         "setting_page_appbar_title":
             MessageLookupByLibrary.simpleMessage("Setting"),
         "setting_page_group_tip_text1":
             MessageLookupByLibrary.simpleMessage("Basic setting"),
+        "setting_theme_mode_set_options": m2,
+        "setting_theme_set_options": m3,
         "tag_detail_appbar_title_edit":
             MessageLookupByLibrary.simpleMessage("Edit tag"),
         "tag_detail_appbar_title_new":
@@ -82,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cancel"),
         "tag_drawer_menu_item_delete_tip_btn_confirm":
             MessageLookupByLibrary.simpleMessage("Yes"),
-        "tag_drawer_menu_item_delete_tip_content": m1,
+        "tag_drawer_menu_item_delete_tip_content": m4,
         "tag_drawer_menu_item_delete_tip_title":
             MessageLookupByLibrary.simpleMessage("Want to delete this tag ?"),
         "tag_drawer_menu_item_edit":

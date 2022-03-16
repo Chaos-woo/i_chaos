@@ -221,13 +221,13 @@ abstract class PageState extends BaseState with WidgetGenerator, RouteAware, _Ro
   //////////////////////////////////////////////////////
   @override
   void didChangeDependencies() {
-    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+//    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    routeObserver.unsubscribe(this);
+//    routeObserver.unsubscribe(this);
     super.dispose();
   }
 

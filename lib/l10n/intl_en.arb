@@ -2,6 +2,11 @@
   "bedrock_refreshTwoLevel": "Refresh",
   "bedrock_reset": "Reset",
   "bedrock_confirm": "Confirm",
+  "app_tab_assert": "Assert",
+  "app_tab_feed": "Feed",
+  "app_tab_log": "Me-log",
+  "app_tab_todos": "ToDOs",
+  "app_tab_setting": "Setting",
   "common_custom_params": "{custom_params}",
   "common_designing_label": "Designing...",
   "month_calendar_page_btn_confirm": "Ok",
@@ -121,7 +126,14 @@
   "setting_page_appbar_title": "Setting",
   "setting_page_group_tip_text1": "Basic setting",
   "setting_option_language_text": "Language",
+  "setting_language_set_options": "{choice, select, lan_0 {Simplified Chinese} lan_1 {English}}",
   "setting_language_set_text1": "Simplified Chinese",
   "setting_language_set_text2": "English",
-  "setting_option_theme_text": "Theme"
+  "setting_option_theme_text": "Theme",
+  "setting_theme_set_options": "{choice, select, theme_0 {Bahama Blue} theme_1 {Mandy Red} theme_2 {Money} theme_3 {Mango} theme_4 {Espresso} theme_5 {San Juan Blue} theme_6 {Red Wine} theme_7 {forest}}",
+  "setting_option_theme_mode_text": "Theme mode",
+  "setting_theme_mode_set_options": "{choice, select, mode_0 {Auto (System)} mode_1 {Light} mode_2 {Dark}}",
+  "setting_option_text_font_text": "Font",
+  "setting_option_text_font_set_display_text": "Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890",
+  "setting_option_text_font_tip_text1": "Support fonts"
 }

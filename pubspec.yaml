@@ -195,10 +195,9 @@ dependencies:
   # 风格统一的组件UI
   getwidget: ^2.0.4
   # 日志接口
-  logger: ^1.0.0
+  logger: ^1.1.0
   # dio日志输出格式化器
   pretty_dio_logger: ^1.1.1
-
   # 使用注解方便实用SQLite
   floor: ^1.2.0
   # json注解
@@ -233,6 +232,8 @@ dependencies:
   get: ^4.6.1
   # google fonts
   google_fonts: 2.1.0
+  # 主题
+  flex_color_scheme: ^4.1.1
 
 dev_dependencies:
   flutter_test:
@@ -255,6 +256,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - assets/google_fonts/
     - assets/images/image_task.svg
     - assets/images/image_loading.svg
     - assets/images/image_complete.svg

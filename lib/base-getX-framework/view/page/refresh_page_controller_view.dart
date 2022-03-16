@@ -24,6 +24,7 @@ abstract class RefreshPageControllerView<T extends ListViewStateController> exte
         controller: controller.refreshController,
         onRefresh: controller.refreshData,
         header: header ?? const ClassicHeader(),
+
         child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,

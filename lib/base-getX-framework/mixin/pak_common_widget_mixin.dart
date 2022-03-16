@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base-getX-framework/common/common_google_fonts.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
@@ -16,16 +15,18 @@ mixin PakCommonWidget on ScreenAdapterMixin, GetXNavigationMixin {
   }
 
   static double commonAppBarHeight = 40.0;
+
   double get leftAppBarHeight => screenHeight - commonAppBarHeight;
 
   AppBar commonAppBar({
     required String title,
-    Color titleColor = Colors.white,
+    TextStyle? textStyle,
+    Color? titleColor,
     List<Widget>? actions,
-    Color backgroundColor = Colors.black,
+    Color? backgroundColor,
     bool centerTitle = false,
     double? elevation = 0.0,
-    Color leadingButtonColor = Colors.white,
+    Color? leadingButtonColor,
     bool needAutoBack = true,
     IconData leadingButtonIcon = AliIcons.IconReturn,
     VoidCallback? leadingButtonOnTap,
@@ -38,7 +39,7 @@ mixin PakCommonWidget on ScreenAdapterMixin, GetXNavigationMixin {
       actions: actions,
       title: Text(
         title,
-        style: CommonGoogleFont.fredoka(color: titleColor),
+        style: textStyle,
       ),
       backgroundColor: backgroundColor,
       leading: InkWell(

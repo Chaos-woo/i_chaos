@@ -80,6 +80,56 @@ class S {
     );
   }
 
+  /// `Assert`
+  String get app_tab_assert {
+    return Intl.message(
+      'Assert',
+      name: 'app_tab_assert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed`
+  String get app_tab_feed {
+    return Intl.message(
+      'Feed',
+      name: 'app_tab_feed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Me-log`
+  String get app_tab_log {
+    return Intl.message(
+      'Me-log',
+      name: 'app_tab_log',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDOs`
+  String get app_tab_todos {
+    return Intl.message(
+      'ToDOs',
+      name: 'app_tab_todos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get app_tab_setting {
+    return Intl.message(
+      'Setting',
+      name: 'app_tab_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{custom_params}`
   String common_custom_params(Object custom_params) {
     return Intl.message(
@@ -1271,6 +1321,20 @@ class S {
     );
   }
 
+  /// `{choice, select, lan_0 {Simplified Chinese} lan_1 {English}}`
+  String setting_language_set_options(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'lan_0': 'Simplified Chinese',
+        'lan_1': 'English',
+      },
+      name: 'setting_language_set_options',
+      desc: '',
+      args: [choice],
+    );
+  }
+
   /// `Simplified Chinese`
   String get setting_language_set_text1 {
     return Intl.message(
@@ -1296,6 +1360,81 @@ class S {
     return Intl.message(
       'Theme',
       name: 'setting_option_theme_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{choice, select, theme_0 {Bahama Blue} theme_1 {Mandy Red} theme_2 {Money} theme_3 {Mango} theme_4 {Espresso} theme_5 {San Juan Blue} theme_6 {Red Wine} theme_7 {forest}}`
+  String setting_theme_set_options(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'theme_0': 'Bahama Blue',
+        'theme_1': 'Mandy Red',
+        'theme_2': 'Money',
+        'theme_3': 'Mango',
+        'theme_4': 'Espresso',
+        'theme_5': 'San Juan Blue',
+        'theme_6': 'Red Wine',
+        'theme_7': 'forest',
+      },
+      name: 'setting_theme_set_options',
+      desc: '',
+      args: [choice],
+    );
+  }
+
+  /// `Theme mode`
+  String get setting_option_theme_mode_text {
+    return Intl.message(
+      'Theme mode',
+      name: 'setting_option_theme_mode_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{choice, select, mode_0 {Auto (System)} mode_1 {Light} mode_2 {Dark}}`
+  String setting_theme_mode_set_options(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'mode_0': 'Auto (System)',
+        'mode_1': 'Light',
+        'mode_2': 'Dark',
+      },
+      name: 'setting_theme_mode_set_options',
+      desc: '',
+      args: [choice],
+    );
+  }
+
+  /// `Font`
+  String get setting_option_text_font_text {
+    return Intl.message(
+      'Font',
+      name: 'setting_option_text_font_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890`
+  String get setting_option_text_font_set_display_text {
+    return Intl.message(
+      'Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890',
+      name: 'setting_option_text_font_set_display_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support fonts`
+  String get setting_option_text_font_tip_text1 {
+    return Intl.message(
+      'Support fonts',
+      name: 'setting_option_text_font_tip_text1',
       desc: '',
       args: [],
     );
