@@ -83,8 +83,10 @@ class FontFamilyController extends BaseViewStateController {
     _fontFamily = font;
     _saveFontFamily();
     // 曲线救国，刷新整体字体/主题
-    FlexColorThemeController theme = findDependency();
-    theme.switchTheme(theme.flexScheme);
+    Future.delayed(const Duration(milliseconds: 0)).then((_) {
+      FlexColorThemeController theme = findDependency();
+      theme.switchTheme(theme.flexScheme);
+    }).whenComplete(() => Get.forceAppUpdate());
     updateListener();
   }
 

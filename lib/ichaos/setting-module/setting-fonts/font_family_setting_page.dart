@@ -53,7 +53,7 @@ class FontFamilySettingPage extends BaseStatelessView {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(
                     minHeight: 95,
-                    maxHeight: 110
+                    maxHeight: 120
                   ),
                   child: Container(
                     height: 95,
