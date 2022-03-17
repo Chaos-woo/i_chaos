@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateless_view.dart';
+import 'package:i_chaos/generated/l10n.dart';
 import 'package:widget_chain/widget_chain.dart';
 
 // 非业务型异常展示的页面
@@ -18,11 +19,13 @@ class ExceptionPageState extends BaseStatelessView {
         .intoColumn(mainAxisAlignment: MainAxisAlignment.center);
 
     return Scaffold(
-      appBar: commonAppBar(title: '异常'),
-      body: autoBottomBarPaddingFrame(
-          child: SingleChildScrollView(
-            child: errorText,
-          )),
+      appBar: commonAppBar(
+        title: S.of(context).app_default_exception_page_title,
+        actions: [],
+      ),
+      body: SingleChildScrollView(
+        child: errorText,
+      ),
     );
   }
 }

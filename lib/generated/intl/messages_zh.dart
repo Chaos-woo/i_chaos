@@ -49,6 +49,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "app_default_exception_page_action_btn_feedback":
+            MessageLookupByLibrary.simpleMessage("提交异常信息"),
+        "app_default_exception_page_action_toast_feedback":
+            MessageLookupByLibrary.simpleMessage("感性您的反馈~"),
+        "app_default_exception_page_tip": MessageLookupByLibrary.simpleMessage(
+            "抱歉，应用程序发生了点小问题！\n可以点击右上角提交异常信息帮助开发者分析问题~"),
+        "app_default_exception_page_title":
+            MessageLookupByLibrary.simpleMessage("运行异常"),
         "app_tab_assert": MessageLookupByLibrary.simpleMessage("Assert"),
         "app_tab_feed": MessageLookupByLibrary.simpleMessage("Feed"),
         "app_tab_log": MessageLookupByLibrary.simpleMessage("Me-log"),

@@ -9,9 +9,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:i_chaos/base_framework/config/app_config.dart';
 import 'package:i_chaos/base_framework/config/global_provider_manager.dart';
 import 'package:i_chaos/base_framework/view_model/app_model/locale_model.dart';
+import 'package:i_chaos/ichaos/common-module/exception/default_exception_page.dart';
 import 'package:i_chaos/ichaos/public/config/design_config.dart';
-import 'package:i_chaos/ichaos/public/scenes/exception/common_exception_scene.dart';
-import 'package:i_chaos/ichaos/setting/setting-domain/core/scenes/home/setting_home_page.dart';
 import 'package:i_chaos/main_material_app.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:oktoast/oktoast.dart';
@@ -234,7 +233,7 @@ void main() async {
       Zone.current.handleUncaughtError(details.exception, details.stack!);
 
       /// 出现异常时会进入下方页面（flutter原有的红屏）
-      return ExceptionPageState(details.exception.toString(), details.stack.toString()).transformToPageWidget();
+      return ExceptionPageState(details.exception.toString(), details.stack.toString());
     };
   }, zoneSpecification: ZoneSpecification(
     print: (Zone self, ZoneDelegate parent, Zone zone, String line) {

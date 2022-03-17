@@ -85,6 +85,7 @@ class FlexColorThemeController extends BaseViewStateController {
       case ThemeMode.light:
         return light;
       case ThemeMode.system:
+        // 跟随系统时判断系统当前的深色模式：该接口android Q+
         return Get.isPlatformDarkMode ? dark : light;
       case ThemeMode.dark:
         return dark;

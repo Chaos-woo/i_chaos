@@ -130,6 +130,46 @@ class S {
     );
   }
 
+  /// `Running error`
+  String get app_default_exception_page_title {
+    return Intl.message(
+      'Running error',
+      name: 'app_default_exception_page_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, some problems happened with the application. \nCould you please click the Feedback button to submit information to help developers analyze the problems?`
+  String get app_default_exception_page_tip {
+    return Intl.message(
+      'Sorry, some problems happened with the application. \nCould you please click the Feedback button to submit information to help developers analyze the problems?',
+      name: 'app_default_exception_page_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feedback`
+  String get app_default_exception_page_action_btn_feedback {
+    return Intl.message(
+      'Feedback',
+      name: 'app_default_exception_page_action_btn_feedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thanks~`
+  String get app_default_exception_page_action_toast_feedback {
+    return Intl.message(
+      'Thanks~',
+      name: 'app_default_exception_page_action_toast_feedback',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{custom_params}`
   String common_custom_params(Object custom_params) {
     return Intl.message(
