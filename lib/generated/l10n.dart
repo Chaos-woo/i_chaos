@@ -1479,6 +1479,1386 @@ class S {
       args: [],
     );
   }
+
+  /// `Assert`
+  String get main_bottombar_widget_tab_text_assert {
+    return Intl.message(
+      'Assert',
+      name: 'main_bottombar_widget_tab_text_assert',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed`
+  String get main_bottombar_widget_tab_text_feed {
+    return Intl.message(
+      'Feed',
+      name: 'main_bottombar_widget_tab_text_feed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Me-log`
+  String get main_bottombar_widget_tab_text_log {
+    return Intl.message(
+      'Me-log',
+      name: 'main_bottombar_widget_tab_text_log',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDOs`
+  String get main_bottombar_widget_tab_text_todos {
+    return Intl.message(
+      'ToDOs',
+      name: 'main_bottombar_widget_tab_text_todos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get main_bottombar_widget_tab_text_setting {
+    return Intl.message(
+      'Setting',
+      name: 'main_bottombar_widget_tab_text_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Running error`
+  String get common_exception_page_appbar_title {
+    return Intl.message(
+      'Running error',
+      name: 'common_exception_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, some problems happened with the application. \nCould you please click the Feedback button to submit information to help developers analyze the problems?`
+  String get common_exception_page_tip_text {
+    return Intl.message(
+      'Sorry, some problems happened with the application. \nCould you please click the Feedback button to submit information to help developers analyze the problems?',
+      name: 'common_exception_page_tip_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit error information`
+  String get common_exception_page_btn_tooltip_text_submit {
+    return Intl.message(
+      'Submit error information',
+      name: 'common_exception_page_btn_tooltip_text_submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thanks~`
+  String get common_exception_page_toast_text_submit {
+    return Intl.message(
+      'Thanks~',
+      name: 'common_exception_page_toast_text_submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{custom_params}`
+  String common_any_page_widget_text_custom(Object custom_params) {
+    return Intl.message(
+      '$custom_params',
+      name: 'common_any_page_widget_text_custom',
+      desc: '',
+      args: [custom_params],
+    );
+  }
+
+  /// `Designing...`
+  String get common_any_page_label_text_design {
+    return Intl.message(
+      'Designing...',
+      name: 'common_any_page_label_text_design',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get common_month_calendar_page_btn_text_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'common_month_calendar_page_btn_text_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get common_month_calendar_page_btn_text_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'common_month_calendar_page_btn_text_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit ToDO`
+  String get todos_edit_page_appbar_title_edit {
+    return Intl.message(
+      'Edit ToDO',
+      name: 'todos_edit_page_appbar_title_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New ToDO`
+  String get todos_edit_page_appbar_title_add {
+    return Intl.message(
+      'New ToDO',
+      name: 'todos_edit_page_appbar_title_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get todos_edit_page_appbar_action_btn_reset {
+    return Intl.message(
+      'Reset',
+      name: 'todos_edit_page_appbar_action_btn_reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDO Content`
+  String get todos_edit_page_label_content {
+    return Intl.message(
+      'ToDO Content',
+      name: 'todos_edit_page_label_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get todos_edit_page_label_remark {
+    return Intl.message(
+      'Description',
+      name: 'todos_edit_page_label_remark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sub task(s)`
+  String get todos_edit_page_label_subtask {
+    return Intl.message(
+      'Sub task(s)',
+      name: 'todos_edit_page_label_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is sub task?`
+  String get todos_edit_page_dialog_title_subtask {
+    return Intl.message(
+      'What is sub task?',
+      name: 'todos_edit_page_dialog_title_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. A ToDO contains some sub tasks, such as SubTask1, SubTask2.\n2. If a ToDO contains N sub tasks, your work completion is 1/N when you completed a sub task.\n3. ToDO will move to completed list when all its sub tasks had completed.\n4. If a ToDO completed, it's all sub tasks will be displayed as completed.`
+  String get todos_edit_page_dialog_content_subtask {
+    return Intl.message(
+      '1. A ToDO contains some sub tasks, such as SubTask1, SubTask2.\n2. If a ToDO contains N sub tasks, your work completion is 1/N when you completed a sub task.\n3. ToDO will move to completed list when all its sub tasks had completed.\n4. If a ToDO completed, it\'s all sub tasks will be displayed as completed.',
+      name: 'todos_edit_page_dialog_content_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get todos_edit_page_dialog_btn_confirm_subtask {
+    return Intl.message(
+      'Ok',
+      name: 'todos_edit_page_dialog_btn_confirm_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid date`
+  String get todos_edit_page_label_valid_date {
+    return Intl.message(
+      'Valid date',
+      name: 'todos_edit_page_label_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to select valid date?`
+  String get todos_edit_page_dialog_title_valid_date {
+    return Intl.message(
+      'How to select valid date?',
+      name: 'todos_edit_page_dialog_title_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. [Today]: This ToDO will be displayed today.\n2. [Tomorrow]:  This ToDO will be displayed tomorrow.\n3. [Select date]: You can select any date after today. But, if it is today or tomorrow, the option will change to [Today] or [Tomorrow] button.\n4. [Draft]: ToDO will not be shown on any ToDO list before you select a valid date.`
+  String get todos_edit_page_dialog_content_valid_date {
+    return Intl.message(
+      '1. [Today]: This ToDO will be displayed today.\n2. [Tomorrow]:  This ToDO will be displayed tomorrow.\n3. [Select date]: You can select any date after today. But, if it is today or tomorrow, the option will change to [Today] or [Tomorrow] button.\n4. [Draft]: ToDO will not be shown on any ToDO list before you select a valid date.',
+      name: 'todos_edit_page_dialog_content_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get todos_edit_page_dialog_btn_confirm_valid_date {
+    return Intl.message(
+      'Ok',
+      name: 'todos_edit_page_dialog_btn_confirm_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get todos_edit_page_option_valid_date_today {
+    return Intl.message(
+      'Today',
+      name: 'todos_edit_page_option_valid_date_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tomorrow`
+  String get todos_edit_page_option_valid_date_tomorrow {
+    return Intl.message(
+      'Tomorrow',
+      name: 'todos_edit_page_option_valid_date_tomorrow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select date`
+  String get todos_edit_page_option_valid_date_select_date {
+    return Intl.message(
+      'Select date',
+      name: 'todos_edit_page_option_valid_date_select_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Draft`
+  String get todos_edit_page_option_valid_date_draft {
+    return Intl.message(
+      'Draft',
+      name: 'todos_edit_page_option_valid_date_draft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency degree`
+  String get todos_edit_page_label_level {
+    return Intl.message(
+      'Emergency degree',
+      name: 'todos_edit_page_label_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deferrable`
+  String get todos_edit_page_option_level_deferrable {
+    return Intl.message(
+      'Deferrable',
+      name: 'todos_edit_page_option_level_deferrable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unimportant`
+  String get todos_edit_page_option_level_unimportant {
+    return Intl.message(
+      'Unimportant',
+      name: 'todos_edit_page_option_level_unimportant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get todos_edit_page_option_level_normal {
+    return Intl.message(
+      'Normal',
+      name: 'todos_edit_page_option_level_normal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Important`
+  String get todos_edit_page_option_level_important {
+    return Intl.message(
+      'Important',
+      name: 'todos_edit_page_option_level_important',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Urgent`
+  String get todos_edit_page_option_level_urgent {
+    return Intl.message(
+      'Urgent',
+      name: 'todos_edit_page_option_level_urgent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location information`
+  String get todos_edit_page_label_location {
+    return Intl.message(
+      'Location information',
+      name: 'todos_edit_page_label_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get todos_edit_page_btn_save {
+    return Intl.message(
+      'Save',
+      name: 'todos_edit_page_btn_save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save success !`
+  String get todos_edit_page_toast_save_success {
+    return Intl.message(
+      'Save success !',
+      name: 'todos_edit_page_toast_save_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save failure, please try again.`
+  String get todos_edit_page_toast_save_failure {
+    return Intl.message(
+      'Save failure, please try again.',
+      name: 'todos_edit_page_toast_save_failure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mon`
+  String get todos_main_page_widget_label_week_abbr_mon {
+    return Intl.message(
+      'Mon',
+      name: 'todos_main_page_widget_label_week_abbr_mon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tue`
+  String get todos_main_page_widget_label_week_abbr_tue {
+    return Intl.message(
+      'Tue',
+      name: 'todos_main_page_widget_label_week_abbr_tue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wed`
+  String get todos_main_page_widget_label_week_abbr_wed {
+    return Intl.message(
+      'Wed',
+      name: 'todos_main_page_widget_label_week_abbr_wed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thu`
+  String get todos_main_page_widget_label_week_abbr_thu {
+    return Intl.message(
+      'Thu',
+      name: 'todos_main_page_widget_label_week_abbr_thu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fri`
+  String get todos_main_page_widget_label_week_abbr_fri {
+    return Intl.message(
+      'Fri',
+      name: 'todos_main_page_widget_label_week_abbr_fri',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sat`
+  String get todos_main_page_widget_label_week_abbr_sat {
+    return Intl.message(
+      'Sat',
+      name: 'todos_main_page_widget_label_week_abbr_sat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sun`
+  String get todos_main_page_widget_label_week_abbr_sun {
+    return Intl.message(
+      'Sun',
+      name: 'todos_main_page_widget_label_week_abbr_sun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More options`
+  String get todos_todo_card_widget_menu_title {
+    return Intl.message(
+      'More options',
+      name: 'todos_todo_card_widget_menu_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get todos_todo_card_widget_option_completed {
+    return Intl.message(
+      'Done',
+      name: 'todos_todo_card_widget_option_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify`
+  String get todos_todo_card_widget_option_modify {
+    return Intl.message(
+      'Modify',
+      name: 'todos_todo_card_widget_option_modify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get todos_todo_card_widget_option_delete {
+    return Intl.message(
+      'Delete',
+      name: 'todos_todo_card_widget_option_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete ToDO?`
+  String get todos_todo_card_widget_dialog_title_delete {
+    return Intl.message(
+      'Delete ToDO?',
+      name: 'todos_todo_card_widget_dialog_title_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get todos_todo_card_widget_dialog_delete_btn_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todos_todo_card_widget_dialog_delete_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todos_todo_card_widget_dialog_delete_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todos_todo_card_widget_dialog_delete_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not finished`
+  String get todos_todo_card_widget_option_unaccomplished {
+    return Intl.message(
+      'Not finished',
+      name: 'todos_todo_card_widget_option_unaccomplished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `retract`
+  String get todos_todo_card_widget_btn_subtask_retract {
+    return Intl.message(
+      'retract',
+      name: 'todos_todo_card_widget_btn_subtask_retract',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDO Detail`
+  String get todos_todo_card_detail_widget_dialog_title {
+    return Intl.message(
+      'ToDO Detail',
+      name: 'todos_todo_card_detail_widget_dialog_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get todos_todo_card_detail_widget_dialog_btn_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'todos_todo_card_detail_widget_dialog_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Content`
+  String get todos_todo_card_detail_widget_dialog_content_label {
+    return Intl.message(
+      'Content',
+      name: 'todos_todo_card_detail_widget_dialog_content_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get todos_todo_card_detail_widget_dialog_remark_label {
+    return Intl.message(
+      'Description',
+      name: 'todos_todo_card_detail_widget_dialog_remark_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency degree`
+  String get todos_todo_card_detail_widget_dialog_level_label {
+    return Intl.message(
+      'Emergency degree',
+      name: 'todos_todo_card_detail_widget_dialog_level_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `status`
+  String get todos_todo_card_detail_widget_dialog_status_label {
+    return Intl.message(
+      'status',
+      name: 'todos_todo_card_detail_widget_dialog_status_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doing`
+  String get todos_todo_card_detail_widget_dialog_status_text_doing {
+    return Intl.message(
+      'Doing',
+      name: 'todos_todo_card_detail_widget_dialog_status_text_doing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get todos_todo_card_detail_widget_dialog_status_text_completed {
+    return Intl.message(
+      'Done',
+      name: 'todos_todo_card_detail_widget_dialog_status_text_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed date`
+  String get todos_todo_card_detail_widget_dialog_completed_date_label {
+    return Intl.message(
+      'Completed date',
+      name: 'todos_todo_card_detail_widget_dialog_completed_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location information`
+  String get todos_todo_card_detail_widget_dialog_location_label {
+    return Intl.message(
+      'Location information',
+      name: 'todos_todo_card_detail_widget_dialog_location_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sub task(s)`
+  String get todos_todo_card_detail_widget_dialog_subtask_label {
+    return Intl.message(
+      'Sub task(s)',
+      name: 'todos_todo_card_detail_widget_dialog_subtask_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid date`
+  String get todos_todo_card_detail_widget_dialog_valid_date_label {
+    return Intl.message(
+      'Valid date',
+      name: 'todos_todo_card_detail_widget_dialog_valid_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create date`
+  String get todos_todo_card_detail_widget_dialog_crete_date_label {
+    return Intl.message(
+      'Create date',
+      name: 'todos_todo_card_detail_widget_dialog_crete_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update date`
+  String get todos_todo_card_detail_widget_dialog_update_date_label {
+    return Intl.message(
+      'Update date',
+      name: 'todos_todo_card_detail_widget_dialog_update_date_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `☀`
+  String get todos_home_fba_widget_btn_today {
+    return Intl.message(
+      '☀',
+      name: 'todos_home_fba_widget_btn_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searching`
+  String get todos_tabbar_widget_tip_filtered_loading {
+    return Intl.message(
+      'Searching',
+      name: 'todos_tabbar_widget_tip_filtered_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Underway`
+  String get todos_tabbar_widget_label_filtered_active {
+    return Intl.message(
+      'Underway',
+      name: 'todos_tabbar_widget_label_filtered_active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get todos_tabbar_widget_label_filtered_completed {
+    return Intl.message(
+      'Completed',
+      name: 'todos_tabbar_widget_label_filtered_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get todos_tabbar_widget_label_filtered_all {
+    return Intl.message(
+      'All',
+      name: 'todos_tabbar_widget_label_filtered_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDO Deleted`
+  String get todos_todo_card_widget_toast_text_deleted {
+    return Intl.message(
+      'ToDO Deleted',
+      name: 'todos_todo_card_widget_toast_text_deleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations~ ToDO completed`
+  String get todos_todo_card_widget_toast_text_completed {
+    return Intl.message(
+      'Congratulations~ ToDO completed',
+      name: 'todos_todo_card_widget_toast_text_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDO not finished`
+  String get todos_todo_card_widget_toast_text_unaccomplished {
+    return Intl.message(
+      'ToDO not finished',
+      name: 'todos_todo_card_widget_toast_text_unaccomplished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sub task(s) all completed`
+  String get todos_todo_card_widget_toast_text_all_subtask_completed {
+    return Intl.message(
+      'Sub task(s) all completed',
+      name: 'todos_todo_card_widget_toast_text_all_subtask_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sub task completed`
+  String get todos_todo_card_widget_toast_text_subtask_completed {
+    return Intl.message(
+      'Sub task completed',
+      name: 'todos_todo_card_widget_toast_text_subtask_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more data`
+  String get todos_main_page_todo_list_tip_no_data {
+    return Intl.message(
+      'No more data',
+      name: 'todos_main_page_todo_list_tip_no_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not found`
+  String get todos_main_page_todo_list_tip_not_found {
+    return Intl.message(
+      'Not found',
+      name: 'todos_main_page_todo_list_tip_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All done of ToDO`
+  String get todos_main_page_todo_list_tip_completed {
+    return Intl.message(
+      'All done of ToDO',
+      name: 'todos_main_page_todo_list_tip_completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Still has unfinished ToDO`
+  String get todos_main_page_todo_list_tip_has_more_todos {
+    return Intl.message(
+      'Still has unfinished ToDO',
+      name: 'todos_main_page_todo_list_tip_has_more_todos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date has been switched to`
+  String get todos_calendar_switch_widget_toast_text_date_jump {
+    return Intl.message(
+      'Date has been switched to',
+      name: 'todos_calendar_switch_widget_toast_text_date_jump',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Draft list`
+  String get todos_draft_page_appbar_title {
+    return Intl.message(
+      'Draft list',
+      name: 'todos_draft_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all`
+  String get todos_draft_page_appbar_option_delete_all {
+    return Intl.message(
+      'Delete all',
+      name: 'todos_draft_page_appbar_option_delete_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all draft?`
+  String get todos_draft_page_appbar_dialog_delete_all_title {
+    return Intl.message(
+      'Delete all draft?',
+      name: 'todos_draft_page_appbar_dialog_delete_all_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all draft and can not found any?`
+  String get todos_draft_page_appbar_dialog_delete_all_content {
+    return Intl.message(
+      'Delete all draft and can not found any?',
+      name: 'todos_draft_page_appbar_dialog_delete_all_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get todos_draft_page_appbar_dialog_btn_delete_all_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todos_draft_page_appbar_dialog_btn_delete_all_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todos_draft_page_appbar_dialog_btn_delete_all_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todos_draft_page_appbar_dialog_btn_delete_all_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move to Today`
+  String get todos_draft_page_list_item_option_move_to_today {
+    return Intl.message(
+      'Move to Today',
+      name: 'todos_draft_page_list_item_option_move_to_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Move to Tomorrow`
+  String get todos_draft_page_list_option_move_to_tomorrow {
+    return Intl.message(
+      'Move to Tomorrow',
+      name: 'todos_draft_page_list_option_move_to_tomorrow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get todos_draft_page_list_option_select_date {
+    return Intl.message(
+      'Select Date',
+      name: 'todos_draft_page_list_option_select_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify`
+  String get todos_draft_page_list_option_modify {
+    return Intl.message(
+      'Modify',
+      name: 'todos_draft_page_list_option_modify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get todos_draft_page_list_item_option_delete {
+    return Intl.message(
+      'Delete',
+      name: 'todos_draft_page_list_item_option_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete draft?`
+  String get todos_draft_page_list_dialog_delete_title {
+    return Intl.message(
+      'Delete draft?',
+      name: 'todos_draft_page_list_dialog_delete_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete draft?`
+  String get todos_draft_page_list_dialog_delete_content {
+    return Intl.message(
+      'Delete draft?',
+      name: 'todos_draft_page_list_dialog_delete_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get todos_draft_page_list_dialog_btn_delete_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todos_draft_page_list_dialog_btn_delete_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todos_draft_page_list_dialog_btn_delete_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todos_draft_page_list_dialog_btn_delete_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not found any draft ...`
+  String get todos_draft_page_list_tip_not_found {
+    return Intl.message(
+      'Not found any draft ...',
+      name: 'todos_draft_page_list_tip_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic list`
+  String get todos_drawer_page_tip_basic_list {
+    return Intl.message(
+      'Basic list',
+      name: 'todos_drawer_page_tip_basic_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tagged list`
+  String get todos_drawer_page_tip_tagged_list {
+    return Intl.message(
+      'Tagged list',
+      name: 'todos_drawer_page_tip_tagged_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily ToDOs`
+  String get todos_drawer_page_option_daily_todo {
+    return Intl.message(
+      'Daily ToDOs',
+      name: 'todos_drawer_page_option_daily_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recently ToDOs`
+  String get todos_drawer_page_option_recently_todo {
+    return Intl.message(
+      'Recently ToDOs',
+      name: 'todos_drawer_page_option_recently_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ToDOs without tag`
+  String get todos_drawer_page_option_no_tag_todo {
+    return Intl.message(
+      'ToDOs without tag',
+      name: 'todos_drawer_page_option_no_tag_todo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New tag`
+  String get todos_drawer_page_option_new_tag {
+    return Intl.message(
+      'New tag',
+      name: 'todos_drawer_page_option_new_tag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get todos_drawer_page_menu_tag_edit {
+    return Intl.message(
+      'Edit',
+      name: 'todos_drawer_page_menu_tag_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get todos_drawer_page_menu_tag_delete {
+    return Intl.message(
+      'Delete',
+      name: 'todos_drawer_page_menu_tag_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Want to delete this tag?`
+  String get todos_drawer_page_dialog_delete_tag_title {
+    return Intl.message(
+      'Want to delete this tag?',
+      name: 'todos_drawer_page_dialog_delete_tag_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tag information: \n1. Tag name: {name};\n2. Create date: {createTime}.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.`
+  String todos_drawer_page_dialog_delete_tag_content(
+      Object name, Object createTime) {
+    return Intl.message(
+      'Tag information: \n1. Tag name: $name;\n2. Create date: $createTime.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.',
+      name: 'todos_drawer_page_dialog_delete_tag_content',
+      desc: '',
+      args: [name, createTime],
+    );
+  }
+
+  /// `Yes`
+  String get todos_drawer_page_dialog_delete_tag_btn_confirm {
+    return Intl.message(
+      'Yes',
+      name: 'todos_drawer_page_dialog_delete_tag_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get todos_drawer_page_dialog_delete_tag_btn_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'todos_drawer_page_dialog_delete_tag_btn_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get todos_drawer_page_menu_tag_sort {
+    return Intl.message(
+      'Sort',
+      name: 'todos_drawer_page_menu_tag_sort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort tag(s)`
+  String get todos_tag_sort_page_appbar_title {
+    return Intl.message(
+      'Sort tag(s)',
+      name: 'todos_tag_sort_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tag, let's create ...`
+  String get todos_tag_sort_page_tag_list_tip_empty {
+    return Intl.message(
+      'No tag, let\'s create ...',
+      name: 'todos_tag_sort_page_tag_list_tip_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Up`
+  String get todos_tag_sort_page_tag_list_btn_move_up {
+    return Intl.message(
+      'Up',
+      name: 'todos_tag_sort_page_tag_list_btn_move_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Down`
+  String get todos_tag_sort_page_tag_list_btn_move_down {
+    return Intl.message(
+      'Down',
+      name: 'todos_tag_sort_page_tag_list_btn_move_down',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New tag`
+  String get todos_tag_detail_page_appbar_title_new {
+    return Intl.message(
+      'New tag',
+      name: 'todos_tag_detail_page_appbar_title_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit tag`
+  String get todos_tag_detail_page_appbar_title_edit {
+    return Intl.message(
+      'Edit tag',
+      name: 'todos_tag_detail_page_appbar_title_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick up a color you like and edit tag name`
+  String get todos_tag_detail_page_label_input_tip {
+    return Intl.message(
+      'Pick up a color you like and edit tag name',
+      name: 'todos_tag_detail_page_label_input_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get todos_tag_detail_page_btn_save {
+    return Intl.message(
+      'Save',
+      name: 'todos_tag_detail_page_btn_save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get todos_tag_detail_page_dialog_color_picker_btn_confirm {
+    return Intl.message(
+      'Ok',
+      name: 'todos_tag_detail_page_dialog_color_picker_btn_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `empty tag name, please input some text`
+  String get todos_tag_detail_page_toast_text_empty_name {
+    return Intl.message(
+      'empty tag name, please input some text',
+      name: 'todos_tag_detail_page_toast_text_empty_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `duplicate tag name, please input different name`
+  String get todos_tag_detail_page_toast_text_duplicate_name {
+    return Intl.message(
+      'duplicate tag name, please input different name',
+      name: 'todos_tag_detail_page_toast_text_duplicate_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get setting_main_page_appbar_title {
+    return Intl.message(
+      'Setting',
+      name: 'setting_main_page_appbar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic setting`
+  String get setting_main_page_tip_base_setting {
+    return Intl.message(
+      'Basic setting',
+      name: 'setting_main_page_tip_base_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get setting_main_page_option_base_setting_language {
+    return Intl.message(
+      'Language',
+      name: 'setting_main_page_option_base_setting_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{choice, select, lan_0 {Simplified Chinese} lan_1 {English}}`
+  String setting_language_page_option_language_choice(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'lan_0': 'Simplified Chinese',
+        'lan_1': 'English',
+      },
+      name: 'setting_language_page_option_language_choice',
+      desc: '',
+      args: [choice],
+    );
+  }
+
+  /// `Theme`
+  String get setting_main_page_option_base_setting_theme {
+    return Intl.message(
+      'Theme',
+      name: 'setting_main_page_option_base_setting_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{choice, select, theme_0 {Bahama Blue} theme_1 {Mandy Red} theme_2 {Money} theme_3 {Mango} theme_4 {Espresso} theme_5 {San Juan Blue} theme_6 {Red Wine} theme_7 {forest}}`
+  String setting_theme_page_option_theme_choice(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'theme_0': 'Bahama Blue',
+        'theme_1': 'Mandy Red',
+        'theme_2': 'Money',
+        'theme_3': 'Mango',
+        'theme_4': 'Espresso',
+        'theme_5': 'San Juan Blue',
+        'theme_6': 'Red Wine',
+        'theme_7': 'forest',
+      },
+      name: 'setting_theme_page_option_theme_choice',
+      desc: '',
+      args: [choice],
+    );
+  }
+
+  /// `Theme mode`
+  String get setting_main_page_option_base_setting_theme_mode {
+    return Intl.message(
+      'Theme mode',
+      name: 'setting_main_page_option_base_setting_theme_mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{choice, select, mode_0 {Auto (System)} mode_1 {Light} mode_2 {Dark}}`
+  String setting_theme_mode_page_option_theme_mode_choice(Object choice) {
+    return Intl.select(
+      choice,
+      {
+        'mode_0': 'Auto (System)',
+        'mode_1': 'Light',
+        'mode_2': 'Dark',
+      },
+      name: 'setting_theme_mode_page_option_theme_mode_choice',
+      desc: '',
+      args: [choice],
+    );
+  }
+
+  /// `Font`
+  String get setting_main_page_option_base_setting_font {
+    return Intl.message(
+      'Font',
+      name: 'setting_main_page_option_base_setting_font',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890`
+  String get setting_font_page_text_example {
+    return Intl.message(
+      'Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890',
+      name: 'setting_font_page_text_example',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support fonts`
+  String get setting_font_page_tip_support_fonts {
+    return Intl.message(
+      'Support fonts',
+      name: 'setting_font_page_tip_support_fonts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

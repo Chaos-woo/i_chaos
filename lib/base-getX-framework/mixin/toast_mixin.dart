@@ -4,7 +4,7 @@ import 'package:oktoast/oktoast.dart';
 
 mixin ToastMixin {
   static const TextStyle defaultTextStyle =
-      TextStyle(color: Colors.white, fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w200);
+      TextStyle(fontSize: 14, decoration: TextDecoration.none, fontWeight: FontWeight.w200);
 
   void showSimpleToast(
     String? msg, {
@@ -53,7 +53,7 @@ mixin ToastMixin {
 
     final Widget toast = Container(
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(15),
       width: ScreenUtil.getInstance().screenWidth - 20,
       decoration: BoxDecoration(
         color: backgroundColor,

@@ -51,6 +51,8 @@ class MainMaterialApp extends BaseStatefulView {
       popGesture: Get.isPopGestureEnable,
 //      transitionDuration: Get.defaultDurationTransition,
       home: OKToast(
+        // 弹出toast前隐藏已经显示的toast
+        dismissOtherOnShow: true,
         child: generateWidget(() => IChaosMainPage(), key: GlobalKey()),
       ),
     );

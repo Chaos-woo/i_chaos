@@ -1,4 +1,6 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
@@ -11,6 +13,8 @@ import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_bindi
 abstract class BaseControllerView<T extends BaseViewStateController> extends GetView<T>
     with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, ScreenAdapterMixin, ManipulateWidgetBinding {
 
+  late BuildContext crrContext;
+
   BaseControllerView({Key? key}) : super(key: key) {
     initViewRes();
   }
@@ -20,6 +24,8 @@ abstract class BaseControllerView<T extends BaseViewStateController> extends Get
 
   @override
   Widget build(BuildContext context) {
+    crrContext = crrContext;
+
     return GetBuilder(builder: (T controller) => viewBuilder(context, controller));
   }
 

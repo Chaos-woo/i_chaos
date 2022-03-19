@@ -24,7 +24,7 @@ class QuickDialogConfig {
   late bool needCancelButton;
 
   QuickDialogConfig({
-    String? title = '',
+    String? title,
     TextAlign titleAlign = TextAlign.center,
     Color titleColor = Colors.red,
     String content = '',
