@@ -1,8 +1,8 @@
 import 'package:floor/floor.dart';
-import 'package:i_chaos/ichaos/public/config/database/chaos_database.dart';
-import 'package:i_chaos/ichaos/public/global.dart';
-import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/tag_dao.dart';
-import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/todo_dao.dart';
+import 'package:i_chaos/ichaos/common-module/configs/databases/chaos_database.dart';
+import 'package:i_chaos/ichaos/common-module/global_variable.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-infrastructure/repository/tag_dao.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-infrastructure/repository/todo_dao.dart';
 
 /// 基础仓库抽象，提供DAO对象获取，抽取获取database行为
 abstract class RootRepository {

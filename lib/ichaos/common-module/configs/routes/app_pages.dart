@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/get-route/routes/abstract_route_pages.dart';
 import 'package:i_chaos/ichaos/common-module/configs/routes/app_routes.dart';
-import 'package:i_chaos/ichaos/setting-module/setting-dark-mode/theme_mode_setting_page.dart';
-import 'package:i_chaos/ichaos/setting-module/setting-fonts/font_family_setting_page.dart';
-import 'package:i_chaos/ichaos/setting-module/setting-language/language_setting_page.dart';
-import 'package:i_chaos/ichaos/setting-module/setting-theme/theme_setting_page.dart';
+import 'package:i_chaos/ichaos/setting-module/setting-pages/dark-mode/theme_mode_setting_page.dart';
+import 'package:i_chaos/ichaos/setting-module/setting-pages/fonts-setting/font_family_setting_page.dart';
+import 'package:i_chaos/ichaos/setting-module/setting-pages/language-setting/language_setting_page.dart';
+import 'package:i_chaos/ichaos/setting-module/setting-pages/theme/theme_setting_page.dart';
 
 class AppPages extends RoutePages {
   AppPages() {

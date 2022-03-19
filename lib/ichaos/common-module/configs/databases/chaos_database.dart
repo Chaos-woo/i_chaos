@@ -1,10 +1,10 @@
 
 import 'dart:async';
 import 'package:floor/floor.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/tag_entity.dart';
-import 'package:i_chaos/ichaos/todo/todo-domain/common/entity/todo_entity.dart';
-import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/tag_dao.dart';
-import 'package:i_chaos/ichaos/todo/todo-infrastructure/repository/todo_dao.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/entity/tag_entity.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/entity/todo_entity.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-infrastructure/repository/tag_dao.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-infrastructure/repository/todo_dao.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'chaos_database.g.dart'; // the generated code will be there
