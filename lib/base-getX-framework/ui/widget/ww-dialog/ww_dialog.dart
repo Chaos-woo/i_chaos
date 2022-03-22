@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_middle_bottom_dialog_widget.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_top_dialog_item_data.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_top_dialog_widget.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_middle_bottom_dialog_widget.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_top_dialog_item_data.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_top_dialog_widget.dart';
 
 const colorWithHex12 = Color(0xFF121D34);
 const colorWithHex9 = Color(0xFF999999);
@@ -39,7 +39,7 @@ class WWDialog {
     double otherButtonFontSize: 17.0,
     FontWeight cancelButtonFontWeight: FontWeight.w400,
     FontWeight otherButtonFontWeight: FontWeight.w500,
-    buttonArrangeType arrangeType: buttonArrangeType.row,
+    ButtonArrangeType arrangeType: ButtonArrangeType.row,
     Function(int index, BuildContext context)? onTap
   }) {
     return showDialog(
@@ -106,7 +106,7 @@ class WWDialog {
     double otherButtonFontSize: 17.0,
     FontWeight cancelButtonFontWeight: FontWeight.w400,
     FontWeight otherButtonFontWeight: FontWeight.w500,
-    buttonArrangeType arrangeType: buttonArrangeType.row,
+    ButtonArrangeType arrangeType: ButtonArrangeType.row,
     Function(int index, BuildContext context)? onTap
   }) {
     return showCupertinoModalPopup(
@@ -240,7 +240,7 @@ enum DiaLogLocation {
   bottom
 }
 
-enum buttonArrangeType {
+enum ButtonArrangeType {
   row,
   column
 }

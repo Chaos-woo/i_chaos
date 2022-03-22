@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view-model/app-model/locale_controller.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
@@ -10,7 +11,6 @@ import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_controller.dart';
 import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
 import 'package:i_chaos/ichaos_main_page.dart';
-import 'package:oktoast/oktoast.dart';
 
 import 'ichaos/common-module/configs/routes/app_pages.dart';
 
@@ -50,11 +50,11 @@ class MainMaterialApp extends BaseStatefulView {
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
 //      transitionDuration: Get.defaultDurationTransition,
-      home: OKToast(
-        // 弹出toast前隐藏已经显示的toast
-        dismissOtherOnShow: true,
-        child: generateWidget(() => IChaosMainPage(), key: GlobalKey()),
-      ),
+      home: generateWidget(() => IChaosMainPage(), key: GlobalKey()),
+      // flutter_smart_dialog
+      navigatorObservers: [FlutterSmartDialog.observer],
+      // flutter_smart_dialog
+      builder: FlutterSmartDialog.init(),
     );
   }
 }

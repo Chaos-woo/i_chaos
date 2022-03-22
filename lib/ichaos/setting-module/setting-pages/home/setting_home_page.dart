@@ -1,7 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_item.dart';

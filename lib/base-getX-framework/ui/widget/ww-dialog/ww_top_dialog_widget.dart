@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_dialog.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_top_dialog_item_data.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_dialog.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_top_dialog_item_data.dart';
 
 var cardShadowColor = Color(0xFFdfdfdf);
 

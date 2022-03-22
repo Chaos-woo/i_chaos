@@ -2815,14 +2815,14 @@ class S {
     );
   }
 
-  /// `{choice, select, mode_0 {Auto (System)} mode_1 {Light} mode_2 {Dark}}`
+  /// `{choice, select, mode_0 {Auto mode (System)} mode_1 {Light mode} mode_2 {Dark mode}}`
   String setting_theme_mode_page_option_theme_mode_choice(Object choice) {
     return Intl.select(
       choice,
       {
-        'mode_0': 'Auto (System)',
-        'mode_1': 'Light',
-        'mode_2': 'Dark',
+        'mode_0': 'Auto mode (System)',
+        'mode_1': 'Light mode',
+        'mode_2': 'Dark mode',
       },
       name: 'setting_theme_mode_page_option_theme_mode_choice',
       desc: '',

@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/toast_mixin.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
 import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_binding_mixin.dart';
 
 abstract class BaseControllerView<T extends BaseViewStateController> extends GetView<T>
-    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, ScreenAdapterMixin, ManipulateWidgetBinding {
+    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, MagicWWDialogMixin, ScreenAdapterMixin, ManipulateWidgetBinding {
 
   late BuildContext crrContext;
 

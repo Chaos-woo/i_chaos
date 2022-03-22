@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/ww-dialog/ww_dialog.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ww-dialog/ww_dialog.dart';
 
 const colorH = Color(0xFFEEEEEE);
 const colorWithCloseButton = Color(0xFFB2B4C6);
@@ -64,7 +64,7 @@ class TTBaseDialog extends StatefulWidget {
   /// 按钮字重  默认500
   final FontWeight otherButtonFontWeight;
   /// 按钮排列方式 默认横向排列
-  final buttonArrangeType arrangeType;
+  final ButtonArrangeType arrangeType;
   /// 点击返回index 0 1
   final Function(int index, BuildContext context)? onTap;
 
@@ -278,10 +278,10 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
   }
 
   /// 创建默认buttons组
-  Widget _createDefaultButtons(buttonArrangeType type, double buttonHeight) {
+  Widget _createDefaultButtons(ButtonArrangeType type, double buttonHeight) {
     return (widget.buttons == null || widget.buttons?.length == 0)
         ? Container()
-        : (type == buttonArrangeType.column)
+        : (type == ButtonArrangeType.column)
         ? _createDefaultColumnButtons(buttonHeight)
         : _createDefaultRowButtons(buttonHeight);
   }
@@ -365,10 +365,10 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
   }
 
   /// 创建自定义buttons
-  Widget _createCustomButtons(buttonArrangeType type) {
+  Widget _createCustomButtons(ButtonArrangeType type) {
     return (widget.customWidgetButtons == null || widget.customWidgetButtons!.length == 0)
         ? Container()
-        : (type == buttonArrangeType.column)
+        : (type == ButtonArrangeType.column)
         ? _createCustomColumnButtons()
         : _createCustomRowButtons();
   }

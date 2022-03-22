@@ -100,13 +100,13 @@ abstract class BaseViewStateController extends GetxController
 
   void setError(String message) {
     _errorMessage = message;
-    showSimpleToast(_errorMessage);
+    showToast(_errorMessage);
     viewState = ViewState.error;
   }
 
   void setNoNet({String? toast}) {
     _errorMessage = toast;
-    showSimpleToast(toast);
+    showToast(toast);
     viewState = ViewState.noNet;
   }
 

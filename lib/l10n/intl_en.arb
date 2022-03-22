@@ -272,7 +272,7 @@
   "setting_main_page_option_base_setting_theme": "Theme",
   "setting_theme_page_option_theme_choice": "{choice, select, theme_0 {Bahama Blue} theme_1 {Mandy Red} theme_2 {Money} theme_3 {Mango} theme_4 {Espresso} theme_5 {San Juan Blue} theme_6 {Red Wine} theme_7 {forest}}",
   "setting_main_page_option_base_setting_theme_mode": "Theme mode",
-  "setting_theme_mode_page_option_theme_mode_choice": "{choice, select, mode_0 {Auto (System)} mode_1 {Light} mode_2 {Dark}}",
+  "setting_theme_mode_page_option_theme_mode_choice": "{choice, select, mode_0 {Auto mode (System)} mode_1 {Light mode} mode_2 {Dark mode}}",
   "setting_main_page_option_base_setting_font": "Font",
   "setting_font_page_text_example": "Example: \nAlmost before we knew it, we had left the ground.\n几乎在我们意识到之前，我们已经离开了地面。\n1234567890",
   "setting_font_page_tip_support_fonts": "Support fonts"

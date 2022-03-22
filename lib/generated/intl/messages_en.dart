@@ -35,9 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
           })}";
 
   static String m4(choice) => "${Intl.select(choice, {
-            'mode_0': 'Auto (System)',
-            'mode_1': 'Light',
-            'mode_2': 'Dark',
+            'mode_0': 'Auto mode (System)',
+            'mode_1': 'Light mode',
+            'mode_2': 'Dark mode',
           })}";
 
   static String m5(choice) => "${Intl.select(choice, {
