@@ -146,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("外观模式设置"),
         "setting_main_page_tip_base_setting":
             MessageLookupByLibrary.simpleMessage("基础设置"),
+        "setting_main_page_tip_individual_setting":
+            MessageLookupByLibrary.simpleMessage("个性化设置"),
         "setting_option_language_text":
             MessageLookupByLibrary.simpleMessage("语言设置"),
         "setting_option_text_font_set_display_text":

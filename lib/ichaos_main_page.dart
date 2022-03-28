@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
 import 'package:i_chaos/ichaos/setting-module/setting-pages/home/setting_home_page.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
@@ -84,7 +84,7 @@ class IChaosMainPage extends BaseStatefulView {
   }
 
   List<SalomonBottomBarItem> _getBottomBarItem() {
-    FontFamilyController fontSettingCtrl = findDependency();
+    FontFamilyCtrl fontSettingCtrl = findDependency();
 
     return [
       /// Money

@@ -14,4 +14,8 @@ mixin GetXDependencyMixin {
   void lazyPutDependency<K extends GetxController>(K dependency, {String? tag}) {
     Get.lazyPut(() => dependency, tag: tag);
   }
+
+  void removeDependency<K extends GetxController>({String? tag}) {
+    Get.delete(tag: tag);
+  }
 }

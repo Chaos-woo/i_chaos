@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:i_chaos/base-getX-framework/view-model/list_view_state_controller.dart';
-import 'package:i_chaos/base-getX-framework/view-model/refresh_list_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/list_view_state_ctrl.dart';
+import 'package:i_chaos/base-getX-framework/view-model/refresh_list_view_state_ctrl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'base_page_controller_view.dart';
 
-abstract class RefreshPageControllerView<T extends ListViewStateController> extends BasePageControllerView<T> {
+abstract class RefreshPageControllerView<T extends ListViewStateCtrl> extends BasePageControllerView<T> {
   RefreshPageControllerView({Key? key}) : super(key: key);
 
   // 配合仅可以刷新的controller使用
@@ -45,7 +45,7 @@ abstract class RefreshPageControllerView<T extends ListViewStateController> exte
         enablePullUp: true,
         controller: controller.refreshController,
         onLoading: () {
-          (controller as RefreshListViewStateController).loadingData();
+          (controller as RefreshListViewStateCtrl).loadingData();
         },
         onRefresh: controller.refreshData,
         header: header ?? const ClassicHeader(),

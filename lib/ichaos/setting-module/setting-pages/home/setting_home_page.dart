@@ -24,37 +24,40 @@ class SettingHomePage extends BaseStatefulView with AutomaticKeepAliveClientMixi
     super.build(context);
 
     // 选项列表
-    List<OptionBarItem> optionItems = [
+    List<OptionBarItem> baseOptionItems = [
       // 多语言设置
       OptionBarItem(
-        S.of(context).setting_option_language_text,
+        S.current.setting_main_page_option_base_setting_language,
         icon: AliIcons.IconInt,
         rightIcon: AliIcons.IconEnter,
         targetPageBuilder: () async {
           return await push(AppRoutes.APP_LANGUAGE_SETTING);
         },
       ),
-      // 主题色设置
-      OptionBarItem(
-        S.of(context).setting_option_theme_text,
-        icon: Icons.palette,
-        rightIcon: AliIcons.IconEnter,
-        targetPageBuilder: () async {
-          return await push(AppRoutes.THEME_COLOR_SETTING);
-        },
-      ),
       // light/dark模式设置
       OptionBarItem(
-        S.of(context).setting_option_theme_mode_text,
+        S.current.setting_main_page_option_base_setting_theme_mode,
         icon: Icons.dark_mode,
         rightIcon: AliIcons.IconEnter,
         targetPageBuilder: () async {
           return await push(AppRoutes.THEME_MODE_SETTING);
         },
       ),
+    ];
+
+    List<OptionBarItem> individualOptionItems = [
+      // 主题色设置
+      OptionBarItem(
+        S.current.setting_main_page_option_base_setting_theme,
+        icon: Icons.palette,
+        rightIcon: AliIcons.IconEnter,
+        targetPageBuilder: () async {
+          return await push(AppRoutes.THEME_COLOR_SETTING);
+        },
+      ),
       // 字体设置
       OptionBarItem(
-        S.of(context).setting_option_text_font_text,
+        S.current.setting_main_page_option_base_setting_font,
         icon: Icons.text_fields,
         rightIcon: AliIcons.IconEnter,
         targetPageBuilder: () async {
@@ -66,20 +69,23 @@ class SettingHomePage extends BaseStatefulView with AutomaticKeepAliveClientMixi
     // 分组提示
     Map<int, OptionGroupTipTool> optionGroupTip = {
       0: OptionGroupTipTool(
-        tip: S.of(context).setting_page_group_tip_text1,
+        tip: S.current.setting_main_page_tip_base_setting,
+      ),
+      1: OptionGroupTipTool(
+        tip: S.current.setting_main_page_tip_individual_setting,
       ),
     };
 
     return Scaffold(
       appBar: commonAppBar(
-        title: S.of(context).setting_page_appbar_title,
+        title: S.current.setting_main_page_appbar_title,
         leadingButtonIcon: Icons.settings,
       ),
       body: autoBottomBarPaddingFrame(
         child: Container(
           width: screenWidth,
           child: OptionBarList(
-            optionBarItemGroups: [optionItems],
+            optionBarItemGroups: [baseOptionItems, individualOptionItems],
             optionGroupTips: optionGroupTip,
           ),
         ),

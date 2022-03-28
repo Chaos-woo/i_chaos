@@ -267,6 +267,7 @@
   "todos_tag_detail_page_toast_text_duplicate_name": "重复的标签名，请重新输入",
   "setting_main_page_appbar_title": "设置",
   "setting_main_page_tip_base_setting": "基础设置",
+  "setting_main_page_tip_individual_setting": "个性化设置",
   "setting_main_page_option_base_setting_language": "语言设置",
   "setting_language_page_option_language_choice": "{choice, select, lan_0 {简体中文} lan_1 {英语}}",
   "setting_main_page_option_base_setting_theme": "主题设置",

@@ -1,13 +1,13 @@
 import 'package:i_chaos/base-getX-framework/utils/platform_utils.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 // 应用缓存
-class AppPakController extends BaseViewStateController {
+class AppPakCtrl extends BaseViewStateCtrl {
   // 包信息
   late PackageInfo packageInfo;
 
-  AppPakController();
+  AppPakCtrl();
 
   // 初始化获取app报信息
   initAppInfo() async {

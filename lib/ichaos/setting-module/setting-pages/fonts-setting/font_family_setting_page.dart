@@ -9,7 +9,7 @@ import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_item.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_list.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_group_tip.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
 // 字体设置页
@@ -20,15 +20,15 @@ class FontFamilySettingPage extends BaseStatelessView {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(
-        title: S.of(context).setting_option_text_font_text,
+        title: S.current.setting_main_page_option_base_setting_font,
       ),
       body: Container(
         width: screenWidth,
-        child: GetBuilder<FontFamilyController>(
+        child: GetBuilder<FontFamilyCtrl>(
           builder: (fontSettingCtrl) {
             Map<int, OptionGroupTipTool> tips = {
               0: OptionGroupTipTool(
-                tip: S.of(context).setting_option_text_font_tip_text1,
+                tip: S.current.setting_font_page_tip_support_fonts,
               ),
             };
 
@@ -61,7 +61,7 @@ class FontFamilySettingPage extends BaseStatelessView {
                     color: Get.isDarkMode ? Colors.grey[800] : Colors.grey[200],
                     child: Center(
                       child: Text(
-                        S.of(context).setting_option_text_font_set_display_text,
+                        S.current.setting_font_page_text_example,
                         style: TextStyle(fontFamily: fontSettingCtrl.fontFamily),
                       ),
                     ),

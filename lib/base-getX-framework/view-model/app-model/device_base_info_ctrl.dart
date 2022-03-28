@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flustars/flustars.dart';
 import 'package:i_chaos/base-getX-framework/common/frame_constant.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 
 // 设备基本信息
-class DeviceBaseInfoController extends BaseViewStateController {
+class DeviceBaseInfoCtrl extends BaseViewStateCtrl {
   AndroidDevice? _android;
   IosDevice? _ios;
 
-  DeviceBaseInfoController();
+  DeviceBaseInfoCtrl();
 
   IosDevice get ios => _ios!;
   AndroidDevice get android => _android!;

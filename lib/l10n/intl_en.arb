@@ -267,6 +267,7 @@
   "todos_tag_detail_page_toast_text_duplicate_name": "duplicate tag name, please input different name",
   "setting_main_page_appbar_title": "Setting",
   "setting_main_page_tip_base_setting": "Basic setting",
+  "setting_main_page_tip_individual_setting": "Individual setting",
   "setting_main_page_option_base_setting_language": "Language",
   "setting_language_page_option_language_choice": "{choice, select, lan_0 {Simplified Chinese} lan_1 {English}}",
   "setting_main_page_option_base_setting_theme": "Theme",

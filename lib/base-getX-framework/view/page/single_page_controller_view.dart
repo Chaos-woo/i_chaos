@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:i_chaos/base-getX-framework/view-model/single_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/single_view_state_ctrl.dart';
 
 import 'base_page_controller_view.dart';
 
 typedef StateViewBuilder<T> = Widget Function(T controller);
 
-abstract class SinglePageControllerView<T extends SingleViewStateController> extends BasePageControllerView<T> {
+abstract class SinglePageControllerView<T extends SingleViewStateCtrl> extends BasePageControllerView<T> {
   SinglePageControllerView({Key? key}) : super(key: key);
 
   Widget simpleControllerStatusView(

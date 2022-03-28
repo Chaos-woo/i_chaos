@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base-getX-framework/ui/widget/web/simple_html_controller.dart';
+import 'package:i_chaos/base-getX-framework/view/base_controller_view.dart';
 import 'package:i_chaos/base-getX-framework/view/page/single_page_controller_view.dart';
-
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SimpleHtmlPage extends SinglePageControllerView<SimpleHtmlController> {
   SimpleHtmlPage({Key? key}) : super(key: key);
 
   @override
-  Widget viewBuilder(BuildContext context, SimpleHtmlController controller) {
+  ViewWidgetBuilder viewWidgetBuilder(BuildContext context, SimpleHtmlController controller) {
+    return ViewWidgetBuilder(
+      view: view(),
+    );
+  }
+
+  Widget view() {
     return Scaffold(
       appBar: commonAppBar(title: controller.html.title),
       body: Container(

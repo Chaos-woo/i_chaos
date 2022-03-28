@@ -20,7 +20,7 @@ enum ViewState {
   noNet, // 无网络状态
 }
 
-abstract class BaseViewStateController extends GetxController
+abstract class BaseViewStateCtrl extends GetxController
     with ToastMixin, ScreenAdapterMixin, GetXNavigationMixin, GetXDependencyMixin {
   // 当前状态
   ViewState _viewState = ViewState.idle;

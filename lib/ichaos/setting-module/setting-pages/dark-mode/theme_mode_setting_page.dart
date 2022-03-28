@@ -7,7 +7,7 @@ import 'package:i_chaos/base-getX-framework/view/page/base_stateless_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_item.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_list.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_controller.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_ctrl.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:widget_chain/widget_chain.dart';
 
@@ -19,9 +19,9 @@ class ThemeModeSettingPage extends BaseStatelessView {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(
-        title: S.of(context).setting_option_theme_mode_text,
+        title: S.current.setting_main_page_option_base_setting_theme_mode,
       ),
-      body: GetBuilder<FlexColorThemeController>(
+      body: GetBuilder<FlexColorThemeCtrl>(
         builder: (themeModelCtrl) {
           // 模式选项
           List<OptionBarItem> themeModeOptionItems = [];
@@ -30,7 +30,7 @@ class ThemeModeSettingPage extends BaseStatelessView {
           for (int i = 0; i < themeModes.length; i++) {
             themeModeOptionItems.add(
               OptionBarItem(
-                S.of(context).setting_theme_mode_set_options('mode_$i'),
+                S.current.setting_theme_mode_page_option_theme_mode_choice('mode_$i'),
                 rightIcon: themeModelCtrl.themeMode == themeModes[i] ? AliIcons.IconRight : null,
                 onTap: () => themeModelCtrl.switchThemeMode(themeModes[i]),
               ),

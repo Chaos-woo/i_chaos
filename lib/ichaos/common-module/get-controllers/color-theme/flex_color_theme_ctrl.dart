@@ -2,12 +2,12 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
 import 'package:i_chaos/ichaos/common-module/utils/enum_string_convert.dart';
 
 // app主题模型
-class FlexColorThemeController extends BaseViewStateController {
+class FlexColorThemeCtrl extends BaseViewStateCtrl {
   // light/dark模式
   late ThemeMode _themeMode;
 
@@ -70,7 +70,7 @@ class FlexColorThemeController extends BaseViewStateController {
 
   // 根据模式获取主题，主要是为了将主题定义统一放到此处
   ThemeData getTheme(ThemeMode? mode) {
-    FontFamilyController fontCtrl = findDependency();
+    FontFamilyCtrl fontCtrl = findDependency();
     ThemeData dark = FlexThemeData.dark(
       scheme: _flexScheme,
     ).copyWith(textTheme: fontCtrl.getTextTheme(ThemeMode.dark));

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view-model/handle/exception_handler.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class ListViewStateController<T> extends BaseViewStateController {
+abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   // 页面数据
   List<T> dataList = [];
 

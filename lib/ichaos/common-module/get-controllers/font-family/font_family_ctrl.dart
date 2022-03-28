@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:i_chaos/base-getX-framework/common/common_google_fonts.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_ctrl.dart';
 
-class FontFamilyController extends BaseViewStateController {
+class FontFamilyCtrl extends BaseViewStateCtrl {
   // 当前系统使用的字体
   late String _fontFamily;
 
@@ -84,7 +84,7 @@ class FontFamilyController extends BaseViewStateController {
     _saveFontFamily();
     // 曲线救国，刷新整体字体/主题
     Future.delayed(const Duration(milliseconds: 0)).then((_) {
-      FlexColorThemeController theme = findDependency();
+      FlexColorThemeCtrl theme = findDependency();
       theme.switchTheme(theme.flexScheme);
     }).whenComplete(() => Get.forceAppUpdate());
     updateListener();

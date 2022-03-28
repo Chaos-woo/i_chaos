@@ -5,11 +5,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:i_chaos/base-getX-framework/view-model/app-model/locale_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/app-model/locale_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_controller.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_controller.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_ctrl.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
 import 'package:i_chaos/ichaos_main_page.dart';
 
 import 'ichaos/common-module/configs/routes/app_pages.dart';
@@ -17,16 +17,16 @@ import 'ichaos/common-module/configs/routes/app_pages.dart';
 class MainMaterialApp extends BaseStatefulView {
   MainMaterialApp({Key? key}) {
     // 注入多语言
-    putDependency<LocaleController>(LocaleController());
+    putDependency<LocaleCtrl>(LocaleCtrl());
     // 注入字体样式
-    putDependency<FontFamilyController>(FontFamilyController());
+    putDependency<FontFamilyCtrl>(FontFamilyCtrl());
     // 注入主题模板、主题色
-    putDependency<FlexColorThemeController>(FlexColorThemeController());
+    putDependency<FlexColorThemeCtrl>(FlexColorThemeCtrl());
   }
 
   @override
   Widget build(BuildContext context) {
-    FlexColorThemeController themeCtrl = findDependency();
+    FlexColorThemeCtrl themeCtrl = findDependency();
 
     return GetMaterialApp(
       title: 'iChaos',
@@ -34,7 +34,7 @@ class MainMaterialApp extends BaseStatefulView {
       darkTheme: themeCtrl.getTheme(ThemeMode.dark),
       themeMode: themeCtrl.themeMode,
       debugShowCheckedModeBanner: false,
-      locale: findDependency<LocaleController>().locale,
+      locale: findDependency<LocaleCtrl>().locale,
       // 国际化工厂代理
       localizationsDelegates: const [
         // Intl 插件（需要安装）

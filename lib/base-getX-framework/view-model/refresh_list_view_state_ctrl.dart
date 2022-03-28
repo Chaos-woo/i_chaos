@@ -1,8 +1,8 @@
 import 'package:i_chaos/base-getX-framework/view-model/handle/exception_handler.dart';
 
-import 'list_view_state_controller.dart';
+import 'list_view_state_ctrl.dart';
 
-abstract class RefreshListViewStateController<T> extends ListViewStateController<T> {
+abstract class RefreshListViewStateCtrl<T> extends ListViewStateCtrl<T> {
   // 分页第一页的页码
   final int pageNumFirst = 1;
 

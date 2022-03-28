@@ -8,7 +8,7 @@ import 'package:i_chaos/base-getX-framework/view/page/base_stateless_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_item.dart';
 import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_list.dart';
-import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_controller.dart';
+import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_ctrl.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
 // 主题色设置页
@@ -19,11 +19,11 @@ class ThemeSettingPage extends BaseStatelessView {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(
-        title: S.of(context).setting_option_theme_text,
+        title: S.current.setting_main_page_option_base_setting_theme,
       ),
       body: Container(
         width: screenWidth,
-        child: GetBuilder<FlexColorThemeController>(
+        child: GetBuilder<FlexColorThemeCtrl>(
           builder: (themeCtrl) {
             // 主题选项
             List<OptionBarItem> themeOptionItems = [];
@@ -32,7 +32,7 @@ class ThemeSettingPage extends BaseStatelessView {
             for (int i = 0; i < themes.length; i++) {
               themeOptionItems.add(
                 OptionBarItem(
-                  S.of(context).setting_theme_set_options('theme_$i'),
+                  S.current.setting_theme_page_option_theme_choice('theme_$i'),
                   icon: Icons.extension,
                   iconColor: themeCtrl.getThemeColorByCurrentMode(themes[i]),
                   rightIcon: themeCtrl.flexScheme == themes[i] ? AliIcons.IconRight : null,

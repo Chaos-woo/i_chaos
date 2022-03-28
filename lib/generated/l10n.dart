@@ -2751,6 +2751,16 @@ class S {
     );
   }
 
+  /// `Individual setting`
+  String get setting_main_page_tip_individual_setting {
+    return Intl.message(
+      'Individual setting',
+      name: 'setting_main_page_tip_individual_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Language`
   String get setting_main_page_option_base_setting_language {
     return Intl.message(

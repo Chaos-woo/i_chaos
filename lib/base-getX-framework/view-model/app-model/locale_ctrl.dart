@@ -1,9 +1,9 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 
-class LocaleController extends BaseViewStateController {
+class LocaleCtrl extends BaseViewStateCtrl {
   static const localeValueList = ['zh', 'en'];
 
   // 默认语言下标
@@ -17,7 +17,7 @@ class LocaleController extends BaseViewStateController {
 
   int get currentLocaleIndex => _currentLanguageIndex;
 
-  LocaleController();
+  LocaleCtrl();
 
   // 初始化全局语言资源
   void _initGlobalLocaleRes() {

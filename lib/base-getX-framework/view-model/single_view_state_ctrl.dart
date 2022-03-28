@@ -1,8 +1,8 @@
 
-import 'package:i_chaos/base-getX-framework/view-model/base_view_state_controller.dart';
+import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view-model/handle/exception_handler.dart';
 
-abstract class SingleViewStateController<T> extends BaseViewStateController {
+abstract class SingleViewStateCtrl<T> extends BaseViewStateCtrl {
   T? data;
 
   @override
