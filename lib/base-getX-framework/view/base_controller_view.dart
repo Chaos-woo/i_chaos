@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
@@ -11,29 +12,27 @@ import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart
 import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_binding_mixin.dart';
 
 abstract class BaseControllerView<T extends BaseViewStateCtrl> extends GetView<T>
-    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, MagicWWDialogMixin, ScreenAdapterMixin, ManipulateWidgetBinding {
+    with GetXDependencyMixin, GetXNavigationMixin,
+        ToastMixin, MagicWWDialogMixin, ScreenAdapterMixin, ManipulateWidgetBinding, DelayedMixin {
   late BuildContext crrContext;
 
   BaseControllerView({Key? key}) : super(key: key) {
     initViewRes();
   }
 
-  // 视图资源初始化，避免view创建时controller还未注入的场景
+  // 视图资源集中初始化，避免view创建时controller还未注入的场景
   void initViewRes() {}
 
   @override
   Widget build(BuildContext context) {
-    crrContext = crrContext;
-
+    crrContext = context;
     ViewWidgetBuilder builder = viewWidgetBuilder(context, controller);
-
-    final widgetBuilderFunc = (T controller) {
-      return builder.view;
-    };
-
-    return GetBuilder(
-      builder: (T controller) => widgetBuilderFunc(controller),
-      tag: builder.tag,
+    return GetBuilder<T>(
+      builder: (T controller) {
+        return builder.viewBuilder.call<T>(controller);
+      },
+      id: builder.builderId,
+      tag: builder.ctrlTag,
     );
   }
 
@@ -41,9 +40,12 @@ abstract class BaseControllerView<T extends BaseViewStateCtrl> extends GetView<T
   ViewWidgetBuilder viewWidgetBuilder(BuildContext context, T controller);
 }
 
-class ViewWidgetBuilder {
-  final Widget view;
-  String? tag;
+typedef ViewBuilder = Widget Function<T>(T ctrl);
 
-  ViewWidgetBuilder({required this.view, this.tag});
+class ViewWidgetBuilder {
+  String? builderId;
+  String? ctrlTag;
+  ViewBuilder viewBuilder;
+
+  ViewWidgetBuilder({required this.viewBuilder, this.builderId, this.ctrlTag});
 }

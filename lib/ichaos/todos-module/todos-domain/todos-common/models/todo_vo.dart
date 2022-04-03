@@ -1,5 +1,7 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:i_chaos/ichaos/common-module/root-variable/database/to_entity_mixin.dart';
+import 'package:i_chaos/ichaos/common-module/utils/random.dart';
+import 'package:i_chaos/ichaos/common-module/utils/uuid.dart';
 import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/entity/todo_entity.dart';
 import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/enums/todo_level.dart';
 import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/models/subtask.dart';
@@ -98,6 +100,17 @@ class TodoVO extends MultiSortBase with SerializeVO<TodoEntity>{
 
   static TodoVO empty() {
     return TodoVO.newTodo(content: '');
+  }
+
+  static TodoVO fakeTester() {
+    List<SubTaskVO> tasks = [
+      SubTaskVO.fakeTester(),
+      SubTaskVO.fakeTester(),
+      SubTaskVO.fakeTester(),
+    ];
+    TodoVO vo = TodoVO.newTodo(content: 'fake testing', subTaskList: tasks, remark: 'fake remark', validTime: DateTime.now());
+    vo.id = RandomUnit.nextInt(0, 1000000);
+    return vo;
   }
 
   TodoVO copyWith() {

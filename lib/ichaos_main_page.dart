@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
-import 'package:i_chaos/ichaos/setting-module/setting-pages/home/setting_home_page.dart';
+import 'package:i_chaos/ichaos/setting-module/setting-pages/setting-homepage/setting_home_page.dart';
+import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-pages/todo-homepage/todos_homepage_page.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 import 'package:noripple_overscroll/noripple_overscroll.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -44,7 +45,7 @@ class IChaosMainPage extends BaseStatefulView {
       Temporature(1),
       Temporature(2),
       Temporature(3),
-      Temporature(4),
+      generateWidget(() => TodosHomePage()),
       generateWidget(() => SettingHomePage()),
     ];
     _pageController = PageController(initialPage: bottomBarState.state.bottomBarIndex.value);
@@ -58,8 +59,6 @@ class IChaosMainPage extends BaseStatefulView {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild chaos page build');
-
     final List<SalomonBottomBarItem> _bottomBarItems = _getBottomBarItem();
     return Scaffold(
       bottomNavigationBar: Obx(() => SalomonBottomBar(

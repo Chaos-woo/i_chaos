@@ -13,18 +13,18 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   late GlobalKey refreshSmarterKey;
 
   @override
-  void onStateBizHandle() {
+  void onBizDataHandle() {
     initData();
   }
 
   @override
-  void onStateDispose() {
+  void onStateCtrlDispose() {
     releaseRes();
     refreshController.dispose();
   }
 
   @override
-  void onStateInit() {
+  void onStateCtrlInit() {
     refreshController = RefreshController(initialRefresh: false);
     refreshSmarterKey = GlobalKey();
     initRes();
@@ -38,23 +38,31 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   void refreshData() async {
     try {
       setLoading();
-      List<T> fetchData = await Future.value(loadData());
+      List<T> fetchData = await loadData();
       if (isEmptyData(fetchData)) {
         setEmpty();
       } else {
         dataList = fetchData;
         onRefreshLoadCompleted(dataList);
-        setLoading(loading: false);
       }
+      setLoading(loading: false);
       refreshController.refreshCompleted();
-      updateListener();
+
+      List<String>? refreshBuilderIds = builderIds();
+      zeroDelay(() {
+        if (refreshBuilderIds != null) {
+          updateListeners(refreshBuilderIds);
+        } else {
+          updateListener();
+        }
+      });
     } catch (e, s) {
       refreshController.refreshFailed();
       ExceptionHandler.getInstance()!.handleException(this, e, s);
     }
   }
 
-  // 判断数据是否为null
+  // 判断数据是否为null，子类可以覆盖实现
   bool isEmptyData(List<T> fetchData) {
     return fetchData.isEmpty;
   }
@@ -68,7 +76,7 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   void initRes() {}
 
   // 数据加载
-  List<T> loadData({
+  Future<List<T>> loadData({
     int? page,
     int? pageSize,
   });
@@ -78,4 +86,7 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
 
   // 资源释放
   void releaseRes() {}
+
+  // GetBuilder局部刷新使用的id，为null或空列表时全部刷新
+  List<String>? builderIds() => null;
 }

@@ -14,7 +14,8 @@ abstract class RefreshListViewStateCtrl<T> extends ListViewStateCtrl<T> {
 
   void loadingData() async {
     try {
-      List<T> fetchData = await Future.value(loadData(page: ++currPage, pageSize: pageSize));
+      setLoading();
+      List<T> fetchData = await loadData(page: ++currPage, pageSize: pageSize);
       if (isEmptyData(fetchData)) {
         currPage--;
         refreshController.loadNoData();
@@ -28,7 +29,14 @@ abstract class RefreshListViewStateCtrl<T> extends ListViewStateCtrl<T> {
       } else {
         setLoading(loading: false);
       }
-      updateListener();
+      List<String>? refreshBuilderIds = builderIds();
+      zeroDelay(() {
+        if (refreshBuilderIds != null) {
+          updateListeners(refreshBuilderIds);
+        } else {
+          updateListener();
+        }
+      });
     } catch (e, s) {
       currPage--;
       refreshController.loadFailed();
@@ -37,8 +45,8 @@ abstract class RefreshListViewStateCtrl<T> extends ListViewStateCtrl<T> {
   }
 
   @override
-  void onStateInit() {
+  void onStateCtrlInit() {
     currPage = pageNumFirst;
-    super.onStateInit();
+    super.onStateCtrlInit();
   }
 }

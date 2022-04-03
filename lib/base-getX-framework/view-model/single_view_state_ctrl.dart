@@ -6,17 +6,17 @@ abstract class SingleViewStateCtrl<T> extends BaseViewStateCtrl {
   T? data;
 
   @override
-  void onStateBizHandle() async {
+  void onBizDataHandle() async {
     await initData();
   }
 
   @override
-  void onStateDispose() {
+  void onStateCtrlDispose() {
     releaseRes();
   }
 
   @override
-  void onStateInit() {
+  void onStateCtrlInit() {
     initRes();
   }
 

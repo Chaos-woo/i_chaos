@@ -91,13 +91,13 @@ class FontFamilyCtrl extends BaseViewStateCtrl {
   }
 
   @override
-  void onStateBizHandle() {}
+  void onBizDataHandle() {}
 
   @override
-  void onStateDispose() {}
+  void onStateCtrlDispose() {}
 
   @override
-  void onStateInit() {
+  void onStateCtrlInit() {
     // 字体资源加载
     _fontFamilyInit();
   }

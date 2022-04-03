@@ -35,13 +35,13 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
   List<FlexScheme> get supportFlexScheme => _supportFlexScheme;
 
   @override
-  void onStateBizHandle() {}
+  void onBizDataHandle() {}
 
   @override
-  void onStateDispose() {}
+  void onStateCtrlDispose() {}
 
   @override
-  void onStateInit() {
+  void onStateCtrlInit() {
     // light/dark模式初始化
     _themeModeInit();
     // 主题模板初始化

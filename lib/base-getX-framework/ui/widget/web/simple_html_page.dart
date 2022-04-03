@@ -4,13 +4,15 @@ import 'package:i_chaos/base-getX-framework/view/base_controller_view.dart';
 import 'package:i_chaos/base-getX-framework/view/page/single_page_controller_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class SimpleHtmlPage extends SinglePageControllerView<SimpleHtmlController> {
+class SimpleHtmlPage extends SinglePageControllerView<SimpleHtmlCtrl> {
   SimpleHtmlPage({Key? key}) : super(key: key);
 
   @override
-  ViewWidgetBuilder viewWidgetBuilder(BuildContext context, SimpleHtmlController controller) {
+  ViewWidgetBuilder viewWidgetBuilder(BuildContext context, SimpleHtmlCtrl controller) {
     return ViewWidgetBuilder(
-      view: view(),
+      viewBuilder: <SimpleHtmlController>(ctrl) {
+        return view();
+      }
     );
   }
 
@@ -19,7 +21,7 @@ class SimpleHtmlPage extends SinglePageControllerView<SimpleHtmlController> {
       appBar: commonAppBar(title: controller.html.title),
       body: Container(
         width: screenWidth,
-        height: leftAppBarHeight,
+        height: remainHeightWithoutAppBar,
         color: Colors.grey[300],
         child: Expanded(
           child: WebView(

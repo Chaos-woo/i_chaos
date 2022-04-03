@@ -15,15 +15,15 @@ class AppPakCtrl extends BaseViewStateCtrl {
   }
 
   @override
-  void onStateBizHandle() {
+  void onBizDataHandle() {
     initAppInfo();
   }
 
   @override
-  void onStateDispose() {}
+  void onStateCtrlDispose() {}
 
   @override
-  void onStateInit() {}
+  void onStateCtrlInit() {}
 
   @override
   bool stateUpdateViewPredicate(ViewState pre, ViewState next) {

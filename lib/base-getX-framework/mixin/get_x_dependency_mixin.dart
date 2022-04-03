@@ -15,6 +15,10 @@ mixin GetXDependencyMixin {
     Get.lazyPut(() => dependency, tag: tag);
   }
 
+  bool existDependency<K extends GetxController>({String? tag}) {
+    return Get.isRegistered<K>(tag: tag);
+  }
+
   void removeDependency<K extends GetxController>({String? tag}) {
     Get.delete(tag: tag);
   }

@@ -2,6 +2,7 @@
 
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
+import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
@@ -21,7 +22,7 @@ enum ViewState {
 }
 
 abstract class BaseViewStateCtrl extends GetxController
-    with ToastMixin, ScreenAdapterMixin, GetXNavigationMixin, GetXDependencyMixin {
+    with ToastMixin, ScreenAdapterMixin, DelayedMixin, GetXNavigationMixin, GetXDependencyMixin {
   // 当前状态
   ViewState _viewState = ViewState.idle;
 
@@ -32,13 +33,13 @@ abstract class BaseViewStateCtrl extends GetxController
   void onInit() {
     super.onInit();
     _viewState = ViewState.init;
-    onStateInit();
+    onStateCtrlInit();
   }
 
   @override
   void onClose() {
     _viewState = ViewState.dispose;
-    onStateDispose();
+    onStateCtrlDispose();
     super.onClose();
   }
 
@@ -46,7 +47,7 @@ abstract class BaseViewStateCtrl extends GetxController
   void onReady() {
     super.onReady();
     _viewState = ViewState.readyInit;
-    onStateBizHandle();
+    onBizDataHandle();
   }
 
   bool get isInit => _viewState == ViewState.init;
@@ -121,11 +122,11 @@ abstract class BaseViewStateCtrl extends GetxController
   }
 
   // 状态初始化处理
-  void onStateInit();
+  void onStateCtrlInit();
 
   // 状态销毁前的处理
-  void onStateDispose();
+  void onStateCtrlDispose();
 
   // 状态业务处理
-  void onStateBizHandle();
+  void onBizDataHandle();
 }

@@ -16,7 +16,7 @@ mixin PakCommonWidget on ScreenAdapterMixin, GetXNavigationMixin {
 
   static double commonAppBarHeight = 40.0;
 
-  double get leftAppBarHeight => screenHeight - commonAppBarHeight;
+  double get remainHeightWithoutAppBar => screenHeight - commonAppBarHeight;
 
   AppBar commonAppBar({
     required String title,

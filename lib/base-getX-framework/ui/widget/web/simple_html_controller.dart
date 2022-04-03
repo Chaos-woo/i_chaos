@@ -1,7 +1,7 @@
 
 import 'package:i_chaos/base-getX-framework/view-model/single_view_state_ctrl.dart';
 
-class SimpleHtmlController<SimpleHtml> extends SingleViewStateCtrl<SimpleHtml> {
+class SimpleHtmlCtrl<SimpleHtml> extends SingleViewStateCtrl<SimpleHtml> {
   late final SimpleHtml html;
 
   @override

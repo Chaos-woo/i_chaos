@@ -17,7 +17,7 @@ mixin ScreenAdapterMixin {
     return screen.getSp(fontSize);
   }
 
-  double menuWindowWidthAdapt(List<String> strings, double baseline) {
+  double variableTextWidthAdapt(List<String> strings, double baseline) {
     int adaptWidth = 0;
 
     for (String s in strings) {

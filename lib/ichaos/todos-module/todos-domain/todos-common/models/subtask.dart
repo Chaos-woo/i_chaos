@@ -26,4 +26,8 @@ class SubTaskVO {
     DateTime time = createTime ?? DateTime.now();
     return SubTaskVO(UuidUnit.id(), content, false, time, time);
   }
+
+  static SubTaskVO fakeTester() {
+    return newSubTask(content: 'fake sub task');
+  }
 }

@@ -4,19 +4,10 @@
 //import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 //import 'package:getwidget/colors/gf_color.dart';
-//import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 //import 'package:i_chaos/generated/l10n.dart';
-//import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
-//import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
-//import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_detail_card.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 //import 'package:noripple_overscroll/noripple_overscroll.dart';
 //
-//class WidgetTodoCard extends WidgetState {
+//class HomeTodoCardWidget extends WidgetState {
 //  static const String _cardFontFamily = 'Lexend Deca';
 //  late final TodoVO _todo;
 //  // 事件操作回调
@@ -26,7 +17,7 @@
 //  // 子任务列表是否出现展开/收起按钮的任务数量上限
 //  late int expandBtnDisplayLimits;
 //
-//  WidgetTodoCard(this._todo, {TodoOperateCallback? operateCallback, int expandBtnDisplayLimits = 2}) {
+//  HomeTodoCardWidget(this._todo, {TodoOperateCallbacks? operateCallback, int expandBtnDisplayLimits = 2}) {
 //    this.operateCallback = operateCallback;
 //    expandAllList = false; // 默认不展开子任务列表
 //    this.expandBtnDisplayLimits = expandBtnDisplayLimits;
