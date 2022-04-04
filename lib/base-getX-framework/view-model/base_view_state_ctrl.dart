@@ -3,6 +3,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/smart_popup_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
@@ -22,7 +23,7 @@ enum ViewState {
 }
 
 abstract class BaseViewStateCtrl extends GetxController
-    with ToastMixin, ScreenAdapterMixin, DelayedMixin, GetXNavigationMixin, GetXDependencyMixin {
+    with ToastMixin, SmartPopupMixin, ScreenAdapterMixin, DelayedMixin, GetXNavigationMixin, GetXDependencyMixin {
   // 当前状态
   ViewState _viewState = ViewState.idle;
 

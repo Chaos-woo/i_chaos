@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/smart_popup_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
@@ -12,7 +13,7 @@ import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart
 import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_binding_mixin.dart';
 
 abstract class BaseControllerView<T extends BaseViewStateCtrl> extends GetView<T>
-    with GetXDependencyMixin, GetXNavigationMixin,
+    with GetXDependencyMixin, GetXNavigationMixin, SmartPopupMixin,
         ToastMixin, MagicWWDialogMixin, ScreenAdapterMixin, ManipulateWidgetBinding, DelayedMixin {
   late BuildContext crrContext;
 

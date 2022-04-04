@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/smart_popup_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
@@ -18,7 +19,7 @@ abstract class BaseStatefulView extends AbstractStatefulView with WidgetGenerato
 }
 
 abstract class AbstractStatefulView<T extends StatefulWidget> extends State<T>
-    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin,
+    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, SmartPopupMixin,
         DelayedMixin, MagicWWDialogMixin, ScreenAdapterMixin, PakCommonWidget {
   @override
   void dispose() {

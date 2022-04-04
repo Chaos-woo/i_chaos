@@ -49,13 +49,13 @@ class OptionButtonDialogConfig {
 
 // 自定义内容dialog配置
 class CustomDialogConfig {
-  final Widget contentWidget;
+  final Widget child;
   QuickDialogTitleModule? dialogTitleModule;
   QuickDialogExtensionButtonModule? dialogButtonModule;
   QuickDialogFrameModule? dialogFrameModule;
 
   CustomDialogConfig({
-    required this.contentWidget,
+    required this.child,
     this.dialogTitleModule,
     this.dialogButtonModule,
     this.dialogFrameModule,

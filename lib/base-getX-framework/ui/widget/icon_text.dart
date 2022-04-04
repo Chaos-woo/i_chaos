@@ -40,6 +40,10 @@ class IconText extends StatelessWidget {
       return Text(
         text!,
         style: _style,
+        maxLines: maxLines,
+        softWrap: softWrap ?? true,
+        overflow: overflow ?? TextOverflow.clip,
+        textAlign: textAlign ?? (direction == Axis.horizontal ? TextAlign.start : TextAlign.center),
       );
     }
 

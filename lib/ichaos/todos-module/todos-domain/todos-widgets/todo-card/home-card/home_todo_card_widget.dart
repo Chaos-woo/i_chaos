@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/colors/gf_color.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/ffloat.dart';
 import 'package:i_chaos/base-getX-framework/view/base_controller_view.dart';
 import 'package:i_chaos/base-getX-framework/view/widget/widget_controller_view.dart';
 import 'package:i_chaos/generated/l10n.dart';

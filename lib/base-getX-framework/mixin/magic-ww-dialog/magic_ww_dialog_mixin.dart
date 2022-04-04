@@ -187,7 +187,7 @@ mixin MagicWWDialogMixin {
   }
 
   // 填充自定义组件内容的dialog
-  void showCustomInfoDialog(
+  void showYoursDialog(
       CustomDialogConfig config) {
     QuickDialogFrameModule frameModule = config.dialogFrameModule ?? QuickDialogFrameModule(location: DiaLogLocation.bottom);
     bool isMiddleDialog = frameModule.location == DiaLogLocation.middle;
@@ -237,7 +237,7 @@ mixin MagicWWDialogMixin {
       title: titleModule.title,
       titleAlign: titleModule.titleAlign,
       titleColor: titleModule.titleColor,
-      customContentWidget: config.contentWidget,
+      customContentWidget: config.child,
       arrangeType: extBtnsModule.arrangeType,
       customWidgetButtons: extBtns,
       location: frameModule.location,
