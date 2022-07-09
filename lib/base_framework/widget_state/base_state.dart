@@ -49,7 +49,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> with Manipul
       _dialogLoadingController = DialogLoadingController();
       Navigator.of(context)
           .push(PageRouteBuilder(
-              settings: RouteSettings(name: loadingLayerRouteName),
+              settings: const RouteSettings(name: loadingLayerRouteName),
 
               ///使用默认值效果可能不好
               transitionDuration: const Duration(milliseconds: 0),

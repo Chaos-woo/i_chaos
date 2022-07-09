@@ -14,7 +14,7 @@ class HtmlPageState extends PageState {
   @override
   Widget build(BuildContext context) {
     return switchStatusBar2Dark(
-        child: Container(
+        child: SizedBox(
       width: 750.w,
       height: 1334.h,
       child: Column(

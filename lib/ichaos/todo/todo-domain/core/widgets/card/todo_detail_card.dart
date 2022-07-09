@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:getwidget/colors/gf_color.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/generated/l10n.dart';
@@ -78,7 +77,7 @@ class WidgetTodoDetailCard extends WidgetState {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: Container(
+      child: SizedBox(
         height: contentHeight,
         child: ListView.builder(
           itemBuilder: (ctx, index) {

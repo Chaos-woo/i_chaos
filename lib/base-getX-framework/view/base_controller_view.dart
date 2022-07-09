@@ -3,18 +3,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
+import 'package:i_chaos/base-getX-framework/get-x/mixin/get_reference_mixin.dart';
+import 'package:i_chaos/base-getX-framework/get-x/mixin/get_navigation_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/nav_bar_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/samrt_dialog_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/screen_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/smart_popup_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/toast_mixin.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view/binding/manipulate_widget_binding_mixin.dart';
 
 abstract class BaseControllerView<T extends BaseViewStateCtrl> extends GetView<T>
-    with GetXDependencyMixin, GetXNavigationMixin, SmartPopupMixin,
-        ToastMixin, MagicWWDialogMixin, ScreenAdapterMixin, ManipulateWidgetBinding, DelayedMixin {
+    with
+        GetXReferenceMixin,
+        GetXNavigationMixin,
+        SmartPopupMixin,
+        ToastMixin,
+        SmartDialogMixin,
+        ScreenMixin,
+        ManipulateWidgetBinding,
+        DelayedMixin,
+        NavBarMixin {
   late BuildContext crrContext;
 
   BaseControllerView({Key? key}) : super(key: key) {
@@ -32,8 +41,8 @@ abstract class BaseControllerView<T extends BaseViewStateCtrl> extends GetView<T
       builder: (T controller) {
         return builder.viewBuilder.call<T>(controller);
       },
-      id: builder.builderId,
-      tag: builder.ctrlTag,
+      id: builder.builderId, // update['id']时指定GetBuilder刷新
+      tag: builder.ctrlTag, // controller控制器注入时使用的tag
     );
   }
 

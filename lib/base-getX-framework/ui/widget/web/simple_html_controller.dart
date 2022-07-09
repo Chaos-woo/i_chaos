@@ -6,7 +6,7 @@ class SimpleHtmlCtrl<SimpleHtml> extends SingleViewStateCtrl<SimpleHtml> {
 
   @override
   Future<SimpleHtml?> loadData() {
-    html = getRouteArguments<SimpleHtml>();
+    html = argument<SimpleHtml>();
     return Future.value(html);
   }
 

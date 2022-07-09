@@ -58,7 +58,7 @@ class RadioButtonGroup extends StatefulWidget {
   // 按钮是否紧密布局
   final bool compactLayout;
 
-  RadioButtonGroup(
+  const RadioButtonGroup(
       {Key? key,
       required this.buttonGroupLabels,
       this.fontSize = 15,
@@ -183,7 +183,7 @@ class RadioButtonGroupState extends State<RadioButtonGroup> {
             ),
           )
         : Column(
-            children: <Widget>[],
+            children: const <Widget>[],
           );
   }
 

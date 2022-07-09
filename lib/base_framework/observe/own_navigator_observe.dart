@@ -22,14 +22,14 @@ class OwnNavigatorObserve extends NavigatorObserver{
 
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    log('pop route', route?.settings?.name);
-    log('pop previous', previousRoute?.settings?.name);
+    log('pop route', route.settings.name);
+    log('pop previous', previousRoute?.settings.name);
   }
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    log('push route', route?.settings?.name);
-    log('push previous', previousRoute?.settings?.name);
+    log('push route', route.settings.name);
+    log('push previous', previousRoute?.settings.name);
 
   }
 

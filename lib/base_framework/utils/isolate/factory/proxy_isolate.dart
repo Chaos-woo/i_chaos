@@ -42,7 +42,7 @@ void main( args,SendPort mainPort)async{
 
   final ReceivePort proxyPort = ReceivePort();
   final SendPort proxySendPort = proxyPort.sendPort;
-  final Isolate isolate = await Isolate.spawnUri(new Uri(path: './worker_isolate.dart'), args, proxySendPort);
+  final Isolate isolate = await Isolate.spawnUri(Uri(path: './worker_isolate.dart'), args, proxySendPort);
 
   SendPort? childSendPort;
 
@@ -59,7 +59,7 @@ void main( args,SendPort mainPort)async{
 }
 
 void runTask(SendPort? port){
-  final timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  final timer = Timer.periodic(const Duration(seconds: 1), (timer) {
     String? methodName = orders.first;
     port!.send([kTaskKey,{kMethodName:methodName,
       kNameArgs:{'bb':'你好'}}]);

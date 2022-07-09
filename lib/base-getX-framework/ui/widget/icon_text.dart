@@ -32,7 +32,7 @@ class IconText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _style = DefaultTextStyle.of(context).style.merge(style);
+    final _style = DefaultTextStyle.of(context).style.merge(style).merge(const TextStyle(color: Colors.white));
 
     text = text ?? '';
 

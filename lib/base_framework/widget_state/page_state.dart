@@ -1,8 +1,6 @@
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:i_chaos/base_framework/config/router_manager.dart';
-import 'package:i_chaos/base_framework/utils/image_helper.dart';
 import 'package:i_chaos/base_framework/widget_state/base_state.dart';
 import 'package:i_chaos/base_framework/widget_state/widget_state.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
@@ -263,22 +261,22 @@ abstract class PageState extends BaseState with WidgetGenerator, RouteAware, _Ro
 mixin _RouteHandler on BaseState implements HandleRouteNavigate {
   @override
   void handleDidPop() {
-    debugPrint("已经pop的页面 ${this.runtimeType}");
+    debugPrint("已经pop的页面 $runtimeType");
   }
 
   @override
   void handleDidPush() {
-    debugPrint("push后,显示的页面 ${this.runtimeType}");
+    debugPrint("push后,显示的页面 $runtimeType");
   }
 
   @override
   void handleDidPopNext() {
-    debugPrint("pop后，将要显示的页面 ${this.runtimeType}");
+    debugPrint("pop后，将要显示的页面 $runtimeType");
   }
 
   @override
   void handleDidPushNext() {
-    debugPrint("push后，被遮挡的页面 ${this.runtimeType}");
+    debugPrint("push后，被遮挡的页面 $runtimeType");
   }
 }
 

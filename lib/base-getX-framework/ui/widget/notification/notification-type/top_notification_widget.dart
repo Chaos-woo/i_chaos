@@ -34,7 +34,7 @@ class _TopNotificationWidgetState extends State<TopNotificationWidget> with Sing
       }
     });
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.forward();
     });
   }

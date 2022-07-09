@@ -63,7 +63,7 @@ class CustomPopupMenu extends StatefulWidget {
   final PreferredPosition? position;
   final void Function(bool)? menuOnChange;
 
-  /// Pass tap event to the widgets below the mask.
+  /// Pass tap events to the widgets below the mask.
   /// It only works when [barrierColor] is transparent.
   final bool enablePassEvent;
 
@@ -148,10 +148,10 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
             }
             _controller?.hideMenu();
             // When [enablePassEvent] works and we tap the [child] to [hideMenu],
-            // but the passed event would trigger [showMenu] again.
+            // but the passed events would trigger [showMenu] again.
             // So, we use time threshold to solve this bug.
             _canResponse = false;
-            Future.delayed(Duration(milliseconds: 100))
+            Future.delayed(const Duration(milliseconds: 100))
                 .then((_) => _canResponse = true);
           },
           child: widget.barrierColor == Colors.transparent
@@ -189,10 +189,10 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
   void initState() {
     super.initState();
     _controller = widget.controller;
-    if (_controller == null) _controller = CustomPopupMenuController();
+    _controller ??= CustomPopupMenuController();
     _controller?.addListener(_updateView);
 
-    WidgetsBinding.instance?.addPostFrameCallback((call) {
+    WidgetsBinding.instance.addPostFrameCallback((call) {
       if (mounted) {
         _childBox = context.findRenderObject() as RenderBox?;
         _parentBox =
@@ -272,8 +272,8 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   void performLayout(Size size) {
     Size contentSize = Size.zero;
     Size arrowSize = Size.zero;
-    Offset contentOffset = Offset(0, 0);
-    Offset arrowOffset = Offset(0, 0);
+    Offset contentOffset = const Offset(0, 0);
+    Offset arrowOffset = const Offset(0, 0);
 
     double anchorCenterX = anchorOffset.dx + anchorSize.width / 2;
     double anchorTopY = anchorOffset.dy;
@@ -393,7 +393,7 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
         _MenuLayoutId.arrow,
         isBottom
             ? Offset(arrowOffset.dx, arrowOffset.dy + 0.1)
-            : Offset(-100, 0),
+            : const Offset(-100, 0),
       );
     }
     if (hasChild(_MenuLayoutId.downArrow)) {
@@ -401,7 +401,7 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
         _MenuLayoutId.downArrow,
         !isBottom
             ? Offset(arrowOffset.dx, arrowOffset.dy - 0.1)
-            : Offset(-100, 0),
+            : const Offset(-100, 0),
       );
     }
   }

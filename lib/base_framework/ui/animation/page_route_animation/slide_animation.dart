@@ -9,12 +9,12 @@ class SlideTopRouteBuilder extends PageRouteBuilder {
   SlideTopRouteBuilder(this.page,this.routeSettings)
       : super(settings:routeSettings,
       pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionDuration: Duration(milliseconds: 800),
+      transitionDuration: const Duration(milliseconds: 800),
       transitionsBuilder:
           (context, animation, secondaryAnimation, child) =>
           SlideTransition(
             position: Tween<Offset>(
-                begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
+                begin: const Offset(0.0, -1.0), end: const Offset(0.0, 0.0))
                 .animate(CurvedAnimation(
                 parent: animation, curve: Curves.fastOutSlowIn)),
             child: child,
@@ -28,12 +28,12 @@ class SlideBottomRouteBuilder extends PageRouteBuilder{
   SlideBottomRouteBuilder(this.page)
       : super(
     pageBuilder:(ctx,animation,secondaryAnimation)=>page,
-    transitionDuration:Duration(milliseconds: 800),
+    transitionDuration:const Duration(milliseconds: 800),
     transitionsBuilder:(ctx,animation,secondaryAnimation,child)
         => SlideTransition(
           position: Tween<Offset>(
-            begin: Offset(0.0,1.0),
-            end: Offset(0.0,0.0),
+            begin: const Offset(0.0,1.0),
+            end: const Offset(0.0,0.0),
           ).animate(CurvedAnimation(
             parent: animation,curve: Curves.fastOutSlowIn
           )),
@@ -56,12 +56,12 @@ class SlideRightRouteBuilder extends PageRouteBuilder{
       :super(settings:routeSettings,
       pageBuilder:(ctx,animation,secondaryAnimation)=>page,
       opaque:false,
-      transitionDuration:Duration(milliseconds: 300),
+      transitionDuration:const Duration(milliseconds: 300),
       transitionsBuilder:(ctx,animation,secondaryAnimation,child)
       => SlideTransition(
         position: Tween<Offset>(
-          begin: Offset(1.0,0.0),
-          end: Offset(0.0,0.0),
+          begin: const Offset(1.0,0.0),
+          end: const Offset(0.0,0.0),
         ).animate(CurvedAnimation(
             parent: animation,curve: Curves.fastOutSlowIn
         )),

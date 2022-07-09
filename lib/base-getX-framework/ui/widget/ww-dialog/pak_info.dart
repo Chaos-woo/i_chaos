@@ -1,1 +1,1 @@
-//ww-dialog简单用法：https://github.com/WangWee/ww_flutter_dialog/blob/master/lib/main.dart
+//ww-dialog修改版，用于flutter-smart-dialog

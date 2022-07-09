@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base-getX-framework/mixin/delayed_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/smart_popup_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/get_x_dependency_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/get_x_navigation_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/magic-ww-dialog/magic_ww_dialog_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/pak_common_widget_mixin.dart';
-import 'package:i_chaos/base-getX-framework/mixin/screen_adapter_mixin.dart';
+import 'package:i_chaos/base-getX-framework/get-x/mixin/get_reference_mixin.dart';
+import 'package:i_chaos/base-getX-framework/get-x/mixin/get_navigation_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/samrt_dialog_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/nav_bar_mixin.dart';
+import 'package:i_chaos/base-getX-framework/mixin/screen_mixin.dart';
 import 'package:i_chaos/base-getX-framework/mixin/toast_mixin.dart';
 
 // 提供给不需要controller的视图/组件使用
@@ -19,8 +19,8 @@ abstract class BaseStatefulView extends AbstractStatefulView with WidgetGenerato
 }
 
 abstract class AbstractStatefulView<T extends StatefulWidget> extends State<T>
-    with GetXDependencyMixin, GetXNavigationMixin, ToastMixin, SmartPopupMixin,
-        DelayedMixin, MagicWWDialogMixin, ScreenAdapterMixin, PakCommonWidget {
+    with GetXReferenceMixin, GetXNavigationMixin, ToastMixin, SmartPopupMixin,
+        DelayedMixin, SmartDialogMixin, ScreenMixin, NavBarMixin {
   @override
   void dispose() {
     super.dispose();

@@ -1,10 +1,9 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base-getX-framework/flutter3-pak-process/pull-to-refresh/pull_to_refresh.dart';
 import 'package:i_chaos/base-getX-framework/view-model/list_view_state_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view-model/refresh_list_view_state_ctrl.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'base_page_controller_view.dart';
 
@@ -18,6 +17,7 @@ abstract class RefreshPageControllerView<T extends ListViewStateCtrl> extends Ba
     Widget? header,
     ListScrollListener? scrollListener,
   }) {
+    controller.refreshCtrlAndSmarterKey();
     return Material(
         color: backgroundColor,
         child: NotificationListener<ScrollNotification>(
@@ -64,6 +64,7 @@ abstract class RefreshPageControllerView<T extends ListViewStateCtrl> extends Ba
     Widget? footer,
     ListScrollListener? scrollListener,
   }) {
+    controller.refreshCtrlAndSmarterKey();
     return Material(
       color: backgroundColor,
       child: NotificationListener<ScrollNotification>(

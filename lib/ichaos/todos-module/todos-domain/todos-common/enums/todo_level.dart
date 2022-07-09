@@ -3,27 +3,23 @@ import 'package:flutter/material.dart';
 class TodoLevel {
   final int code;
   final String desc;
-  final String title;
   final MaterialColor color;
+  final IconData icon;
 
-  TodoLevel._(this.code, this.desc, this.title, this.color);
+  static const int newTodoDefaultLevel = 0;
 
-  @override
-  String toString() => 'TodoLevel:[$code],$desc,$title';
+  TodoLevel._(this.code, this.desc, this.color, this.icon);
 
-  static TodoLevel deferrable = TodoLevel._(0, 'deferrable', '可延期', Colors.grey);
-  static TodoLevel unimportant = TodoLevel._(1, 'unimportant', '不重要', Colors.green);
-  static TodoLevel normal = TodoLevel._(2, 'normal', '普通', Colors.lightBlue);
-  static TodoLevel important = TodoLevel._(3, 'important', '重要', Colors.orange);
-  static TodoLevel urgent = TodoLevel._(4, 'urgent', '紧急', Colors.red);
+  static TodoLevel first =
+  TodoLevel._(0, 'urgent and important', Colors.red, Icons.local_fire_department);
+  static TodoLevel second =
+  TodoLevel._(1, 'urgent but unimportant', Colors.orange, Icons.access_alarm);
+  static TodoLevel third =
+  TodoLevel._(2, 'important but not urgent', Colors.lightBlue, Icons.event);
+  static TodoLevel last =
+      TodoLevel._(3, 'unimportant and not urgent', Colors.grey, Icons.alarm_off);
 
-  static List<TodoLevel> values = [
-    deferrable, unimportant, normal, important, urgent
-  ];
-
-  static TodoLevel named(String desc) {
-    return values.firstWhere((item) => item.desc == desc, orElse: null);
-  }
+  static List<TodoLevel> values = [first, second, third, last];
 
   static TodoLevel coded(int code) {
     if (code >= 0 || code < values.length) {
@@ -31,7 +27,7 @@ class TodoLevel {
         if (val.code == code) return val;
       }
     }
-    return normal;
+    return second;
   }
 
   bool isThisLevel(TodoLevel level) {

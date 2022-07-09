@@ -1,9 +1,9 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base-getX-framework/flutter3-pak-process/widget-chain/widget_chain.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateless_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
-import 'package:widget_chain/widget_chain.dart';
 
 // 非业务型异常展示的页面
 class ExceptionPageState extends BaseStatelessView {
@@ -19,7 +19,7 @@ class ExceptionPageState extends BaseStatelessView {
         .intoColumn(mainAxisAlignment: MainAxisAlignment.center);
 
     return Scaffold(
-      appBar: commonAppBar(
+      appBar: backNavBar(
         title: S.of(context).app_default_exception_page_title,
         actions: [],
       ),

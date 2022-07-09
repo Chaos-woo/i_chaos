@@ -43,7 +43,7 @@ class ImageEditorState extends BaseStatelessView {
                 initEditorConfigHandler: (state) {
                   return EditorConfig(
                     maxScale: 8.0,
-                    cropRectPadding: EdgeInsets.all(20.0),
+                    cropRectPadding: const EdgeInsets.all(20.0),
                     hitTestSize: 20.0,
                     initCropRectType: InitCropRectType.imageRect,
                   );

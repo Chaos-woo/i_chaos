@@ -1,4 +1,4 @@
-import 'package:i_chaos/ichaos/common-module/utils/uuid.dart';
+import 'package:i_chaos/base-getX-framework/utils/uuid.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'subtask.g.dart';
@@ -24,7 +24,7 @@ class SubTaskVO {
 
   static SubTaskVO newSubTask({required String content, DateTime? createTime}) {
     DateTime time = createTime ?? DateTime.now();
-    return SubTaskVO(UuidUnit.id(), content, false, time, time);
+    return SubTaskVO(UuidUtil.id(), content, false, time, time);
   }
 
   static SubTaskVO fakeTester() {

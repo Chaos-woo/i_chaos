@@ -65,7 +65,7 @@ class SmartPopup extends StatefulWidget {
   final PreferredPosition? position;
   final void Function(bool)? popupOnChange;
 
-  /// Pass tap event to the widgets below the mask.
+  /// Pass tap events to the widgets below the mask.
   /// It only works when [barrierColor] is transparent.
   final bool enablePassEvent;
 
@@ -147,10 +147,10 @@ class _SmartPopupState extends State<SmartPopup> {
             }
             _controller?.hide();
             // When [enablePassEvent] works and we tap the [child] to [hideMenu],
-            // but the passed event would trigger [showMenu] again.
+            // but the passed events would trigger [showMenu] again.
             // So, we use time threshold to solve this bug.
             _canResponse = false;
-            Future.delayed(Duration(milliseconds: 100)).then((_) => _canResponse = true);
+            Future.delayed(const Duration(milliseconds: 100)).then((_) => _canResponse = true);
           },
           child: widget.barrierColor == Colors.transparent
               ? popup
@@ -187,10 +187,10 @@ class _SmartPopupState extends State<SmartPopup> {
   void initState() {
     super.initState();
     _controller = widget.controller;
-    if (_controller == null) _controller = SmartPopupController();
+    _controller ??= SmartPopupController();
     _controller?.addListener(_updateView);
 
-    WidgetsBinding.instance?.addPostFrameCallback((call) {
+    WidgetsBinding.instance.addPostFrameCallback((call) {
       if (mounted) {
         _childBox = context.findRenderObject() as RenderBox?;
         _parentBox = Overlay.of(context)?.context.findRenderObject() as RenderBox?;
@@ -274,8 +274,8 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   void performLayout(Size size) {
     Size contentSize = Size.zero;
     Size arrowSize = Size.zero;
-    Offset contentOffset = Offset(0, 0);
-    Offset arrowOffset = Offset(0, 0);
+    Offset contentOffset = const Offset(0, 0);
+    Offset arrowOffset = const Offset(0, 0);
 
     double anchorCenterX = anchorOffset.dx + anchorSize.width / 2;
     double anchorTopY = anchorOffset.dy;
@@ -390,13 +390,13 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
     if (hasChild(_popupLayoutId.arrow)) {
       positionChild(
         _popupLayoutId.arrow,
-        isBottom ? Offset(arrowOffset.dx, arrowOffset.dy + 0.1) : Offset(-100, 0),
+        isBottom ? Offset(arrowOffset.dx, arrowOffset.dy + 0.1) : const Offset(-100, 0),
       );
     }
     if (hasChild(_popupLayoutId.downArrow)) {
       positionChild(
         _popupLayoutId.downArrow,
-        !isBottom ? Offset(arrowOffset.dx, arrowOffset.dy - 0.1) : Offset(-100, 0),
+        !isBottom ? Offset(arrowOffset.dx, arrowOffset.dy - 0.1) : const Offset(-100, 0),
       );
     }
   }

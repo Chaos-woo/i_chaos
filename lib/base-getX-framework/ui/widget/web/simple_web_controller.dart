@@ -6,7 +6,7 @@ class SimpleWebCtrl<SimpleWeb> extends SingleViewStateCtrl<SimpleWeb> {
 
   @override
   Future<SimpleWeb?> loadData() {
-    web = getRouteArguments<SimpleWeb>();
+    web = argument<SimpleWeb>();
     return Future.value(web);
   }
 

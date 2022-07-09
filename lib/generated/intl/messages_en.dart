@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m9(name, createTime) =>
       "Tag information: \n1. Tag name: ${name};\n2. Create date: ${createTime}.\n 3. Tips: all of ToDOs of the tag will remove from list after deleting this tag.";
 
+  static String m10(number) => "task (${number}):";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_default_exception_page_action_btn_feedback":
@@ -95,8 +97,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "bedrock_reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "common_any_page_label_text_design":
             MessageLookupByLibrary.simpleMessage("Designing..."),
-        "common_any_page_widget_text_custom": m0,
+        "common_any_text": m0,
+        "common_cancel_button": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "common_confirm_button":
+            MessageLookupByLibrary.simpleMessage("Confirm"),
         "common_custom_params": m1,
+        "common_delete_button": MessageLookupByLibrary.simpleMessage("Delete"),
+        "common_delete_title":
+            MessageLookupByLibrary.simpleMessage("Confirm deletion?"),
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("Designing..."),
         "common_exception_page_appbar_title":
@@ -107,10 +115,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sorry, some problems happened with the application. \nCould you please click the Feedback button to submit information to help developers analyze the problems?"),
         "common_exception_page_toast_text_submit":
             MessageLookupByLibrary.simpleMessage("Thanks~"),
+        "common_hint_plz_input":
+            MessageLookupByLibrary.simpleMessage("please input something"),
         "common_month_calendar_page_btn_text_cancel":
             MessageLookupByLibrary.simpleMessage("Cancel"),
         "common_month_calendar_page_btn_text_confirm":
             MessageLookupByLibrary.simpleMessage("Ok"),
+        "common_ok_button": MessageLookupByLibrary.simpleMessage("Ok"),
+        "common_save_button": MessageLookupByLibrary.simpleMessage("Save"),
         "main_bottombar_widget_tab_text_assert":
             MessageLookupByLibrary.simpleMessage("Assert"),
         "main_bottombar_widget_tab_text_feed":
@@ -145,6 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Theme"),
         "setting_main_page_option_base_setting_theme_mode":
             MessageLookupByLibrary.simpleMessage("Theme mode"),
+        "setting_main_page_option_base_setting_theme_mode_sub_title":
+            MessageLookupByLibrary.simpleMessage("light/dart mode"),
         "setting_main_page_tip_base_setting":
             MessageLookupByLibrary.simpleMessage("Basic setting"),
         "setting_main_page_tip_individual_setting":
@@ -450,12 +464,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New ToDO"),
         "todos_edit_page_appbar_title_edit":
             MessageLookupByLibrary.simpleMessage("Edit ToDO"),
-        "todos_edit_page_btn_save":
-            MessageLookupByLibrary.simpleMessage("Save"),
-        "todos_edit_page_dialog_btn_confirm_subtask":
-            MessageLookupByLibrary.simpleMessage("Ok"),
-        "todos_edit_page_dialog_btn_confirm_valid_date":
-            MessageLookupByLibrary.simpleMessage("Ok"),
+        "todos_edit_page_dialog_content_content":
+            MessageLookupByLibrary.simpleMessage(
+                "Using simple text to describe the ToDO so that you can quickly understand it."),
+        "todos_edit_page_dialog_content_level":
+            MessageLookupByLibrary.simpleMessage("todo..."),
+        "todos_edit_page_dialog_content_remark":
+            MessageLookupByLibrary.simpleMessage("More Details or remarks."),
         "todos_edit_page_dialog_content_subtask":
             MessageLookupByLibrary.simpleMessage(
                 "1. A ToDO contains some sub tasks, such as SubTask1, SubTask2.\n2. If a ToDO contains N sub tasks, your work completion is 1/N when you completed a sub task.\n3. ToDO will move to completed list when all its sub tasks had completed.\n4. If a ToDO completed, it\'s all sub tasks will be displayed as completed."),
@@ -466,28 +481,50 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("What is sub task?"),
         "todos_edit_page_dialog_title_valid_date":
             MessageLookupByLibrary.simpleMessage("How to select valid date?"),
-        "todos_edit_page_label_content":
-            MessageLookupByLibrary.simpleMessage("ToDO Content"),
-        "todos_edit_page_label_level":
+        "todos_edit_page_dialog_valid_date_btn_switch_to_today":
+            MessageLookupByLibrary.simpleMessage("Switch to today"),
+        "todos_edit_page_error_tip_content":
+            MessageLookupByLibrary.simpleMessage("brief can not empty."),
+        "todos_edit_page_label_subtitle_content":
+            MessageLookupByLibrary.simpleMessage("brief of ToDO"),
+        "todos_edit_page_label_subtitle_level":
+            MessageLookupByLibrary.simpleMessage(
+                "more urgent and more important ToDO will place forward."),
+        "todos_edit_page_label_subtitle_location":
+            MessageLookupByLibrary.simpleMessage(
+                "writing address information avoid forgetting."),
+        "todos_edit_page_label_subtitle_remark":
+            MessageLookupByLibrary.simpleMessage(
+                "writing more details of ToDO"),
+        "todos_edit_page_label_subtitle_subtask":
+            MessageLookupByLibrary.simpleMessage(
+                "task flow or points for attention Of ToDO"),
+        "todos_edit_page_label_subtitle_valid_date":
+            MessageLookupByLibrary.simpleMessage(
+                "choice a you want to prompt date"),
+        "todos_edit_page_label_title_content":
+            MessageLookupByLibrary.simpleMessage("ToDO Brief"),
+        "todos_edit_page_label_title_level":
             MessageLookupByLibrary.simpleMessage("Emergency degree"),
-        "todos_edit_page_label_location":
-            MessageLookupByLibrary.simpleMessage("Location information"),
-        "todos_edit_page_label_remark":
+        "todos_edit_page_label_title_location":
+            MessageLookupByLibrary.simpleMessage("Address"),
+        "todos_edit_page_label_title_remark":
             MessageLookupByLibrary.simpleMessage("Description"),
-        "todos_edit_page_label_subtask":
+        "todos_edit_page_label_title_subtask":
             MessageLookupByLibrary.simpleMessage("Sub task(s)"),
-        "todos_edit_page_label_valid_date":
+        "todos_edit_page_label_title_subtask_dummy_exist": m10,
+        "todos_edit_page_label_title_subtask_dummy_new":
+            MessageLookupByLibrary.simpleMessage("please input task content:"),
+        "todos_edit_page_label_title_valid_date":
             MessageLookupByLibrary.simpleMessage("Valid date"),
-        "todos_edit_page_option_level_deferrable":
-            MessageLookupByLibrary.simpleMessage("Deferrable"),
-        "todos_edit_page_option_level_important":
-            MessageLookupByLibrary.simpleMessage("Important"),
-        "todos_edit_page_option_level_normal":
-            MessageLookupByLibrary.simpleMessage("Normal"),
-        "todos_edit_page_option_level_unimportant":
-            MessageLookupByLibrary.simpleMessage("Unimportant"),
-        "todos_edit_page_option_level_urgent":
-            MessageLookupByLibrary.simpleMessage("Urgent"),
+        "todos_edit_page_option_level_important_not_urgent":
+            MessageLookupByLibrary.simpleMessage("Important\nNot urgent"),
+        "todos_edit_page_option_level_unimportant_not_urgent":
+            MessageLookupByLibrary.simpleMessage("Unimportant\nNot urgent"),
+        "todos_edit_page_option_level_urgent_important":
+            MessageLookupByLibrary.simpleMessage("Urgent\nImportant"),
+        "todos_edit_page_option_level_urgent_unimportant":
+            MessageLookupByLibrary.simpleMessage("Urgent\nUnimportant"),
         "todos_edit_page_option_valid_date_draft":
             MessageLookupByLibrary.simpleMessage("Draft"),
         "todos_edit_page_option_valid_date_select_date":
@@ -496,6 +533,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Today"),
         "todos_edit_page_option_valid_date_tomorrow":
             MessageLookupByLibrary.simpleMessage("Tomorrow"),
+        "todos_edit_page_toast_empty_tip_subtask_new":
+            MessageLookupByLibrary.simpleMessage(
+                "New Sub task cannot be empty"),
         "todos_edit_page_toast_save_failure":
             MessageLookupByLibrary.simpleMessage(
                 "Save failure, please try again."),

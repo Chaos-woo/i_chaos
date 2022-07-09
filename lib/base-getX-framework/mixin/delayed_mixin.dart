@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 mixin DelayedMixin {
@@ -7,10 +9,21 @@ mixin DelayedMixin {
     ).whenComplete(callback);
   }
 
-  Future<void> anyDelay(VoidCallback callback, {Duration? duration}) {
+  Future<void> varDelay(VoidCallback callback, {Duration? duration}) {
     return Future.delayed(
       duration ?? const Duration(milliseconds: 0),
     ).whenComplete(callback);
+  }
+
+  Future<void> varReplayDelay(VoidCallback callback, int replay, {Duration? duration}) {
+    return Future.delayed(
+      duration ?? const Duration(milliseconds: 0),
+    ).whenComplete(() {
+      replay = min(replay, 3);
+      for (int i = 0; i < replay; i++) {
+        zeroDelay(callback);
+      }
+    });
   }
 
   Future<R> returnDelay<R>(VoidCallback callback, {Duration? duration}) {

@@ -203,7 +203,9 @@ class SingleTodoVM extends SingleViewStateModel<TodoVO> {
   }
 
   @override
-  Future<TodoVO>? loadData() {}
+  Future<TodoVO>? loadData() {
+    return null;
+  }
 
   @override
   onCompleted(TodoVO data) {}

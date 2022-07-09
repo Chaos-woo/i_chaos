@@ -13,8 +13,8 @@ class DetailImageWidgetState extends PageState {
   Widget build(BuildContext context) {
     return switchStatusBar2Dark(
         isSetDark: true,
-        edgeInsets: EdgeInsets.all(0),
-        child: Container(
+        edgeInsets: const EdgeInsets.all(0),
+        child: SizedBox(
           width: 750.w,
           height: 1334.h,
           child: Stack(

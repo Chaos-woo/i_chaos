@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// dislodge the any subclass of ScrollView's inkwell
@@ -20,7 +19,7 @@ class OverScrollBehavior extends ScrollBehavior {
           //do not show tail's inkwell
           showTrailing: false,
           axisDirection: axisDirection,
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
         );
       case TargetPlatform.linux:
       case TargetPlatform.macOS:

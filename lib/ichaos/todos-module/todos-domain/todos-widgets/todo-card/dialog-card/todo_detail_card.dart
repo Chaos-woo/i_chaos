@@ -10,9 +10,9 @@
 //import 'package:i_chaos/generated/l10n.dart';
 //import 'package:i_chaos/ichaos/public/extension/date_time_extension.dart';
 //import 'package:i_chaos/ichaos/public/widgets/mini_checkbox_list_title.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/enums/todo_level.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/models/subtask.dart';
-//import 'package:i_chaos/ichaos/todo/todo-domain/common/models/todo_vo.dart';
+//import 'package:i_chaos/ichaos/todo/todo-domain/commons/enums/todo_level.dart';
+//import 'package:i_chaos/ichaos/todo/todo-domain/commons/models/subtask.dart';
+//import 'package:i_chaos/ichaos/todo/todo-domain/commons/models/todo_vo.dart';
 //import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/card/todo_op_callback.dart';
 //
 //class WidgetTodoDetailCard extends WidgetState {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/ichaos/common-module/get-controllers/font-family/font_family_ctrl.dart';
+import 'package:i_chaos/ichaos/common-module/resources/app_style.dart';
 import 'package:i_chaos/ichaos/common-module/utils/enum_string_convert.dart';
 
 // app主题模型
@@ -13,6 +14,9 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
 
   // FlexColor主题插件模板
   late FlexScheme _flexScheme;
+
+  // 是否是dark模式
+  late bool _isDarkMode;
 
   static const String kThemeModeCache = 'kThemeMode';
   static const String kFlexScheme = 'kFlexScheme';
@@ -34,6 +38,10 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
 
   List<FlexScheme> get supportFlexScheme => _supportFlexScheme;
 
+  Color get darkModeColor => AppStyle.colors.dark;
+
+  bool get isDarkMode => _isDarkMode;
+
   @override
   void onBizDataHandle() {}
 
@@ -50,12 +58,15 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
 
   // 切换light/dark模式
   void switchThemeMode(ThemeMode mode) {
-    _themeMode = mode;
-    _saveThemeMode(mode);
-
-    Future.delayed(const Duration(milliseconds: 0))
-        .then((_) => Get.changeTheme(getTheme(mode)))
-        .whenComplete(() => updateListener());
+    zeroDelay(() async {
+      _themeMode = mode;
+      _refreshDarkMode();
+      _saveThemeMode(mode);
+      Get.changeTheme(getTheme(mode));
+      Get.changeThemeMode(themeMode);
+      await Get.forceAppUpdate();
+      updateListener();
+    });
   }
 
   // 切换主题
@@ -63,14 +74,15 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
     _flexScheme = scheme;
     _saveThemeScheme(scheme);
 
-    Future.delayed(const Duration(milliseconds: 0))
-        .then((_) => Get.changeTheme(getTheme(null)))
-        .whenComplete(() => updateListener());
+    zeroDelay(() async {
+      Get.changeTheme(getTheme(null));
+      await Get.forceAppUpdate();
+    });
   }
 
-  // 根据模式获取主题，主要是为了将主题定义统一放到此处
+  // 根据模式获取主题
   ThemeData getTheme(ThemeMode? mode) {
-    FontFamilyCtrl fontCtrl = findDependency();
+    FontFamilyCtrl fontCtrl = findReference();
     ThemeData dark = FlexThemeData.dark(
       scheme: _flexScheme,
     ).copyWith(textTheme: fontCtrl.getTextTheme(ThemeMode.dark));
@@ -78,7 +90,7 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
       scheme: _flexScheme,
     ).copyWith(textTheme: fontCtrl.getTextTheme(ThemeMode.light));
     if (mode == null) {
-      return Get.isDarkMode ? dark : light;
+      return _isDarkMode ? dark : light;
     }
 
     switch (mode) {
@@ -93,8 +105,16 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
   }
 
   // 获取主题色
-  Color getThemeColorByCurrentMode(FlexScheme scheme) {
-    return FlexThemeData.light(scheme: scheme).primaryColor;
+  Color getPrimaryColorByScheme(FlexScheme scheme) {
+    return getCurrentThemeData(scheme: scheme).primaryColor;
+  }
+
+  Color getPrimaryColor() {
+    return getCurrentThemeData().primaryColor;
+  }
+
+  ThemeData getCurrentThemeData({FlexScheme? scheme}) {
+    return scheme == null ? FlexThemeData.light(scheme: _flexScheme) : FlexThemeData.light(scheme: scheme);
   }
 
   void _themeModeInit() {
@@ -109,6 +129,7 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
     if (initNeedSave) {
       _saveThemeMode(_themeMode);
     }
+    _refreshDarkMode();
   }
 
   void _flexSchemeInit() {
@@ -133,5 +154,43 @@ class FlexColorThemeCtrl extends BaseViewStateCtrl {
   // 保存用户主题配置
   void _saveThemeScheme(FlexScheme scheme) {
     SpUtil.putString(kFlexScheme, enumToString(scheme));
+  }
+
+  void _refreshDarkMode() {
+    _isDarkMode = _themeMode == ThemeMode.system ? (Get.isPlatformDarkMode) : _themeMode == ThemeMode.dark;
+  }
+
+  // 获取深色模式应该展示的颜色，参数为深色模式时使用的颜色，默认返回主题色
+  Color getFitModeColor({
+    Color? lightModeColor,
+    Color? darkModeColor,
+    bool usingPrimary = false,
+    bool isBackground = false,
+  }) {
+    Color primaryColor = getPrimaryColor();
+    Color color;
+    if (_isDarkMode) {
+      if (null != darkModeColor) {
+        color = darkModeColor;
+      } else {
+        if (isBackground) {
+          color = AppStyle.colors.dark;
+        } else {
+          color = usingPrimary ? primaryColor : AppStyle.colors.white;
+        }
+      }
+    } else {
+      if (null != lightModeColor) {
+        color = lightModeColor;
+      } else {
+        if (isBackground) {
+          color = AppStyle.colors.white;
+        } else {
+          color = usingPrimary ? primaryColor : AppStyle.colors.black;
+        }
+      }
+    }
+
+    return color;
   }
 }

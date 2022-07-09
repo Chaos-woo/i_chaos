@@ -27,14 +27,14 @@ class FromTopNotifyWidget extends WidgetState with SingleTickerProviderStateMixi
     // TODO: implement initState
     super.initState();
     controller = AnimationController(vsync: this,duration: animationDuration);
-    animation = Tween<Offset>(begin: Offset(0,-1),end: Offset.zero).animate(controller!);
+    animation = Tween<Offset>(begin: const Offset(0,-1),end: Offset.zero).animate(controller!);
     controller!.addStatusListener((status) {
       if(status == AnimationStatus.completed){
         Future.delayed(notifyDwellTime)
-            .whenComplete(() => controller?.reverse()?.whenComplete(() => notifyDone(true)));
+            .whenComplete(() => controller?.reverse().whenComplete(() => notifyDone(true)));
       }
     });
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller!.forward();
     });
   }

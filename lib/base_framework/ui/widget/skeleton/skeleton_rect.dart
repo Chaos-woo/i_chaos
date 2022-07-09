@@ -8,7 +8,7 @@ class SkeletonRect extends BaseSkeletonWidget {
   final double? radius;
   final Color? color;
 
-  SkeletonRect({Key? key, this.width, this.height, this.radius, this.color}) : super(key: key);
+  const SkeletonRect({Key? key, this.width, this.height, this.radius, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

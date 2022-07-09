@@ -274,6 +274,7 @@ class _$TodoDao extends TodoDao {
     await _queryAdapter.queryNoReturn(
         'UPDATE tb_todo SET tag=null WHERE tag=?1',
         arguments: [tagId]);
+    return null;
   }
 
   @override

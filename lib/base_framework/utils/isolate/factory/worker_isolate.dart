@@ -34,9 +34,7 @@ class WorkerMainProxy {
   static WorkerMainProxy? _instance;
 
   static WorkerMainProxy? getInstance() {
-    if (_instance == null) {
-      _instance = WorkerMainProxy._();
-    }
+    _instance ??= WorkerMainProxy._();
     return _instance;
   }
 
@@ -75,10 +73,10 @@ class WorkerMainProxy {
   }
 
   void sendTask() {
-    if (taskCache.length > 0) {
-      taskCache.forEach((element) {
+    if (taskCache.isNotEmpty) {
+      for (var element in taskCache) {
         childPort!.send([kTaskKey, element.methodName, element.nameArgs]);
-      });
+      }
       taskCache.clear();
     }
   }
@@ -141,10 +139,10 @@ void proxyHandler(SendPort mainPort) async {
 }
 
 void runProxy() {
-  final timer = Timer.periodic(Duration(milliseconds: 1), (timer) {
-    if (taskLog.length > 0) {
+  final timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+    if (taskLog.isNotEmpty) {
       workers.forEach((key, value) {
-        if (taskLog.length > 0) {
+        if (taskLog.isNotEmpty) {
           if (value.isStandBy()) {
             TaskWrapper task = taskLog.first;
             value.setStatus(false); // not free

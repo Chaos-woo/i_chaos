@@ -9,7 +9,7 @@ class ScaleRouteBuilder extends PageRouteBuilder {
   ScaleRouteBuilder(this.page,this.routeSettings)
       : super(settings:routeSettings,
     pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionDuration: Duration(milliseconds: 300),
+    transitionDuration: const Duration(milliseconds: 300),
     transitionsBuilder: (context, animation, secondaryAnimation, child) =>
 //                Align(
 //                  child: SizeTransition(child: child, sizeFactor: animation),

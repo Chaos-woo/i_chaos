@@ -33,9 +33,7 @@ class NoInkWell extends InteractiveInkFeature {
       {required Color color,
       required MaterialInkController controller,
       required RenderBox referenceBox})
-      : assert(controller != null),
-        assert(referenceBox != null),
-        super(color: color, controller: controller, referenceBox: referenceBox);
+      : super(color: color, controller: controller, referenceBox: referenceBox);
 
   @override
   void paintFeature(Canvas canvas, Matrix4 transform) {}

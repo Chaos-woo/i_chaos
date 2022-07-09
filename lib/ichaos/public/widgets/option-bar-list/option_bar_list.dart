@@ -1,6 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, non_constant_identifier_names, prefer_initializing_formals, must_be_immutable
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:i_chaos/ichaos/public/widgets/option-bar-list/option_bar_item.dart';
 

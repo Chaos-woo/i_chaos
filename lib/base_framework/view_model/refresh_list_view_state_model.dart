@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:i_chaos/base_framework/view_model/handle/exception_handler.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../base-getX-framework/flutter3-pak-process/pull-to-refresh/src/smart_refresher.dart';
 import 'list_view_state_model.dart';
 
 abstract class RefreshListViewStateModel<T> extends ListViewStateModel<T> {

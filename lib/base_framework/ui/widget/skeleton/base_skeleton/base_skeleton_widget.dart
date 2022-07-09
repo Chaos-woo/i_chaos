@@ -11,13 +11,13 @@ import 'package:shimmer/shimmer.dart';
 
 abstract class BaseSkeletonWidget extends BaseStatelessWidget {
   ///确保全局骨架 颜色一致
-  final Color skeletonColor = Color.fromRGBO(221, 221, 221, 1);
-  final Color baseColor = Color(0xFFE0E0E0);
-  final Color highLightColor = Color(0xFFF5F5F5);
+  final Color skeletonColor = const Color.fromRGBO(221, 221, 221, 1);
+  final Color baseColor = const Color(0xFFE0E0E0);
+  final Color highLightColor = const Color(0xFFF5F5F5);
 
   final bool _enabled = true;
 
-  BaseSkeletonWidget({Key? key}) : super(key: key);
+  const BaseSkeletonWidget({Key? key}) : super(key: key);
 
   ///自动给child 增加 闪闪亮特效！
   Widget getShimmer(Widget child) {

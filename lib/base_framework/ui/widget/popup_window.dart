@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const int _windowPopupDuration = 300;
 const double _kWindowCloseIntervalEnd = 2.0 / 3.0;

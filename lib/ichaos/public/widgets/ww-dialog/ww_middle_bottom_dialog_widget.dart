@@ -68,7 +68,7 @@ class TTBaseDialog extends StatefulWidget {
   /// 点击返回index 0 1
   final Function(int index, BuildContext context)? onTap;
 
-  TTBaseDialog({
+  const TTBaseDialog({
     required this.bgColor,
     required this.isShowCloseButton,
     required this.isNeedCloseDiaLog,
@@ -112,15 +112,15 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
   /// Bottom弹窗
   Widget _createBaseBottomDialog() {
     bool emptyTitle =
-    ((widget.title == null || widget.title?.length == 0 ) && widget.customTitleWidget == null); // 是否有标题
+    ((widget.title == null || widget.title!.isEmpty ) && widget.customTitleWidget == null); // 是否有标题
     bool emptyContent =
-    ((widget.content == null || widget.content?.length == 0) && widget.customContentWidget == null); // 是否有内容
+    ((widget.content == null || widget.content!.isEmpty) && widget.customContentWidget == null); // 是否有内容
     return Material(
         color: Colors.transparent,
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Container(
-            margin: widget.isSystemBottomDialog ? EdgeInsets.only(left: 10,bottom: 30,right: 10) : EdgeInsets.all(0),
+            margin: widget.isSystemBottomDialog ? const EdgeInsets.only(left: 10,bottom: 30,right: 10) : const EdgeInsets.all(0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -142,7 +142,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                               widget.title!,
                               style: TextStyle(color: widget.titleColor, fontSize: widget.titleFontSize, fontWeight: widget.titleFontWeight),
                             ),
-                            margin: EdgeInsets.only(top: 10.0),
+                            margin: const EdgeInsets.only(top: 10.0),
                           )
                       ),
                       Container(
@@ -155,12 +155,12 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                             widget.content!,
                             style: TextStyle(color: widget.contentColor, fontSize: widget.contentFontSize,fontWeight: widget.contentFontWeight),
                           ),
-                          margin: EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.all(10.0),
                         ),
                         // height: 45,
                         width: double.infinity,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
                                 color: colorH,
@@ -175,7 +175,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                     ],
                   ),
                 ),
-                widget.isSystemBottomDialog ? SizedBox(height: 8) : SizedBox(),
+                widget.isSystemBottomDialog ? const SizedBox(height: 8) : const SizedBox(),
                 widget.isSystemBottomDialog
                     ? Container(
                   width: double.infinity,
@@ -199,8 +199,8 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
 
   /// 中间弹窗相关方法
   Widget _createBaseMiddleDiaLog() {
-    bool emptyTitle = ((widget.title == null || widget.title?.length == 0) && widget.customTitleWidget == null); // 是否有标题
-    bool emptyContent = ((widget.content == null || widget.content?.length == 0) && widget.customContentWidget == null); // 是否有内容
+    bool emptyTitle = ((widget.title == null || widget.title!.isEmpty) && widget.customTitleWidget == null); // 是否有标题
+    bool emptyContent = ((widget.content == null || widget.content!.isEmpty) && widget.customContentWidget == null); // 是否有内容
     return Material(
       color: Colors.transparent,
       child: Center(
@@ -213,16 +213,14 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+                  padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
                   child: Stack(
                     children: [
                       Align(
                           alignment: Alignment.center,
                           child: emptyTitle
                               ? Container()
-                              : widget.customTitleWidget != null
-                              ? widget.customTitleWidget
-                              : Container(
+                              : widget.customTitleWidget ?? SizedBox(
                             width: double.infinity,
                             child: Text(
                               widget.title!,
@@ -239,7 +237,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                           child: (widget.isShowCloseButton == false)
                               ? Container()
                               : InkWell(
-                            child: Icon(
+                            child: const Icon(
                                 Icons.close,
                                 color: colorWithCloseButton),
                             onTap: () {
@@ -254,9 +252,9 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                 emptyContent
                     ? Container()
                     : _getContentWidget(emptyTitle, emptyContent),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
                         color: colorH,
@@ -279,7 +277,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
 
   /// 创建默认buttons组
   Widget _createDefaultButtons(buttonArrangeType type, double buttonHeight) {
-    return (widget.buttons == null || widget.buttons?.length == 0)
+    return (widget.buttons == null || widget.buttons!.isEmpty)
         ? Container()
         : (type == buttonArrangeType.column)
         ? _createDefaultColumnButtons(buttonHeight)
@@ -308,8 +306,8 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                       }
                     }),
                 decoration: (index == widget.buttons!.length - 1)
-                    ? BoxDecoration()
-                    : BoxDecoration(
+                    ? const BoxDecoration()
+                    : const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: colorH,
@@ -348,8 +346,8 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
                       }
                     }),
                 decoration: (index == widget.buttons!.length - 1)
-                    ? BoxDecoration()
-                    : BoxDecoration(
+                    ? const BoxDecoration()
+                    : const BoxDecoration(
                   border: Border(
                     right: BorderSide(
                       color: colorH,
@@ -366,7 +364,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
 
   /// 创建自定义buttons
   Widget _createCustomButtons(buttonArrangeType type) {
-    return (widget.customWidgetButtons == null || widget.customWidgetButtons!.length == 0)
+    return (widget.customWidgetButtons == null || widget.customWidgetButtons!.isEmpty)
         ? Container()
         : (type == buttonArrangeType.column)
         ? _createCustomColumnButtons()
@@ -383,8 +381,8 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
               width: double.infinity,
               child: buttonWidget,
               decoration: (index == widget.customWidgetButtons!.length - 1)
-                  ? BoxDecoration()
-                  : BoxDecoration(
+                  ? const BoxDecoration()
+                  : const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: colorH,
@@ -409,8 +407,8 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
               child: Container(
                   child: buttonWidget,
                   decoration: (index == widget.customWidgetButtons!.length - 1)
-                      ? BoxDecoration()
-                      : BoxDecoration(
+                      ? const BoxDecoration()
+                      : const BoxDecoration(
                     border: Border(
                       right: BorderSide(
                         color: colorH,
@@ -429,7 +427,7 @@ class _TTBaseDialogState extends State<TTBaseDialog> {
   _getContentWidget(emptyTitle, emptyContent) {
     return Container(
         width: double.infinity, // 跟外部容器等宽
-        margin: EdgeInsets.only(left: 20, right: 20),
+        margin: const EdgeInsets.only(left: 20, right: 20),
         child: (widget.customContentWidget != null)
             ? widget.customContentWidget
             : Text(

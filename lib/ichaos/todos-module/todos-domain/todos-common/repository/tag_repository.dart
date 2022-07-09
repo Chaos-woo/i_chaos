@@ -10,7 +10,7 @@ class TagRepository extends RootRepository {
   Future<List<TagVO>> listTag() async {
     final tagDao = await getTagDao();
     List<TagEntity> tagEntities = await tagDao.list();
-    return tagEntities.map((entity) => entity.fromEntity()).toList();
+    return tagEntities.map((entity) => entity.toVO()).toList();
   }
 
   Future<int> insertTag(TagVO vo) async {
@@ -36,6 +36,6 @@ class TagRepository extends RootRepository {
   Future<TagVO?> findByName(String name) async {
     final tagDao = await getTagDao();
     TagEntity? entity = await tagDao.findByName(name);
-    return entity?.fromEntity();
+    return entity?.toVO();
   }
 }

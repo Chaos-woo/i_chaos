@@ -3,7 +3,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:i_chaos/base-getX-framework/common/common_google_fonts.dart';
+import 'package:i_chaos/base-getX-framework/commons/common_google_fonts.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/ichaos/common-module/get-controllers/color-theme/flex_color_theme_ctrl.dart';
 
@@ -83,11 +83,11 @@ class FontFamilyCtrl extends BaseViewStateCtrl {
     _fontFamily = font;
     _saveFontFamily();
     // 曲线救国，刷新整体字体/主题
-    Future.delayed(const Duration(milliseconds: 0)).then((_) {
-      FlexColorThemeCtrl theme = findDependency();
-      theme.switchTheme(theme.flexScheme);
-    }).whenComplete(() => Get.forceAppUpdate());
-    updateListener();
+    zeroDelay(() {
+      updateListener();
+      FlexColorThemeCtrl themeCtrl = findReference();
+      themeCtrl.switchTheme(themeCtrl.flexScheme);
+    });
   }
 
   @override

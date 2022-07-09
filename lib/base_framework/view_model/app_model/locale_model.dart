@@ -21,6 +21,7 @@ class LocaleModel extends ChangeNotifier {
     // 默认使用中文
     _localeIndex = _defaultLocaleLanguage;
     SpUtil.putInt(kLocaleIndex, _localeIndex!);
+    return null;
   }
 
   Locale? get locale {
@@ -33,6 +34,7 @@ class LocaleModel extends ChangeNotifier {
     // 默认使用中文
     _localeIndex = _defaultLocaleLanguage;
     SpUtil.putInt(kLocaleIndex, _localeIndex!);
+    return null;
   }
 
   LocaleModel() {

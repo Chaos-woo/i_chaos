@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:i_chaos/base_framework/view_model/single_view_state_model.dart';
-import 'package:i_chaos/generated/l10n.dart';
 import 'package:i_chaos/ichaos/todo/todo-domain/core/widgets/filtered/filtered_tab_bar_vm.dart';
 import 'package:table_calendar/table_calendar.dart';
 

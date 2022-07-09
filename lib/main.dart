@@ -2,24 +2,13 @@
 
 import 'dart:async';
 
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:i_chaos/base_framework/config/app_config.dart';
-import 'package:i_chaos/base_framework/config/global_provider_manager.dart';
-import 'package:i_chaos/base_framework/view_model/app_model/locale_model.dart';
 import 'package:i_chaos/ichaos/common-module/exception/default_exception_page.dart';
-import 'package:i_chaos/ichaos/public/config/design_config.dart';
-import 'package:i_chaos/main_material_app.dart';
-import 'package:noripple_overscroll/noripple_overscroll.dart';
-import 'package:provider/provider.dart';
+import 'package:i_chaos/my_material_app.dart';
 import 'package:reflectable/reflectable.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'generated/l10n.dart';
-import 'ichaos/todo/todo-domain/core/scenes/home/todo_home_page.dart';
-import 'icons/ali_icons.dart';
 
 //void main() async {
 //  WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +54,7 @@ import 'icons/ali_icons.dart';
 //        builder: (ctx, localeModel, _) {
 //          return MaterialApp(
 //            title: 'iChaos',
-////            theme: ThemeData(
+////            theme-setting: ThemeData(
 ////              primarySwatch: Colors.teal,
 ////            ),
 //            debugShowCheckedModeBanner: false,
@@ -247,7 +236,7 @@ void main() async {
   });
 
   /// 实际启动页面
-  runApp(MainMaterialApp().transformToPageWidget());
+  runApp(MyMaterialApp());
 
   /// 状态栏置透明
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));

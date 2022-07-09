@@ -1570,11 +1570,81 @@ class S {
     );
   }
 
+  /// `Ok`
+  String get common_ok_button {
+    return Intl.message(
+      'Ok',
+      name: 'common_ok_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get common_cancel_button {
+    return Intl.message(
+      'Cancel',
+      name: 'common_cancel_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get common_confirm_button {
+    return Intl.message(
+      'Confirm',
+      name: 'common_confirm_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get common_delete_button {
+    return Intl.message(
+      'Delete',
+      name: 'common_delete_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm deletion?`
+  String get common_delete_title {
+    return Intl.message(
+      'Confirm deletion?',
+      name: 'common_delete_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get common_save_button {
+    return Intl.message(
+      'Save',
+      name: 'common_save_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `please input something`
+  String get common_hint_plz_input {
+    return Intl.message(
+      'please input something',
+      name: 'common_hint_plz_input',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{custom_params}`
-  String common_any_page_widget_text_custom(Object custom_params) {
+  String common_any_text(Object custom_params) {
     return Intl.message(
       '$custom_params',
-      name: 'common_any_page_widget_text_custom',
+      name: 'common_any_text',
       desc: '',
       args: [custom_params],
     );
@@ -1640,31 +1710,121 @@ class S {
     );
   }
 
-  /// `ToDO Content`
-  String get todos_edit_page_label_content {
+  /// `ToDO Brief`
+  String get todos_edit_page_label_title_content {
     return Intl.message(
-      'ToDO Content',
-      name: 'todos_edit_page_label_content',
+      'ToDO Brief',
+      name: 'todos_edit_page_label_title_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `brief of ToDO`
+  String get todos_edit_page_label_subtitle_content {
+    return Intl.message(
+      'brief of ToDO',
+      name: 'todos_edit_page_label_subtitle_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Using simple text to describe the ToDO so that you can quickly understand it.`
+  String get todos_edit_page_dialog_content_content {
+    return Intl.message(
+      'Using simple text to describe the ToDO so that you can quickly understand it.',
+      name: 'todos_edit_page_dialog_content_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `brief can not empty.`
+  String get todos_edit_page_error_tip_content {
+    return Intl.message(
+      'brief can not empty.',
+      name: 'todos_edit_page_error_tip_content',
       desc: '',
       args: [],
     );
   }
 
   /// `Description`
-  String get todos_edit_page_label_remark {
+  String get todos_edit_page_label_title_remark {
     return Intl.message(
       'Description',
-      name: 'todos_edit_page_label_remark',
+      name: 'todos_edit_page_label_title_remark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `writing more details of ToDO`
+  String get todos_edit_page_label_subtitle_remark {
+    return Intl.message(
+      'writing more details of ToDO',
+      name: 'todos_edit_page_label_subtitle_remark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More Details or remarks.`
+  String get todos_edit_page_dialog_content_remark {
+    return Intl.message(
+      'More Details or remarks.',
+      name: 'todos_edit_page_dialog_content_remark',
       desc: '',
       args: [],
     );
   }
 
   /// `Sub task(s)`
-  String get todos_edit_page_label_subtask {
+  String get todos_edit_page_label_title_subtask {
     return Intl.message(
       'Sub task(s)',
-      name: 'todos_edit_page_label_subtask',
+      name: 'todos_edit_page_label_title_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `task flow or points for attention Of ToDO`
+  String get todos_edit_page_label_subtitle_subtask {
+    return Intl.message(
+      'task flow or points for attention Of ToDO',
+      name: 'todos_edit_page_label_subtitle_subtask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `task ({number}):`
+  String todos_edit_page_label_title_subtask_dummy_exist(Object number) {
+    return Intl.message(
+      'task ($number):',
+      name: 'todos_edit_page_label_title_subtask_dummy_exist',
+      desc: '',
+      args: [number],
+    );
+  }
+
+  /// `please input task content:`
+  String get todos_edit_page_label_title_subtask_dummy_new {
+    return Intl.message(
+      'please input task content:',
+      name: 'todos_edit_page_label_title_subtask_dummy_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Sub task cannot be empty`
+  String get todos_edit_page_toast_empty_tip_subtask_new {
+    return Intl.message(
+      'New Sub task cannot be empty',
+      name: 'todos_edit_page_toast_empty_tip_subtask_new',
       desc: '',
       args: [],
     );
@@ -1690,21 +1850,21 @@ class S {
     );
   }
 
-  /// `Ok`
-  String get todos_edit_page_dialog_btn_confirm_subtask {
+  /// `Valid date`
+  String get todos_edit_page_label_title_valid_date {
     return Intl.message(
-      'Ok',
-      name: 'todos_edit_page_dialog_btn_confirm_subtask',
+      'Valid date',
+      name: 'todos_edit_page_label_title_valid_date',
       desc: '',
       args: [],
     );
   }
 
-  /// `Valid date`
-  String get todos_edit_page_label_valid_date {
+  /// `choice a you want to prompt date`
+  String get todos_edit_page_label_subtitle_valid_date {
     return Intl.message(
-      'Valid date',
-      name: 'todos_edit_page_label_valid_date',
+      'choice a you want to prompt date',
+      name: 'todos_edit_page_label_subtitle_valid_date',
       desc: '',
       args: [],
     );
@@ -1725,16 +1885,6 @@ class S {
     return Intl.message(
       '1. [Today]: This ToDO will be displayed today.\n2. [Tomorrow]:  This ToDO will be displayed tomorrow.\n3. [Select date]: You can select any date after today. But, if it is today or tomorrow, the option will change to [Today] or [Tomorrow] button.\n4. [Draft]: ToDO will not be shown on any ToDO list before you select a valid date.',
       name: 'todos_edit_page_dialog_content_valid_date',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ok`
-  String get todos_edit_page_dialog_btn_confirm_valid_date {
-    return Intl.message(
-      'Ok',
-      name: 'todos_edit_page_dialog_btn_confirm_valid_date',
       desc: '',
       args: [],
     );
@@ -1780,81 +1930,101 @@ class S {
     );
   }
 
+  /// `Switch to today`
+  String get todos_edit_page_dialog_valid_date_btn_switch_to_today {
+    return Intl.message(
+      'Switch to today',
+      name: 'todos_edit_page_dialog_valid_date_btn_switch_to_today',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Emergency degree`
-  String get todos_edit_page_label_level {
+  String get todos_edit_page_label_title_level {
     return Intl.message(
       'Emergency degree',
-      name: 'todos_edit_page_label_level',
+      name: 'todos_edit_page_label_title_level',
       desc: '',
       args: [],
     );
   }
 
-  /// `Deferrable`
-  String get todos_edit_page_option_level_deferrable {
+  /// `more urgent and more important ToDO will place forward.`
+  String get todos_edit_page_label_subtitle_level {
     return Intl.message(
-      'Deferrable',
-      name: 'todos_edit_page_option_level_deferrable',
+      'more urgent and more important ToDO will place forward.',
+      name: 'todos_edit_page_label_subtitle_level',
       desc: '',
       args: [],
     );
   }
 
-  /// `Unimportant`
-  String get todos_edit_page_option_level_unimportant {
+  /// `todo...`
+  String get todos_edit_page_dialog_content_level {
     return Intl.message(
-      'Unimportant',
-      name: 'todos_edit_page_option_level_unimportant',
+      'todo...',
+      name: 'todos_edit_page_dialog_content_level',
       desc: '',
       args: [],
     );
   }
 
-  /// `Normal`
-  String get todos_edit_page_option_level_normal {
+  /// `Unimportant\nNot urgent`
+  String get todos_edit_page_option_level_unimportant_not_urgent {
     return Intl.message(
-      'Normal',
-      name: 'todos_edit_page_option_level_normal',
+      'Unimportant\nNot urgent',
+      name: 'todos_edit_page_option_level_unimportant_not_urgent',
       desc: '',
       args: [],
     );
   }
 
-  /// `Important`
-  String get todos_edit_page_option_level_important {
+  /// `Important\nNot urgent`
+  String get todos_edit_page_option_level_important_not_urgent {
     return Intl.message(
-      'Important',
-      name: 'todos_edit_page_option_level_important',
+      'Important\nNot urgent',
+      name: 'todos_edit_page_option_level_important_not_urgent',
       desc: '',
       args: [],
     );
   }
 
-  /// `Urgent`
-  String get todos_edit_page_option_level_urgent {
+  /// `Urgent\nUnimportant`
+  String get todos_edit_page_option_level_urgent_unimportant {
     return Intl.message(
-      'Urgent',
-      name: 'todos_edit_page_option_level_urgent',
+      'Urgent\nUnimportant',
+      name: 'todos_edit_page_option_level_urgent_unimportant',
       desc: '',
       args: [],
     );
   }
 
-  /// `Location information`
-  String get todos_edit_page_label_location {
+  /// `Urgent\nImportant`
+  String get todos_edit_page_option_level_urgent_important {
     return Intl.message(
-      'Location information',
-      name: 'todos_edit_page_label_location',
+      'Urgent\nImportant',
+      name: 'todos_edit_page_option_level_urgent_important',
       desc: '',
       args: [],
     );
   }
 
-  /// `Save`
-  String get todos_edit_page_btn_save {
+  /// `Address`
+  String get todos_edit_page_label_title_location {
     return Intl.message(
-      'Save',
-      name: 'todos_edit_page_btn_save',
+      'Address',
+      name: 'todos_edit_page_label_title_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `writing address information avoid forgetting.`
+  String get todos_edit_page_label_subtitle_location {
+    return Intl.message(
+      'writing address information avoid forgetting.',
+      name: 'todos_edit_page_label_subtitle_location',
       desc: '',
       args: [],
     );
@@ -2820,6 +2990,16 @@ class S {
     return Intl.message(
       'Theme mode',
       name: 'setting_main_page_option_base_setting_theme_mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `light/dart mode`
+  String get setting_main_page_option_base_setting_theme_mode_sub_title {
+    return Intl.message(
+      'light/dart mode',
+      name: 'setting_main_page_option_base_setting_theme_mode_sub_title',
       desc: '',
       args: [],
     );

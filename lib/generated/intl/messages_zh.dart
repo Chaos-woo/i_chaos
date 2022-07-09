@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m9(name, createTime) =>
       "标签基本信息如下: \n1. 标签名: ${name};\n2. 创建时间: ${createTime}。\n3. 小提示：在删除该标签后，该标签下的所有ToDO将会移出该标签列表。";
 
+  static String m10(number) => "任务 ${number}:";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_default_exception_page_action_btn_feedback":
@@ -94,8 +96,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "bedrock_reset": MessageLookupByLibrary.simpleMessage("重置"),
         "common_any_page_label_text_design":
             MessageLookupByLibrary.simpleMessage("施工中..."),
-        "common_any_page_widget_text_custom": m0,
+        "common_any_text": m0,
+        "common_cancel_button": MessageLookupByLibrary.simpleMessage("取消"),
+        "common_confirm_button": MessageLookupByLibrary.simpleMessage("确认"),
         "common_custom_params": m1,
+        "common_delete_button": MessageLookupByLibrary.simpleMessage("删除"),
+        "common_delete_title": MessageLookupByLibrary.simpleMessage("确认删除?"),
         "common_designing_label":
             MessageLookupByLibrary.simpleMessage("施工中..."),
         "common_exception_page_appbar_title":
@@ -106,10 +112,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "抱歉，应用程序发生了点小问题！\n可以点击右上角提交异常信息帮助开发者分析问题~"),
         "common_exception_page_toast_text_submit":
             MessageLookupByLibrary.simpleMessage("感性您的反馈~"),
+        "common_hint_plz_input": MessageLookupByLibrary.simpleMessage("请输入"),
         "common_month_calendar_page_btn_text_cancel":
             MessageLookupByLibrary.simpleMessage("取消"),
         "common_month_calendar_page_btn_text_confirm":
             MessageLookupByLibrary.simpleMessage("确认"),
+        "common_ok_button": MessageLookupByLibrary.simpleMessage("好的"),
+        "common_save_button": MessageLookupByLibrary.simpleMessage("保存"),
         "main_bottombar_widget_tab_text_assert":
             MessageLookupByLibrary.simpleMessage("Assert"),
         "main_bottombar_widget_tab_text_feed":
@@ -144,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("主题设置"),
         "setting_main_page_option_base_setting_theme_mode":
             MessageLookupByLibrary.simpleMessage("外观模式设置"),
+        "setting_main_page_option_base_setting_theme_mode_sub_title":
+            MessageLookupByLibrary.simpleMessage("浅色模式、深色模式"),
         "setting_main_page_tip_base_setting":
             MessageLookupByLibrary.simpleMessage("基础设置"),
         "setting_main_page_tip_individual_setting":
@@ -438,11 +449,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("新增"),
         "todos_edit_page_appbar_title_edit":
             MessageLookupByLibrary.simpleMessage("编辑"),
-        "todos_edit_page_btn_save": MessageLookupByLibrary.simpleMessage("保存"),
-        "todos_edit_page_dialog_btn_confirm_subtask":
-            MessageLookupByLibrary.simpleMessage("了解啦~"),
-        "todos_edit_page_dialog_btn_confirm_valid_date":
-            MessageLookupByLibrary.simpleMessage("了解啦~"),
+        "todos_edit_page_dialog_content_content":
+            MessageLookupByLibrary.simpleMessage("使用简短的文字描述ToDO"),
+        "todos_edit_page_dialog_content_level":
+            MessageLookupByLibrary.simpleMessage("todo..."),
+        "todos_edit_page_dialog_content_remark":
+            MessageLookupByLibrary.simpleMessage("可是使用更多的文字解释ToDO，或是记录一些备注信息。"),
         "todos_edit_page_dialog_content_subtask":
             MessageLookupByLibrary.simpleMessage(
                 "1. 事件可认为是多个子任务的合集。\n2. 当事件被分为X个子任务时，X1任务完成时，事件完成度为1/X，依此类推。\n3. 当事件下的所有子任务完成时，该事件将被标识为完成，且被移动至【已完成】列表。\n4. 若直接将事件更改为完成状态，则其下的所有子任务将被展示为完成状态，如若事件从【已完成】状态变为【未完成】状态，则子任务将会展示为原来的状态。"),
@@ -453,28 +465,45 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("子任务是什么?"),
         "todos_edit_page_dialog_title_valid_date":
             MessageLookupByLibrary.simpleMessage("日期怎么选择?"),
-        "todos_edit_page_label_content":
-            MessageLookupByLibrary.simpleMessage("快记录下要做什么?"),
-        "todos_edit_page_label_level":
+        "todos_edit_page_dialog_valid_date_btn_switch_to_today":
+            MessageLookupByLibrary.simpleMessage("切换至今日"),
+        "todos_edit_page_error_tip_content":
+            MessageLookupByLibrary.simpleMessage("简要描述不能为空"),
+        "todos_edit_page_label_subtitle_content":
+            MessageLookupByLibrary.simpleMessage("简明扼要的文字描述..."),
+        "todos_edit_page_label_subtitle_level":
             MessageLookupByLibrary.simpleMessage("很重要的事情会排在前面喔!"),
-        "todos_edit_page_label_location":
+        "todos_edit_page_label_subtitle_location":
             MessageLookupByLibrary.simpleMessage("需要记录下地点吗?"),
-        "todos_edit_page_label_remark":
-            MessageLookupByLibrary.simpleMessage("备注"),
-        "todos_edit_page_label_subtask":
-            MessageLookupByLibrary.simpleMessage("子任务"),
-        "todos_edit_page_label_valid_date":
+        "todos_edit_page_label_subtitle_remark":
+            MessageLookupByLibrary.simpleMessage("描述的更加详细一些吧~"),
+        "todos_edit_page_label_subtitle_subtask":
+            MessageLookupByLibrary.simpleMessage("任务流程或注意点"),
+        "todos_edit_page_label_subtitle_valid_date":
             MessageLookupByLibrary.simpleMessage("ToDO事项需要放到哪天完成呢?"),
-        "todos_edit_page_option_level_deferrable":
-            MessageLookupByLibrary.simpleMessage("可延期"),
-        "todos_edit_page_option_level_important":
-            MessageLookupByLibrary.simpleMessage("重要"),
-        "todos_edit_page_option_level_normal":
-            MessageLookupByLibrary.simpleMessage("普通"),
-        "todos_edit_page_option_level_unimportant":
-            MessageLookupByLibrary.simpleMessage("不重要"),
-        "todos_edit_page_option_level_urgent":
-            MessageLookupByLibrary.simpleMessage("紧急"),
+        "todos_edit_page_label_title_content":
+            MessageLookupByLibrary.simpleMessage("简要描述"),
+        "todos_edit_page_label_title_level":
+            MessageLookupByLibrary.simpleMessage("紧迫程度"),
+        "todos_edit_page_label_title_location":
+            MessageLookupByLibrary.simpleMessage("地点信息"),
+        "todos_edit_page_label_title_remark":
+            MessageLookupByLibrary.simpleMessage("具体描述/备注"),
+        "todos_edit_page_label_title_subtask":
+            MessageLookupByLibrary.simpleMessage("子任务"),
+        "todos_edit_page_label_title_subtask_dummy_exist": m10,
+        "todos_edit_page_label_title_subtask_dummy_new":
+            MessageLookupByLibrary.simpleMessage("请输入子任务内容"),
+        "todos_edit_page_label_title_valid_date":
+            MessageLookupByLibrary.simpleMessage("日期选择"),
+        "todos_edit_page_option_level_important_not_urgent":
+            MessageLookupByLibrary.simpleMessage("重要不紧急"),
+        "todos_edit_page_option_level_unimportant_not_urgent":
+            MessageLookupByLibrary.simpleMessage("不重要又不紧急"),
+        "todos_edit_page_option_level_urgent_important":
+            MessageLookupByLibrary.simpleMessage("紧急且重要"),
+        "todos_edit_page_option_level_urgent_unimportant":
+            MessageLookupByLibrary.simpleMessage("紧急不重要"),
         "todos_edit_page_option_valid_date_draft":
             MessageLookupByLibrary.simpleMessage("草稿箱"),
         "todos_edit_page_option_valid_date_select_date":
@@ -483,6 +512,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("今日"),
         "todos_edit_page_option_valid_date_tomorrow":
             MessageLookupByLibrary.simpleMessage("明日"),
+        "todos_edit_page_toast_empty_tip_subtask_new":
+            MessageLookupByLibrary.simpleMessage("子任务不能为空"),
         "todos_edit_page_toast_save_failure":
             MessageLookupByLibrary.simpleMessage("保存失败"),
         "todos_edit_page_toast_save_success":

@@ -1,5 +1,4 @@
 import 'package:flustars/flustars.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:i_chaos/base_framework/ui/behavior/over_scroll_behavior.dart';

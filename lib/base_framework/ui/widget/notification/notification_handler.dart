@@ -21,9 +21,7 @@ class NotificationHandler extends Notification {
   factory NotificationHandler() => getInstance()!;
 
   static NotificationHandler? getInstance() {
-    if (_singleton == null) {
-      _singleton = new NotificationHandler._();
-    }
+    _singleton ??= NotificationHandler._();
     return _singleton;
   }
 
@@ -64,9 +62,9 @@ class NotificationHandler extends Notification {
   final List<NotifyStatusListener> _listeners = [];
 
   void _notifyListener(NotifyStatus notifyStatus) {
-    _listeners.forEach((element) {
+    for (var element in _listeners) {
       element(notifyStatus);
-    });
+    }
   }
 
   /// @param [animationDuration] child 从顶部滑出/收回所需时间
@@ -79,8 +77,8 @@ class NotificationHandler extends Notification {
     Completer completer = Completer();
     NotifyOverlayEntry notifyOverlayEntry = NotifyOverlayEntry(
         child,
-        animationDuration ?? Duration(milliseconds: 500),
-        notifyDwellTime ?? Duration(seconds: 2000), callback: () {
+        animationDuration ?? const Duration(milliseconds: 500),
+        notifyDwellTime ?? const Duration(seconds: 2000), callback: () {
       completer.complete();
       if (!streamDone) {
         _subscription.resume();
@@ -131,10 +129,10 @@ class NotificationHandler extends Notification {
       Duration? notifyDwellTime}) async {
     listCompleter = Completer();
 
-    children.forEach((element) {
+    for (var element in children) {
       _sink.add(
           NotifyListItemWrapper(element, animationDuration, notifyDwellTime));
-    });
+    }
     _sink.add(null);
     if (streamDone) {
       streamDone = false;

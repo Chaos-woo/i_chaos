@@ -2,7 +2,6 @@
 
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:i_chaos/base_framework/widget_state/page_state.dart';
 
 enum AtpXPageEnterDirection { left, right }
@@ -69,6 +68,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
   // 动画容器包含的子组件
   late final Widget _childWidget;
   // 页面组件
+  @override
   final ScreenUtil screen = ScreenUtil.getInstance();
   // 子组件首次构建需要使用BuildContext，在didChangeDependencies首次调用后不再构建子组件
   bool _childFirstBuildWithBuildContext = false;
@@ -101,7 +101,7 @@ abstract class AbstractTransparentPageX<R extends Object> extends PageState with
     // 初始动画组件
     _initAnimation();
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _animationController.forward();
     });
   }

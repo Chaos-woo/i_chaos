@@ -53,6 +53,8 @@ class TodoHomeFloatingActionBtnVM extends SingleViewStateModel {
 
   @override
   Future? loadData() {
+    return null;
+  
   }
 
   @override

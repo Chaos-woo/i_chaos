@@ -22,7 +22,7 @@ class TodoLevel {
   ];
 
   static TodoLevel named(String desc) {
-    return values.firstWhere((item) => item.desc == desc, orElse: null);
+    return values.firstWhere((item) => item.desc == desc);
   }
 
   static TodoLevel coded(int code) {

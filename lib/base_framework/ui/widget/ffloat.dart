@@ -328,7 +328,7 @@ class _FFloatState extends State<FFloat> {
   }
 
   void postUpdateCallback() {
-    WidgetsBinding.instance!.addPostFrameCallback((time) {
+    WidgetsBinding.instance.addPostFrameCallback((time) {
       if (!mounted) return;
       RenderBox? box = key.currentContext!.findRenderObject() as RenderBox?;
       Offset? location = box?.localToGlobal(Offset.zero);
@@ -363,7 +363,7 @@ class _FFloatState extends State<FFloat> {
     if (_float != null) {
       asyncParams();
       if (_float!.isShow) {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           if (_float != null) {
             _float!._showFloat();
@@ -515,7 +515,7 @@ class _FFloat {
   }
 
   void init() {
-    notifier = new ValueNotifier(0);
+    notifier = ValueNotifier(0);
     notifier!.addListener(() {
       if (notifier!.value == 0) {
         realDismiss();
@@ -530,7 +530,7 @@ class _FFloat {
     controller?._rebuildShow = () {
       rebuildShow();
     };
-    ffloatContentController = new _FFloatContentController();
+    ffloatContentController = _FFloatContentController();
   }
 
   void update(Size? anchorSize, Offset? location) {
@@ -569,7 +569,7 @@ class _FFloat {
     OverlayState overlayState = Overlay.of(context)!;
     _overlayEntry = OverlayEntry(builder: (BuildContext context) {
       Widget floatContent = _FFloatContent(
-        (location != null ? location : childLocation) ?? Offset.zero,
+        (location ?? childLocation) ?? Offset.zero,
         builder,
         anchorSize: childSize ?? Size.zero,
         alignment: alignment,
@@ -708,9 +708,9 @@ class _FFloatContentState extends State<_FFloatContent>
   void initState() {
     init = true;
     super.initState();
-    animationController = new AnimationController(
+    animationController = AnimationController(
         vsync: this,
-        duration: widget.animDuration ?? Duration(milliseconds: 0));
+        duration: widget.animDuration ?? const Duration(milliseconds: 0));
     scaleAnimation =
         Tween<double>(begin: 0.0, end: 1.0).animate(animationController!);
     scaleAnimation.addListener(() {
@@ -747,7 +747,7 @@ class _FFloatContentState extends State<_FFloatContent>
   }
 
   void _setState(Function func) {
-    if (mounted && func != null) {
+    if (mounted) {
       setState(() {
         func();
       });
@@ -755,7 +755,7 @@ class _FFloatContentState extends State<_FFloatContent>
   }
 
   void postUpdateCallback() {
-    WidgetsBinding.instance!.addPostFrameCallback((time) {
+    WidgetsBinding.instance.addPostFrameCallback((time) {
       if (!mounted) return;
       RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
       Size? size = box?.size;
@@ -822,7 +822,7 @@ class _FFloatContentState extends State<_FFloatContent>
     List<Widget> children = [];
     Color color = widget.color;
     BorderRadius borderRadius = widget.corner == null
-        ? BorderRadius.all(Radius.circular(0))
+        ? const BorderRadius.all(Radius.circular(0))
         : BorderRadius.only(
             topLeft: Radius.circular(widget.corner!.leftTopCorner),
             topRight: Radius.circular(widget.corner!.rightTopCorner),
@@ -852,7 +852,7 @@ class _FFloatContentState extends State<_FFloatContent>
           ? [
               BoxShadow(
                 color: widget.shadowColor!,
-                offset: widget.shadowOffset ?? Offset(0, 0),
+                offset: widget.shadowOffset ?? const Offset(0, 0),
                 blurRadius: widget.shadowBlur,
               )
             ]

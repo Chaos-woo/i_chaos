@@ -44,7 +44,7 @@ class StringHelper {
 
   ///with symbol no camel
   static Widget getPriceWithoutCamel(String price, double markSp, double priceSp,
-      {String moneySymbol = "\$ ", Color priceColor = Colors.black, Color? symbolColor, FontWeight fontWeight: FontWeight.normal}) {
+      {String moneySymbol = "\$ ", Color priceColor = Colors.black, Color? symbolColor, FontWeight fontWeight = FontWeight.normal}) {
     return Text.rich(TextSpan(children: [
       TextSpan(
         text: moneySymbol,
@@ -98,7 +98,7 @@ class StringHelper {
 
   ///with symbol
   static Widget getCamelPrice(String price, double markSp, double intSp, double decimalSp,
-      {String moneySymbol = "\$ ", Color priceColor = Colors.black, Color? symbolColor, FontWeight fontWeight: FontWeight.bold}) {
+      {String moneySymbol = "\$ ", Color priceColor = Colors.black, Color? symbolColor, FontWeight fontWeight = FontWeight.bold}) {
     return Text.rich(TextSpan(
       children: [
         TextSpan(

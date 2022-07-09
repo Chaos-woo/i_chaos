@@ -7,10 +7,6 @@ import 'package:i_chaos/base-getX-framework/utils/exception/exception_pitcher.da
 
 
 class DefaultApiInterceptor extends InterceptorsWrapper {
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    super.onRequest(options, handler);
-  }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {

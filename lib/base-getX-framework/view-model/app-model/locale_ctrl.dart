@@ -28,8 +28,8 @@ class LocaleCtrl extends BaseViewStateCtrl {
   }
 
   // 保存当前用户选择语言
-  void _cacheLocaleRes() {
-    SpUtil.putInt(kAppLocaleIndex, _currentLanguageIndex);
+  Future<void> _cacheLocaleRes() async {
+    await SpUtil.putInt(kAppLocaleIndex, _currentLanguageIndex);
   }
 
   String? get localeString {
@@ -40,17 +40,21 @@ class LocaleCtrl extends BaseViewStateCtrl {
     return Locale(localeValueList[_currentLanguageIndex], '');
   }
 
+  bool get isEnEnv => localeString != null && localeString!.contains('en');
+
   // 语言切换
-  switchLocale(int index) {
-    _currentLanguageIndex = index;
-    _cacheLocaleRes();
-    Get.updateLocale(locale!);
-    updateListener();
+  void switchLocale(int index) {
+    zeroDelay(() async {
+      _currentLanguageIndex = index;
+      await Get.updateLocale(locale!);
+      await _cacheLocaleRes();
+      await Get.forceAppUpdate();
+      updateListener();
+    });
   }
 
   @override
-  void onBizDataHandle() {
-  }
+  void onBizDataHandle() {}
 
   @override
   void onStateCtrlDispose() {}

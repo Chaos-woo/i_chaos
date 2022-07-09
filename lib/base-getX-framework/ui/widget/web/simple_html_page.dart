@@ -18,7 +18,7 @@ class SimpleHtmlPage extends SinglePageControllerView<SimpleHtmlCtrl> {
 
   Widget view() {
     return Scaffold(
-      appBar: commonAppBar(title: controller.html.title),
+      appBar: backNavBar(title: controller.html.title),
       body: Container(
         width: screenWidth,
         height: remainHeightWithoutAppBar,

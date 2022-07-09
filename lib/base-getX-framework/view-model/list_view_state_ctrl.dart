@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base-getX-framework/flutter3-pak-process/pull-to-refresh/pull_to_refresh.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 import 'package:i_chaos/base-getX-framework/view-model/handle/exception_handler.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   // 页面数据
@@ -10,7 +10,7 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
   // 刷新控制
   late RefreshController refreshController;
   // 实现refreshController与SmartRefresher的唯一绑定
-  late GlobalKey refreshSmarterKey;
+  late UniqueKey refreshSmarterKey;
 
   @override
   void onBizDataHandle() {
@@ -25,9 +25,13 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
 
   @override
   void onStateCtrlInit() {
-    refreshController = RefreshController(initialRefresh: false);
-    refreshSmarterKey = GlobalKey();
+    refreshCtrlAndSmarterKey();
     initRes();
+  }
+
+  void refreshCtrlAndSmarterKey() {
+    refreshController = RefreshController(initialRefresh: false);
+    refreshSmarterKey = UniqueKey();
   }
 
   // 首次数据初始化
@@ -41,10 +45,11 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
       List<T> fetchData = await loadData();
       if (isEmptyData(fetchData)) {
         setEmpty();
+        dataList = [];
       } else {
         dataList = fetchData;
-        onRefreshLoadCompleted(dataList);
       }
+      onRefreshLoadCompleted(dataList);
       setLoading(loading: false);
       refreshController.refreshCompleted();
 
@@ -89,4 +94,9 @@ abstract class ListViewStateCtrl<T> extends BaseViewStateCtrl {
 
   // GetBuilder局部刷新使用的id，为null或空列表时全部刷新
   List<String>? builderIds() => null;
+
+  // 请求数据刷新，有列表刷新移动动画
+  void requestRefreshData({Duration? duration}) {
+    refreshController.requestRefresh(duration: duration ?? const Duration(milliseconds: 200));
+  }
 }

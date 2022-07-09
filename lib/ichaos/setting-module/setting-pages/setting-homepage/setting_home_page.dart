@@ -1,11 +1,11 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/option-bar-list/option_bar_group.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/option-bar-list/option_bar_item.dart';
+import 'package:i_chaos/base-getX-framework/ui/widget/option-bar-list/option_group_tip.dart';
 import 'package:i_chaos/base-getX-framework/view/page/base_stateful_view.dart';
 import 'package:i_chaos/generated/l10n.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_item.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_bar_list.dart';
-import 'package:i_chaos/ichaos/common-module/common-widgets/option-bar-list/option_group_tip.dart';
 import 'package:i_chaos/ichaos/common-module/configs/routes/app_routes.dart';
 import 'package:i_chaos/icons/ali_icons.dart';
 
@@ -28,20 +28,17 @@ class SettingHomePage extends BaseStatefulView with AutomaticKeepAliveClientMixi
       // 多语言设置
       OptionBarItem(
         S.current.setting_main_page_option_base_setting_language,
-        icon: AliIcons.IconInt,
+        leadingIcon: AliIcons.IconInt,
         rightIcon: AliIcons.IconEnter,
-        targetPageBuilder: () async {
-          return await push(AppRoutes.APP_LANGUAGE_SETTING);
-        },
+        onTap: () => push(AppRoutes.APP_LANGUAGE_SETTING),
       ),
       // light/dark模式设置
       OptionBarItem(
         S.current.setting_main_page_option_base_setting_theme_mode,
-        icon: Icons.dark_mode,
+        subTitle: S.current.setting_main_page_option_base_setting_theme_mode_sub_title,
+        leadingIcon: Icons.dark_mode,
         rightIcon: AliIcons.IconEnter,
-        targetPageBuilder: () async {
-          return await push(AppRoutes.THEME_MODE_SETTING);
-        },
+        onTap: () => push(AppRoutes.THEME_MODE_SETTING),
       ),
     ];
 
@@ -49,42 +46,34 @@ class SettingHomePage extends BaseStatefulView with AutomaticKeepAliveClientMixi
       // 主题色设置
       OptionBarItem(
         S.current.setting_main_page_option_base_setting_theme,
-        icon: Icons.palette,
+        leadingIcon: Icons.palette,
         rightIcon: AliIcons.IconEnter,
-        targetPageBuilder: () async {
-          return await push(AppRoutes.THEME_COLOR_SETTING);
-        },
+        onTap: () => push(AppRoutes.THEME_COLOR_SETTING),
       ),
       // 字体设置
       OptionBarItem(
         S.current.setting_main_page_option_base_setting_font,
-        icon: Icons.text_fields,
+        leadingIcon: Icons.text_fields,
         rightIcon: AliIcons.IconEnter,
-        targetPageBuilder: () async {
-          return await push(AppRoutes.APP_FONT_SETTING);
-        },
+        onTap: () => push(AppRoutes.APP_FONT_SETTING),
       ),
     ];
 
     // 分组提示
-    Map<int, OptionGroupTipTool> optionGroupTip = {
-      0: OptionGroupTipTool(
-        tip: S.current.setting_main_page_tip_base_setting,
-      ),
-      1: OptionGroupTipTool(
-        tip: S.current.setting_main_page_tip_individual_setting,
-      ),
+    Map<int, OptionGroupTitle> optionGroupTip = {
+      0: OptionGroupTitle(title: S.current.setting_main_page_tip_base_setting),
+      1: OptionGroupTitle(title: S.current.setting_main_page_tip_individual_setting),
     };
 
     return Scaffold(
-      appBar: commonAppBar(
+      appBar: noTapNavBar(
         title: S.current.setting_main_page_appbar_title,
-        leadingButtonIcon: Icons.settings,
+        leadingIcon: Icons.settings,
       ),
-      body: autoBottomBarPaddingFrame(
+      body: keepOutBottomPadding(
         child: Container(
           width: screenWidth,
-          child: OptionBarList(
+          child: OptionBarGroup(
             optionBarItemGroups: [baseOptionItems, individualOptionItems],
             optionGroupTips: optionGroupTip,
           ),

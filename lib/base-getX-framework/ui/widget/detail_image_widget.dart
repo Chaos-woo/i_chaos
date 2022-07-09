@@ -12,7 +12,7 @@ class DetailImageWidgetState extends BaseStatelessView {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 750.w,
       height: 1334.h,
       child: Stack(
@@ -47,7 +47,7 @@ class DetailImageWidgetState extends BaseStatelessView {
             ),
           ),
 //          commonAppBar(title: "$indexStr/${imageList!.length}", leftWidget: buildAppBarLeft(), leftPadding: 40.w, rightPadding: 40.h),
-          commonAppBar(title: 'no title'),
+          backNavBar(title: 'no title'),
         ],
       ),
     );

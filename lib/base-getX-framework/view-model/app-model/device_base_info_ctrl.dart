@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flustars/flustars.dart';
-import 'package:i_chaos/base-getX-framework/common/frame_constant.dart';
+import 'package:i_chaos/base-getX-framework/commons/frame_constant.dart';
 import 'package:i_chaos/base-getX-framework/view-model/base_view_state_ctrl.dart';
 
 // 设备基本信息

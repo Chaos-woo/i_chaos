@@ -9,4 +9,8 @@ abstract class WidgetViewCtrl extends BaseViewStateCtrl {
     // 默认组件更新状态时不刷新页面状态
     return false;
   }
+
+  // widget组件默认不需要初始化业务数据
+  @override
+  void onBizDataHandle() {}
 }

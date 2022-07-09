@@ -35,7 +35,9 @@ class MeLog {
     var timestamp = _timestamp.microsecondsSinceEpoch;
     String extraInfo = '{';
     if (_extra.isNotEmpty) {
-      for (final key in _extra.keys) extraInfo = extraInfo + '$key' + ':' + '${_extra[key]}' + _DIVISION;
+      for (final key in _extra.keys) {
+        extraInfo = extraInfo + key + ':' + '${_extra[key]}' + _DIVISION;
+      }
       extraInfo = extraInfo.replaceRange(extraInfo.length - _DIVISION.length, extraInfo.length, '');
       extraInfo = extraInfo + '}';
     }

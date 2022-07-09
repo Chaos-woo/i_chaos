@@ -23,7 +23,7 @@ class SimpleWebPage extends SinglePageControllerView<SimpleWebCtrl> {
 
   Widget view() {
     return Scaffold(
-      appBar: commonAppBar(title: controller.web.title),
+      appBar: backNavBar(title: controller.web.title),
       body: Container(
         width: screenWidth,
         height: remainHeightWithoutAppBar,

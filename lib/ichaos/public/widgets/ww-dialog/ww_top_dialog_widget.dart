@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_dialog.dart';
 import 'package:i_chaos/ichaos/public/widgets/ww-dialog/ww_top_dialog_item_data.dart';
 
-var cardShadowColor = Color(0xFFdfdfdf);
+var cardShadowColor = const Color(0xFFdfdfdf);
 
 class TTTopDialog extends StatefulWidget {
   /// 背景颜色 默认白色
@@ -38,7 +38,7 @@ class TTTopDialog extends StatefulWidget {
   final List<Widget>? customListDatasource;
   /// 回调(传当前点击的map)
   final Function(TopDialogItemData item)? onTap;
-  TTTopDialog({
+  const TTTopDialog({
     required this.bgColor,
     this.customContentWidget,
     required this.contentColor,
@@ -77,7 +77,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
     return Material(
         color: Colors.transparent,
         child: CustomContainer(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.transparent
             ),
             onTap: (){
@@ -98,7 +98,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          Container(
+          SizedBox(
             // color: Colors.greenAccent,
             width: widget.dialogWidth,
             child: Column(
@@ -123,7 +123,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
                       ]:[]
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: widget.customContentWidget,
                   ),
                 )
@@ -132,7 +132,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
           ),
           widget.triangleType == DiaLogTriangleType.none
               ? Container()
-              : Container(
+              : SizedBox(
             width: double.infinity, // PS:这个很重要 不设置的话三角形没有size 无法准确画三角形
             child: CustomPaint(
                 painter:TrianglePainter(widget.bgColor,widget.triangleType)
@@ -160,7 +160,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          Container(
+          SizedBox(
             // color: Colors.orange,
             width: widget.dialogWidth,
             // 10:三角形的高度
@@ -192,7 +192,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
                     child: ListView.builder(
                       physics: listViewScrollPhysics,
                       itemCount: isCustomContent ? widget.customListDatasource!.length : widget.listDatasource!.length,
-                      itemBuilder: this._getBaseDialogContent,
+                      itemBuilder: _getBaseDialogContent,
                     ),
                   ),
                 )
@@ -201,7 +201,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
           ),
           widget.triangleType == DiaLogTriangleType.none
               ? Container()
-              : Container(
+              : SizedBox(
             width: double.infinity, // PS:这个很重要 不设置的话三角形没有size 无法准确画三角形
             child: CustomPaint(
                 painter:TrianglePainter(widget.bgColor,widget.triangleType)
@@ -229,7 +229,7 @@ class _TTTopDialogState extends State<TTTopDialog> {
             child: isCustomContent
                 ? widget.customListDatasource![index]
                 : Container(
-              padding: EdgeInsets.only(left: 10,right: 10),
+              padding: const EdgeInsets.only(left: 10,right: 10),
               width: double.infinity,
               child: Text(
                 widget.listDatasource![index].name,
@@ -260,9 +260,11 @@ typedef customContainerOnTap = void Function();
 
 /// 自定义的Container
 class CustomContainer extends Container {
+  @override
   final Widget child;
   final double? width;
   final double? height;
+  @override
   final Decoration? decoration;
   final customContainerOnTap? onTap;  // 添加点击事件
 
@@ -278,8 +280,8 @@ class CustomContainer extends Container {
   @override
   Widget build(BuildContext context) {
     Widget widget = Container(
-      width: this.width,
-      height: this.height,
+      width: width,
+      height: height,
       decoration: decoration,
       child: InkWell( // 添加点击事件
         child: child,
@@ -314,16 +316,16 @@ class TrianglePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // TODO: implement paint
     final baseX = size.width;
-    final double TriangleW = 16.0;
-    final double TriangleH = 10.0;
+    const double TriangleW = 16.0;
+    const double TriangleH = 10.0;
     // 起点
-    if(this.type == DiaLogTriangleType.left) {
+    if(type == DiaLogTriangleType.left) {
       // 左三角
       _path.moveTo(20, TriangleH);
       _path.lineTo(20 + TriangleW, TriangleH);
       _path.lineTo(20 + TriangleW/2 + 1, 0);
       _path.lineTo(20 + TriangleW/2 - 1, 0);
-    }else if(this.type == DiaLogTriangleType.middle) {
+    }else if(type == DiaLogTriangleType.middle) {
       // 中间三角
       _path.moveTo((baseX - TriangleW)/2, TriangleH);
       _path.lineTo((baseX - TriangleW)/2 + TriangleW, TriangleH);
