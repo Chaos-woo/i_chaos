@@ -46,16 +46,13 @@ class TodosEditingCtrl extends RunningStateCtrl {
   }
 
   void fireTodoInsertEvent(TodoVO todo) =>
-      EventBusHelper().fire(TodosCudEvent.singleCreate(
+      EventBusHelper().fire(TodosCreateOrDeleteEvent.singleCreate(
         TodosEventPublisher.todoEditor,
         todo,
       ));
 
   void fireTodoUpdateEvent(TodoVO todo) =>
-      EventBusHelper().fire(TodosCudEvent.singleUpdate(
-        TodosEventPublisher.todoEditor,
-        todo,
-      ));
+      EventBusHelper().fire(TodosUpdateEvent(TodosEventPublisher.todoEditor, todo));
 
   int get maxCharCntOfContent => _localeCtrl.isEnEnv
       ? todoContentLimitCnt * numOfLettersPerEnWords

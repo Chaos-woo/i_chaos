@@ -9,7 +9,7 @@ import 'package:i_chaos/ichaos/todos-module/todos-domain/todos-common/events/pub
 
 class CalendarBarCtrl extends RunningStateCtrl implements GetxService {
   DateTime currentDate;
-  late StreamSubscription _dateChangeCert;
+  late StreamSubscription _onDateChangeCert;
 
   // 日历条当前页
   int currentPage = 0;
@@ -21,7 +21,7 @@ class CalendarBarCtrl extends RunningStateCtrl implements GetxService {
 
   @override
   void initStateRes() {
-    _dateChangeCert = EventBusHelper().subscribe<TodosDateChangeEvent>((event) {
+    _onDateChangeCert = EventBusHelper().subscribe<TodosDateChangeEvent>((event) {
       if (event.publisher == TodosEventPublisher.weekCalendar || currentDate.isSameDay(event.selectedDate)) {
         return;
       }
@@ -32,7 +32,7 @@ class CalendarBarCtrl extends RunningStateCtrl implements GetxService {
 
   @override
   void releaseStateRes() {
-    _dateChangeCert.cancel();
+    _onDateChangeCert.cancel();
   }
 
   void selectDate(DateTime date) {

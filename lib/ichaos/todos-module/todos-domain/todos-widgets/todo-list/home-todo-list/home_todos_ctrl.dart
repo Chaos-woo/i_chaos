@@ -29,7 +29,7 @@ class HomeTodosCtrl extends RepeatableAllStateCtrl<TodoVO> implements GetxServic
 
   final TodoRepository _todoRepo = /*GetXReferenceMixin.findRef()*/ TodoRepository();
   late StreamSubscription _onDateChangeCert;
-  late StreamSubscription _onTodosCudCert;
+  late StreamSubscription _onTodosCreateOrDeleteCert;
 
   int get activeTodoCnt => activeTodos.length;
 
@@ -47,7 +47,7 @@ class HomeTodosCtrl extends RepeatableAllStateCtrl<TodoVO> implements GetxServic
       }
     });
 
-    _onTodosCudCert = EventBusHelper().subscribe<TodosCudEvent>((event) {
+    _onTodosCreateOrDeleteCert = EventBusHelper().subscribe<TodosCreateOrDeleteEvent>((event) {
       List<CudTodo> cudTodos = event.todos
           .where(
               (e) => e.todo.validTime != null && currentDate.isSameDay(e.todo.validTime!))
@@ -64,7 +64,7 @@ class HomeTodosCtrl extends RepeatableAllStateCtrl<TodoVO> implements GetxServic
   void releaseStateRes() {
     super.releaseStateRes();
     _onDateChangeCert.cancel();
-    _onTodosCudCert.cancel();
+    _onTodosCreateOrDeleteCert.cancel();
   }
 
   @override

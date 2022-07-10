@@ -11,29 +11,31 @@ class CudTodo {
   CudTodo(this.type, this.todo);
 }
 
-class TodosCudEvent {
+class TodosCreateOrDeleteEvent {
   final TodosEventPublisher publisher;
   late List<CudTodo> todos;
 
-  TodosCudEvent(this.publisher, this.todos);
+  TodosCreateOrDeleteEvent(this.publisher, this.todos);
 
-  TodosCudEvent.single(this.publisher, TodoVO todo, TodoCudType type) {
+  TodosCreateOrDeleteEvent.single(this.publisher, TodoVO todo, TodoCudType type) {
     CudTodo pak = CudTodo(type, todo);
     todos = [pak];
   }
 
-  TodosCudEvent.singleCreate(this.publisher, TodoVO todo) {
+  TodosCreateOrDeleteEvent.singleCreate(this.publisher, TodoVO todo) {
     CudTodo pak = CudTodo(TodoCudType.create, todo);
     todos = [pak];
   }
 
-  TodosCudEvent.singleUpdate(this.publisher, TodoVO todo) {
-    CudTodo pak = CudTodo(TodoCudType.update, todo);
-    todos = [pak];
-  }
-
-  TodosCudEvent.singleDelete(this.publisher, TodoVO todo) {
+  TodosCreateOrDeleteEvent.singleDelete(this.publisher, TodoVO todo) {
     CudTodo pak = CudTodo(TodoCudType.delete, todo);
     todos = [pak];
   }
+}
+
+class TodosUpdateEvent {
+  final TodosEventPublisher publisher;
+  final TodoVO todo;
+
+  TodosUpdateEvent(this.publisher, this.todo);
 }
